@@ -1,4 +1,4 @@
 User-Agent:*
 Allow: /
 
-Sitemap: https://animalface.site/sitemap.xml
+Sitemap: https://k-celeb.netlify.app/sitemap.xml
