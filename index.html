@@ -2,85 +2,94 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>동물상 테스트</title>
-    <meta name="title" content="동물상 테스트">
-    <meta name="subject" content="얼굴로 보는 인공지능 동물상 테스트, 나와 닮은 동물상을 찾아보세요!">
-    <meta name="keywords" content="동물상 테스트, 인공지능 동물상 테스트, 얼굴상, 얼굴상 테스트, 나와 닮은 동물, 동물상 찾기, 얼굴로 보는 동물상, 얼굴 동물, 동물얼굴, animalface, 강아지상, 고양이상, 여우상, 사슴상, 토끼상, 곰상, 공룡상, 인공지능 동물상, AI 얼굴상, AI 동물상">
-    <meta name="author" content="조코딩">
-    <link rel="stylesheet" href="style.css">
-    <link rel="canonical" href="https://animalface.site" />
-    <meta property="og:url" content="https://animalface.site" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="동물상 테스트" />
-    <meta property="og:description" content="얼굴로 보는 인공지능 동물상 테스트, 나와 닮은 동물상을 찾아보세요! 대표 동물상 연예인 사진 데이터로 학습한 인공지능이 나의 얼굴로 동물상과 특징을 찾아드립니다. 회원가입도 필요없이 화면에서 바로 확인해보세요! 사진 데이터는 그 어디에도 전송되지 않습니다. 인공지능이 보는 나의 동물상 테스트 한번 해보세요! 강아지상? 고양이상? 여우상? 사슴상? 토끼상? 곰상? 공룡상? 얼굴상 테스트를 통해 나와 닮은 동물 찾기를 할 수 있습니다."
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet" />
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
     />
-    <meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fc0eq42%2FbtqCQpiFhFn%2F8KPaOP9q8PXpJFRL7if55K%2Fimg.jpg" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e64b3727e862b06"></script>
+    <title>나랑 닮은 아이돌 찾기</title>
+    <meta name="title" content="나랑 닮은 아이돌 찾기" />
+    <meta
+        name="subject"
+        content="얼굴로 보는 인공지능 아이돌 테스트, 나와 닮은 아이돌을 찾아보세요!"
+    />
+    <meta
+        name="keywords"
+        content="아이돌 테스트, 인공지능 아이돌 테스트, 얼굴상, 얼굴상 테스트, 나와 닮은 아이돌, 나와 닮은 연예인 테스트, 연예인, 인공지능 연예인, 연예인 찾기, 얼굴로 보는 연예인, 얼굴 연예인, 연예인 얼굴, celebrity, 인공지능 연예인상, AI 얼굴상, AI 연예인상"
+    />
+    <meta name="author" content="권태헌(kwontaeheon@gmail.com)" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="canonical" href="https://k-celeb.netlify.app" />
+    <meta property="og:url" content="https://k-celeb.netlify.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="나랑 닮은 아이돌 찾기" />
+    <meta
+        property="og:description"
+        content="얼굴로 보는 인공지능 아이돌 테스트, 나와 닮은 아이돌을 찾아보세요 대표 아이돌 사진 데이터로 학습한 인공지능이 나의 얼굴로 닮은 아이돌을 찾아드립니다. 회원가입도 필요없이 화면에서 바로 확인해보세요! 사진 데이터는 그 어디에도 전송되지 않습니다. 인공지능이 보는 나의 연예인상 테스트 한번 해보세요! 테스트를 통해 나와 닮은 연예인 찾기를 할 수 있습니다."
+    />
+    <meta
+        property="og:image"
+        content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fc0eq42%2FbtqCQpiFhFn%2F8KPaOP9q8PXpJFRL7if55K%2Fimg.jpg"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<script
+        type="text/javascript"
+        src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e64b3727e862b06"
+    ></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145482737-6"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KELZ9YY6E2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
         function gtag() {
             dataLayer.push(arguments);
         }
         gtag('js', new Date());
-        gtag('config', 'UA-145482737-6');
+
+        gtag('config', 'G-KELZ9YY6E2');
     </script>
 </head>
 
 <body>
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="https://animalface.site/">동물상 테스트</a>
+        <a class="navbar-brand" href="https://k-celeb.netlify.app">나랑 닮은 아이돌 찾기</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">동물상 테스트
+                    <a class="nav-link" href="#">나랑 닮은 아이돌 찾기
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item active" onclick="gtag('event', '조코딩 유튜브 클릭', {'event_category': '조코딩 유튜브 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" id="yotube-top-link" href="https://www.youtube.com/channel/UCQNE2JmbasNYbjGAcuBiRRg">조코딩 유튜브 채널</a>
+                <li class="nav-item active" onclick="gtag('event', '개발자 테리의 블로그 클릭', {'event_category': '개발자 테리의 블로그 클릭','event_label': '상단 메뉴'});">
+                    <a class="nav-link" id="yotube-top-link" href="https://blog.naver.com/honth">개발자 테리의 블로그</a>
                 </li>
             </ul>
         </div>
     </nav>
     <section class="section">
-        <h1 class="title">동물상 테스트</h1>
-        <h2 class="subtitle">얼굴로 보는 인공지능 동물상 테스트</h2>
-        <h2 class="sr-only">나는 어떤 동물과 닮았을까? 나의 동물상 찾기를 해보세요!</h2>
-        <h3 class="sr-only">대표 동물상 연예인 사진 데이터로 학습한 인공지능이 나의 얼굴로 동물상과 특징을 찾아드립니다.</h3>
+        <h1 class="title">나랑 닮은 아이돌 찾기</h1>
+        <h2 class="subtitle">얼굴로 보는 인공지능 아이돌 테스트</h2>
+        <h2 class="sr-only">나는 어떤 아이돌과 닮았을까? 나의 아이돌 찾기를 해보세요!</h2>
+        <h3 class="sr-only">대표 연예인 사진 데이터로 학습한 인공지능이 나의 얼굴로 닮은 아이돌을 찾아드립니다.</h3>
         <h4 class="sr-only">본 서비스는 Google의 인공지능 teachable machine 2.0을 활용하였습니다.</h4>
-        <p class="sr-only">얼굴로 보는 인공지능 동물상 테스트, 나와 닮은 동물상을 찾아보세요! 대표 동물상 연예인 사진 데이터로 학습한 인공지능이 나의 얼굴로 동물상과 특징을 찾아드립니다. 회원가입도 필요없이 화면에서 바로 확인해보세요! 사진 데이터는 그 어디에도 전송되지 않습니다. 인공지능이 보는 나의 동물상 테스트 한번 해보세요! 강아지상? 고양이상? 여우상? 사슴상? 토끼상? 곰상? 공룡상? 얼굴상 테스트를 통해 나와 닮은 동물 찾기를 할 수 있습니다.</p>
+        <p class="sr-only">얼굴로 보는 인공지능 아이돌 테스트, 나와 닮은 아이돌을 찾아보세요! 대표 연예인 사진 데이터로 학습한 인공지능이 나의 얼굴로 닮은 아이돌을 찾아드립니다. 회원가입도 필요없이 화면에서 바로 확인해보세요! 사진 데이터는 그 어디에도 전송되지 않습니다. 인공지능이 보는 나의 아이돌 테스트 한번 해보세요! 테스트를 통해 나와 닮은 아이돌 찾기를 할 수 있습니다.</p>
     </section>
     <section class="youtube pb-3" id="yotube-mid-link">
-        <div class="container mt-3 youtube-cover d-flex flex-row-reverse align-items-center" onclick="gtag('event', '조코딩 유튜브 클릭', {'event_category': '조코딩 유튜브 클릭','event_label': '화면 중간'});">
-            <img src="img/youtube-copy.jpg" alt="youtube-icon" class="youtube-icon">
-            <a href="https://www.youtube.com/channel/UCQNE2JmbasNYbjGAcuBiRRg" class="youtube-link">By 조코딩 유튜브 채널</a>
+        <div class="container mt-3 youtube-cover d-flex flex-row-reverse align-items-center" onclick="gtag('event', '개발자 테리의 블로그 클릭', {'event_category': '개발자 테리의 블로그 클릭','event_label': '화면 중간'});">
+            <a href="https://blog.naver.com/honth" class="youtube-link">By 개발자 테리</a>
         </div>
-    </section>
-    <h3 class="pb-2 d-flex justify-content-center">성별을 선택하세요</h3>
-    <section class="d-flex justify-content-center">
-        <p class="d-flex align-items-center pr-3">여자</p>
-        <div>
-            <input type="checkbox" id="gender">
-            <label for="gender">
-                <span class="knob">
-                    <i></i>
-                </span>
-            </label>
-        </div>
-        <p class="d-flex align-items-center pl-3">남자</p>
     </section>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <div class="mt-3 container file-upload">
@@ -97,7 +106,7 @@
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <p class="text-center">AI가 당신의 동물상을 분석중입니다.</p>
+                <p class="text-center">AI가 당신과 비슷한 아이돌을 분석중입니다.</p>
             </div>
             <p class="result-message"></p>
             <div id="label-container" class="d-flex flex-column justify-content-around"></div>
@@ -110,53 +119,20 @@
             </div>
         </div>
     </div>
-    <!-- <div id="coupang" class="container d-flex justify-content-center">
-        <script src="https://ads-partners.coupang.com/g.js"></script>
-        <script>
-            new PartnersCoupang.G({
-                "id": 141621,
-                "subId": null
-            });
-        </script>
-    </div> -->
-    <div class="mt-2 container d-flex justify-content-center ad-banner">
-        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-1ibeto5pa83fn" data-ad-width="320" data-ad-height="100"></ins>
-    </div>
-    <div class="mt-2 container d-flex justify-content-center ad-banner">
-        <ins class="kakao_ad_area" style="display:none;" 
-     data-ad-unit    = "DAN-1jefy9znk6ibb" 
-     data-ad-width   = "300" 
-     data-ad-height  = "250"></ins>
-    </div>
+    <ins class="kakao_ad_area" style="display:none;" 
+	 data-ad-unit    = "DAN-Qqi96JP31UNwGSS1" 
+	 data-ad-width   = "320" 
+	 data-ad-height  = "100"></ins> 
+	<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-    <section id="yotube-bottom-link" class="mt-2 d-flex flex-column justify-content-center align-items-center" onclick="gtag('event', '조코딩 유튜브 클릭', {'event_category': '조코딩 유튜브 클릭','event_label': '하단 광고'});">
-        <!-- <a href="https://www.youtube.com/channel/UCQNE2JmbasNYbjGAcuBiRRg" class="d-flex flex-column justify-content-center align-items-center">
-            <img class="ad-banner"src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FdHfMHS%2FbtqDfCJdLpH%2F6xKAC0w10kTrGjhll02SOK%2Fimg.jpg" alt="조코딩 유튜브 홍보"/>
-            <span>이런 앱을 직접 만들어보고 싶지 않으신가요? 조코딩 채널을 구독해보세요!</span>
-        </a> -->
-        <iframe width="320" height="180" src="https://www.youtube.com/embed/s6SITKSN9Q0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <h4 class="mt-1">이런 앱 만들면 얼마 벌까? 충격적인 수익 공개합니다</h4>
-    </section>
     <div class="container pt-3">
         <div id="disqus_thread"></div>
     </div>
     <footer class="footer pt-5 container d-flex justify-content-center">
         <div>
-            <p>&copy; 조코딩 JoCoding 2020. All Rights Reserved. </p>
-<!--            
-        <ul class="list-inline d-flex justify-content-center">
-            <li class="list-inline-item">
-                <a href="https://developerdk.tistory.com/46">Privacy</a>
-            </li>
-            <li class="list-inline-item">
-                <a href="https://developerdk.tistory.com/47">Terms</a>
-            </li>
-            <li class="list-inline-item">
-                <a href="https://www.youtube.com/channel/UCQNE2JmbasNYbjGAcuBiRRg">FAQ</a>
-            </li>
-        </ul>
--->
+            <p>&copy; 테리 Terry 2020. All Rights Reserved. </p>
         </div>
     </footer>
     <!-- Modal -->
@@ -171,9 +147,10 @@
                 </div>
                 <div class="modal-body d-flex justify-content-center">
                     <ins class="kakao_ad_area" style="display:none;" 
- data-ad-unit    = "DAN-t89oh3sc0ew5" 
+ data-ad-unit    = "DAN-xdL5MxEcbOwjaaIE" 
  data-ad-width   = "300" 
- data-ad-height  = "250"></ins>
+ data-ad-height  = "250"></ins> 
+
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
                     <button type="button p-2" class="try-again-btn" onclick="gaReload2();">
@@ -196,18 +173,25 @@
             window.location.reload();
         }
     </script>
-    <script>
-        (function() {
-        var d = document,
-            s = d.createElement('script');
-        s.src = 'https://jocoding.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the
-        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
+    <div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    
+    var disqus_config = function () {
+    this.page.url = "https://k-celeb.netlify.app";  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = "k-celeb"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+   
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://k-celeb.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -273,12 +257,11 @@
             var image = document.getElementById("face-image")
             const prediction = await model.predict(image, false);
             prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
-            console.log(prediction[0].className);
             var resultTitle, resultExplain, resultCeleb;
+			console.log(prediction);
             if (document.getElementById("gender").checked) {
-                gtag('event', '동물상 테스트 수행', {
-                    'event_category': '동물상 테스트 수행',
-                    'event_label': '남자'
+                gtag('event', '아이돌 테스트 수행', {
+                    'event_category': '아이돌 테스트 수행',
                 });
                 switch (prediction[0].className) {
                     case "dog":
@@ -432,15 +415,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-gender toggle
-Copyright (c) 2020 by Mert Cukuren (https://codepen.io/knyttneve/pen/bPpEZY)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- -->
+-->
 
 </html>
