@@ -58,7 +58,12 @@
 
             gtag('config', 'G-KELZ9YY6E2');
         </script>
-		<script data-ad-client="ca-pub-9636274019237410" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script
+            data-ad-client="ca-pub-9636274019237410"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
+		<!-- <script async src="https://cse.google.com/cse.js?cx=6ff83479c103f36ed"></script> -->
     </head>
 
     <body>
@@ -94,6 +99,15 @@
                 </ul>
             </div>
         </nav>
+
+        <ins
+            class="kakao_ad_area"
+            style="display: none;"
+            data-ad-unit="DAN-HVyTZIGpbGMWg3sj"
+            data-ad-width="320"
+            data-ad-height="100"
+        ></ins>
+
         <section class="section">
             <h1 class="title">닮은 아이돌 찾기</h1>
             <h2 class="subtitle">얼굴로 보는 인공지능 아이돌 테스트</h2>
@@ -113,8 +127,6 @@
             </p>
         </section>
         <center>
-            
-
             <script
                 class="jsbin"
                 src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
@@ -143,7 +155,21 @@
                         </div>
                         <p class="text-center">AI가 당신과 비슷한 아이돌을 분석중입니다.</p>
                     </div>
-                    <p class="result-message"></p>
+                    <p class="result-message" id="result-message"></p>
+					<!-- <div class="gcse-searchbox"  data-queryParameterName=></div>
+                    <div class="gcse-searchresults"></div> -->
+					<iframe src="" 
+							id="search" 
+							onload="calcHeight();" 
+							name="search" 
+							title="search" 
+							frameborder="0" 
+							scrolling="no" 
+							style="overflow-x:hidden; 
+								   overflow:auto; width:100%; 
+								   min-height:300px;">
+					</iframe>
+					
                     <div
                         id="label-container"
                         class="d-flex flex-column justify-content-around"
@@ -152,52 +178,47 @@
                     <div class="addthis_inline_share_toolbox"></div>
 
                     <div class="pt-3 image-title-wrap">
-                        <button
-                            type="button p-2"
-                            class="try-again-btn"
-                            onclick="gaReload();"
-                            
-                        >
+                        <button type="button p-2" class="try-again-btn" onclick="gaReload();">
                             <span class="try-again-text">다른 사진으로 재시도</span>
                         </button>
                     </div>
+					
+                    
+					
                 </div>
             </div>
 
             <ins
                 class="kakao_ad_area"
                 style="display: none;"
-                data-ad-unit="DAN-HVyTZIGpbGMWg3sj"
-                data-ad-width="320"
-                data-ad-height="100"
-            ></ins>
-			<ins
-                class="kakao_ad_area"
-                style="display: none;"
                 data-ad-unit="DAN-CK9C6CkavM1G2zSV"
                 data-ad-width="320"
                 data-ad-height="100"
             ></ins>
-        
-        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-        <div class="container pt-3">
-            <div id="disqus_thread"></div>
-        </div>
-        <ins
-            class="kakao_ad_area"
-            style="display: none;"
-            data-ad-unit="DAN-xglxEEtWOKm0YLqD"
-            data-ad-width="300"
-            data-ad-height="250"
-        ></ins>
-        <ins
-            class="kakao_ad_area"
-            style="display: none;"
-            data-ad-unit="DAN-mKNWhaFIoeIKEIDi"
-            data-ad-width="300"
-            data-ad-height="250"
-        ></ins>
-		</center>
+
+            <script
+                type="text/javascript"
+                src="//t1.daumcdn.net/kas/static/ba.min.js"
+                async
+            ></script>
+            <div class="container pt-3">
+                <div id="disqus_thread"></div>
+            </div>
+            <ins
+                class="kakao_ad_area"
+                style="display: none;"
+                data-ad-unit="DAN-xglxEEtWOKm0YLqD"
+                data-ad-width="300"
+                data-ad-height="250"
+            ></ins>
+            <ins
+                class="kakao_ad_area"
+                style="display: none;"
+                data-ad-unit="DAN-mKNWhaFIoeIKEIDi"
+                data-ad-width="300"
+                data-ad-height="250"
+            ></ins>
+        </center>
         <footer class="footer pt-5 container d-flex justify-content-center">
             <div>
                 <p>&copy; 테리 Terry 2020. All Rights Reserved.</p>
@@ -209,6 +230,7 @@
                     event_category: '다른 사진으로 재시도',
                 });
                 window.location.reload();
+				// history.pushState(null, null, "index.html?q=유재석");
             }
         </script>
         <div id="disqus_thread"></div>
@@ -252,55 +274,77 @@
         ></script>
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
-		<script type="text/javascript">
-                 let URL;
-			     const url = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
-                 // const urlMale = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
-                 // const urlFemale = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
-                 let model, webcam, labelContainer, maxPredictions;
-                 async function init() {
-                     // if (document.getElementById("gender").checked) {
-                     //     URL = urlMale;
-                     // } else {
-                     //     URL = urlFemale;
-                     // }
-					 URL = url;
-                     const modelURL = URL + "model.json";
-                     const metadataURL = URL + "metadata.json";
-                     model = await tmImage.load(modelURL, metadataURL);
-                     maxPredictions = model.getTotalClasses();
-                     labelContainer = document.getElementById("label-container");
-                     for (let i = 0; i < maxPredictions; i++) {
-                         var element = document.createElement("div")
-                         element.classList.add("d-flex");
-                         labelContainer.appendChild(element);
-                     
-					 }
-					 console.log('init')
-                 }
-                 async function predict() {
-                     var image = document.getElementById("face-image")
-                     const prediction = await model.predict(image, false);
-                     prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
-                     var resultTitle, resultExplain, resultCeleb;
-                     console.log(prediction);
-					 var resultTitle = prediction[0].className;
-					 var resultExplain = (prediction[0].probability * 100).toFixed(3) ;
-					 var resultCeleb = "연예인 설명 예시";
-					 gtag('event', resultTitle, {'event_category': resultExplain});
-                     var title = "<div class='" + prediction[0].className + "-title'>" + resultTitle + "</div>";
-                     var explain = "<div class='celeb-explain pt-2'>" + resultExplain + " % </div>";
-                     var celeb = "<div class='" + prediction[0].className + "-celeb pt-2 pb-2'>" + resultCeleb + "</div>";
-                     $('.result-message').html(title + explain + celeb);
-					 
-                     var labelTitle = "나와 비슷한 셀럽"
-                     var label = "<div class='celeb-label d-flex align-items-center'>" + labelTitle + "</div>"
-                     var bar = "<div class='bar-container position-relative container'><div class='" + prediction[i].className 
-					 + "-box'></div><div class='d-flex justify-content-center align-items-center " + prediction[i].className + "-bar' style='width: "
-					 + barWidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + "%</span></div></div>"
-                     labelContainer.childNodes[i].innerHTML = label + bar;
-                     
-                 }
+        <script type="text/javascript">
+            let URL;
+            const url = 'https://teachablemachine.withgoogle.com/models/U6D9oxbis/';
+            // const urlMale = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
+            // const urlFemale = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
+            let model, webcam, labelContainer, maxPredictions;
+            async function init() {
+                // if (document.getElementById("gender").checked) {
+                //     URL = urlMale;
+                // } else {
+                //     URL = urlFemale;
+                // }
+                URL = url;
+                const modelURL = URL + 'model.json';
+                const metadataURL = URL + 'metadata.json';
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+                labelContainer = document.getElementById('label-container');
+                for (let i = 0; i < maxPredictions; i++) {
+                    var element = document.createElement('div');
+                    element.classList.add('d-flex');
+                    labelContainer.appendChild(element);
+                }
+                console.log('init');
+            }
+            async function predict() {
+                var image = document.getElementById('face-image');
+                const prediction = await model.predict(image, false);
+                prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+                var resultTitle, resultExplain, resultCeleb;
+                // console.log(prediction);
+                var resultTitle = prediction[0].className;
+                var resultExplain = (prediction[0].probability * 100).toFixed(3);
+                // var resultCeleb = '연예인 설명 예시';
+                gtag('event', resultTitle, { event_category: resultExplain });
+                var title =
+                    "<div class='" + prediction[0].className + "-title'>" + resultTitle + '</div>';
+                var explain = "<div class='celeb-explain pt-2'>" + resultExplain + ' % </div>';
+                // var celeb =
+                //     "<div class='" +
+                //     prediction[0].className +
+                //     "-celeb pt-2 pb-2'>" +
+                //     resultCeleb +
+                //     '</div>';
+                $('.result-message').html(title + explain);
+				$('#search').attr('src', 'search.html?q=' + resultTitle);
+                var labelTitle = '나와 비슷한 셀럽';
+                var label =
+                    "<div class='celeb-label d-flex align-items-center'>" + labelTitle + '</div>';
+				var barWidth = '100';
+                var bar =
+                    "<div class='bar-container position-relative container'><div class='" +
+                    prediction[0].className +
+                    "-box'></div><div class='d-flex justify-content-center align-items-center " +
+                    prediction[0].className +
+                    "-bar' style='width: " +
+                    barWidth +
+                    "'><span class='d-block percent-text'>" +
+                    Math.round(prediction[0].probability.toFixed(2) * 100) +
+                    '%</span></div></div>';
+                // labelContainer.childNodes[0].innerHTML = label + bar;
+				// var element = google.search.cse.element.getElement('google-results-gname');
+				// element.execute(resultTitle);
+				// labelContainer.childNodes[0].innerHTML = label + bar;
+				
+				// var faceImage = document.getElementById('face-image').value,
+				// 	resultMessage = title + explain + celeb,
+				// 	url = 'index.html?q=' + resultTitle + '&faceimage=' + encodeURIComponent(faceImage) + '&resultmessage=' + encodeURIComponent(resultMessage);
+
+				// document.location.href = url;
+            }
         </script>
         <script>
             function readURL(input) {
@@ -336,7 +380,7 @@
                 $('.image-upload-wrap').removeClass('image-dropping');
             });
         </script>
-        
+
         <script>
             function iosApp() {
                 document.getElementById('coupang').style.display = 'none';
@@ -357,6 +401,22 @@
             //     function () {
             //         $.getScript('//t1.daumcdn.net/kas/static/ba.min.js');
             //     };
+			
+			function calcHeight(){
+			 //find the height of the internal page
+
+			 var the_height=
+			 document.getElementById('the_iframe').contentWindow.
+			 document.body.scrollHeight;
+
+			 //change the height of the iframe
+			 document.getElementById('the_iframe').height=
+			 the_height;
+
+			 //document.getElementById('the_iframe').scrolling = "no";
+			 document.getElementById('the_iframe').style.overflow = "hidden";
+			}
+			
         </script>
     </body>
     <!-- 
