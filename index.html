@@ -284,7 +284,7 @@
                      var resultTitle, resultExplain, resultCeleb;
                      console.log(prediction);
 					 var resultTitle = prediction[0].className;
-					 var resultExplain = prediction[0].probability.toFixed(3) * 100;
+					 var resultExplain = (prediction[0].probability * 100).toFixed(3) ;
 					 var resultCeleb = "연예인 설명 예시";
 					 gtag('event', resultTitle, {'event_category': resultExplain});
                      var title = "<div class='" + prediction[0].className + "-title'>" + resultTitle + "</div>";
