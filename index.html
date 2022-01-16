@@ -161,13 +161,14 @@
 					<iframe src="" 
 							id="search" 
 							onload="calcHeight();" 
+							onclick="calcHeight();"
 							name="search" 
 							title="search" 
 							frameborder="0" 
 							scrolling="no" 
 							style="overflow-x:hidden; 
 								   overflow:auto; width:100%; 
-								   min-height:300px;">
+								   ">
 					</iframe>
 					
                     <div
@@ -406,15 +407,14 @@
 			 //find the height of the internal page
 
 			 var the_height=
-			 document.getElementById('the_iframe').contentWindow.
-			 document.body.scrollHeight;
+				 document.getElementById('search').contentWindow.
+				 document.body.scrollHeight;
 
 			 //change the height of the iframe
-			 document.getElementById('the_iframe').height=
-			 the_height;
+			 document.getElementById('search').height=the_height;
 
 			 //document.getElementById('the_iframe').scrolling = "no";
-			 document.getElementById('the_iframe').style.overflow = "hidden";
+			 document.getElementById('search').style.overflow = "hidden";
 			}
 			
         </script>
