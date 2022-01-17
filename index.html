@@ -165,8 +165,8 @@
                         name="search"
                         title="search"
                         frameborder="0"
-                        scrolling="no"
-                        style="overflow-x: hidden; overflow: auto; width: 100%; height: 0"
+                        scrolling="auto"
+                        style="overflow-x: hidden; overflow: auto; width: 100%; "
                     >
                     </iframe>
 
@@ -273,7 +273,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
         <script type="text/javascript">
             let URL;
-            const url = 'https://teachablemachine.withgoogle.com/models/U6D9oxbis/';
+            const url = 'https://teachablemachine.withgoogle.com/models/MBPXOm3kZ/';
             // const urlMale = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
             // const urlFemale = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
             let model, webcam, labelContainer, maxPredictions;
@@ -343,13 +343,6 @@
 					$('.result-message').html(title);
 				} else {
 					$('.result-message').html(title + explain);
-					// var celeb =
-					//     "<div class='" +
-					//     prediction[0].className +
-					//     "-celeb pt-2 pb-2'>" +
-					//     resultCeleb +
-					//     '</div>';image.faceDetection({ complete: function (faces) { console.log(faces); } });
-					
 					$('#search').attr('src', 'search.html?q=연예인 ' + resultTitle + ' 프로필 이미지');
 					var labelTitle = '나와 비슷한 셀럽';
 					var label =
