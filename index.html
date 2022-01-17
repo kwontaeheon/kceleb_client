@@ -307,7 +307,7 @@
                 // var resultCeleb = '연예인 설명 예시';
                 $('#face-image').faceDetection({
 					grayscale: false,
-                    confidence: -3, // 2 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter
+                    confidence: -20, // -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter
                     complete: function (faces) {
                         if (faces.length == 0 || faces.length > 1) {
                             resultTitle = '셀럽 한 명을 인식할 수 있는 정면 사진을 사용해주세요. <br>' + 
@@ -359,6 +359,7 @@
 						Math.round(prediction[0].probability.toFixed(2) * 100) +
 						'%</span></div></div>';
 				}
+				$('#loading').hide();
                 // labelContainer.childNodes[0].innerHTML = label + bar;
                 // var element = google.search.cse.element.getElement('google-results-gname');
                 // element.execute(resultTitle);
@@ -386,7 +387,7 @@
                     init().then(function () {
                         console.log('hello');
                         predict();
-                        $('#loading').hide();
+                        // $('#loading').hide();
                     });
                 } else {
                     removeUpload();
