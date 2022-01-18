@@ -147,20 +147,20 @@
                     <div class="drag-text">
                         <img src="img/upload.svg" class="mt-5 pt-5 upload" />
                         <h3 class="mb-5 pb-5 pt-4 upload-text">
-							얼굴 사진을 올려놓거나 눌러서 업로드하세요! <br>
+							얼굴 사진을 올려놓거나 눌러서 업로드하세요! <br><br>
+							*사진은 어디에도 저장되지 않습니다* 
                         </h3>
                     </div>
                 </div>
-				<p class="mb-5 pb-5 pt-4 upload-text">
-					*사진은 어디에도 저장되지 않습니다* 
-				</p>
+				
                 <div class="file-upload-content">
                     <img class="file-upload-image" id="face-image" src="#" alt="your image" />
                     <div id="loading" class="animated bounce">
                         <div class="spinner-border" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
-                        <p class="text-center">AI가 당신과 비슷한 아이돌을 분석중입니다.</p>
+						
+                        <p class="result-message" >AI가 당신과 비슷한 아이돌을 분석중입니다.</p>
                     </div>
                     <p class="result-message" id="result-message"></p>
                     <!-- <div class="gcse-searchbox"  data-queryParameterName=></div>
@@ -322,7 +322,7 @@
                     confidence: -1.25, // -20 : 1명인데 2명나옴 -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter
                     complete: function (faces) {
                         if (faces.length == 0 || faces.length > 1) {
-                            resultTitle = '셀럽 한 명을 인식할 수 있는 정면 사진을 사용해주세요. <br>' + 
+                            resultTitle = '셀럽 한 명의 정면 사진을 사용해주세요. <br>' + 
 								    faces.length + ' 명 인식되었습니다.';
 							resultFace = false;
                         }
@@ -355,7 +355,10 @@
 				  + prediction[2].className + " (" + (prediction[2].probability * 100).toFixed(1) + '%) </div>';
 				
 				if (!resultFace) {
+					title =
+					"<div class='" + prediction[0].className + "-title'> " + resultTitle + '</div>';
 					$('.result-message').html(title);
+					document.getElementById('search').height = 0;
 				} else {
 					$('.result-message').html(title + explain);
 					$('#search').attr('src', 'search.html?q=연예인 ' + resultTitle + ' 프로필 이미지');

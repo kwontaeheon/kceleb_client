@@ -69,7 +69,7 @@ body {
 }
 
 .image-upload-wrap {
-    width: 60%;
+    width: 80%;
 	margin: 0 auto;
     position: relative;
     object-fit: contain;
@@ -101,11 +101,14 @@ body {
 .celeb-explain {
   font-size: 1.5rem;
 }
+.text-center {
+   font-size: 1.5rem;
+}
 .file-upload-image {
   /* max-height: 10%; */
   position: relative; 
   max-height: 180px;
-  max-width: 60%;
+  max-width: 80%;
   margin: auto;
   padding: 10px;
 }
@@ -199,7 +202,7 @@ body {
 }
 
 .upload-text {
-    width: 58%;
+    width: 90%;
     font-size: 1.5rem;
     line-height: 1.53;
     text-align: center;
