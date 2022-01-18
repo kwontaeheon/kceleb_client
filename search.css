@@ -1,0 +1,12 @@
+html, body: {
+	margin: 0;
+	padding: 0;
+}
+body {
+	height: 0px;
+}
+.mainbar{
+	min-height: 0px;
+	max-height: 500px;
+}
+

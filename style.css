@@ -2,14 +2,20 @@ html, body {
   overflow-x:hidden 
 }
 body {
-  font-family: 'Jua', sans-serif;
+  font-family: 'Do Hyeon', sans-serif;;
   background-color: #ffffff;
   box-sizing: border-box;
   color: #35465d;
 	overflow-x:hidden;
 }
+.iframebox {
+ position: relative;
+ width: 100%;
+ padding: 0%;
+ min-height: 0px;
+}
 .file-upload {
-    padding: 15% 3%;
+    padding: 1% 1%;
     margin: 0 auto;
     border-radius: 10px;
     border: solid 1.5px #f6f7fa;
@@ -63,7 +69,7 @@ body {
 
 .image-upload-wrap {
     width: 60%;
-    margin: 0 auto;
+	margin: 0 auto;
     position: relative;
     object-fit: contain;
     border-radius: 10px;
@@ -92,7 +98,7 @@ body {
 }
 
 .file-upload-image {
-  max-height: 60%;
+  max-height: 400px;
   max-width: 60%;
   margin: auto;
   padding: 10px;

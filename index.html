@@ -4,7 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet" />
+        <!-- <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet" /> -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+		
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -109,7 +113,7 @@
         ></ins>
 
         <section class="section">
-            <h1 class="title">닮은 아이돌 찾기</h1>
+            <h1 class="title">셀럽미: 닮은 아이돌 찾기</h1>
             <h2 class="subtitle">얼굴로 보는 인공지능 아이돌 테스트</h2>
             <h2 class="sr-only">나는 어떤 아이돌과 닮았을까? 나의 아이돌 찾기를 해보세요!</h2>
             <h3 class="sr-only">
@@ -158,18 +162,21 @@
                     <p class="result-message" id="result-message"></p>
                     <!-- <div class="gcse-searchbox"  data-queryParameterName=></div>
                     <div class="gcse-searchresults"></div> -->
-                    <iframe
+                    <div class="iframebox">
+						
+					<iframe
                         src=""
                         id="search"
-                        onload="calcHeight();"
-                        onclick="calcHeight();"
+                        
                         name="search"
                         title="search"
+						
                         frameborder="0"
                         scrolling="auto"
-                        style="overflow-x: hidden; overflow: auto; width: 100%; "
-                    >
-                    </iframe>
+						onload="calcHeight();"
+                        style="overflow-x: hidden; overflow: hidden; width: 100%; "
+							></iframe>
+						
 
                     <div
                         id="label-container"
@@ -239,7 +246,7 @@
 
             var disqus_config = function () {
                 this.page.url = 'https://celebme.kr'; // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = 'k-celeb'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                this.page.identifier = '셀럽미'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
 
             (function () {
@@ -309,7 +316,7 @@
                 // var resultCeleb = '연예인 설명 예시';
                 $('#face-image').faceDetection({
 					grayscale: false,
-                    confidence: -20, // -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter
+                    confidence: -1.25, // -20 : 1명인데 2명나옴 -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter
                     complete: function (faces) {
                         if (faces.length == 0 || faces.length > 1) {
                             resultTitle = '셀럽 한 명을 인식할 수 있는 정면 사진을 사용해주세요. <br>' + 
@@ -411,8 +418,6 @@
 
         <script>
             function iosApp() {
-                document.getElementById('coupang').style.display = 'none';
-                $('#coupang ins').hide();
                 document.getElementById('addThis').style.display = 'none';
                 document.getElementById('disqus_thread').style.display = 'none';
                 var kakao = document.getElementsByClassName('kakao_ad_area');
@@ -438,7 +443,7 @@
 
                 //change the height of the iframe
                 document.getElementById('search').height = the_height;
-
+				
                 //document.getElementById('the_iframe').scrolling = "no";
                 document.getElementById('search').style.overflow = 'hidden';
             }

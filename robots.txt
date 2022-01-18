@@ -1,4 +1,4 @@
 User-Agent:*
 Allow: /
 
-Sitemap: https://k-celeb.netlify.app/sitemap.xml
+Sitemap: https://celebme.kr/sitemap.xml
