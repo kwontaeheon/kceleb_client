@@ -3,6 +3,7 @@ body {
   background-color: #ffffff;
   box-sizing: border-box;
   color: #35465d;
+	overflow-x:hidden;
 }
 .file-upload {
     padding: 15% 3%;
