@@ -303,7 +303,7 @@
                     element.classList.add('d-flex');
                     labelContainer.appendChild(element);
                 }
-                console.log('init');
+                // console.log('init');
             }
             async function predict() {
                 var image = document.getElementById('face-image');
@@ -341,13 +341,16 @@
                     },
                 });
 				
-				var resultExplain = (prediction[0].probability * 100).toFixed(3);
+				var resultExplain = (prediction[0].probability * 100).toFixed(1);
                 gtag('event', resultTitle, { event_category: resultExplain, result_face: resultFace });
 				
 				var title =
-					"<div class='" + prediction[0].className + "-title'>" + resultTitle + '</div>';
+					"<div class='" + prediction[0].className + "-title'> 1순위: " + resultTitle +" (" + resultExplain + '%) </div>';
 				
-				var explain = "<div class='celeb-explain pt-2'>" + resultExplain + ' % </div>';
+				var explain = "<div class='celeb-explain pt-2'> 2, 3순위: " 
+				  + prediction[1].className + " (" + (prediction[1].probability * 100).toFixed(1) + "%) , " 
+				  + prediction[2].className + " (" + (prediction[2].probability * 100).toFixed(1) + '%) </div>';
+				
 				if (!resultFace) {
 					$('.result-message').html(title);
 				} else {
@@ -394,7 +397,7 @@
                     };
                     reader.readAsDataURL(input.files[0]);
                     init().then(function () {
-                        console.log('hello');
+                        // console.log('hello');
                         predict();
                         // $('#loading').hide();
                     });

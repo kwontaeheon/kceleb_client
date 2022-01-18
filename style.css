@@ -13,6 +13,7 @@ body {
  width: 100%;
  padding: 0%;
  min-height: 0px;
+ max-height: 400px;
 }
 .file-upload {
     padding: 1% 1%;
@@ -97,6 +98,9 @@ body {
   text-transform: uppercase;
 }
 
+.celeb-explain {
+  font-size: 1.5rem;
+}
 .file-upload-image {
   max-height: 400px;
   max-width: 60%;
