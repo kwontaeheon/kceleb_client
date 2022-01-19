@@ -8,6 +8,7 @@ body {
 }
 .mainbar{
 	min-height: 0px;
+max-height: 200px;
 	
 }
 .gsc-expansionArea {
