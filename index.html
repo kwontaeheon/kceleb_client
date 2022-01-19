@@ -325,12 +325,13 @@
                     grayscale: false,
                     confidence: -2.035, // -20 : 1명인데 2명표시됨, -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter. 2: 신뢰도 높은 filter
                     complete: function (faces) {
+console.log(faces);
                         if (faces.length == 0 || faces.length > 1) {
                             resultTitle =
                                 '선명한 정면사진을 사용해주세요. <br>' +
                                 faces.length +
                                 ' 명 인식되었습니다.';
-console.log(faces);
+
                             resultFace = false;
                         }
                     },
