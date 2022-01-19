@@ -5,18 +5,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <!-- <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet" /> -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-		
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+            rel="stylesheet"
+        />
+
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
             crossorigin="anonymous"
         />
-        <title>셀럽미</title>
-        <meta name="title" content="셀럽미" />
+        <title>셀럽미: 닮은 아이돌 찾기</title>
+        <meta name="title" content="셀럽미: 닮은 아이돌 찾기" />
         <meta
             name="subject"
             content="얼굴로 보는 인공지능 아이돌 테스트, 나와 닮은 아이돌을 찾아보세요!"
@@ -59,7 +62,7 @@
             }
             gtag('js', new Date());
 
-            gtag('config', 'G-KELZ9YY6E2');
+            gtag('config', 'G-2LCDF4Z1GX');
         </script>
         <script
             data-ad-client="ca-pub-9636274019237410"
@@ -70,9 +73,8 @@
     </head>
 
     <body>
-		
         <nav class="p-3 container navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="https://celebme.kr">셀럽미</a>
+            <a class="navbar-brand" href="https://celebme.kr">셀럽미: 닮은 아이돌 찾기</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -88,7 +90,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="#"
-                            >셀럽미
+                            >셀럽미: 닮은 아이돌 찾기
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -147,39 +149,46 @@
                     <div class="drag-text">
                         <img src="img/upload.svg" class="mt-5 pt-5 upload" />
                         <h3 class="mb-5 pb-5 pt-4 upload-text">
-							얼굴 사진을 올려놓거나 눌러서 업로드하세요! <br><br>
-							*사진은 어디에도 저장되지 않습니다* 
+                            얼굴 사진을 올려놓거나 <br />
+                            눌러서 시작하세요!
                         </h3>
+
+                        <h5 style="margin-bottom: 5%;">
+                            * 한 명의 정면 사진 중 <br />
+                            밝지않은 배경이 인식률이 높아요. <br />
+                            사진은 어디에도 저장되지 않습니다 *
+                        </h5>
                     </div>
                 </div>
-				
+
                 <div class="file-upload-content">
                     <img class="file-upload-image" id="face-image" src="#" alt="your image" />
                     <div id="loading" class="animated bounce">
                         <div class="spinner-border" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
-						
-                        <p class="result-message" >AI가 당신과 비슷한 아이돌을 분석중입니다.</p>
+
+                        <p class="result-message">
+                            AI가 당신과 비슷한 아이돌을 분석중입니다.<br />
+                            잠시만 기다려주세요.
+                        </p>
                     </div>
                     <p class="result-message" id="result-message"></p>
                     <!-- <div class="gcse-searchbox"  data-queryParameterName=></div>
                     <div class="gcse-searchresults"></div> -->
                     <!-- <div class="iframebox"> -->
-						
-					<iframe
+
+                    <iframe
                         src=""
                         id="search"
-                        
                         name="search"
                         title="search"
-						
                         frameborder="0"
                         scrolling="auto"
-						onload="calcHeight();"
-                        style="overflow-x: hidden; overflow: hidden; width: 100%; "
-							></iframe>
-					<!-- </div> -->
+                        onload="calcHeight();"
+                        style="overflow-x: hidden; overflow: hidden; width: 100%;"
+                    ></iframe>
+                    <!-- </div> -->
 
                     <div
                         id="label-container"
@@ -189,6 +198,11 @@
                     <div class="addthis_inline_share_toolbox"></div>
 
                     <div class="pt-3 image-title-wrap">
+                        <a href="https://bit.ly/3GKB7Sf" target="_blank">
+                            <button type="button p-2" class="donation-btn" onclick="donate();">
+                            <span class="try-again-text">개발자에게 커피한잔! 후원하기</span>
+                        </button>
+                        </a>
                         <button type="button p-2" class="try-again-btn" onclick="gaReload();">
                             <span class="try-again-text">다른 사진으로 재시도</span>
                         </button>
@@ -229,7 +243,7 @@
         </center>
         <footer class="footer pt-5 container d-flex justify-content-center">
             <div>
-                <p>&copy; 테리 Terry 2020. All Rights Reserved.</p>
+                <p>&copy; 테리 Terry 2022. All Rights Reserved.</p>
             </div>
         </footer>
         <script>
@@ -238,22 +252,21 @@
                     event_category: '다른 사진으로 재시도',
                 });
                 window.location.reload();
-                // history.pushState(null, null, "index.html?q=유재석");
             }
+			function donate() {
+				gtag('event', '개발자에게 커피한잔! 후원하기', {
+					event_category: '개발자에게 커피한잔! 후원하기',
+				});
+			}
         </script>
         <div id="disqus_thread"></div>
         <script>
-            /**
-             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-
             var disqus_config = function () {
-                this.page.url = 'https://celebme.kr'; // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = '셀럽미'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                this.page.url = 'https://celebme.kr';
+                this.page.identifier = '셀럽미: 닮은 아이돌 찾기';
             };
 
             (function () {
-                // DON'T EDIT BELOW THIS LINE
                 var d = document,
                     s = d.createElement('script');
                 s.src = 'https://k-celeb.disqus.com/embed.js';
@@ -285,16 +298,9 @@
         <script type="text/javascript">
             let URL;
             const url = 'https://teachablemachine.withgoogle.com/models/MBPXOm3kZ/';
-			
-            // const urlMale = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
-            // const urlFemale = "https://teachablemachine.withgoogle.com/models/U6D9oxbis/";
+
             let model, webcam, labelContainer, maxPredictions;
             async function init() {
-                // if (document.getElementById("gender").checked) {
-                //     URL = urlMale;
-                // } else {
-                //     URL = urlFemale;
-                // }
                 URL = url;
                 const modelURL = URL + 'model.json';
                 const metadataURL = URL + 'metadata.json';
@@ -306,88 +312,90 @@
                     element.classList.add('d-flex');
                     labelContainer.appendChild(element);
                 }
-                // console.log('init');
             }
             async function predict() {
                 var image = document.getElementById('face-image');
                 const prediction = await model.predict(image, false);
                 prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
                 var resultTitle, resultExplain, resultCeleb;
-                // console.log(prediction);
                 var resultTitle = prediction[0].className;
                 var resultFace = true;
-                // var resultCeleb = '연예인 설명 예시';
                 $('#face-image').faceDetection({
-					grayscale: false,
-                    confidence: -1.25, // -20 : 1명인데 2명나옴 -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter
+                    grayscale: false,
+                    confidence: -2.035, // -20 : 1명인데 2명표시됨, -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter. 2: 신뢰도 높은 filter
                     complete: function (faces) {
                         if (faces.length == 0 || faces.length > 1) {
-                            resultTitle = '셀럽 한 명의 정면 사진을 사용해주세요. <br>' + 
-								    faces.length + ' 명 인식되었습니다.';
-							resultFace = false;
+                            resultTitle =
+                                '선명한 정면사진을 사용해주세요. <br>' +
+                                faces.length +
+                                ' 명 인식되었습니다.';
+                            resultFace = false;
                         }
-                        // for (var i = 0; i < faces.length; i++) {
-                        //     $('<div>', {
-                        //         class: 'face-image',
-                        //         css: {
-                        //             position: 'absolute',
-                        //             left: faces[i].x * faces[i].scaleX + 'px',
-                        //             top: faces[i].y * faces[i].scaleY + 'px',
-                        //             width: faces[i].width * faces[i].scaleX + 'px',
-                        //             height: faces[i].height * faces[i].scaleY + 'px',
-                        //         },
-                        //     }).insertAfter(this);
-                        // }
                     },
                     error: function (code, message) {
                         alert('Error: ' + message);
                     },
                 });
-				
-				var resultExplain = (prediction[0].probability * 100).toFixed(1);
-                gtag('event', resultTitle, { event_category: resultExplain, result_face: resultFace });
-				
-				var title =
-					"<div class='" + prediction[0].className + "-title'> 1순위: " + resultTitle +" (" + resultExplain + '%) </div>';
-				
-				var explain = "<div class='celeb-explain pt-2'> 2, 3순위: " 
-				  + prediction[1].className + " (" + (prediction[1].probability * 100).toFixed(1) + "%) , " 
-				  + prediction[2].className + " (" + (prediction[2].probability * 100).toFixed(1) + '%) </div>';
-				
-				if (!resultFace) {
-					title =
-					"<div class='" + prediction[0].className + "-title'> " + resultTitle + '</div>';
-					$('.result-message').html(title);
-					document.getElementById('search').height = 0;
-				} else {
-					$('.result-message').html(title + explain);
-					$('#search').attr('src', 'search.html?q=연예인 ' + resultTitle + ' 프로필 이미지');
-					var labelTitle = '나와 비슷한 셀럽';
-					var label =
-						"<div class='celeb-label d-flex align-items-center'>" + labelTitle + '</div>';
-					var barWidth = '100';
-					var bar =
-						"<div class='bar-container position-relative container'><div class='" +
-						prediction[0].className +
-						"-box'></div><div class='d-flex justify-content-center align-items-center " +
-						prediction[0].className +
-						"-bar' style='width: " +
-						barWidth +
-						"'><span class='d-block percent-text'>" +
-						Math.round(prediction[0].probability.toFixed(2) * 100) +
-						'%</span></div></div>';
-				}
-				$('#loading').hide();
-                // labelContainer.childNodes[0].innerHTML = label + bar;
-                // var element = google.search.cse.element.getElement('google-results-gname');
-                // element.execute(resultTitle);
-                // labelContainer.childNodes[0].innerHTML = label + bar;
 
-                // var faceImage = document.getElementById('face-image').value,
-                // 	resultMessage = title + explain + celeb,
-                // 	url = 'index.html?q=' + resultTitle + '&faceimage=' + encodeURIComponent(faceImage) + '&resultmessage=' + encodeURIComponent(resultMessage);
+                var resultExplain = (prediction[0].probability * 100).toFixed(1);
+                gtag('event', resultTitle, {
+                    event_category: resultExplain,
+                    result_face: resultFace,
+                });
 
-                // document.location.href = url;
+                var title =
+                    "<div class='" +
+                    prediction[0].className +
+                    "-title'> 1순위: " +
+                    resultTitle +
+                    ' (' +
+                    resultExplain +
+                    '%) </div>';
+
+                var explain =
+                    "<div class='celeb-explain pt-2'> 2, 3순위: " +
+                    prediction[1].className +
+                    ' (' +
+                    (prediction[1].probability * 100).toFixed(1) +
+                    '%) , ' +
+                    prediction[2].className +
+                    ' (' +
+                    (prediction[2].probability * 100).toFixed(1) +
+                    '%) </div>';
+
+                if (!resultFace) {
+                    title =
+                        "<div class='" +
+                        prediction[0].className +
+                        "-title'> " +
+                        resultTitle +
+                        '</div>';
+                    $('.result-message').html(title);
+                    document.getElementById('search').height = 0;
+                } else {
+                    $('.result-message').html(title + explain);
+                    $('#search').attr(
+                        'src',
+                        'search.html?q=연예인 ' + resultTitle + ' 프로필 이미지'
+                    );
+                    var labelTitle = '나와 비슷한 셀럽';
+                    var label =
+                        "<div class='celeb-label d-flex align-items-center'>" +
+                        labelTitle +
+                        '</div>';
+                    var barWidth = '100';
+                    var bar =
+                        "<div class='bar-container position-relative container'><div class='" +
+                        prediction[0].className +
+                        "-box'></div><div class='d-flex justify-content-center align-items-center " +
+                        prediction[0].className +
+                        "-bar' style='width: " +
+                        barWidth +
+                        "'><span class='d-block percent-text'>" +
+                        Math.round(prediction[0].probability.toFixed(2) * 100) +
+                        '%</span></div></div>';
+                }
+                $('#loading').hide();
             }
         </script>
         <script>
@@ -403,7 +411,6 @@
                     };
                     reader.readAsDataURL(input.files[0]);
                     init().then(function () {
-                        // console.log('hello');
                         predict();
                         // $('#loading').hide();
                     });
@@ -439,22 +446,34 @@
                 document.getElementById('yotube-mid-link').style.display = 'none';
                 document.getElementById('yotube-bottom-link').style.display = 'none';
             }
-            // $('#adModal').on('shown.bs.modal'),
-            //     function () {
-            //         $.getScript('//t1.daumcdn.net/kas/static/ba.min.js');
-            //     };
 
             function calcHeight() {
                 //find the height of the internal page
 
-                var the_height = document.getElementById('search').contentWindow.document.body
-                    .scrollHeight;
+                var iframe_var = document.getElementById('search');
+
+                var photos = iframe_var.contentWindow.document.body.getElementsByClassName(
+                    'gs-image-scalable'
+                );
+                var height_target = 0;
+                for (var i = 0; i < photos.length; i++) {
+                    
+                    if (height_target < photos[i].height) {
+                        height_target = photos[i].height;
+                    }
+                }
+                var height_px = 'height: ' + height_target + 'px';
+                var areaVar = iframe_var.contentWindow.document.body.getElementsByClassName(
+                    'gsc-expansionArea'
+                );
+                for (var i = 0; i < areaVar.length; i++) {
+                    areaVar[i].setAttribute('style', height_px);
+                }
+                var the_height = iframe_var.contentWindow.document.body.scrollHeight;
 
                 //change the height of the iframe
-                document.getElementById('search').height = the_height;
-				
-                //document.getElementById('the_iframe').scrolling = "no";
-                document.getElementById('search').style.overflow = 'hidden';
+                iframe_var.height = the_height;
+                iframe_var.style.overflow = 'hidden';
             }
         </script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
