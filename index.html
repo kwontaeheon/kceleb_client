@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet" /> -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -479,17 +479,22 @@
                 var height_target = 0;
                 for (var i = 0; i < photos.length; i++) {
                     // console.log(photos[i].height);
-                    if (height_target < photos[i].height) {
-                        height_target = photos[i].height + 10;
+					var photo_height = photos[i].height;
+                    if (height_target < photo_height) {
+                        height_target = photo_height + 10;
                     }
+					
+					photos[i].style.width = (photos[i].width - 10) + "px";
+					
                 }
                 var height_px = 'height: ' + height_target + 'px';
                 var areaVar = iframe_var.contentWindow.document.body.getElementsByClassName(
                     'gsc-expansionArea'
                 );
-                for (var i = 0; i < areaVar.length; i++) {
-                    areaVar[i].setAttribute('style', height_px);
-                    areaVar[i].height = height_px;
+				// console.log(height_target);
+				for (var i = 0; i < areaVar.length; i++) {
+					areaVar[i].setAttribute("style", height_px);
+					
                 }
                 var the_height = iframe_var.contentWindow.document.body.scrollHeight;
 
