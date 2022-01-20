@@ -8,7 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+            href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css"
             rel="stylesheet"
         />
 
@@ -162,7 +162,9 @@
                 </div>
 
                 <div class="file-upload-content">
-                    <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+                    <div class="wrapper">
+                        <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+                    </div>
                     <div id="loading" class="animated bounce">
                         <div class="spinner-border" role="status">
                             <span class="sr-only">Loading...</span>
@@ -200,10 +202,10 @@
                     <div class="pt-3 image-title-wrap">
                         <a href="https://bit.ly/3GKB7Sf" target="_blank">
                             <button type="button p-2" class="donation-btn" onclick="donate();">
-                            <span class="try-again-text">개발자에게 커피한잔! 후원하기</span>
-                        </button>
+                                <span class="try-again-text">개발자에게 커피한잔! 후원하기</span>
+                            </button>
                         </a>
-						<br /><br />
+                        <br /><br />
                         <button type="button p-2" class="try-again-btn" onclick="gaReload();">
                             <span class="try-again-text">다른 사진으로 재시도</span>
                         </button>
@@ -254,11 +256,11 @@
                 });
                 window.location.reload();
             }
-			function donate() {
-				gtag('event', '개발자에게 커피한잔! 후원하기', {
-					event_category: '개발자에게 커피한잔! 후원하기',
-				});
-			}
+            function donate() {
+                gtag('event', '개발자에게 커피한잔! 후원하기', {
+                    event_category: '개발자에게 커피한잔! 후원하기',
+                });
+            }
         </script>
         <div id="disqus_thread"></div>
         <script>
@@ -316,31 +318,47 @@
             }
             async function predict() {
                 var image = document.getElementById('face-image');
-                const prediction = await model.predict(image, false);
-                prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+
                 var resultTitle, resultExplain, resultCeleb;
-                var resultTitle = prediction[0].className;
-                var resultFace = true;
+
+                var resultFace = false;
                 $('#face-image').faceDetection({
                     grayscale: false,
-                    confidence: -99, // -20 : 1명인데 2명표시됨, -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter. 2: 신뢰도 높은 filter
+                    confidence: -10, // -20 : 1명인데 2명표시됨, -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter. 2: 신뢰도 높은 filter
                     complete: function (faces) {
-                        console.log(faces);
-                        if (faces.length == 0 || faces.length > 1) {
-                            resultTitle =
-                                '선명한 정면사진을 사용해주세요. <br>' +
-                                faces.length +
-                                ' 명 인식되었습니다.';
-
+                        // console.log(image.width * 0.2);
+                        // console.log(image.height * 0.2);
+                        var face_cnt = 0;
+                        for (var i = 0; i < faces.length; i++) {
+                            // console.log(faces[i].width);
+                            // console.log(faces[i].height);
+                            if (
+                                faces[i].width > image.width * 0.2 ||
+                                faces[i].height > image.height * 0.2
+                            ) {
+                                resultFace = true;
+                                face_cnt += 1;
+                                // console.log(face_cnt);
+                            }
+                        }
+                        if (resultFace == false) {
+                            resultTitle = '선명한 정면사진을 사용해주세요. <br>';
                             resultFace = false;
+                        }
+
+                        if (faces.length == 0 || faces.length > 1) {
                         }
                     },
                     error: function (code, message) {
                         alert('Error: ' + message);
                     },
                 });
-
-                var resultExplain = (prediction[0].probability * 100).toFixed(1);
+                const prediction = await model.predict(image, false);
+                prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+                if (resultFace) {
+                    resultTitle = prediction[0].className;
+                    resultExplain = (prediction[0].probability * 100).toFixed(1);
+                }
                 gtag('event', resultTitle, {
                     event_category: resultExplain,
                     result_face: resultFace,
@@ -460,9 +478,9 @@
                 );
                 var height_target = 0;
                 for (var i = 0; i < photos.length; i++) {
-                    
+                    // console.log(photos[i].height);
                     if (height_target < photos[i].height) {
-                        height_target = photos[i].height;
+                        height_target = photos[i].height + 10;
                     }
                 }
                 var height_px = 'height: ' + height_target + 'px';
@@ -471,6 +489,7 @@
                 );
                 for (var i = 0; i < areaVar.length; i++) {
                     areaVar[i].setAttribute('style', height_px);
+                    areaVar[i].height = height_px;
                 }
                 var the_height = iframe_var.contentWindow.document.body.scrollHeight;
 
