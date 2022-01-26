@@ -303,7 +303,8 @@
             const url = 'https://teachablemachine.withgoogle.com/models/MBPXOm3kZ/';
 			const genderModelUrl = 'https://teachablemachine.withgoogle.com/models/nk0rwwZ7d/';
 			const menModelUrl = 'https://teachablemachine.withgoogle.com/models/zb8E9WoH4/';
-			let model, genderModel, menModel; 
+			const humanModelUrl = 'https://teachablemachine.withgoogle.com/models/bXdw7VDCG/';
+			let model, genderModel, menModel, humanModel; 
 			async function init() {
                 URL = url;
                 const modelURL = URL + 'model.json';
@@ -312,6 +313,7 @@
 				
 				genderModel = await tmImage.load(genderModelUrl + 'model.json', genderModelUrl + 'metadata.json');
 				menModel = await tmImage.load(menModelUrl + 'model.json', menModelUrl + 'metadata.json');
+				humanModel = await tmImage.load(humanModelUrl + 'model.json', humanModelUrl + 'metadata.json');
             }
 			
 			/**
@@ -323,33 +325,18 @@
                 var resultFace = false;
 				var statement = "" ;
                 var title = "";
+				
 				// Step 1: check if face exists
-                $('#face-image').faceDetection({
-                    grayscale: false,
-                    confidence: -10, // -20 : 1명인데 2명표시됨, -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter. 2: 신뢰도 높은 filter
-					complete: function (faces) {
-                        var face_cnt = 0;
-                        for (var i = 0; i < faces.length; i++) {
-                            if (
-                                faces[i].width > image.width * 0.2 ||
-                                faces[i].height > image.height * 0.2
-                            ) {
-                                resultFace = true;
-                                face_cnt += 1;
-                            }
-                        }
-                        if (resultFace == false) {
-                            resultTitle = '선명한 정면사진을 사용해주세요. <br>';
-                            resultFace = false;
-                        }
-
-                        if (faces.length == 0 || faces.length > 1) {
-                        }
-                    },
-                    error: function (code, message) {
-                        alert('Error: ' + message);
-                    },
-                });
+                const humanPrediction = await humanModel.predict(image, true);
+				humanPrediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+				const human = humanPrediction[0].className;
+				if (human == '사람') {
+					resultFace = true;
+				} else {
+					console.log(human);
+					resultFace = false; 
+					resultTitle = '선명한 정면사진을 사용해주세요. <br>';
+				}
 				
 				// 사람이 한 명 이상이라도 인식되는 경우
                 if (resultFace) {
@@ -497,7 +484,7 @@
             }
         </script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="jquery.facedetection.min.js"></script>
+        
     </body>
     <!-- 
 image input box
