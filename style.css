@@ -53,6 +53,7 @@ body {
 .file-upload-content {
     display: none;
     text-align: center;
+	align-items: center
 }
 #loading {
     display: none;
@@ -107,13 +108,29 @@ body {
 }
 .file-upload-image {
     /* max-height: 10%; */
-    position: relative;
-    max-height: 180px;
-    max-width: 80%;
+    position: absolute;
+    /* max-height: 180px; */
+	top: 0;
+	left: 0;
+	transform: translate(50, 50);
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
     margin: auto;
     padding: 10px;
+	/* max-height: 100%;
+	max-width: 100%;
+	-ms-interpolation-mode: bicubic; */
 }
-
+.wrapper {
+	/* display: block; 
+	overflow: hidden;  */
+	height: 280px; 
+	width: 280px;
+	position: relative;
+	margin: auto;
+	
+}
 .try-again-btn {
     border-radius: 40px;
     border: solid 1.5px #35465d;
@@ -240,6 +257,9 @@ body {
     margin: 0 auto;
 }
 .result-message {
+    font-size: 2rem;
+}
+.loading-message {
     font-size: 2rem;
 }
 

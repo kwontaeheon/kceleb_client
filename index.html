@@ -169,11 +169,10 @@
                         <div class="spinner-border" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
-
-                        <p class="result-message">
-                            AI가 당신과 비슷한 아이돌을 분석중입니다.<br />
+						<div class="loading-message" id="loading-message">
+                            AI가 사진을 분석하고 있어요<br />
                             잠시만 기다려주세요.
-                        </p>
+						</div>
                     </div>
                     <p class="result-message" id="result-message"></p>
                     <!-- <div class="gcse-searchbox"  data-queryParameterName=></div>
@@ -299,46 +298,44 @@
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
         <script type="text/javascript">
+			
             let URL;
             const url = 'https://teachablemachine.withgoogle.com/models/MBPXOm3kZ/';
-
-            let model, webcam, labelContainer, maxPredictions;
-            async function init() {
+			const genderModelUrl = 'https://teachablemachine.withgoogle.com/models/nk0rwwZ7d/';
+			const menModelUrl = 'https://teachablemachine.withgoogle.com/models/zb8E9WoH4/';
+			let model, genderModel, menModel; 
+			async function init() {
                 URL = url;
                 const modelURL = URL + 'model.json';
                 const metadataURL = URL + 'metadata.json';
                 model = await tmImage.load(modelURL, metadataURL);
-                maxPredictions = model.getTotalClasses();
-                labelContainer = document.getElementById('label-container');
-                for (let i = 0; i < maxPredictions; i++) {
-                    var element = document.createElement('div');
-                    element.classList.add('d-flex');
-                    labelContainer.appendChild(element);
-                }
+				
+				genderModel = await tmImage.load(genderModelUrl + 'model.json', genderModelUrl + 'metadata.json');
+				menModel = await tmImage.load(menModelUrl + 'model.json', menModelUrl + 'metadata.json');
             }
+			
+			/**
+			  Displays Similar idol name from model prediction
+			*/
             async function predict() {
                 var image = document.getElementById('face-image');
-
                 var resultTitle, resultExplain, resultCeleb;
-
                 var resultFace = false;
+				var statement = "" ;
+                var title = "";
+				// Step 1: check if face exists
                 $('#face-image').faceDetection({
                     grayscale: false,
                     confidence: -10, // -20 : 1명인데 2명표시됨, -9 : 미약하지만 minimum filter  , 0: 적정하게 신뢰할수있는수준으로 filter. 2: 신뢰도 높은 filter
-                    complete: function (faces) {
-                        // console.log(image.width * 0.2);
-                        // console.log(image.height * 0.2);
+					complete: function (faces) {
                         var face_cnt = 0;
                         for (var i = 0; i < faces.length; i++) {
-                            // console.log(faces[i].width);
-                            // console.log(faces[i].height);
                             if (
                                 faces[i].width > image.width * 0.2 ||
                                 faces[i].height > image.height * 0.2
                             ) {
                                 resultFace = true;
                                 face_cnt += 1;
-                                // console.log(face_cnt);
                             }
                         }
                         if (resultFace == false) {
@@ -353,70 +350,66 @@
                         alert('Error: ' + message);
                     },
                 });
-                const prediction = await model.predict(image, false);
-                prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+				
+				// 사람이 한 명 이상이라도 인식되는 경우
                 if (resultFace) {
-                    resultTitle = prediction[0].className;
-                    resultExplain = (prediction[0].probability * 100).toFixed(1);
-                }
+					// 남자인지 여자인지 체크 시작
+					const genderPrediction = await genderModel.predict(image, true); // 흑백인지여부 true
+					genderPrediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+					const gender = genderPrediction[0].className;
+					
+					var prediction;
+					// 연예인과 비교 시작
+					if (gender == '남자') {
+						prediction = await menModel.predict(image, true); // 흑백인지여부 true
+					} else {
+						prediction = await model.predict(image, true); // 흑백인지여부 true
+						
+					}
+					prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+					resultTitle = prediction[0].className;
+					resultExplain = (prediction[0].probability * 100).toFixed(1);
+					
+					
+					
+					
+					var title =
+						"<div>" + 
+						gender + " " +
+						"1순위: " +
+						resultTitle +
+						' (' +
+						resultExplain +
+						'%) </div>';
+
+					var explain =
+						"<div class='celeb-explain pt-2'> 2, 3순위: " +
+						prediction[1].className +
+						' (' +
+						(prediction[1].probability * 100).toFixed(1) +
+						'%) , ' +
+						prediction[2].className +
+						' (' +
+						(prediction[2].probability * 100).toFixed(1) +
+						'%) </div>';
+					$('.result-message').html(title + explain);
+                    $('#search').attr(
+                        'src',
+                        'search.html?q=연예인 "' + resultTitle + '" 프로필 이미지'
+                    );
+                } else {
+					title =
+                        "<div>" +
+                        resultTitle +
+                        '</div>';
+                    $('.result-message').html(title);
+                    document.getElementById('search').height = 0;
+				}
                 gtag('event', resultTitle, {
                     event_category: resultExplain,
                     result_face: resultFace,
                 });
 
-                var title =
-                    "<div class='" +
-                    prediction[0].className +
-                    "-title'> 1순위: " +
-                    resultTitle +
-                    ' (' +
-                    resultExplain +
-                    '%) </div>';
-
-                var explain =
-                    "<div class='celeb-explain pt-2'> 2, 3순위: " +
-                    prediction[1].className +
-                    ' (' +
-                    (prediction[1].probability * 100).toFixed(1) +
-                    '%) , ' +
-                    prediction[2].className +
-                    ' (' +
-                    (prediction[2].probability * 100).toFixed(1) +
-                    '%) </div>';
-
-                if (!resultFace) {
-                    title =
-                        "<div class='" +
-                        prediction[0].className +
-                        "-title'> " +
-                        resultTitle +
-                        '</div>';
-                    $('.result-message').html(title);
-                    document.getElementById('search').height = 0;
-                } else {
-                    $('.result-message').html(title + explain);
-                    $('#search').attr(
-                        'src',
-                        'search.html?q=연예인 ' + resultTitle + ' 프로필 이미지'
-                    );
-                    var labelTitle = '나와 비슷한 셀럽';
-                    var label =
-                        "<div class='celeb-label d-flex align-items-center'>" +
-                        labelTitle +
-                        '</div>';
-                    var barWidth = '100';
-                    var bar =
-                        "<div class='bar-container position-relative container'><div class='" +
-                        prediction[0].className +
-                        "-box'></div><div class='d-flex justify-content-center align-items-center " +
-                        prediction[0].className +
-                        "-bar' style='width: " +
-                        barWidth +
-                        "'><span class='d-block percent-text'>" +
-                        Math.round(prediction[0].probability.toFixed(2) * 100) +
-                        '%</span></div></div>';
-                }
-                $('#loading').hide();
             }
         </script>
         <script>
@@ -433,7 +426,7 @@
                     reader.readAsDataURL(input.files[0]);
                     init().then(function () {
                         predict();
-                        // $('#loading').hide();
+                        $('#loading').hide();
                     });
                 } else {
                     removeUpload();
