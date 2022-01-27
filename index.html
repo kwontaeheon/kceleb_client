@@ -299,21 +299,23 @@
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
         <script type="text/javascript">
 			
-            let URL;
-            const url = 'https://teachablemachine.withgoogle.com/models/MBPXOm3kZ/';
+            // let URL;
+            // const url = 'https://teachablemachine.withgoogle.com/models/MBPXOm3kZ/';
 			const genderModelUrl = 'https://teachablemachine.withgoogle.com/models/nk0rwwZ7d/';
 			const menModelUrl = 'https://teachablemachine.withgoogle.com/models/K5XE_a_jo/';
+			const womenModelUrl = 'https://teachablemachine.withgoogle.com/models/XytywXkYJ/';
 			const humanModelUrl = 'https://teachablemachine.withgoogle.com/models/bXdw7VDCG/';
-			let model, genderModel, menModel, humanModel; 
+			let model, genderModel, menModel, humanModel, womenModel; 
 			async function init() {
-                URL = url;
-                const modelURL = URL + 'model.json';
-                const metadataURL = URL + 'metadata.json';
-                model = await tmImage.load(modelURL, metadataURL);
+                // URL = url;
+                // const modelURL = URL + 'model.json';
+                // const metadataURL = URL + 'metadata.json';
+                // model = await tmImage.load(modelURL, metadataURL);
 				
 				genderModel = await tmImage.load(genderModelUrl + 'model.json', genderModelUrl + 'metadata.json');
 				menModel = await tmImage.load(menModelUrl + 'model.json', menModelUrl + 'metadata.json');
 				humanModel = await tmImage.load(humanModelUrl + 'model.json', humanModelUrl + 'metadata.json');
+				womenModel = await tmImage.load(womenModelUrl + 'model.json', womenModelUrl + 'metadata.json');
             }
 			
 			/**
@@ -350,7 +352,7 @@
 					if (gender == '남자') {
 						prediction = await menModel.predict(image, true); // 흑백인지여부 true
 					} else {
-						prediction = await model.predict(image, true); // 흑백인지여부 true
+						prediction = await womenModel.predict(image, true); // 흑백인지여부 true
 						
 					}
 					prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
