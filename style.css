@@ -225,7 +225,7 @@ body {
 }
 
 .upload {
-    width: 20%;
+    width: 40%;
 	filter: invert(48%) sepia(0%) saturate(2841%) hue-rotate(251deg) brightness(67%) contrast(80%);
 }
 
