@@ -19,6 +19,7 @@ body {
 .file-upload {
     padding: 1% 1%;
     margin: 0 auto;
+	margin-bottom: 10px;
     border-radius: 10px;
     border: solid 1.5px #f6f7fa;
     background-color: #f6f7fa;
@@ -264,6 +265,10 @@ body {
 }
 .loading-message {
     font-size: 2rem;
+}
+.loading-sub {
+	font-size: 1.3rem;
+	padding-top: 3%;
 }
 
 label {

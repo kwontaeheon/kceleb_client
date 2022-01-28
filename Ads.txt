@@ -1,5 +1,5 @@
 disqus.com, 4725065, DIRECT
-google.com, pub-6650322601660058, RESELLER, f08c47fec0942fa0 
+google.com, pub-9636274019237410, RESELLER, f08c47fec0942fa0 
 aax.media, AAXN9V74H, DIRECT 
 media.net, 8PR6YK195, RESELLER 
 pubmatic.com, 158984, RESELLER, 5d62403b186f2ace 
@@ -16,7 +16,7 @@ sovrn.com, 260380, RESELLER, fafdf38b16bf6b2b
 aniview.com, 616704c962b31624e671e171, RESELLER, 78b21b97965ec3f8  
 advertising.com, 23089, RESELLER  
 appnexus.com, 12637, RESELLER, f5ab79cb980f11d1 
-google.com, pub-3565385483761681, DIRECT, f08c47fec0942fa0 
+google.com, pub-9636274019237410, DIRECT, f08c47fec0942fa0 
 pubmatic.com, 161335, RESELLER, 5d62403b186f2ace 
 rubiconproject.com, 13918, RESELLER, 0bfd66d529a55807 
 adyoulike.com, 65821909b0ce70f6e87747d8f22c3cf0, DIRECT  
