@@ -421,7 +421,6 @@
                         title = '<div>' + resultTitle + '</div>';
                         $('.result-message').html(title);
                         document.getElementById('search').height = 0;
-                        $('.result-message').show();
                         gtag('event', resultTitle, {
                             event_category: '사람인식 실패',
                             result_face: resultFace,
@@ -462,7 +461,7 @@
             async function readURL(input) {
                 if (input.files && input.files[0]) {
                     $('.try-again-btn').hide();
-                    $('#loading').show();
+                    
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         $('.image-upload-wrap').hide();
@@ -470,8 +469,9 @@
                         $('#title').html(input.files[0].name);
                     };
                     await reader.readAsDataURL(input.files[0]);
+					$('.file-upload-content').show();
                     document.getElementById('face-image').onload = function () {
-                        $('.file-upload-content').show();
+						$('#loading').show();
                         init().then(function () {
                             predict().then(function (prom) {
                                 $('.try-again-btn').show();
