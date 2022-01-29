@@ -437,13 +437,13 @@
                         );
                         var gender = genderPrediction[0].className;
                         if (gender == '남자') {
-                            // 흑백여부 false
-                            menModel.predict(image, false).then(function (prediction) {
+                            // 흑백여부 true
+                            menModel.predict(image, true).then(function (prediction) {
                                 displayIdolPrediction(prediction);
                             });
                         } else {
-                            // 흑백여부 false
-                            womenModel.predict(image, false).then(function (prediction) {
+                            // 흑백여부 true
+                            womenModel.predict(image, true).then(function (prediction) {
                                 displayIdolPrediction(prediction);
                             });
                         }
