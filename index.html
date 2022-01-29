@@ -408,13 +408,14 @@
                     humanPrediction.sort(
                         (a, b) => parseFloat(b.probability) - parseFloat(a.probability)
                     );
+					console.log(humanPrediction);
                     var human = humanPrediction[0].className;
 
                     // Step 1: check if face exists
                     var resultFace, resultTitle;
                     resultFace = false;
                     resultTitle = '선명한 정면사진을 사용해주세요. <br>';
-                    if (human == '사람') {
+                    if (human == '사람' && humanPrediction[0].probability >= 0.8) {
                         resultFace = true;
                     } else {
                         // 사물
@@ -470,13 +471,13 @@
                     };
                     await reader.readAsDataURL(input.files[0]);
 					$('.file-upload-content').show();
+					$('#loading').show();
                     document.getElementById('face-image').onload = function () {
-						$('#loading').show();
                         init().then(function () {
                             predict().then(function (prom) {
                                 $('.try-again-btn').show();
-                                $('#loading').hide();
                                 $('.result-message').show();
+								$('#loading').hide();
                             });
                         });
                     };
