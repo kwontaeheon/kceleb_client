@@ -470,8 +470,9 @@
                     reader.readAsDataURL(input.files[0]);
                     init().then(function () {
                         predict().then(function () {
-							$('#loading').hide();
+							
 							$('.try-again-btn').show();
+                                       $('#loading').hide();
 						})
                     });
                 } else {
