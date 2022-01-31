@@ -462,7 +462,9 @@
             async function readURL(input) {
                 if (input.files && input.files[0]) {
                     $('.try-again-btn').hide();
-                    
+                    gtag('event', 'AI호출 시작', {
+			    event_category: 'AI호출 시작',
+			});
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         $('.image-upload-wrap').hide();
