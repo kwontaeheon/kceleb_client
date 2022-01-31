@@ -27,7 +27,8 @@
         />
         <meta
             name="keywords"
-            content="아이돌 테스트, 인공지능 아이돌 테스트, 얼굴상, 얼굴상 테스트, 나와 닮은 아이돌, 나와 닮은 연예인 테스트, 연예인, 인공지능 연예인, 연예인 찾기, 얼굴로 보는 연예인, 얼굴 연예인, 연예인 얼굴, celebrity, 인공지능 연예인상, AI 얼굴상, AI 연예인상"
+            content="아이돌 테스트, 인공지능 아이돌 테스트, 얼굴상, 얼굴상 테스트, 나와 닮은 아이돌, 나와 닮은 연예인 테스트, 연예인, 인공지능 연예인, 연예인 찾기, 얼굴로 보는 연예인, 얼굴 연예인, 연예인 얼굴, celebrity, 인공지능 연예인상, 
+		     얼굴상, AI 연예인상"
         />
         <meta name="author" content="권태헌(kwontaeheon@gmail.com)" />
         <link rel="stylesheet" href="style.css" />
@@ -462,8 +463,8 @@
             async function readURL(input) {
                 if (input.files && input.files[0]) {
                     $('.try-again-btn').hide();
-                    gtag('event', 'AI호출 시작', {
-			    event_category: 'AI호출 시작',
+                    gtag('event', 'AI호출시작', {
+			    event_category: 'AI호출시작',
 			});
                     var reader = new FileReader();
                     reader.onload = function (e) {
