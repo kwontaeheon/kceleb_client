@@ -210,6 +210,9 @@ body {
     .navbar-brand {
         font-size: 2rem;
     }
+    .navbar-nav {
+        font-size: 1.5rem;
+    }
 }
 
 .youtube-link {
@@ -227,6 +230,7 @@ body {
     color: #573737;
     text-decoration: underline;
 }
+
 
 .youtube-icon {
     width: 30px;
@@ -381,7 +385,7 @@ input:checked + label > .knob > i:before {
 .switch {
     position: relative;
     display: inline-block;
-    width: 120px;
+    width: 80px;
     height: 34px;
   }
   
@@ -426,9 +430,9 @@ input:checked + label > .knob > i:before {
   }
   
   input:checked + .slider:before {
-    -webkit-transform: translateX(85px);
-    -ms-transform: translateX(85px);
-    transform: translateX(85px);
+    -webkit-transform: translateX(45px);
+    -ms-transform: translateX(45px);
+    transform: translateX(45px);
   }
   
   /* Rounded sliders */
