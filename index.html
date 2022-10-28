@@ -119,7 +119,7 @@
             대표 연예인 사진 데이터로 학습한 인공지능이 나의 얼굴로 닮은 아이돌을 찾아드립니다.
         </h4>
         <h4 class="sr-only">
-            본 서비스는 Google의 인공지능 teachable machine 2.0을 활용하였습니다.
+            본 서비스는 Google의 인공지능 teachable machine 2.0을 활용하여 제작되었다가, Javascript 기반의 Tensorflow 로 재학습하여 개편하였습니다. 
         </h4>
         <p class="sr-only">
             얼굴로 보는 인공지능 아이돌 테스트, 나와 닮은 아이돌을 찾아보세요! 대표 연예인 사진
@@ -260,35 +260,56 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <!-- Import @tensorflow/tfjs-core -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script> -->
+	<!-- Adds the CPU backend -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-cpu"></script> -->
+	<!--
+	  Import @tensorflow/tfjs-tflite
+
+	  Note that we need to explicitly load dist/tf-tflite.min.js so that it can
+	  locate WASM module files from their default location (dist/).
+	-->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
+    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> </script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script> -->
     <script type="text/javascript">
-        const menModelUrl = 'https://teachablemachine.withgoogle.com/models/K5XE_a_jo/';
-        const womenModelUrl = 'https://teachablemachine.withgoogle.com/models/XytywXkYJ/';
-        let menModel, womenModel, isMale;
+        const repoUrl = 'https://raw.githubusercontent.com/kwontaeheon/kceleb_model/main/'
+        const menModelUrl = repoUrl + 'tfjs_men/tfjs/model.json';
+        
+        const menLabelUrl = repoUrl + 'men_label/labels.txt';
+        const womenModelUrl = repoUrl + 'tfjs_women/tfjs/model.json';
+        const womenLabelUrl = repoUrl + 'women_label/labels.txt';
+
+        let menModel, womenModel, isMale, menLabel, womenLabel;
         async function init() {
             isMale = document.getElementById("fmselector").checked;
             if (isMale) {
                 if (!menModel) {
-                    menModel = await tmImage.load(
-                        menModelUrl + 'model.json',
-                        menModelUrl + 'metadata.json'
-                    );
+                    menModel = await tf.loadGraphModel(menModelUrl);
+                    response = await fetch(menLabelUrl);
+                    text = await response.text();
+                    menLabel = text.split("\n");
+                    // console.log(menLabel);
+                    console.log("loaded");
                 }
             } else {
                 if (!womenModel) {
-                    womenModel = await tmImage.load(
-                        womenModelUrl + 'model.json',
-                        womenModelUrl + 'metadata.json'
-                    );
+                    womenModel = await tf.loadGraphModel(womenModelUrl);
+                    response = await fetch(womenLabelUrl);
+                    text = await response.text();
+                    womenLabel = text.split("\n");
+                    // console.log(womenLabel);
+                    console.log("loaded");
                 }
             }
         }
 
-        function displayIdolPrediction(prediction) {
-            prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
-            var resultTitle = prediction[0].className;
-            var resultExplain = (prediction[0].probability * 100).toFixed(1);
+        function displayIdolPrediction(values, indices) {
+            var resultTitle = indices[0];
+            var resultExplain = (values[0] * 100).toFixed(1);
             var title =
                 '<div  style="padding: 10px;">' +
                 resultTitle +
@@ -297,18 +318,18 @@
                 '%) </div>';
             var explain =
                 "<div class='h6' > " +
-                prediction[1].className +
+                indices[1] +
                 ' (' +
-                (prediction[1].probability * 100).toFixed(1) +
+                (values[1] * 100).toFixed(1) +
                 '%) / ' +
-                prediction[2].className +
+                indices[2] +
                 ' (' +
-                (prediction[2].probability * 100).toFixed(1) +
+                (values[2] * 100).toFixed(1) +
                 '%) </div>';
             $('.result-message').html(title + explain);
             $('#search').attr(
                 'src',
-                'search.html?q=연예인 "' + resultTitle + '" 프로필 이미지'
+                'search.html?q="allintitle:' + resultTitle + '"  -닮은 -청량 -단체사진'
             );
 
             gtag('event', resultTitle, {
@@ -323,17 +344,50 @@
         async function predict() {
 
             var image = document.getElementById('face-image');
+            // 흑백여부 false
+            console.log('Loaded TensorFlow.js - version: ' + tf.version.tfjs);
+            const imageData = tf.browser.fromPixels(image, numChannels=3);
+            const imgSize = Math.min(image.width, image.height);
+            const left = (image.width - imgSize) / 2.0;
+            const top = (image.height - imgSize) / 2.0;
+            const right = (image.width + imgSize) / 2.0;
+            const bottom = (image.height + imgSize) / 2.0;
+            let boxes = [[top / image.height, left / image.width, bottom / image.height, right / image.width]];
+            // console.log(boxes);
+            //let resizedImage = tf.image.resizeBilinear(imageData, [300, 300]);
+            //resizedImage = tf.expandDims(resizedImage, axis=0);
+            const img4dResized = tf.expandDims(imageData, axis=0);
+             let resizedImage = tf.image.cropAndResize(img4dResized, boxes, [0], [300,300]);
+            // resizedImage.print();
+
+            let pred;
             if (isMale) {
-                // 흑백여부 false
-                menModel.predict(image, false).then(function (prediction) {
-                    displayIdolPrediction(prediction);
-                });
+                pred = await menModel.predict(resizedImage);
             } else {
-                // 흑백여부 false
-                womenModel.predict(image, false).then(function (prediction) {
-                    displayIdolPrediction(prediction);
-                });
+                pred = await womenModel.predict(resizedImage);
             }
+            const {values, indices} = tf.topk(pred, 3, true);
+            // values.print();
+            // indices.print();
+            const valuesArr = values.arraySync()[0];
+            const indicesArr = indices.arraySync()[0];
+            let namesArr = ["", "", ""];
+            
+            for (var x in [0,1,2]) {
+                // console.log(x, indicesArr[x]);
+                // console.log( menLabel);
+                // console.log( womenLabel);
+                if (isMale) {
+                    namesArr[x] = menLabel[indicesArr[x]];
+                }
+                else {
+                    namesArr[x] = womenLabel[indicesArr[x]];
+                }
+
+            }
+            // console.log(valuesArr, indicesArr, namesArr);
+            displayIdolPrediction(valuesArr, namesArr);
+
         }
 
         async function loadImage(url, elem) {
