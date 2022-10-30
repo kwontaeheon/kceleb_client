@@ -131,8 +131,8 @@ body {
 .wrapper {
     /* display: block; 
 		overflow: hidden;  */
-    height: 280px;
-    width: 280px;
+    height: 260px;
+    width: 260px;
     position: relative;
     margin: auto;
 }
