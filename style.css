@@ -443,3 +443,11 @@ input:checked + label > .knob > i:before {
   .slider.round:before {
     border-radius: 50%;
   }
+
+.app-download-icon {
+    width: 200px
+}
+.text-app-center {
+    font-size: 1rem;
+    text-align: center!important;
+}
