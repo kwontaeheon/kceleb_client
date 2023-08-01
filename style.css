@@ -449,5 +449,34 @@ input:checked + label > .knob > i:before {
 }
 .text-app-center {
     font-size: 1rem;
-    text-align: center!important;
+    text-align: center; /* !important; */
+}
+
+/* 이미지 나란히 배치용 CSS */
+.grid-image {
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-start;
+    margin:30px 0;
+}
+.grid-image img {
+    width:calc(33.333% - 10px);
+    margin:0 15px 15px 0;
+}
+.grid-image img:nth-of-type(3n),
+.grid-image img:last-child {
+    margin-right:0;
+}
+@media screen and (max-width:640px){
+  .grid-image img {
+    width:calc(50% - 15px);
+  }
+}
+@media screen and (max-width:480px){
+  .grid-image img:nth-of-type(2n) {
+    margin-right:0;
+  }
+  .grid-image img:nth-of-type(3n) {
+    margin-right:15px;
+  }
 }
