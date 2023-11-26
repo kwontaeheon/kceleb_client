@@ -447,8 +447,9 @@ input:checked + label > .knob > i:before {
 .app-download-icon {
     width: 200px
 }
+
 .text-app-center {
-    font-size: 1rem;
+    font-size: 1.4rem;
     text-align: center; /* !important; */
 }
 
