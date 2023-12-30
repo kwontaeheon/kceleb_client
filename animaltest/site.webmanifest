@@ -1,0 +1,8 @@
+{
+    "name": "셀럽미: 과제생활 동물찾기 성격 테스트",
+    "short_name": "과제생활 동물찾기 성격 테스트",
+    "icons": [{ "src": "/favicon.png", "sizes": "16x16", "type": "image/png" }],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
