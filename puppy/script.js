@@ -703,37 +703,11 @@ if (resultParam) {
             'result': ": " + results[resultParam].animal + "(" + resultParam + ")",
         }
     });
-    Kakao.Share.createCustomButton({
-        container: '#shareKt2',
-        templateId: 102209, // 나의 앱 ID 작성
-        templateArgs: {
-            'result_url': "?result=" + resultParam,
-            'result': ": " + results[resultParam].animal + "(" + resultParam + ")",
-        }
-    });    
-
-    Kakao.Share.createCustomButton({
-        container: '#shareKt3',
-        templateId: 102209, // 나의 앱 ID 작성
-        templateArgs: {
-          'result_url': "?result=" + resultParam,
-          'result': ": " + results[resultParam].animal + "(" + resultParam + ")",
-        }
-        });
 } else {
     Kakao.Share.createCustomButton({
         container: '#shareKt1',
         templateId: 102209, // 나의 앱 ID 작성
       });
-    Kakao.Share.createCustomButton({
-    container: '#shareKt2',
-    templateId: 102209, // 나의 앱 ID 작성
-    });
-    
-    Kakao.Share.createCustomButton({
-        container: '#shareKt3',
-        templateId: 102209, // 나의 앱 ID 작성
-        });
 }
 // }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝
 
