@@ -1,0 +1,236 @@
+body {
+    /* font-family: Arial, sans-serif; */
+    font-family: 'MaruBuri', 'Arial', 'sans-serif';
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* height: 95vh; */
+    
+    min-height: 80vh;
+    /* display: flex; */
+    /* align-items: center; */
+    justify-content: space-between;
+}
+
+
+.progress-bar {
+    height: 10px;
+    background-color: #ddd;
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; */
+    margin-bottom: 15px;
+}
+
+.progress {
+    height: 100%;
+    width: 0; /* Progress bar starts at 0% */
+    background-color: #007BFF; /* Progress bar color */
+    transition: width 0.3s; /* Add a smooth transition effect */
+}
+
+
+.image-section {
+    overflow: hidden;
+    text-align: center;
+    min-height: 27vh;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: 25vh;
+    display: block;
+    margin: 0 auto;
+}
+
+.question-section {
+    text-align: center;
+    flex-grow: 0;
+    /* display: flex; */
+    flex-direction: column;
+    font-size: 1.3em;
+    /* max-height: 70%; */
+    /* min-height: 100vh; */
+}
+.result-section {
+    text-align: left;
+    flex-grow: 0;
+    /* display: flex; */
+    flex-direction: column;
+    font-size: 1.3em;
+    /* max-height: 70%; */
+}
+
+/* .share-section {
+    text-align: center;
+    flex-grow: 0;
+    flex-direction: column;
+    font-size: 1.3em;
+    align-items: center;
+} */
+
+
+.start-section {
+    text-align: center;
+    flex-grow: 0;
+    flex-direction: column;
+    font-size: 1.3em;
+    /* min-height: 50vh; */
+}
+
+.start-desc {
+    font-size: 1.0em;
+    white-space: pre-line;
+    display: contents;
+}
+
+.question {
+    font-size: 1.3em;
+    text-align: center;
+    white-space: pre-line;
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* flex-grow: 1; */
+     /* Fill 50% of remaining space */
+    overflow: auto; /* Add scrollbar if necessary */
+    white-space: pre-line;
+    text-align: initial;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+
+
+label {
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    text-align: left;
+    width: 80%;
+}
+
+
+button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* margin-top: 20px; */
+    margin: 20px;
+    font-size: 1em;
+}
+
+button.sharebutton {
+    background: url("talk-share.png") no-repeat;
+    background-position: center center;
+    background-size: contain;
+    /* background-image:  url("talk-share.png") no-repeat; */
+    width: 40px;
+    height: 40px;
+    margin: 0px;
+    padding: 15px;
+    /* width: 180px; */
+    /* height: 180px; */
+}
+
+button:hover {
+    background-color: #AAA;
+}
+
+
+.result-title {
+    font-size: 1.5em;
+    display: contents;
+    margin: 1.4em;
+    padding: 1.4em;
+}
+
+
+.result-desc {
+    font-size: 1.3em;
+    white-space: pre-line;
+    display: contents;
+    margin: 1.4em;
+    padding: 1.4em;
+}
+
+.result-animal-desc {
+    font-size: 1.0em;
+    white-space: pre-line;
+    display: contents;
+    text-align: left;
+}
+
+
+.result-good {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 20px;
+    white-space: pre-line;
+    display: contents;
+    align-items: center;
+}
+.result-bad {
+    font-size: 1.3em;
+        font-weight: bold;
+    margin: 20px;
+    white-space: pre-line;
+    display: contents;
+    align-items: center;
+}
+
+.p-3 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.navbar-light .navbar-brand {
+    line-height: 1.68;
+    text-align: left;
+    color: #35465d;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: #ffffff;
+    margin: 0px;
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 10px;
+    }
+    .navbar-brand {
+        font-size: 1.6rem;
+    }
+    .navbar-nav {
+        font-size: 1.5rem;
+    }
+}

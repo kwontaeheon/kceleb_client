@@ -1,0 +1,4 @@
+User-Agent:*
+Allow: /
+
+Sitemap: https://celebme.kr/sitemap.xml
