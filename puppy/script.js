@@ -90,6 +90,7 @@ questions = shuffle(questions);
 
 let currentQuestion = -1;
 const answers = [];
+const progressDiv = document.getElementById("progress-bar");
 const progressBar = document.getElementById("progress");
 
 
@@ -653,11 +654,11 @@ function updateProgressBar(progress = 0) {
     }
     progressBar.style.width = `${progress}%`;
     if (progress > 0) {
-        progressBar.style.display = "inline";
+        progressDiv.style.display = "inline";
         startSection.style.display = "none";
         questionSection.style.display = "inline";
         if (progress == 1) {
-            progressBar.style.display = "none";
+            progressDiv.style.display = "none";
             questionSection.style.display = "none";
             resultSection.style.display = "inline";
         }
