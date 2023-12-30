@@ -91,13 +91,14 @@ questions = shuffle(questions);
 let currentQuestion = -1;
 const answers = [];
 const progressBar = document.getElementById("progress");
+const progressDiv = document.getElementById("progress-bar");
 
 
 // const container = document.getElementsByClassName("container");
 const questionElement = document.getElementById("question");
 const optionsElement = document.querySelector(".options");
 const imageElement = document.getElementById("image-section");
-const resultImageElement = document.getElementById("result-image-section");
+const resultImageElement = imageElement; // document.getElementById("result-image-section");
 const backButton = document.getElementById("back-button");
 const nextButton = document.getElementById("next-button");
 const reloadButton = document.getElementById("reload-button")
@@ -125,7 +126,7 @@ function startQuestions() {
     imageElement.src = "img/img1.jpg"
     currentQuestion = 0;
     displayQuestion();
-    questionSection.scrollIntoView(true);
+    // questionSection.scrollIntoView(true);
     
 }
 startButton.addEventListener("click", startQuestions);
@@ -193,7 +194,8 @@ function displayNextQuestion() {
         if (currentQuestion < questions.length) {
             displayQuestion();
         } else {
-            showResults();
+            window.location.href = "index.html?result=" + encodeURIComponent(determineResult(answers));
+            // showResults();
         }
     }
 }
@@ -697,9 +699,13 @@ function determineResult(answers) {
     return result;
 }
 
-function showResults() {
+function showResults(result = "none") {
     // Logic to determine the result based on answers
-    const result = determineResult(answers);
+    if (result == "none") {
+        result = determineResult(answers);
+    } else {
+        result = result.toUpperCase();
+    }
     const resultVal = results[result];
     // questionSection.style = "display: none;";
     // resultSection.style = "display: inline;";
@@ -710,8 +716,7 @@ function showResults() {
     resultTitle.textContent = resultTitleMsg;
     resultDesc.textContent = resultVal.description;
     let date = Date.now();
-    gtag('event', "MBTI결과", {'event_category': '테스트결과', 'event_label': "MBTI결과", 'time': date});
-    gtag('event', resultMbti, {'event_category': '테스트결과', 'event_label': resultMbti, 'time': date});
+    gtag('event', "MBTI결과", {'event_category': '테스트결과', 'mbti': resultMbti, 'time': date});
     
 
     resultAnimalDesc.textContent = resultVal.animalDescription;
@@ -720,15 +725,28 @@ function showResults() {
     let badItems = similarItem["BAD"].map(o => results[o].animal).join(", ");
     resultGood.textContent = "당신과 잘 맞는 동물: " + goodItems;
     resultBad.textContent = "잘 맞지 않는 동물: " +badItems;
-    nextButton.style.display = "none";
-    backButton.style.display = "none";
-    resultSection.scrollIntoView(true);
+    updateProgressBar(1);
+    // nextButton.style.display = "none";
+    // backButton.style.display = "none";
+    // resultSection.scrollIntoView(true);
 }
 
 
-function updateProgressBar() {
-    const progress = ((currentQuestion + 1) / questions.length) * 100;
+function updateProgressBar(progress = 0) {
+    if (progress == 0) {
+        progress = ((currentQuestion + 1) / questions.length) * 100;
+    }
     progressBar.style.width = `${progress}%`;
+    if (progress > 0) {
+        progressDiv.style.display = "inline";
+        startSection.style.display = "none";
+        questionSection.style.display = "inline";
+        if (progress == 1) {
+            progressDiv.style.display = "none";
+            questionSection.style.display = "none";
+            resultSection.style.display = "inline";
+        }
+    }
 }
 
 
@@ -739,16 +757,37 @@ backButton.addEventListener("click", displayPreviousQuestion);
 
 // displayQuestion();
 
+
+// {{ result 쿼리파라미터가 존재할 땐 바로 결과표시 시작
+
+// Function to get URL parameter by name
+function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+
 Kakao.init('2949227d164a7f67c415b0770a7a0d2f');
-Kakao.Share.createCustomButton({
-    container: '#shareKt1',
-    templateId: 100198, // 나의 앱 ID 작성
-  });
-Kakao.Share.createCustomButton({
-container: '#shareKt2',
-templateId: 100198, // 나의 앱 ID 작성
-});
-Kakao.Share.createCustomButton({
-container: '#shareKt3',
-templateId: 100198, // 나의 앱 ID 작성
-});
+
+// Get the value of the 'result' parameter
+const resultParam = getUrlParameter('result');
+
+// Replace content based on the value of 'result' parameter
+if (resultParam) {
+
+    showResults(resultParam);
+
+    Kakao.Share.createCustomButton({
+        container: '#shareKt1',
+        templateId: 100198, // 나의 앱 ID 작성
+        templateArgs: {
+            'result_url': "?result=" + resultParam,
+            'result': ": " + results[resultParam].animal + "(" + resultParam + ")",
+        }
+    });
+} else {
+    Kakao.Share.createCustomButton({
+        container: '#shareKt1',
+        templateId: 100198, // 나의 앱 ID 작성
+      });
+}

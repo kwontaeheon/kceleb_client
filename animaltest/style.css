@@ -62,7 +62,7 @@ body {
     flex-direction: column;
     font-size: 1.3em;
     /* max-height: 70%; */
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 .result-section {
     text-align: left;
@@ -87,7 +87,7 @@ body {
     flex-grow: 0;
     flex-direction: column;
     font-size: 1.3em;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 .start-desc {
