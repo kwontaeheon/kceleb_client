@@ -33,13 +33,14 @@ function displayIdolPrediction(values, indices) {
   var resultTitle = indices[0];
   var resultExplain = (values[0] * 100).toFixed(1);
   var title =
-    '<div  style="padding: 10px;">' +
+    "<div class='h2'> 셀럽미: 닮은 아이돌 찾기 결과 </div>" +
+    "<div class='h3' style='padding: 10px;'>" +
     resultTitle +
     " (" +
     resultExplain +
     "%) </div>";
   var explain =
-    "<div class='h6' > " +
+    "<div class='h5' > " +
     indices[1] +
     " (" +
     (values[1] * 100).toFixed(1) +
