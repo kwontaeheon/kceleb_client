@@ -1,14 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
->
-    <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-    <url>
-        <loc>https://celebme.kr/</loc>
-        <lastmod>2022-01-14T17:27:32+00:00</lastmod>
-    </url>
+
+<url>
+  <loc>https://celebme.kr/</loc>
+  <lastmod>2024-02-26T03:33:47+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/animaltest/index.html</loc>
+  <lastmod>2024-02-26T03:33:49+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/puppy/index.html</loc>
+  <lastmod>2024-02-26T03:33:49+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/</loc>
+  <lastmod>2024-02-24T04:50:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=869</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/index.html</loc>
+  <lastmod>2024-02-26T03:33:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?cat=29</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/animaltest/</loc>
+  <lastmod>2024-02-26T03:33:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=891</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?cat=3</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?cat=64</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?cat=112</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?author=1</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=688</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=674</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=671</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=646</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=633</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=612</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=610</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?paged=2</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?paged=3</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?cat=4</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?cat=54</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?cat=1</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=608</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=606</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=604</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=586</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=475</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=493</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=443</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?paged=2&amp;author=1</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?paged=3&amp;author=1</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=465</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=571</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/?p=435</loc>
+  <lastmod>2024-02-26T03:56:34+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/blog/www.lovelyham.com/</loc>
+  <lastmod>2024-02-24T05:12:50+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+
+
 </urlset>
