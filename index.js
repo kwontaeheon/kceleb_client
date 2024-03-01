@@ -196,6 +196,35 @@ const faceNames = {
   "193": "블랙핑크 제니",
   "194": "블랙핑크 지수"
 }
+const jsonContainer = document.getElementById('json-container');
+const toggleButton = document.getElementById('toggleButton');
+const jsonKeys = Object.keys(faceNames);
+jsonKeys.forEach(key => {
+  const keyValueContainer = document.createElement('div');
+  const keyElement = document.createElement('span');
+  const valueElement = document.createElement('span');
+
+  keyElement.classList.add('json-key');
+  valueElement.classList.add('json-string');
+
+  keyElement.textContent = `"${key}": `;
+  valueElement.textContent = `"${faceNames[key]}"`;
+
+  keyValueContainer.appendChild(keyElement);
+  keyValueContainer.appendChild(valueElement);
+
+  jsonContainer.appendChild(keyValueContainer);
+});
+
+toggleButton.addEventListener('click', function() {
+  const x = jsonContainer;
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+});
+$(".result-message").hide();
 
 
 function cropImage(imgElement, callback, maxWidth=512, maxHeight = 512) {
@@ -255,6 +284,7 @@ function drawChart(userData) {
       data: ageData,
       plugins: [ChartDataLabels],
       options: {
+          indexAxis: 'y',
           plugins: {
             // autocolors: {
             //   mode: 'label'
@@ -318,6 +348,7 @@ function drawChart(userData) {
     type: 'bar',
     data: emotionData,
     options: {
+        indexAxis: 'y',
         plugins: {
             autocolors: {
                 mode: 'data'
@@ -350,6 +381,7 @@ function drawChart(userData) {
     type: 'bar',
     data: raceData,
     options: {
+        indexAxis: 'y',
         plugins: {
           autocolors: {
             mode: 'data'
@@ -406,7 +438,7 @@ async function getSimilarCeleb(inputImage) {
     // console.log(data);
     similarIdolData = data;
     displayIdolPredictionBriefly(data);
-    displayIdolPrediction(1);
+    // displayIdolPrediction(1);
     
     $(".try-again-btn").show();
     $("#result-message").show();
@@ -427,96 +459,55 @@ function displayIdolPredictionBriefly(data) {
   for (var rank = 1; rank <= 10; rank++) {
     const r = faceNames[data[rank - 1].identity.split("/")[1]]
     
-    $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+    // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
     $('#r' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
   }
-  window.history.replaceState({}, document.title, "/");
-  for (var rank = 2; rank <= 10; rank++) {
-    // $('#search' + rank).hide();
+  
+  for (var rank = 1; rank <= 10; rank++) {
+    $('#search' + rank).hide();
+    $('#s' + rank).show();
   }
   
 }
 
 function displayIdolPrediction(rank) {
-  data = similarIdolData
+  data = similarIdolData;
+  
   // console.log(data);
   
-  // try {
-    const r = faceNames[data[rank - 1].identity.split("/")[1]];
-    console.log(r);
-    // q = 'allintitle:"' + r + '"';
-    // $('#r' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
-    // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
-
+  try {
+    if ($('#search' + rank).is(":visible")) {
+      $('#search' + rank).hide();
+      $('#s' + rank).show();
+    }
+    else {    
+      const r = faceNames[data[rank - 1].identity.split("/")[1]];
+      console.log(r);
+      q = 'allintitle:"' + r + '"';
+      
     
-    
-    var element = google.search.cse.element.getElement('q' + rank);
-    console.log(element);
-    // console.log(q);
-    element.execute(r);
-    $('#search' + rank).show();
-    $('#s' + rank).show();
-    
-    $("html, body").scrollTop(
-      document.getElementById("r" + rank).offsetTop
-    );
-  // } catch (error) {
-  //   console.log(error);
-  // }
+      var element = google.search.cse.element.getElement('q' + rank);
+      element.execute(q);
+      $('#search' + rank).show();
+      $('#s' + rank).hide();
+      window.history.replaceState({}, document.title, "/");
+      
+      gtag("event", "similar_idol_result", {
+        celeb: r.replaceAll(" ",""),
+        rank: rank
+      });
+      gtag("event", r.replaceAll(" ",""), {
+        event_category: "similar_idol_result",
+        rank: rank,
+        result_face: true,
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
 
   
-  
-
-  // var element = google.search.cse.element.getElement('q1');
-  // var element2 = google.search.cse.element.getElement('q2');
-  // var element3 = google.search.cse.element.getElement('q3');
-  // var element4 = google.search.cse.element.getElement('q4');
-  // var element5 = google.search.cse.element.getElement('q5');
-  // var element6 = google.search.cse.element.getElement('q6');
-  // var element7 = google.search.cse.element.getElement('q7');
-  // var element8 = google.search.cse.element.getElement('q8');
-  // var element9 = google.search.cse.element.getElement('q9');
-  // var element10 = google.search.cse.element.getElement('q10');
-
-  // try {
-  // element.execute(q1);
-  // element2.execute(q2);
-  // element3.execute(q3);
-  // element4.execute(q4);
-  // element5.execute(q5);
-  // element6.execute(q6);
-  // element7.execute(q7);
-  // element8.execute(q8);
-  // element9.execute(q9);
-  // element10.execute(q10);
-  // } catch (error) {
-
-  // }
-  
-  
-  // $("#search1").attr(
-  //   "src",
-  //   q1
-  // );
-  // $( "#search1" ).innerHTML = q1;
-  // $( "#search1" ).load('index.html?' + 'q1=abc');
-  
-  // $("#search2").attr(
-  //   "src",
-  //   q2
-  // );
-  // $( "#search2" ).innerHTML = q2;
-
-  // $("#search3").attr(
-  //   "src",
-  //   q3
-  // );
-  // $( "#search3" ).innerHTML = q3;
-
-  // gtag("event", resultTitle, {
-  //   event_category: resultExplain,
-  //   result_face: true,
-  // });
 }
 
 /**
@@ -553,7 +544,7 @@ async function readURL(input) {
     $(".file-upload-content").show();
     $("#loading-message").html("얼굴을 분석하고 있어요.")
     $("#loading").show();
-    $("#result-message").hide();
+    $(".result-message").hide();
     $("#result-similar-idol").hide();
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");
@@ -583,7 +574,7 @@ function removeUpload() {
   $("#face-image").replaceWith($("#face-image").clone());
   $(".file-upload-content").hide();
   $(".image-upload-wrap").show();
-  $("#result-message").hide();
+  $(".result-message").hide();
   // document.getElementById("search").height = 0;
   $("html, body").scrollTop(
     document.getElementsByClassName("title")[0].offsetTop
