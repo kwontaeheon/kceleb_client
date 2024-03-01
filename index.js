@@ -232,13 +232,19 @@ function drawChart(userData) {
 
   Chart.register(autocolors);
   // Chart.register(ChartDataLabels);
+  $("#face-analysis-result").html(
+    "나이: " + userData.age + "<br/>"
+    + "성별: " + userData.dominant_gender + "<br/>"
+    + "감정: " + userData.dominant_emotion + "<br/>"
+    + "민족성: " + userData.dominant_race + "<br/>"
+    )
 
   const ageData = {
     labels: ["Age"],
     datasets: [{
       label: 'Age',
       data: [userData.age],
-      backgroundColor: ['#FF6384']
+      // backgroundColor: ['#FF6384']
     }]
   };
   if (ageChart != null) {
@@ -250,19 +256,15 @@ function drawChart(userData) {
       plugins: [ChartDataLabels],
       options: {
           plugins: {
-            autocolors: {
-              mode: 'data'
-            },
+            // autocolors: {
+            //   mode: 'label'
+            // },
             legend: {
               display: false,
             }
           }
         }
     });
-  
-
-  
-
   
   
   // Display gender in pie chart
@@ -389,6 +391,7 @@ async function analyzeFace(inputImage) {
 
 }
 
+var similarIdolData;
 async function getSimilarCeleb(inputImage) {
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
@@ -401,11 +404,16 @@ async function getSimilarCeleb(inputImage) {
   .then(data => {
     // Handle the response data here
     // console.log(data);
-    displayIdolPrediction(data);
+    similarIdolData = data;
+    displayIdolPredictionBriefly(data);
+    displayIdolPrediction(1);
     
-      $(".try-again-btn").show();
-      $(".result-message").show();
-      $("#loading").hide();
+    $(".try-again-btn").show();
+    $("#result-message").show();
+    $("#loading").hide();
+    $("html, body").scrollTop(
+      document.getElementsByClassName("title")[0].offsetTop
+    );
     
   })
   .catch(error => {
@@ -414,89 +422,78 @@ async function getSimilarCeleb(inputImage) {
   });
 
 }
-
-function displayIdolPrediction(data) {
-  console.log(data);
-  const first = data[0];
-  
-  // var resultTitle = first[''];
-  // var resultExplain = (values[0] * 100).toFixed(1);
-  // var title =
-  //   "<div class='h2'> 셀럽미: 닮은 아이돌 찾기 결과 </div>" +
-  //   "<div class='h3' style='padding: 10px;'>" +
-  //   resultTitle +
-  //   " (" +
-  //   resultExplain +
-  //   "%) </div>";
-  // var explain =
-  //   "<div class='h5' > " +
-  //   indices[1] +
-  //   " (" +
-  //   (values[1] * 100).toFixed(1) +
-  //   "%) / " +
-  //   indices[2] +
-  //   " (" +
-  //   (values[2] * 100).toFixed(1) +
-  //   "%) </div>";
-  // $(".result-message").html(title + explain);
-  try {
-  q1 = 'allintitle:' + faceNames[data[0].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r1').html(faceNames[data[0].identity.split("/")[1]]+ ": " +  ((1 - data[0].distance) * 100).toFixed(2) + "%");
-  q2 = 'allintitle:' + faceNames[data[1].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r2').html(faceNames[data[1].identity.split("/")[1]]  + ": " + ((1 - data[1].distance) * 100).toFixed(2) + "%");
-  q3 = 'allintitle:' + faceNames[data[2].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r3').html(faceNames[data[2].identity.split("/")[1]]  + ": " + ((1 - data[2].distance)* 100).toFixed(2) + "%");
-  q4 = 'allintitle:' + faceNames[data[3].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r4').html(faceNames[data[3].identity.split("/")[1]]  + ": " + ((1 - data[3].distance) * 100).toFixed(2) + "%");
-  q5 = 'allintitle:' + faceNames[data[4].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r5').html(faceNames[data[4].identity.split("/")[1]]  + ": " + ((1 - data[4].distance) * 100).toFixed(2) + "%");
-  q6 = 'allintitle:' + faceNames[data[5].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r6').html(faceNames[data[5].identity.split("/")[1]]  + ": " + ((1 - data[5].distance) * 100).toFixed(2) + "%");
-  q7 = 'allintitle:' + faceNames[data[6].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r7').html(faceNames[data[6].identity.split("/")[1]]  + ": " + ((1 - data[6].distance) * 100).toFixed(2) + "%");
-  q8 = 'allintitle:' + faceNames[data[7].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r8').html(faceNames[data[7].identity.split("/")[1]]  + ": " + ((1 - data[7].distance) * 100).toFixed(2) + "%");
-  q9 = 'allintitle:' + faceNames[data[8].identity.split("/")[1]] + ' -청량 -단체사진 -닮은"';
-  $('#r9').html(faceNames[data[8].identity.split("/")[1]]  + ": " + ((1 - data[8].distance) * 100).toFixed(2) + "%");
-  q10 = 'allintitle:' +faceNames[data[9].identity.split("/")[1]]  + ' -청량 -단체사진 -닮은"';
-  $('#r10').html(faceNames[data[9].identity.split("/")[1]]  + ": " + ((1 - data[9].distance) * 100).toFixed(2) + "%");
-  } catch (error) {
-
+function displayIdolPredictionBriefly(data) {
+  $("#result-similar-idol").show();
+  for (var rank = 1; rank <= 10; rank++) {
+    const r = faceNames[data[rank - 1].identity.split("/")[1]]
+    
+    $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+    $('#r' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
   }
-
-  
-  
-
-  var element = google.search.cse.element.getElement('q1');
-  var element2 = google.search.cse.element.getElement('q2');
-  var element3 = google.search.cse.element.getElement('q3');
-  var element4 = google.search.cse.element.getElement('q4');
-  var element5 = google.search.cse.element.getElement('q5');
-  var element6 = google.search.cse.element.getElement('q6');
-  var element7 = google.search.cse.element.getElement('q7');
-  var element8 = google.search.cse.element.getElement('q8');
-  var element9 = google.search.cse.element.getElement('q9');
-  var element10 = google.search.cse.element.getElement('q10');
-
-  try {
-  element.execute(q1);
-  element2.execute(q2);
-  element3.execute(q3);
-  element4.execute(q4);
-  element5.execute(q5);
-  element6.execute(q6);
-  element7.execute(q7);
-  element8.execute(q8);
-  element9.execute(q9);
-  element10.execute(q10);
-  } catch (error) {
-
-  }
-  
   window.history.replaceState({}, document.title, "/");
-  $("html, body").scrollTop(
-    document.getElementsByClassName("title")[0].offsetTop
-  );
+  for (var rank = 2; rank <= 10; rank++) {
+    // $('#search' + rank).hide();
+  }
+  
+}
+
+function displayIdolPrediction(rank) {
+  data = similarIdolData
+  // console.log(data);
+  
+  // try {
+    const r = faceNames[data[rank - 1].identity.split("/")[1]];
+    console.log(r);
+    // q = 'allintitle:"' + r + '"';
+    // $('#r' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+    // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+
+    
+    
+    var element = google.search.cse.element.getElement('q' + rank);
+    console.log(element);
+    // console.log(q);
+    element.execute(r);
+    $('#search' + rank).show();
+    $('#s' + rank).show();
+    
+    $("html, body").scrollTop(
+      document.getElementById("r" + rank).offsetTop
+    );
+  // } catch (error) {
+  //   console.log(error);
+  // }
+
+  
+  
+
+  // var element = google.search.cse.element.getElement('q1');
+  // var element2 = google.search.cse.element.getElement('q2');
+  // var element3 = google.search.cse.element.getElement('q3');
+  // var element4 = google.search.cse.element.getElement('q4');
+  // var element5 = google.search.cse.element.getElement('q5');
+  // var element6 = google.search.cse.element.getElement('q6');
+  // var element7 = google.search.cse.element.getElement('q7');
+  // var element8 = google.search.cse.element.getElement('q8');
+  // var element9 = google.search.cse.element.getElement('q9');
+  // var element10 = google.search.cse.element.getElement('q10');
+
+  // try {
+  // element.execute(q1);
+  // element2.execute(q2);
+  // element3.execute(q3);
+  // element4.execute(q4);
+  // element5.execute(q5);
+  // element6.execute(q6);
+  // element7.execute(q7);
+  // element8.execute(q8);
+  // element9.execute(q9);
+  // element10.execute(q10);
+  // } catch (error) {
+
+  // }
+  
+  
   // $("#search1").attr(
   //   "src",
   //   q1
@@ -541,6 +538,7 @@ async function loadImage(url, elem) {
 async function readURL(input) {
   if (input.files && input.files[0]) {
     $(".try-again-btn").hide();
+    
     gtag("event", "AI호출시작", {
       event_category: "AI호출시작",
     });
@@ -553,12 +551,15 @@ async function readURL(input) {
     };
     await reader.readAsDataURL(input.files[0]);
     $(".file-upload-content").show();
+    $("#loading-message").html("얼굴을 분석하고 있어요.")
     $("#loading").show();
-    $(".result-message").hide();
+    $("#result-message").hide();
+    $("#result-similar-idol").hide();
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");
       cropImage(imgData, function(resizedImg) {
         analyzeFace(resizedImg).then(function () {
+          $("#loading-message").html("닮은 아이돌을 찾고 있어요.")
           getSimilarCeleb(resizedImg);
         })
         
@@ -582,7 +583,7 @@ function removeUpload() {
   $("#face-image").replaceWith($("#face-image").clone());
   $(".file-upload-content").hide();
   $(".image-upload-wrap").show();
-  $(".result-message").hide();
+  $("#result-message").hide();
   // document.getElementById("search").height = 0;
   $("html, body").scrollTop(
     document.getElementsByClassName("title")[0].offsetTop
