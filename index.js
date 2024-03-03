@@ -1,4 +1,4 @@
-const apiUrl = "https://tkorg.duckdns.org:8181"
+const apiUrl = "http://celebme.duckdns.org:8181"
 
 const faceNames = {
   "1": "BTS RM",
@@ -196,6 +196,38 @@ const faceNames = {
   "193": "블랙핑크 제니",
   "194": "블랙핑크 지수"
 }
+
+var resultMeta = {
+  "man": "남자",
+  "woman": "여자",
+  "angry": "화남😡",
+  "disgust": "싫어함😱",
+  "fear": "두려움😨",
+  "happy": "행복함🥳",
+  "neutral": "무표정🙂",
+  "sad": "슬픔😭",
+  "surprise": "놀람😳",
+  "asian": "아시아인",
+  "black": "흑인",
+  "indian": "인도인",
+  "latino hispanic": "라틴 계열 미국인",
+  "middle eastern": "중동인",
+  "white": "백인",
+}
+
+function getMeta(name) {
+
+  try {
+    return resultMeta[name.toLowerCase()];
+
+  } catch (error) {
+    console.log(error);
+    return name;
+  }
+
+}
+
+
 const jsonContainer = document.getElementById('json-container');
 const toggleButton = document.getElementById('toggleButton');
 const jsonKeys = Object.keys(faceNames);
@@ -216,7 +248,7 @@ jsonKeys.forEach(key => {
   jsonContainer.appendChild(keyValueContainer);
 });
 
-toggleButton.addEventListener('click', function() {
+toggleButton.addEventListener('click', function () {
   const x = jsonContainer;
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -227,7 +259,7 @@ toggleButton.addEventListener('click', function() {
 $(".result-message").hide();
 
 
-function cropImage(imgElement, callback, maxWidth=512, maxHeight = 512) {
+function cropImage(imgElement, callback, maxWidth = 512, maxHeight = 512) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const img = imgElement;
@@ -248,30 +280,30 @@ function cropImage(imgElement, callback, maxWidth=512, maxHeight = 512) {
   canvas.height = maxHeight;
   ctx.drawImage(img, (maxWidth - newWidth) / 2, (maxHeight - newHeight) / 2, newWidth, newHeight);
 
-  canvas.toBlob(function(blob) {
-      callback(blob);
+  canvas.toBlob(function (blob) {
+    callback(blob);
   }, 'image/webp');
 }
 
 var ageChart, emotionChart, genderChart, raceChart;
 function drawChart(userData) {
-  
+
   const autocolors = window['chartjs-plugin-autocolors'];
-  
+
 
   Chart.register(autocolors);
   // Chart.register(ChartDataLabels);
   $("#face-analysis-result").html(
     "나이: " + userData.age + "<br/>"
-    + "성별: " + userData.dominant_gender + "<br/>"
-    + "감정: " + userData.dominant_emotion + "<br/>"
-    + "민족성: " + userData.dominant_race + "<br/>"
-    )
+    + "성별: " + getMeta(userData.dominant_gender) + "<br/>"
+    + "감정: " + getMeta(userData.dominant_emotion) + "<br/>"
+    + "인종: " + getMeta(userData.dominant_race) + "<br/>"
+  )
 
   const ageData = {
-    labels: ["Age"],
+    labels: ["나이"],
     datasets: [{
-      label: 'Age',
+      label: '나이',
       data: [userData.age],
       // backgroundColor: ['#FF6384']
     }]
@@ -280,28 +312,32 @@ function drawChart(userData) {
     ageChart.destroy();
   }
   ageChart = new Chart(document.getElementById('ageChart'), {
-      type: 'bar',
-      data: ageData,
-      plugins: [ChartDataLabels],
-      options: {
-          indexAxis: 'y',
-          plugins: {
-            // autocolors: {
-            //   mode: 'label'
-            // },
-            legend: {
-              display: false,
-            }
-          }
+    type: 'bar',
+    data: ageData,
+    plugins: [ChartDataLabels],
+    options: {
+      indexAxis: 'y',
+      plugins: {
+        // autocolors: {
+        //   mode: 'label'
+        // },
+        legend: {
+          display: false,
         }
-    });
-  
-  
+      }
+    }
+  });
+
+
+  console.log(Object.keys(userData.gender));
+  console.log(Object.keys(userData.gender).flatMap(value => { return getMeta(value); }));
   // Display gender in pie chart
   const genderData = {
-    labels: Object.keys(userData.gender),
+    labels: Object.keys(userData.gender).flatMap(value => {
+      return getMeta(value);
+    }),
     datasets: [{
-      label: 'Gender',
+      label: '성별',
       data: Object.values(userData.gender),
       backgroundColor: ['#36A2EB', '#FF6384']
     }]
@@ -315,32 +351,34 @@ function drawChart(userData) {
     data: genderData,
     plugins: [ChartDataLabels],
     options: {
-        plugins: {
-          autocolors: {
-            mode: 'data'
-          },
-          datalabels: {
-              formatter: function(value, context) {
-                  console.log(value);//context.chart.data.labels[context.dataIndex]
-                  return value.toFixed(1);
-              }
-          },
-          legend: {
-            display: false,
+      plugins: {
+        autocolors: {
+          mode: 'data'
+        },
+        datalabels: {
+          formatter: function (value, context) {
+            console.log(value);//context.chart.data.labels[context.dataIndex]
+            return value.toFixed(1);
           }
         },
-      }
+        legend: {
+          display: false,
+        }
+      },
+    }
   });
 
   // Display emotion in radar chart
   const emotionData = {
-    labels: Object.keys(userData.emotion),
+    labels: Object.keys(userData.emotion).flatMap(value => {
+      return getMeta(value);
+    }),
     datasets: [{
-      label: 'Emotion',
+      label: '감정',
       data: Object.values(userData.emotion)
     }]
   };
-  
+
   if (emotionChart != null) {
     emotionChart.destroy();
   }
@@ -348,78 +386,80 @@ function drawChart(userData) {
     type: 'bar',
     data: emotionData,
     options: {
-        indexAxis: 'y',
-        plugins: {
-            autocolors: {
-                mode: 'data'
-            },
-            datalabels: {
-                formatter: function(value, context) {
-                    console.log(value); //context.chart.data.labels[context.dataIndex]
-                    return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
-                }
-            },
-            legend: {
-              display: false,
-            }
+      indexAxis: 'y',
+      plugins: {
+        autocolors: {
+          mode: 'data'
         },
-      }
+        datalabels: {
+          formatter: function (value, context) {
+            console.log(value); //context.chart.data.labels[context.dataIndex]
+            return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
+          }
+        },
+        legend: {
+          display: false,
+        }
+      },
+    }
   });
 
   // Display race in radar chart
   const raceData = {
-    labels: Object.keys(userData.race),
+    labels: Object.keys(userData.race).flatMap(value => {
+      return getMeta(value);
+    }),
     datasets: [{
-      label: 'Race',
+      label: '인종',
       data: Object.values(userData.race)
     }]
   };
   if (raceChart != null) {
     raceChart.destroy();
   }
-  raceChart =   new Chart(document.getElementById('raceChart'), {
+  raceChart = new Chart(document.getElementById('raceChart'), {
     type: 'bar',
     data: raceData,
     options: {
-        indexAxis: 'y',
-        plugins: {
-          autocolors: {
-            mode: 'data'
-          },
-          datalabels: {
-              formatter: function(value, context) {
-                  console.log(value);//context.chart.data.labels[context.dataIndex]
-                  return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
-              }
-          },
-          legend: {
-            display: false,
+      indexAxis: 'y',
+      plugins: {
+        autocolors: {
+          mode: 'data'
+        },
+        datalabels: {
+          formatter: function (value, context) {
+            console.log(value);//context.chart.data.labels[context.dataIndex]
+            return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
           }
         },
-        
-      }
+        legend: {
+          display: false,
+        }
+      },
+
+    }
   });
 }
 
 async function analyzeFace(inputImage) {
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
-  return await fetch('http://tkorg.duckdns.org:8181/analyze', {
+  return await fetch(apiUrl + '/analyze', {
     method: 'POST',
     body: formData
   })
-  .then(response => response.json())
-  .then(data => {
-    // Handle the response data here
-    console.log("analyze");
-    console.log(data);
-    drawChart(data);
-    
-  })
-  .catch(error => {
-    // Handle errors here
-    console.error('Error:', error);
-  });
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response data here
+      console.log("analyze");
+      console.log(data);
+      drawChart(data);
+
+    })
+    .catch(error => {
+      // Handle errors here
+      console.error('Error:', error);
+    });
 
 }
 
@@ -428,75 +468,80 @@ async function getSimilarCeleb(inputImage) {
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
 
-  return await fetch('http://tkorg.duckdns.org:8181/find', {
+  return await fetch(apiUrl + '/find', {
     method: 'POST',
     body: formData
   })
-  .then(response => response.json())
-  .then(data => {
-    // Handle the response data here
-    // console.log(data);
-    similarIdolData = data;
-    displayIdolPredictionBriefly(data);
-    // displayIdolPrediction(1);
-    
-    $(".try-again-btn").show();
-    $("#result-message").show();
-    $("#loading").hide();
-    $("html, body").scrollTop(
-      document.getElementsByClassName("title")[0].offsetTop
-    );
-    
-  })
-  .catch(error => {
-    // Handle errors here
-    console.error('Error:', error);
-  });
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response data here
+      console.log(data);
+      similarIdolData = data;
+      displayIdolPredictionBriefly(data);
+      // displayIdolPrediction(1);
+
+      $(".try-again-btn").show();
+      $("#result-message").show();
+      $("#loading").hide();
+      $("html, body").scrollTop(
+        document.getElementsByClassName("title")[0].offsetTop
+      );
+
+    })
+    .catch(error => {
+      // Handle errors here
+      console.error('Error:', error);
+    });
 
 }
 function displayIdolPredictionBriefly(data) {
   $("#result-similar-idol").show();
   for (var rank = 1; rank <= 10; rank++) {
-    const r = faceNames[data[rank - 1].identity.split("/")[1]]
-    
-    // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
-    $('#r' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+    try {
+      const r = faceNames[data[rank - 1].identity.split("/")[1]]
+
+      // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+
+      $('#search' + rank).hide();
+      $('#s' + rank).show();
+    } catch (error) {
+      console.log(error);
+    }
   }
-  
-  for (var rank = 1; rank <= 10; rank++) {
-    $('#search' + rank).hide();
-    $('#s' + rank).show();
-  }
-  
+
+
 }
 
 function displayIdolPrediction(rank) {
   data = similarIdolData;
-  
+
   // console.log(data);
-  
+
   try {
     if ($('#search' + rank).is(":visible")) {
       $('#search' + rank).hide();
-      $('#s' + rank).show();
+      // $('#s' + rank).show();
+      $('#s' + rank).html("🔍");
     }
-    else {    
+    else {
       const r = faceNames[data[rank - 1].identity.split("/")[1]];
       console.log(r);
       q = 'allintitle:"' + r + '"';
-      
-    
+
+
       var element = google.search.cse.element.getElement('q' + rank);
       element.execute(q);
       $('#search' + rank).show();
-      $('#s' + rank).hide();
+      // $('#s' + rank).hide();
+      $('#s' + rank).html("_");
       window.history.replaceState({}, document.title, "/");
-      
+
       gtag("event", "similar_idol_result", {
-        celeb: r.replaceAll(" ",""),
+        celeb: r.replaceAll(" ", ""),
         rank: rank
       });
-      gtag("event", r.replaceAll(" ",""), {
+      gtag("event", r.replaceAll(" ", ""), {
         event_category: "similar_idol_result",
         rank: rank,
         result_face: true,
@@ -507,14 +552,14 @@ function displayIdolPrediction(rank) {
     console.log(error);
   }
 
-  
+
 }
 
 /**
   Displays Similar idol name from model prediction
 */
 // async function predict() {
-  
+
 //   displayIdolPrediction(valuesArr, namesArr);
 // }
 
@@ -529,7 +574,7 @@ async function loadImage(url, elem) {
 async function readURL(input) {
   if (input.files && input.files[0]) {
     $(".try-again-btn").hide();
-    
+
     gtag("event", "AI호출시작", {
       event_category: "AI호출시작",
     });
@@ -548,19 +593,19 @@ async function readURL(input) {
     $("#result-similar-idol").hide();
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");
-      cropImage(imgData, function(resizedImg) {
+      cropImage(imgData, function (resizedImg) {
         analyzeFace(resizedImg).then(function () {
           $("#loading-message").html("닮은 아이돌을 찾고 있어요.")
           getSimilarCeleb(resizedImg);
         })
-        
-        
+
+
       })
-      
-    // predict().then(function (prom) {
-          
-    //     });
-      
+
+      // predict().then(function (prom) {
+
+      //     });
+
     };
   } else {
     removeUpload();

@@ -51,6 +51,7 @@
         crossorigin="anonymous"></script>
 
 
+
 </head>
 
 <body>
@@ -92,7 +93,18 @@
             </ul>
         </div>
     </nav>
-
+    <div id="google_translate_element"></div>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ko',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false,
+                includedLanguages: 'en,ja,es,zh-CN,zh-TW,fr,de,pt,ru'
+            }, 'google_translate_element');
+        }
+    </script>
 
     <section class="section">
         <h1 class="title">셀럽미: 닮은 셀럽 찾기</h1>
@@ -115,210 +127,225 @@
         </p>
     </section>
     <center>
-        <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <div class="mt-3 container file-upload">
-            <div class="image-upload-wrap">
-                <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
-                <div class="drag-text">
-                    <img src="img/upload.svg" class="mt-5 upload" />
-                    <div class="upload-text">
-                        얼굴 사진을 올려놓거나 <br />
-                        눌러서 시작하세요.
+        <div class="result-section">
+            <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+            <div class="mt-3 container file-upload">
+                <div class="image-upload-wrap">
+                    <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
+                    <div class="drag-text">
+                        <img src="img/upload.svg" class="mt-5 upload" />
+                        <div class="upload-text">
+                            얼굴 사진을 올려놓거나 <br />
+                            눌러서 시작하세요.
 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-upload-content">
+                    <div class="wrapper">
+                        <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+                    </div>
+                    <div id="loading" class="animated bounce">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="loading-message" id="loading-message">
+                            얼굴을 분석하고 있어요.
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="file-upload-content">
-                <div class="wrapper">
-                    <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+            <div class="result-message" id="result-message">
+                <div class="h2" style="padding: 16px;">
+                    셀럽미: <얼굴 분석 결과>
+                    <hr style="background-color:black;" />
                 </div>
-                <div id="loading" class="animated bounce">
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
+                <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
+                    얼굴에 대한 나이, 성별, 감정, 인종고 분석 결과
+                </div>
+
+                <div class="row">
+                    <div style="width: 50%; padding: 20px 20px 20px 50px;">
+                        <canvas id="ageChart"></canvas>
                     </div>
-                    <div class="loading-message" id="loading-message">
-                        얼굴을 분석하고 있어요.
+                    <div style="width: 50%; padding: 20px 50px 20px 20px;">
+                        <canvas id="genderChart"></canvas>
                     </div>
                 </div>
+                <center>
+                    <div style="width: 75%; padding: 20px;">
+                        <canvas id="raceChart"></canvas>
+                    </div>
+                    <div style="width: 75%; padding: 20px;">
+                        <canvas id="emotionChart"></canvas>
+                    </div>
+                </center>
             </div>
-        </div>
-        <div class="result-message" id="result-message">
-            <div class="h2" style="padding: 16px;">
-                셀럽미: 얼굴 분석 결과
-                <hr style="background-color:black;" />
-            </div>
-            <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
-                얼굴에 대한 나이, 성별, 감정, 민족성 분석 결과
-            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
 
-            <div class="row">
-                <div style="width: 50%; padding: 20px;">
-                    <canvas id="ageChart"></canvas>
+            <script async data-cfasync="false" src="https://cse.google.com/cse.js?cx=2346e8f4411dd44c7"></script>
+            <div class="result-message" id="result-similar-idol">
+                <div class="h2" style="padding: 10px;">
+                    셀럽미: <닮은 셀럽 이미지>
+                    <hr style="background-color:black;" />
                 </div>
-                <div style="width: 50%; padding: 20px;">
-
-                    <canvas id="genderChart"></canvas>
-
+                
+                <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
+                    <div class='result-title' id="r1"> 1순위 </div>
+                    <span class="search-text" id="s1">🔍</span>
+                </button>
+                <div style="max-height: 30%; overflow: hidden;">
+                <div id="search1" class="gcse-searchresults-only"
+                    data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                    data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                    data-gname="q1"></div>
                 </div>
-            </div>
-            <center>
-                <div style="width: 75%;">
-                    <canvas id="emotionChart"></canvas>
-                    <canvas id="raceChart"></canvas>
-                </div>
-            </center>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
-
-        <script async  data-cfasync="false"  src="https://cse.google.com/cse.js?cx=2346e8f4411dd44c7"></script>
-        <div class="result-message" id="result-similar-idol">
-            <div class="h2" style="padding: 10px;">
-                셀럽미: 닮은 셀럽 이미지 검색
-                <hr style="background-color:black;" />
-            </div>
-            <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);">
-                <div class='result-title' id="r1"> 1순위 </div>
-                <span class="search-text" id="s1">🔍</span>
-            </button>
-            <div id="search1" class="gcse-searchresults-only"
-                data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
-                data-gname="q1"></div>
-            <div class="row" style="font-size: 1.1rem; margin: 10px;">
-                <div style="width: 33%; max-height: 20%; overflow: hidden;">
-                    <!-- https://wiki.creativecommons.org/wiki/CC_Search_integration -->
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(2);">
-                        <div class='result-title' id="r2"> 2순위 </div>
-                        <span class="search-text" id="s2">🔍</span>
-                    </button>
-                    <div id="search2" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q2"></div>
-
-
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(5);">
-                        <div class='result-title' id="r5"> 5순위 </div>
-                        <span class="search-text" id="s5">🔍</span>
-                    </button>
-                    <div id="search5" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q5"></div>
-
-
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(8);">
-                        <div class='result-title' id="r8"> 8순위 </div>
-                        <span class="search-text" id="s8">🔍</span>
-                    </button>
-                    <div id="search8" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q8"></div>
-
-
-                </div>
-                <div style="width: 33%; max-height: 20%;  overflow: hidden;">
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(3);">
-                        <div class='result-title' id="r3"> 3순위 </div>
-                        <span class="search-text" id="s3">🔍</span>
-                    </button>
-                    <div id="search3" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q3"></div>
-
-
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(6);">
-                        <div class='result-title' id="r6"> 6순위 </div>
-                        <span class="search-text" id="s6">🔍</span>
-                    </button>
-                    <div id="search6" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q6"></div>
-
-
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(9);">
-                        <div class='result-title' id="r9"> 9순위 </div>
-                        <span class="search-text" id="s9">🔍</span>
-                    </button>
-                    <div id="search9" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q9"></div>
-
-
-                </div>
-                <div style="width: 33%; max-height: 20%;  overflow: hidden;">
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(4);">
-                        <div class='result-title' id="r4"> 4순위 </div>
-                        <span class="search-text" id="s4">🔍</span>
-                    </button>
-                    <div id="search4" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q4"></div>
-
-
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(7);">
-                        <div class='result-title' id="r7"> 7순위 </div>
-                        <span class="search-text" id="s7">🔍</span>
-                    </button>
-                    <div id="search7" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q7"></div>
-
-
-                    <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(10);">
-                        <div class='result-title' id="r10"> 10순위 </div>
-                        <span class="search-text" id="s10">🔍</span>
-                    </button>
-                    <div id="search10" class="gcse-searchresults-only"
-                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1"
-                        data-disableWebSearch="true" data-gname="q10"></div>
-
-
-                </div>
-            </div>
-            <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
-                <span class="try-again-text" style="font-size: 2.2rem;">닮은 셀럽 다시 찾기</span>
-            </button>
-
-
-        </div>
-        <div id="label-container" class="d-flex flex-column justify-content-around"></div>
-
-        
-
-        <br />
-        <br />
-        <!-- App modal -->
-        <div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="appModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="appModalLabel">퍼피 테스트 오픈!</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                <div class="row" style="font-size: 1.1rem; margin: 10px;">
+                    <div style="width: 33%; max-height: 20%; overflow: hidden;">
+                        <!-- https://wiki.creativecommons.org/wiki/CC_Search_integration -->
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(2);">
+                            <div class='result-title' id="r2"> 2순위 </div>
+                            <span class="search-text" id="s2">🔍</span>
                         </button>
-                    </div>
-                    <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+                        <div id="search2" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q2"></div>
 
-                        <img class="" src="/puppy/img/animal/%EA%B0%95%EC%95%84%EC%A7%80.jpg" alt='icon' width="150px">
-                        <p class="text-app-center">내 성격과 닮은 강아지도 찾아보세요. <br> MBTI 성격 테스트로 닮은 강아지를 찾아드려요.</p>
-                        <a href="/puppy/index.html">
-                            <button type="button" class="my-button">
-                                <h3 class="modal-title" id="appModalLabel">퍼피테스트 하러가기!</h3>
+
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(5);">
+                            <div class='result-title' id="r5"> 5순위 </div>
+                            <span class="search-text" id="s5">🔍</span>
+                        </button>
+                        <div id="search5" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q5"></div>
+
+
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(8);">
+                            <div class='result-title' id="r8"> 8순위 </div>
+                            <span class="search-text" id="s8">🔍</span>
+                        </button>
+                        <div id="search8" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q8"></div>
+
+
+                    </div>
+                    <div style="width: 33%; max-height: 20%;  overflow: hidden;">
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(3);">
+                            <div class='result-title' id="r3"> 3순위 </div>
+                            <span class="search-text" id="s3">🔍</span>
+                        </button>
+                        <div id="search3" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q3"></div>
+
+
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(6);">
+                            <div class='result-title' id="r6"> 6순위 </div>
+                            <span class="search-text" id="s6">🔍</span>
+                        </button>
+                        <div id="search6" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q6"></div>
+
+
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(9);">
+                            <div class='result-title' id="r9"> 9순위 </div>
+                            <span class="search-text" id="s9">🔍</span>
+                        </button>
+                        <div id="search9" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q9"></div>
+
+
+                    </div>
+                    <div style="width: 33%; max-height: 20%;  overflow: hidden;">
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(4);">
+                            <div class='result-title' id="r4"> 4순위 </div>
+                            <span class="search-text" id="s4">🔍</span>
+                        </button>
+                        <div id="search4" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q4"></div>
+
+
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(7);">
+                            <div class='result-title' id="r7"> 7순위 </div>
+                            <span class="search-text" id="s7">🔍</span>
+                        </button>
+                        <div id="search7" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q7"></div>
+
+
+                        <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(10);">
+                            <div class='result-title' id="r10"> 10순위 </div>
+                            <span class="search-text" id="s10">🔍</span>
+                        </button>
+                        <div id="search10" class="gcse-searchresults-only"
+                            data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                            data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                            data-gname="q10"></div>
+
+
+                    </div>
+                </div>
+
+                <div class="normaltext">
+                    셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>
+                </div>
+
+                <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
+                    <span class="try-again-text" style="font-size: 2.2rem;">닮은 셀럽 다시 찾기</span>
+                </button>
+
+
+            </div>
+            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
+
+
+            <br />
+            <br />
+            <!-- App modal -->
+            <div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="appModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="appModalLabel">
+                                셀럽미: 닮은 아이돌 찾기 업데이트! <br>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                             </button>
-                        </a>
-                        <!-- <h5 class="modal-title" id="appModalLabel">아이돌 얼굴 테스트 신규 앱 출시!</h5>
+                        </div>
+                        <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+
+                            <img class="" width="200px"
+                            src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
+                            alt='app icon'>
+                            <p class="text-app-center">
+                                "얼굴 분석 + 닮은 셀럽 찾기" 서비스로 개편 되었어요.<br>
+                                얼굴 분석 결과와 함께 확인해보세요!
+                            </p>
+                            <!-- <a href="/puppy/index.html">
+                                <button type="button" class="my-button">
+                                    <h3 class="modal-title" id="appModalLabel">퍼피테스트 하러가기!</h3>
+                                </button>
+                            </a> -->
+                            <!-- <h5 class="modal-title" id="appModalLabel">아이돌 얼굴 테스트 신규 앱 출시!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -327,58 +354,58 @@
                     <img class="" src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw" alt='app icon'>
                     <p class="text-app-center">아이돌 얼굴 테스트 셀럽미가 <br> 더욱 업그레이드되어 앱으로 출시되었습니다.</p>
                     <a href="https://play.google.com/store/apps/details?id=com.terrykwon.kceleb"><img class="app-download-icon" width="200px" src="https://blog.kakaocdn.net/dn/c6po0N/btqMgsb7Qpb/MQBT1U1xzqvsabAQd4OYGk/img.png" alt="Android Playstore"/></a> -->
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <style type="text/css">
+                .img-wrapper {
+                    position: relative;
+                    width: 95%;
+                    max-width: 400px;
+                    height: 100px;
+                }
+
+                .img-wrapper img {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+
+                    object-fit: cover;
+                    margin: auto;
+
+                }
+            </style>
+            <br>
+            <!-- app banner -->
+            <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+                <h4 class="normaltext">
+                    <div style="color: #35885d;" id="toggleButton">학습에
+                        사용된 셀럽 목록 보기</div>
+                </h4>
+                <div id="json-container" class="json-container" style="display: none;"></div>
+
+                <p class="text-app-center">
+                    AI 프로필, 일상 프로필, 바디 프로필 기능 추가!</br>
+                    셀럽미 앱을 플레이스토어에서 만나보세요.
+                </p>
+                <a href="https://play.google.com/store/apps/details?id=com.terrykwon.kceleb">
+                    <div class="grid-image">
+                        <img class="" width="50px"
+                            src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
+                            alt='app icon'>
+                        <img class="app-download-icon" width="150px"
+                            src="https://blog.kakaocdn.net/dn/c6po0N/btqMgsb7Qpb/MQBT1U1xzqvsabAQd4OYGk/img.png"
+                            alt="Android Playstore" />
+                </a>
+            </div>
+            <div class="container pt-3">
+                <div id="disqus_thread"></div>
+            </div>
+
+            <br />
         </div>
-
-        <style type="text/css">
-            .img-wrapper {
-                position: relative;
-                width: 95%;
-                max-width: 400px;
-                height: 100px;
-            }
-
-            .img-wrapper img {
-                position: relative;
-                width: 100%;
-                height: 100%;
-
-                object-fit: cover;
-                margin: auto;
-
-            }
-        </style>
-        <br>
-        <!-- app banner -->
-        <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-            <h4 class="normaltext">
-                <div style="color: #35885d;" id="toggleButton">학습에
-                    사용된 셀럽 목록 보기</div>
-            </h4>
-            <div id="json-container" class="json-container" style="display: none;"></div>
-            
-            <p class="text-app-center">
-                AI 프로필, 일상 프로필, 바디 프로필 기능 추가!</br>
-                셀럽미 앱을 플레이스토어에서 만나보세요.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.terrykwon.kceleb">
-                <div class="grid-image">
-                    <img class="" width="50px"
-                        src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
-                        alt='app icon'>
-                    <img class="app-download-icon" width="150px"
-                        src="https://blog.kakaocdn.net/dn/c6po0N/btqMgsb7Qpb/MQBT1U1xzqvsabAQd4OYGk/img.png"
-                        alt="Android Playstore" />
-            </a>
-        </div>
-        <div class="container pt-3">
-            <div id="disqus_thread"></div>
-        </div>
-
-        <br />
-
     </center>
 
     <footer class="footer pt-5 container d-flex justify-content-center">
@@ -439,7 +466,7 @@
             wcs_do();
         }
 
-       <!-- $('#appModal').modal();    -->  <!- 팝업 오픈하려면 주석 해 - ->
+       $('#appModal').modal();    
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </body>
