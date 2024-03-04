@@ -93,7 +93,32 @@
             </ul>
         </div>
     </nav>
-    <div id="google_translate_element"></div>
+    <section class="container d-flex flex-column justify-content-center align-items-center">
+        <div class="row">
+            <div class="language">Language:</div>
+            <div>
+                <select onchange="changeLanguage(this)" class="custom-select col-8">
+                <option value="ko" lang="ko">한국어</option>
+                <option value="en" lang="en">English</option>
+                <option value="es" lang="es">español</option>
+                <option value="ja" lang="ja">日本語</option>
+                <option value="zh" lang="zh">中文</option>
+                <option value="vi" lang="vi">tiếng Việt</option>
+                <option value="id" lang="id">Bahasa Indonesia</option>
+                <option value="it" lang="it">Italiano</option>
+                <option value="th" lang="th">ไทย</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    </section>
+    <script>
+        var ua = navigator.userAgent.toLowerCase();
+        function changeLanguage(lang) {
+            window.location.href = "/" + lang.value + ".html";
+        }
+    </script>
+    <!-- <div id="google_translate_element"></div>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -104,7 +129,7 @@
                 includedLanguages: 'en,ja,es,zh-CN,zh-TW,fr,de,pt,ru'
             }, 'google_translate_element');
         }
-    </script>
+    </script> -->
 
     <section class="section">
         <h1 class="title">셀럽미: 닮은 셀럽 찾기</h1>
@@ -158,7 +183,7 @@
             </div>
             <div class="result-message" id="result-message">
                 <div class="h2" style="padding: 16px;">
-                    셀럽미: <얼굴 분석 결과>
+                     <셀럽미:얼굴 분석 결과>
                     <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
@@ -174,11 +199,15 @@
                     </div>
                 </div>
                 <center>
-                    <div style="width: 75%; padding: 20px;">
-                        <canvas id="raceChart"></canvas>
-                    </div>
-                    <div style="width: 75%; padding: 20px;">
-                        <canvas id="emotionChart"></canvas>
+                    <div class="row">
+                        
+                        <div style="width: 80%; padding: 20px; margin: auto; ">
+                            <canvas id="raceChart"></canvas>
+                        </div>
+                        <div style="width: 80%; padding: 20px 20px 50px 20px; margin: auto;">
+                            <canvas id="emotionChart"></canvas>
+                        </div>
+                        
                     </div>
                 </center>
             </div>
@@ -189,7 +218,7 @@
             <script async data-cfasync="false" src="https://cse.google.com/cse.js?cx=2346e8f4411dd44c7"></script>
             <div class="result-message" id="result-similar-idol">
                 <div class="h2" style="padding: 10px;">
-                    셀럽미: <닮은 셀럽 이미지>
+                     <셀럽미:닮은 셀럽 이미지>
                     <hr style="background-color:black;" />
                 </div>
                 

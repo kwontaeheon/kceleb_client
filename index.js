@@ -498,7 +498,7 @@ function displayIdolPredictionBriefly(data) {
   $("#result-similar-idol").show();
   for (var rank = 1; rank <= 10; rank++) {
     try {
-      const r = faceNames[data[rank - 1].identity.split("/")[1]]
+      const r = faceNames[data[rank - 1].identity] ; // .split("/")[1]]
 
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
       $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
@@ -525,7 +525,7 @@ function displayIdolPrediction(rank) {
       $('#s' + rank).html("🔍");
     }
     else {
-      const r = faceNames[data[rank - 1].identity.split("/")[1]];
+      const r = faceNames[data[rank - 1].identity]; // .split("/")[1]];
       console.log(r);
       q = 'allintitle:"' + r + '"';
 
