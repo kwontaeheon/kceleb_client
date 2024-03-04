@@ -248,14 +248,17 @@ jsonKeys.forEach(key => {
   jsonContainer.appendChild(keyValueContainer);
 });
 
-toggleButton.addEventListener('click', function () {
+function toggleCelebList() {
   const x = jsonContainer;
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
     x.style.display = "none";
   }
-});
+}
+// toggleButton.addEventListener('click', function () {
+  
+// });
 $(".result-message").hide();
 
 
@@ -292,12 +295,14 @@ function drawChart(userData) {
 
 
   Chart.register(autocolors);
+  Chart.defaults.font.size = 14;
   // Chart.register(ChartDataLabels);
   $("#face-analysis-result").html(
-    "나이: " + userData.age + "<br/>"
-    + "성별: " + getMeta(userData.dominant_gender) + "<br/>"
-    + "감정: " + getMeta(userData.dominant_emotion) + "<br/>"
-    + "인종: " + getMeta(userData.dominant_race) + "<br/>"
+    "사진 속 얼굴은 " + getMeta(userData.dominant_race) + ", <br/>" 
+    + "나이 " + userData.age + " 세 " + getMeta(userData.dominant_gender) + ", "
+    + getMeta(userData.dominant_emotion) + " 으로 보입니다.<br/>"
+
+    
   )
 
   const ageData = {
@@ -305,7 +310,7 @@ function drawChart(userData) {
     datasets: [{
       label: '나이',
       data: [userData.age],
-      // backgroundColor: ['#FF6384']
+      backgroundColor: ['#11BB84']
     }]
   };
   if (ageChart != null) {
@@ -316,7 +321,8 @@ function drawChart(userData) {
     data: ageData,
     plugins: [ChartDataLabels],
     options: {
-      indexAxis: 'y',
+      maintainAspectRatio: false,
+      // indexAxis: 'y',
       plugins: {
         // autocolors: {
         //   mode: 'label'
@@ -338,6 +344,7 @@ function drawChart(userData) {
     }),
     datasets: [{
       label: '성별',
+      maintainAspectRatio: false,
       data: Object.values(userData.gender),
       backgroundColor: ['#36A2EB', '#FF6384']
     }]
@@ -351,6 +358,7 @@ function drawChart(userData) {
     data: genderData,
     plugins: [ChartDataLabels],
     options: {
+      maintainAspectRatio: false,
       plugins: {
         autocolors: {
           mode: 'data'
@@ -375,18 +383,33 @@ function drawChart(userData) {
     }),
     datasets: [{
       label: '감정',
-      data: Object.values(userData.emotion)
-    }]
+      data: Object.values(userData.emotion),
+      hoverOffset: 20,
+      borderWidth: 0,
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(125, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(54, 162, 135)',
+        'rgb(255, 205, 86)',
+        'rgb(125, 125, 86)',
+        'rgb(225, 125, 86)',
+      ],
+      circumference: 180,
+      rotation: 90
+    }],
+    
   };
 
   if (emotionChart != null) {
     emotionChart.destroy();
   }
   emotionChart = new Chart(document.getElementById('emotionChart'), {
-    type: 'bar',
+    type: 'doughnut',
     data: emotionData,
     options: {
       indexAxis: 'y',
+      maintainAspectRatio: false,
       plugins: {
         autocolors: {
           mode: 'data'
@@ -398,7 +421,8 @@ function drawChart(userData) {
           }
         },
         legend: {
-          display: false,
+          display: true,
+          position: 'bottom'
         }
       },
     }
@@ -411,29 +435,43 @@ function drawChart(userData) {
     }),
     datasets: [{
       label: '인종',
-      data: Object.values(userData.race)
+      data: Object.values(userData.race),
+      hoverOffset: 20,
+      borderWidth: 0,
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(125, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(54, 162, 135)',
+        'rgb(255, 205, 86)',
+        'rgb(125, 125, 86)'
+      ],
+      circumference: 180,
+      rotation: -90
     }]
   };
   if (raceChart != null) {
     raceChart.destroy();
   }
   raceChart = new Chart(document.getElementById('raceChart'), {
-    type: 'bar',
+    type: 'doughnut',
     data: raceData,
     options: {
-      indexAxis: 'y',
+      // indexAxis: 'y',
+      maintainAspectRatio: false,
       plugins: {
+        
         autocolors: {
           mode: 'data'
         },
         datalabels: {
           formatter: function (value, context) {
             console.log(value);//context.chart.data.labels[context.dataIndex]
-            return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
+            return  context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
           }
         },
         legend: {
-          display: false,
+          display: true
         }
       },
 
@@ -499,7 +537,10 @@ function displayIdolPredictionBriefly(data) {
   for (var rank = 1; rank <= 10; rank++) {
     try {
       const r = faceNames[data[rank - 1].identity] ; // .split("/")[1]]
-
+      if (rank == 1) {
+        $('#celeb-result').html("사진 속 얼굴이 " + r + " 을(를) 가장 닮았어요." + "<br/>"
+        + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" )
+      }
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
       $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
 
@@ -643,3 +684,41 @@ function iosApp() {
   }
   document.getElementById("yotube-top-link").style.display = "none";
 }
+
+
+
+// {{ result 쿼리파라미터가 존재할 땐 바로 결과표시 시작
+
+// 카카오 공유
+// Function to get URL parameter by name
+function getUrlParameter(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
+
+Kakao.init('8b998f0abc3beae40dc620c58067dd55');
+
+// Get the value of the 'result' parameter
+const resultParam = getUrlParameter('result');   // resultParam: 'key:value' 형태 ex. '에스파 닝닝: 56%' 로 할수도 있는데, encode 로 10명 결과를 담자.
+
+// Replace content based on the value of 'result' parameter
+if (resultParam) {
+
+    showResults(resultParam);  // 구현필요
+    
+    Kakao.Share.createCustomButton({
+        container: '#shareKt1',
+        templateId: 104987, // 나의 앱 ID 작성
+        templateArgs: {
+            'result_url': "?result=" + resultParam,    // encoded url
+            'result': ": " + results[resultParam].animal + "(" + resultParam + ")",    // result text '에스파 닝닝: 56%'
+        }
+    });
+} else {
+    Kakao.Share.createCustomButton({
+        container: '#shareKt1',
+        templateId: 104987, // 나의 앱 ID 작성
+      });
+}
+
+// }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝

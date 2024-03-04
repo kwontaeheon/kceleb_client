@@ -55,7 +55,7 @@
 </head>
 
 <body>
-
+    
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
 
         <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">셀럽미: 닮은 셀럽 찾기</a>
@@ -191,24 +191,28 @@
                 </div>
 
                 <div class="row">
-                    <div style="width: 50%; padding: 20px 20px 20px 50px;">
+                    <div style="position: relative; height: 20vh; width: 50%; padding: 20px 20px 20px 50px;">
                         <canvas id="ageChart"></canvas>
                     </div>
-                    <div style="width: 50%; padding: 20px 50px 20px 20px;">
+                    <div style="position: relative; height: 20vh; width: 50%; padding: 20px 50px 20px 20px;">
                         <canvas id="genderChart"></canvas>
                     </div>
                 </div>
                 <center>
                     <div class="row">
                         
-                        <div style="width: 80%; padding: 20px; margin: auto; ">
+                        <div style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto; ">
                             <canvas id="raceChart"></canvas>
+                            
                         </div>
-                        <div style="width: 80%; padding: 20px 20px 50px 20px; margin: auto;">
+                        
+                        <div style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto;">
                             <canvas id="emotionChart"></canvas>
                         </div>
                         
                     </div>
+                    <br/>
+                    <br/>
                 </center>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
@@ -220,6 +224,10 @@
                 <div class="h2" style="padding: 10px;">
                      <셀럽미:닮은 셀럽 이미지>
                     <hr style="background-color:black;" />
+                </div>
+
+                <div class="normaltext" id="celeb-result">
+                    셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>
                 </div>
                 
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
@@ -331,14 +339,30 @@
 
                     </div>
                 </div>
-
-                <div class="normaltext">
-                    셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>
+                <br/>
+                <button type="button p-2" class="try-again-btn" onclick="toggleCelebList();" style="margin:10px; background-color: #35885d;">
+                    <span class="try-again-text" style="font-size: 1.8rem;">셀럽 목록 보기</span>
+                </button>
+                <div id="json-container" class="json-container" style="display: none;"></div>
+                
+                
+                <br/>
+                <div id="shareKt1" style="font-size: 1.8rem;" onclick="gtag('event', '카톡공유클릭', {'event_category': '카톡공유클릭','event_label': '카톡공유클릭'});">
+                    <button type="button p-2" class="try-again-btn" onclick="" style="margin:10px; background-color: #353709;">
+                        <span class="try-again-text" style="font-size: 1.8rem;">카카오 공유 하기
+                        <img src="puppy/talk-share.png" style="width: 30px; height: 30px;"/>
+                        </span>
+                    </button>
                 </div>
+                
+
+                <br/>
 
                 <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
-                    <span class="try-again-text" style="font-size: 2.2rem;">닮은 셀럽 다시 찾기</span>
+                    <span class="try-again-text" style="font-size: 2.2rem;">셀럽미 다시 하기</span>
                 </button>
+
+                
 
 
             </div>
@@ -409,12 +433,7 @@
             <br>
             <!-- app banner -->
             <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-                <h3>
-                    <div style="color: #35885d;" id="toggleButton">학습에
-                        사용된 셀럽 목록 보기</div>
-                </h3>
-                <div id="json-container" class="json-container" style="display: none;"></div>
-                <br/><br/>
+                
 
                 <p class="text-app-center">
                     AI 프로필, 일상 프로필, 바디 프로필 기능 추가!</br>
@@ -499,6 +518,7 @@
        $('#appModal').modal();    
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js" integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
 </body>
 <!--
 image input box

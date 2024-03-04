@@ -181,7 +181,7 @@ body {
     border: 0px;
 	margin-top: 2%;
     padding: 4px 16px;
-    background-color: #f255b3;
+    background-color: #fd8114;
 }
 
 .search-btn {
@@ -268,7 +268,7 @@ body {
     color: #35465d;
 }
 .language {
-    font-size: 2.0rem;
+    font-size: 1.8rem;
     padding: 0 20px;
 }
 
@@ -575,6 +575,7 @@ input:checked + label > .knob > i:before {
     padding: 10px;
     background-color: #f9f9f9;
     margin: 20px;
+    font-size: 1.3rem;
   }
 .json-key {
 color: #007bff;
