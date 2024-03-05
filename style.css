@@ -139,8 +139,20 @@ body {
     text-transform: uppercase;
 }
 
+#modalMessage {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
 .result-title{
-    line-height: 1.9;
+    line-height: 1.6;
     /* padding: 5px; */
     text-align: center;
     color: #ffffff;
@@ -184,13 +196,28 @@ body {
     background-color: #fd8114;
 }
 
+div.gsc-result-info {
+    font-size: 0;
+    padding: 0;
+}
+div.gsc-above-wrapper-area {
+    padding: 0;
+}
+.share-btn {
+    border-radius: 40px;
+    border: 0px;
+	margin-top: 2%;
+    padding: 4px 16px;
+    background-color: #fd8114;
+}
+
 .search-btn {
     border-radius: 20px;
     border: solid 1.5px #35465d;
 	margin-left: 10px;
     margin-bottom: 10px;
     background-color: #35465d;
-    padding: 4px;
+    
 }
 
 .donation-btn {
@@ -582,4 +609,8 @@ color: #007bff;
 }
 .json-string {
 color: #28a745;
+}
+
+div#disqus_thread iframe[sandbox] {
+max-height: 0px !important;
 }

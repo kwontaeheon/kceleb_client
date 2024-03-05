@@ -1,5 +1,11 @@
+
+// const compressor = require('./compression.js');
 const apiUrl = "http://celebme.duckdns.org:8181"
 
+// 닮은 셀럽 목록 변수
+var similarIdolData;
+// 얼굴 분석 변수
+var faceData;
 const faceNames = {
   "1": "BTS RM",
   "2": "BTS 뷔",
@@ -262,6 +268,7 @@ function toggleCelebList() {
 $(".result-message").hide();
 
 
+
 function cropImage(imgElement, callback, maxWidth = 512, maxHeight = 512) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
@@ -384,7 +391,7 @@ function drawChart(userData) {
     datasets: [{
       label: '감정',
       data: Object.values(userData.emotion),
-      hoverOffset: 20,
+      hoverOffset: 50,
       borderWidth: 0,
       backgroundColor: [
         'rgb(255, 99, 132)',
@@ -436,7 +443,7 @@ function drawChart(userData) {
     datasets: [{
       label: '인종',
       data: Object.values(userData.race),
-      hoverOffset: 20,
+      hoverOffset: 50,
       borderWidth: 0,
       backgroundColor: [
         'rgb(255, 99, 132)',
@@ -491,6 +498,7 @@ async function analyzeFace(inputImage) {
       // Handle the response data here
       console.log("analyze");
       console.log(data);
+      faceData = data;
       drawChart(data);
 
     })
@@ -501,7 +509,7 @@ async function analyzeFace(inputImage) {
 
 }
 
-var similarIdolData;
+
 async function getSimilarCeleb(inputImage) {
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
@@ -517,10 +525,12 @@ async function getSimilarCeleb(inputImage) {
       similarIdolData = data;
       displayIdolPredictionBriefly(data);
       // displayIdolPrediction(1);
-
+      
+      updateKakaoLink();
       $(".try-again-btn").show();
-      $("#result-message").show();
+      $(".result-message").show();
       $("#loading").hide();
+      // window.history.replaceState({}, document.title, "/");
       $("html, body").scrollTop(
         document.getElementsByClassName("title")[0].offsetTop
       );
@@ -537,15 +547,18 @@ function displayIdolPredictionBriefly(data) {
   for (var rank = 1; rank <= 10; rank++) {
     try {
       const r = faceNames[data[rank - 1].identity] ; // .split("/")[1]]
-      if (rank == 1) {
-        $('#celeb-result').html("사진 속 얼굴이 " + r + " 을(를) 가장 닮았어요." + "<br/>"
-        + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" )
-      }
+     
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
-      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
 
       $('#search' + rank).hide();
-      $('#s' + rank).show();
+      // $('#s' + rank).show();
+      if (rank == 1) {
+        displayIdolPrediction(1);
+        $('#celeb-result').html("사진 속 얼굴이 " + r + " 을(를) 가장 닮았어요." + "<br/><br/>"
+        // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
+        )
+      }
     } catch (error) {
       console.log(error);
     }
@@ -558,25 +571,24 @@ function displayIdolPrediction(rank) {
   data = similarIdolData;
 
   // console.log(data);
-
+  const r = faceNames[data[rank - 1].identity]; // .split("/")[1]];
   try {
     if ($('#search' + rank).is(":visible")) {
       $('#search' + rank).hide();
-      // $('#s' + rank).show();
-      $('#s' + rank).html("🔍");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
     }
     else {
-      const r = faceNames[data[rank - 1].identity]; // .split("/")[1]];
+      
       console.log(r);
       q = 'allintitle:"' + r + '"';
-
 
       var element = google.search.cse.element.getElement('q' + rank);
       element.execute(q);
       $('#search' + rank).show();
-      // $('#s' + rank).hide();
-      $('#s' + rank).html("_");
-      window.history.replaceState({}, document.title, "/");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% _");
+      
+      // window.history.replaceState({}, document.title, "/");
+      window.history.replaceState({}, document.title, getBaseUrl());
 
       gtag("event", "similar_idol_result", {
         celeb: r.replaceAll(" ", ""),
@@ -661,6 +673,8 @@ function removeUpload() {
   $(".file-upload-content").hide();
   $(".image-upload-wrap").show();
   $(".result-message").hide();
+
+  window.location.href = getBaseUrl();
   // document.getElementById("search").height = 0;
   $("html, body").scrollTop(
     document.getElementsByClassName("title")[0].offsetTop
@@ -686,6 +700,114 @@ function iosApp() {
 }
 
 
+// function arrayToQueryString(array) {
+//   return array.map(item => encodeURIComponent(item)).join('&');
+// }
+
+async function copyToClipboard(textToCopy) {
+  // Navigator clipboard api needs a secure context (https)
+  if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(textToCopy);
+  } else {
+      // Use the 'out of viewport hidden text area' trick
+      const textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+          
+      // Move textarea out of the viewport so it's not visible
+      textArea.style.position = "absolute";
+      textArea.style.left = "-999999px";
+          
+      document.body.prepend(textArea);
+      textArea.select();
+
+      try {
+          document.execCommand('copy');
+      } catch (error) {
+          console.error(error);
+      } finally {
+          textArea.remove();
+      }
+  }
+}
+
+
+
+function getUriComponents() {
+  if (similarIdolData && faceData) {
+    const simStr = encodeURI(encodeURIComponent(JSON.stringify(similarIdolData)));
+    const faceStr = encodeURI(encodeURIComponent(JSON.stringify(faceData)));
+    $('#modalMessage').html("결과를 포함한 링크를 복사했어요.");
+    return "?result=" + simStr + "&face=" + faceStr;
+  }
+  $('#modalMessage').html("링크를 복사했어요.");
+  return "";
+}
+
+function getBaseUrl() {
+  console.log(window.location.href.split("?"));
+  var name = window.location.href.split("?")[0];
+  name = name.split("#")[0];
+  console.log(name);
+  return name;
+}
+
+function getShareUrl() {
+  var linkUrl = getBaseUrl();
+  return linkUrl + getUriComponents();
+}
+
+async function shareUrl() {
+  
+  const linkUrl = getShareUrl();
+  try {
+    await copyToClipboard(linkUrl);
+    console.log('url copied to the clipboard.');
+    $('#modalMessage').fadeIn();
+    setTimeout(function() {
+        $('#modalMessage').fadeOut();
+    }, 3000); // 3000 milliseconds = 3 seconds
+    
+  } catch(error) {
+    console.error("copy to clipboard error.");
+  }
+    
+}
+
+function showResults(resultParam, faceParam) {
+  $(".image-upload-wrap").hide();
+  $("#face-image").attr("src", "https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw");
+  $(".file-upload-content").show();
+  const resultDecoded = decodeURI(decodeURIComponent(resultParam));
+  const resultJson = JSON.parse(resultDecoded.split("#")[0]);
+  similarIdolData = resultJson;
+
+  const faceDecoded = decodeURI(decodeURIComponent(faceParam));
+  const faceJson = JSON.parse(faceDecoded.split("#")[0]);
+  faceData = faceJson;
+  console.log(faceData);
+  
+  var int=setInterval(function() {
+    if (typeof google != 'undefined' && google.search.cse) {
+      // google.search.cse.element.getElement('ap_search').execute("#{@term}")  
+      
+
+      drawChart(faceData);
+      displayIdolPredictionBriefly(similarIdolData);
+      const name = getBaseUrl()
+      window.history.replaceState({}, document.title, name);
+      clearInterval(int);
+      
+    }
+  }, 200)
+
+  
+
+  $(".try-again-btn").show();
+  $(".result-message").show();
+  // window.location.href = window.location.pathname + "?q1=" + faceNames[similarIdolData[0].identity];
+  // displayIdolPrediction(1);
+}
+
 
 // {{ result 쿼리파라미터가 존재할 땐 바로 결과표시 시작
 
@@ -698,27 +820,32 @@ function getUrlParameter(name) {
 
 Kakao.init('8b998f0abc3beae40dc620c58067dd55');
 
+function updateKakaoLink() {
+
+  Kakao.Share.createCustomButton({
+    container: '#shareKt1',
+    templateId: 104987, // 나의 앱 ID 작성
+    templateArgs: {
+        'result_url': "?result=" + resultParam + "&face=" + faceParam,    // encoded url
+        'result': faceNames[similarIdolData[0].identity]  + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%"
+        ,    // result text '에스파 닝닝: 56%'
+    }
+});
+}
 // Get the value of the 'result' parameter
 const resultParam = getUrlParameter('result');   // resultParam: 'key:value' 형태 ex. '에스파 닝닝: 56%' 로 할수도 있는데, encode 로 10명 결과를 담자.
-
+const faceParam = getUrlParameter('face');
 // Replace content based on the value of 'result' parameter
-if (resultParam) {
+if (resultParam != null) {
 
-    showResults(resultParam);  // 구현필요
+    showResults(resultParam, faceParam);  // 구현필요
     
-    Kakao.Share.createCustomButton({
-        container: '#shareKt1',
-        templateId: 104987, // 나의 앱 ID 작성
-        templateArgs: {
-            'result_url': "?result=" + resultParam,    // encoded url
-            'result': ": " + results[resultParam].animal + "(" + resultParam + ")",    // result text '에스파 닝닝: 56%'
-        }
-    });
 } else {
-    Kakao.Share.createCustomButton({
-        container: '#shareKt1',
-        templateId: 104987, // 나의 앱 ID 작성
-      });
+    
 }
+Kakao.Share.createCustomButton({
+  container: '#shareKt1',
+  templateId: 104987, // 나의 앱 ID 작성
+});
 
 // }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝

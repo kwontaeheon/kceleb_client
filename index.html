@@ -50,11 +50,13 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636274019237410"
         crossorigin="anonymous"></script>
 
-
+    
 
 </head>
 
 <body>
+    <script async data-cfasync="false" src="https://cse.google.com/cse.js?cx=2346e8f4411dd44c7"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js" integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
     
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
 
@@ -115,7 +117,7 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/" + lang.value + ".html";
+            window.location.href = "/index_" + lang.value + ".html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>
@@ -187,9 +189,9 @@
                     <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
-                    얼굴에 대한 나이, 성별, 감정, 인종고 분석 결과
+                    얼굴에 대한 나이, 성별, 감정, 인종 분석 결과
                 </div>
-
+                
                 <div class="row">
                     <div style="position: relative; height: 20vh; width: 50%; padding: 20px 20px 20px 50px;">
                         <canvas id="ageChart"></canvas>
@@ -219,7 +221,7 @@
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
 
-            <script async data-cfasync="false" src="https://cse.google.com/cse.js?cx=2346e8f4411dd44c7"></script>
+            
             <div class="result-message" id="result-similar-idol">
                 <div class="h2" style="padding: 10px;">
                      <셀럽미:닮은 셀럽 이미지>
@@ -232,7 +234,6 @@
                 
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
                     <div class='result-title' id="r1"> 1순위 </div>
-                    <span class="search-text" id="s1">🔍</span>
                 </button>
                 <div style="max-height: 30%; overflow: hidden;">
                 <div id="search1" class="gcse-searchresults-only"
@@ -245,7 +246,6 @@
                         <!-- https://wiki.creativecommons.org/wiki/CC_Search_integration -->
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(2);">
                             <div class='result-title' id="r2"> 2순위 </div>
-                            <span class="search-text" id="s2">🔍</span>
                         </button>
                         <div id="search2" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -255,7 +255,6 @@
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(5);">
                             <div class='result-title' id="r5"> 5순위 </div>
-                            <span class="search-text" id="s5">🔍</span>
                         </button>
                         <div id="search5" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -265,7 +264,6 @@
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(8);">
                             <div class='result-title' id="r8"> 8순위 </div>
-                            <span class="search-text" id="s8">🔍</span>
                         </button>
                         <div id="search8" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -277,7 +275,6 @@
                     <div style="width: 33%; max-height: 20%;  overflow: hidden;">
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(3);">
                             <div class='result-title' id="r3"> 3순위 </div>
-                            <span class="search-text" id="s3">🔍</span>
                         </button>
                         <div id="search3" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -287,7 +284,7 @@
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(6);">
                             <div class='result-title' id="r6"> 6순위 </div>
-                            <span class="search-text" id="s6">🔍</span>
+                            <!-- <span class="search-text" id="s6">🔍</span> -->
                         </button>
                         <div id="search6" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -297,7 +294,6 @@
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(9);">
                             <div class='result-title' id="r9"> 9순위 </div>
-                            <span class="search-text" id="s9">🔍</span>
                         </button>
                         <div id="search9" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -309,7 +305,6 @@
                     <div style="width: 33%; max-height: 20%;  overflow: hidden;">
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(4);">
                             <div class='result-title' id="r4"> 4순위 </div>
-                            <span class="search-text" id="s4">🔍</span>
                         </button>
                         <div id="search4" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -319,7 +314,7 @@
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(7);">
                             <div class='result-title' id="r7"> 7순위 </div>
-                            <span class="search-text" id="s7">🔍</span>
+                            <!-- <span class="search-text" id="s7">🔍</span> -->
                         </button>
                         <div id="search7" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -329,7 +324,6 @@
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(10);">
                             <div class='result-title' id="r10"> 10순위 </div>
-                            <span class="search-text" id="s10">🔍</span>
                         </button>
                         <div id="search10" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
@@ -340,24 +334,7 @@
                     </div>
                 </div>
                 <br/>
-                <button type="button p-2" class="try-again-btn" onclick="toggleCelebList();" style="margin:10px; background-color: #35885d;">
-                    <span class="try-again-text" style="font-size: 1.8rem;">셀럽 목록 보기</span>
-                </button>
-                <div id="json-container" class="json-container" style="display: none;"></div>
                 
-                
-                <br/>
-                <div id="shareKt1" style="font-size: 1.8rem;" onclick="gtag('event', '카톡공유클릭', {'event_category': '카톡공유클릭','event_label': '카톡공유클릭'});">
-                    <button type="button p-2" class="try-again-btn" onclick="" style="margin:10px; background-color: #353709;">
-                        <span class="try-again-text" style="font-size: 1.8rem;">카카오 공유 하기
-                        <img src="puppy/talk-share.png" style="width: 30px; height: 30px;"/>
-                        </span>
-                    </button>
-                </div>
-                
-
-                <br/>
-
                 <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
                     <span class="try-again-text" style="font-size: 2.2rem;">셀럽미 다시 하기</span>
                 </button>
@@ -366,11 +343,37 @@
 
 
             </div>
+            <button type="button p-2" class="share-btn" onclick="toggleCelebList();" style="margin:10px; background-color: #35885d;">
+                <span class="try-again-text" style="font-size: 1.8rem;">셀럽 목록 보기</span>
+            </button>
+            <div id="json-container" class="json-container" style="display: none;"></div>
+            
+            
+            <br/>
+            <div class="normaltext">결과 화면에서 공유하면 닮은 셀럽 목록을 공유할 수 있어요</div>
+
+            <button type="button p-2" class="share-btn" id="shareKt1" onclick=" shareKakao();" style="margin:10px; height: 40px; background-color: #353709;">
+                <span class="try-again-text" style="font-size: 1.3rem;">카카오 공유 하기
+                <img src="puppy/talk-share.png" style="width: 30px; height: 30px;"/>
+                </span>
+            </button>
+            
+            <button type="button p-2" class="share-btn" onclick=" shareUrl();" style="margin:10px; height: 40px; background-color: #353709;">
+                <span class="try-again-text" style="font-size: 1.3rem;">링크 복사하기 🔗</span>
+            </button>
+
+            
+        
+            
+            
+
+            <br/>
             <div id="label-container" class="d-flex flex-column justify-content-around"></div>
 
 
             <br />
             <br />
+            <div id="modalMessage">복사되었어요.</div>
             <!-- App modal -->
             <div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="appModalLabel"
                 aria-hidden="true">
@@ -518,7 +521,7 @@
        $('#appModal').modal();    
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js" integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
+    
 </body>
 <!--
 image input box

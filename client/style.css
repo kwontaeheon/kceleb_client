@@ -499,3 +499,7 @@ input:checked + label > .knob > i:before {
     margin-right:15px;
   }
 }
+
+div#disqus_thread iframe[sandbox] {
+    max-height: 0px !important;
+}
