@@ -523,6 +523,9 @@ async function getSimilarCeleb(inputImage) {
       // Handle the response data here
       console.log(data);
       similarIdolData = data;
+      for (var rank = 0; rank < 10; rank++) {
+        similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
+      }
       displayIdolPredictionBriefly(data);
       // displayIdolPrediction(1);
       
@@ -546,7 +549,7 @@ function displayIdolPredictionBriefly(data) {
   $("#result-similar-idol").show();
   for (var rank = 1; rank <= 10; rank++) {
     try {
-      const r = faceNames[data[rank - 1].identity] ; // .split("/")[1]]
+      const r = data[rank - 1].identity ; // .split("/")[1]]
      
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
       $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
@@ -571,7 +574,7 @@ function displayIdolPrediction(rank) {
   data = similarIdolData;
 
   // console.log(data);
-  const r = faceNames[data[rank - 1].identity]; // .split("/")[1]];
+  const r = data[rank - 1].identity; // .split("/")[1]];
   try {
     if ($('#search' + rank).is(":visible")) {
       $('#search' + rank).hide();
@@ -751,6 +754,12 @@ function getBaseUrl() {
   return name;
 }
 
+function getIndexParamsUrl() {
+  var linkUrl = getBaseUrl();
+  linkUrl = linkUrl.split("/").pop();
+  return linkUrl + getUriComponents();
+}
+
 function getShareUrl() {
   var linkUrl = getBaseUrl();
   return linkUrl + getUriComponents();
@@ -821,13 +830,13 @@ function getUrlParameter(name) {
 Kakao.init('8b998f0abc3beae40dc620c58067dd55');
 
 function updateKakaoLink() {
-
+  
   Kakao.Share.createCustomButton({
     container: '#shareKt1',
     templateId: 104987, // 나의 앱 ID 작성
     templateArgs: {
-        'result_url': "?result=" + resultParam + "&face=" + faceParam,    // encoded url
-        'result': faceNames[similarIdolData[0].identity]  + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%"
+        'result_url': getIndexParamsUrl(),    // encoded url
+        'result': similarIdolData[0].identity  + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%"
         ,    // result text '에스파 닝닝: 56%'
     }
 });
