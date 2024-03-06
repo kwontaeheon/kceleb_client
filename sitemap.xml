@@ -13,6 +13,21 @@
   <priority>1.00</priority>
 </url>
 <url>
+  <loc>https://celebme.kr/index.html</loc>
+  <lastmod>2024-03-06T03:33:47+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/index_ko.html</loc>
+  <lastmod>2024-03-06T03:33:47+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://celebme.kr/index_en.html</loc>
+  <lastmod>2024-03-06T03:33:47+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
   <loc>https://celebme.kr/animaltest/index.html</loc>
   <lastmod>2024-02-26T03:33:49+00:00</lastmod>
   <priority>0.80</priority>
