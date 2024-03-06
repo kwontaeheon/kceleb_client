@@ -109,8 +109,6 @@
                     <option value="zh" lang="zh">中文</option>
                     <option value="vi" lang="vi">tiếng Việt</option>
                     <option value="id" lang="id">Bahasa Indonesia</option>
-                    <option value="it" lang="it">Italiano</option>
-                    <option value="th" lang="th">ไทย</option>
                 </select>
             </div>
         </div>
@@ -409,6 +407,11 @@
                                 "얼굴 분석 + 닮은 셀럽 찾기" 서비스로 개편 되었어요.<br>
                                 얼굴 분석 결과와 함께 확인해보세요!
                             </p>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="setCookie('celebme-popup', 'done', 7);">
+                                <span aria-hidden="true">&times;</span>
+                                팝업 일주일간 보지 않기
+                            </button>
+                            
                             <!-- <a href="/puppy/index.html">
                                 <button type="button" class="my-button">
                                     <h3 class="modal-title" id="appModalLabel">퍼피테스트 하러가기!</h3>
@@ -531,7 +534,7 @@
             wcs_do();
         }
 
-        if (!window.location.href.includes("result")) {
+        if (!window.location.href.includes("result") && getCookie('celebme-popup') != 'done') {
             $('#appModal').modal();
         }
     </script>

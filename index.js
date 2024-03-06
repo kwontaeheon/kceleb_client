@@ -11,7 +11,8 @@ var faceData;
 const lang = $( "#lang option:selected" ).val();
 var faceNames = {};
 (function () {
-  fetch("names_" + lang + ".json")
+  
+  fetch("names_" + (lang === "ko" ? "ko" : "en") + ".json")
     .then(response => response.json())
     .then(jsonData => {
       // Use jsonData as needed
@@ -85,6 +86,32 @@ function toggleCelebList() {
 // });
 $(".result-message").hide();
 
+
+
+// 쿠키 확인 
+function getCookie(name) {
+  var nameOfCookie=name+"=";
+  var a=0;
+      while(a<=document.cookie.length) {
+      var b=(a+nameOfCookie.length);
+          if(document.cookie.substring(a,b)==nameOfCookie) {
+              if((endOfCookie=document.cookie.indexOf(";",b))==-1)
+              endOfCookie=document.cookie.length;
+              return unescape(document.cookie.substring(b,endOfCookie));
+          }
+          a=document.cookie.indexOf(" ",a) +1;
+          if(a==0)
+          break;
+      }
+  return "";
+}
+
+// 쿠키 설정
+function setCookie(name, value, expiredays){
+  var todayDate = new Date();
+  todayDate.setDate( todayDate.getDate() + expiredays );
+  document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+}
 
 
 function cropImage(imgElement, callback, maxWidth = 512, maxHeight = 512) {

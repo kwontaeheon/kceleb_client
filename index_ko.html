@@ -109,8 +109,6 @@
                     <option value="zh" lang="zh">中文</option>
                     <option value="vi" lang="vi">tiếng Việt</option>
                     <option value="id" lang="id">Bahasa Indonesia</option>
-                    <option value="it" lang="it">Italiano</option>
-                    <option value="th" lang="th">ไทย</option>
                 </select>
             </div>
         </div>
@@ -530,7 +528,7 @@
             wcs_do();
         }
 
-        if (!window.location.href.includes("result")) {
+        if (!window.location.href.includes("result") && getCookie('celebme-popup') != 'done') {
             $('#appModal').modal();
         }
     </script>

@@ -1,0 +1,35 @@
+{
+  "man": "người đàn ông",
+  "woman": "phụ nữ",
+  "angry": "Tức giận",
+  "disgust": "ghê tởm😱",
+  "fear": "sợ hãi😨",
+  "happy": "Hạnh phúc",
+  "neutral": "Vô cảm 🙂",
+  "sad": "Nỗi buồn",
+  "surprise": "ngạc nhiên",
+  "asian": "Châu Á",
+  "black": "đen",
+  "indian": "Người Ấn Độ",
+  "latino hispanic": "Người Mỹ gốc Latinh",
+  "middle eastern": "Người Trung Đông",
+  "white": "trắng",
+
+  "face_in_picture": "Khuôn mặt trong ảnh là ",
+ 
+  "age": "tuổi",
+  "gender": "giới tính",
+  "emotion": "cảm xúc",
+  "race": "cuộc đua",
+  "age_val": "tuổi",
+  "i_guess": ", Nó trông giống như.",
+  "it_resembles": ", Nó giống nhất.",
+
+  "analyzing_face": "Đang phân tích khuôn mặt.",
+  "finding_lookalike_celeb": "Tìm kiếm người nổi tiếng giống tôi.",
+  "copied_link_with_result": "Bạn đã sao chép liên kết có kết quả.",
+  "copied_link": "Kết quả đã được sao chép."
+
+ 
+
+}
