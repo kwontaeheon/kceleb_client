@@ -263,7 +263,7 @@ function toggleCelebList() {
   }
 }
 // toggleButton.addEventListener('click', function () {
-  
+
 // });
 $(".result-message").hide();
 
@@ -305,11 +305,11 @@ function drawChart(userData) {
   Chart.defaults.font.size = 14;
   // Chart.register(ChartDataLabels);
   $("#face-analysis-result").html(
-    "사진 속 얼굴은 " + getMeta(userData.dominant_race) + ", <br/>" 
+    "사진 속 얼굴은 " + getMeta(userData.dominant_race) + ", <br/>"
     + "나이 " + userData.age + " 세 " + getMeta(userData.dominant_gender) + ", "
     + getMeta(userData.dominant_emotion) + " 으로 보입니다.<br/>"
 
-    
+
   )
 
   const ageData = {
@@ -405,7 +405,7 @@ function drawChart(userData) {
       circumference: 180,
       rotation: 90
     }],
-    
+
   };
 
   if (emotionChart != null) {
@@ -467,14 +467,14 @@ function drawChart(userData) {
       // indexAxis: 'y',
       maintainAspectRatio: false,
       plugins: {
-        
+
         autocolors: {
           mode: 'data'
         },
         datalabels: {
           formatter: function (value, context) {
             console.log(value);//context.chart.data.labels[context.dataIndex]
-            return  context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
+            return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
           }
         },
         legend: {
@@ -528,7 +528,7 @@ async function getSimilarCeleb(inputImage) {
       }
       displayIdolPredictionBriefly(data);
       // displayIdolPrediction(1);
-      
+
       updateKakaoLink();
       $(".try-again-btn").show();
       $(".result-message").show();
@@ -549,8 +549,8 @@ function displayIdolPredictionBriefly(data) {
   $("#result-similar-idol").show();
   for (var rank = 1; rank <= 10; rank++) {
     try {
-      const r = data[rank - 1].identity ; // .split("/")[1]]
-     
+      const r = data[rank - 1].identity; // .split("/")[1]]
+
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
       $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
 
@@ -558,8 +558,8 @@ function displayIdolPredictionBriefly(data) {
       // $('#s' + rank).show();
       if (rank == 1) {
         displayIdolPrediction(1);
-        $('#celeb-result').html("사진 속 얼굴이 " + r + " 을(를) 가장 닮았어요." + "<br/><br/>"
-        // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
+        $('#celeb-result').html("사진 속 얼굴이 " + r + " 을(를) 가장 닮았어요."
+          // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
         )
       }
     } catch (error) {
@@ -581,7 +581,7 @@ function displayIdolPrediction(rank) {
       $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
     }
     else {
-      
+
       console.log(r);
       q = 'allintitle:"' + r + '"';
 
@@ -589,7 +589,7 @@ function displayIdolPrediction(rank) {
       element.execute(q);
       $('#search' + rank).show();
       $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% _");
-      
+
       // window.history.replaceState({}, document.title, "/");
       window.history.replaceState({}, document.title, getBaseUrl());
 
@@ -710,26 +710,26 @@ function iosApp() {
 async function copyToClipboard(textToCopy) {
   // Navigator clipboard api needs a secure context (https)
   if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(textToCopy);
+    await navigator.clipboard.writeText(textToCopy);
   } else {
-      // Use the 'out of viewport hidden text area' trick
-      const textArea = document.createElement("textarea");
-      textArea.value = textToCopy;
-          
-      // Move textarea out of the viewport so it's not visible
-      textArea.style.position = "absolute";
-      textArea.style.left = "-999999px";
-          
-      document.body.prepend(textArea);
-      textArea.select();
+    // Use the 'out of viewport hidden text area' trick
+    const textArea = document.createElement("textarea");
+    textArea.value = textToCopy;
 
-      try {
-          document.execCommand('copy');
-      } catch (error) {
-          console.error(error);
-      } finally {
-          textArea.remove();
-      }
+    // Move textarea out of the viewport so it's not visible
+    textArea.style.position = "absolute";
+    textArea.style.left = "-999999px";
+
+    document.body.prepend(textArea);
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      textArea.remove();
+    }
   }
 }
 
@@ -766,20 +766,20 @@ function getShareUrl() {
 }
 
 async function shareUrl() {
-  
+
   const linkUrl = getShareUrl();
   try {
     await copyToClipboard(linkUrl);
     console.log('url copied to the clipboard.');
     $('#modalMessage').fadeIn();
-    setTimeout(function() {
-        $('#modalMessage').fadeOut();
+    setTimeout(function () {
+      $('#modalMessage').fadeOut();
     }, 3000); // 3000 milliseconds = 3 seconds
-    
-  } catch(error) {
+
+  } catch (error) {
     console.error("copy to clipboard error.");
   }
-    
+
 }
 
 function showResults(resultParam, faceParam) {
@@ -794,22 +794,22 @@ function showResults(resultParam, faceParam) {
   const faceJson = JSON.parse(faceDecoded.split("#")[0]);
   faceData = faceJson;
   console.log(faceData);
-  
-  var int=setInterval(function() {
+
+  var int = setInterval(function () {
     if (typeof google != 'undefined' && google.search.cse) {
       // google.search.cse.element.getElement('ap_search').execute("#{@term}")  
-      
+
 
       drawChart(faceData);
       displayIdolPredictionBriefly(similarIdolData);
       const name = getBaseUrl()
       window.history.replaceState({}, document.title, name);
       clearInterval(int);
-      
+
     }
   }, 200)
 
-  
+
 
   $(".try-again-btn").show();
   $(".result-message").show();
@@ -830,16 +830,16 @@ function getUrlParameter(name) {
 Kakao.init('8b998f0abc3beae40dc620c58067dd55');
 
 function updateKakaoLink() {
-  
+
   Kakao.Share.createCustomButton({
     container: '#shareKt1',
     templateId: 104987, // 나의 앱 ID 작성
     templateArgs: {
-        'result_url': getIndexParamsUrl(),    // encoded url
-        'result': similarIdolData[0].identity  + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%"
-        ,    // result text '에스파 닝닝: 56%'
+      'result_url': getIndexParamsUrl(),    // encoded url
+      'result': similarIdolData[0].identity + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%"
+      ,    // result text '에스파 닝닝: 56%'
     }
-});
+  });
 }
 // Get the value of the 'result' parameter
 const resultParam = getUrlParameter('result');   // resultParam: 'key:value' 형태 ex. '에스파 닝닝: 56%' 로 할수도 있는데, encode 로 10명 결과를 담자.
@@ -847,10 +847,10 @@ const faceParam = getUrlParameter('face');
 // Replace content based on the value of 'result' parameter
 if (resultParam != null) {
 
-    showResults(resultParam, faceParam);  // 구현필요
-    
+  showResults(resultParam, faceParam);  // 구현필요
+
 } else {
-    
+
 }
 Kakao.Share.createCustomButton({
   container: '#shareKt1',

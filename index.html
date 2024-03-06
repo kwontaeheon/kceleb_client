@@ -50,14 +50,16 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636274019237410"
         crossorigin="anonymous"></script>
 
-    
+
 
 </head>
 
 <body>
     <script async data-cfasync="false" src="https://cse.google.com/cse.js?cx=2346e8f4411dd44c7"></script>
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js" integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
-    
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+        integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
+        crossorigin="anonymous"></script>
+
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
 
         <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">셀럽미: 닮은 셀럽 찾기</a>
@@ -100,19 +102,19 @@
             <div class="language">Language:</div>
             <div>
                 <select onchange="changeLanguage(this)" class="custom-select col-8">
-                <option value="ko" lang="ko">한국어</option>
-                <option value="en" lang="en">English</option>
-                <option value="es" lang="es">español</option>
-                <option value="ja" lang="ja">日本語</option>
-                <option value="zh" lang="zh">中文</option>
-                <option value="vi" lang="vi">tiếng Việt</option>
-                <option value="id" lang="id">Bahasa Indonesia</option>
-                <option value="it" lang="it">Italiano</option>
-                <option value="th" lang="th">ไทย</option>
+                    <option value="ko" lang="ko">한국어</option>
+                    <option value="en" lang="en">English</option>
+                    <option value="es" lang="es">español</option>
+                    <option value="ja" lang="ja">日本語</option>
+                    <option value="zh" lang="zh">中文</option>
+                    <option value="vi" lang="vi">tiếng Việt</option>
+                    <option value="id" lang="id">Bahasa Indonesia</option>
+                    <option value="it" lang="it">Italiano</option>
+                    <option value="th" lang="th">ไทย</option>
                 </select>
             </div>
         </div>
-    </div>
+        </div>
     </section>
     <script>
         var ua = navigator.userAgent.toLowerCase();
@@ -185,13 +187,13 @@
             </div>
             <div class="result-message" id="result-message">
                 <div class="h2" style="padding: 16px;">
-                     <셀럽미:얼굴 분석 결과>
-                    <hr style="background-color:black;" />
+                    <셀럽미:얼굴 분석 결과>
+                        <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
                     얼굴에 대한 나이, 성별, 감정, 인종 분석 결과
                 </div>
-                
+
                 <div class="row">
                     <div style="position: relative; height: 20vh; width: 50%; padding: 20px 20px 20px 50px;">
                         <canvas id="ageChart"></canvas>
@@ -202,44 +204,50 @@
                 </div>
                 <center>
                     <div class="row">
-                        
-                        <div style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto; ">
+
+                        <div
+                            style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto; ">
                             <canvas id="raceChart"></canvas>
-                            
+
                         </div>
-                        
-                        <div style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto;">
+
+                        <div
+                            style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto;">
                             <canvas id="emotionChart"></canvas>
                         </div>
-                        
+
                     </div>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                 </center>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
 
-            
+
             <div class="result-message" id="result-similar-idol">
                 <div class="h2" style="padding: 10px;">
-                     <셀럽미:닮은 셀럽 이미지>
-                    <hr style="background-color:black;" />
+                    <셀럽미:닮은 셀럽 이미지>
+                        <hr style="background-color:black;" />
                 </div>
 
-                <div class="normaltext" id="celeb-result">
-                    셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>
+
+                <div class="normaltext" id="celeb-result-desc">
+                    <div class="normaltext" id="celeb-result">
+                        셀럽 이름을 눌러서 이미지를 검색해보세요.
+                    </div>
+                    셀럽 이름을 눌러서 이미지를 검색해보세요. <br /><br />
                 </div>
-                
+
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
                     <div class='result-title' id="r1"> 1순위 </div>
                 </button>
                 <div style="max-height: 30%; overflow: hidden;">
-                <div id="search1" class="gcse-searchresults-only"
-                    data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
-                    data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                    data-gname="q1"></div>
+                    <div id="search1" class="gcse-searchresults-only"
+                        data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
+                        data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
+                        data-gname="q1"></div>
                 </div>
                 <div class="row" style="font-size: 1.1rem; margin: 10px;">
                     <div style="width: 33%; max-height: 20%; overflow: hidden;">
@@ -333,41 +341,46 @@
 
                     </div>
                 </div>
-                <br/>
-                
+                <br />
+
                 <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
                     <span class="try-again-text" style="font-size: 2.2rem;">셀럽미 다시 하기</span>
                 </button>
 
-                
+
 
 
             </div>
-            <button type="button p-2" class="share-btn" onclick="toggleCelebList();" style="margin:10px; background-color: #35885d;">
+            <button type="button p-2" class="share-btn" onclick="toggleCelebList();"
+                style="margin:10px; background-color: #35885d;">
                 <span class="try-again-text" style="font-size: 1.8rem;">셀럽 목록 보기</span>
             </button>
             <div id="json-container" class="json-container" style="display: none;"></div>
-            
-            
-            <br/>
+
+
+            <br />
             <div class="normaltext">결과 화면에서 공유하면 닮은 셀럽 목록을 공유할 수 있어요</div>
 
-            <button type="button p-2" class="share-btn" id="shareKt1" onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'});" style="margin:10px; height: 40px; background-color: #353709;">
+            <button type="button p-2" class="share-btn" id="shareKt1"
+                onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'});"
+                style="margin:10px; height: 40px; background-color: #353709;">
                 <span class="try-again-text" style="font-size: 1.3rem;">카카오 공유 하기
-                <img src="puppy/talk-share.png" style="width: 30px; height: 30px;"/>
+                    <img src="puppy/talk-share.png" style="width: 30px; height: 30px;" />
                 </span>
             </button>
-            
-            <button type="button p-2" class="share-btn" onclick="gtag('event', 'URL공유클릭', {'event_category': '공유클릭','event_label': 'URL공유클릭'}); shareUrl();" style="margin:10px; height: 40px; background-color: #353709;">
+
+            <button type="button p-2" class="share-btn"
+                onclick="gtag('event', 'URL공유클릭', {'event_category': '공유클릭','event_label': 'URL공유클릭'}); shareUrl();"
+                style="margin:10px; height: 40px; background-color: #353709;">
                 <span class="try-again-text" style="font-size: 1.3rem;">링크 복사하기 🔗</span>
             </button>
 
-            
-        
-            
-            
 
-            <br/>
+
+
+
+
+            <br />
             <div id="label-container" class="d-flex flex-column justify-content-around"></div>
 
 
@@ -390,8 +403,8 @@
                         <div class="modal-body d-flex flex-column justify-content-center align-items-center">
 
                             <img class="" width="200px"
-                            src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
-                            alt='app icon'>
+                                src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
+                                alt='app icon'>
                             <p class="text-app-center">
                                 "얼굴 분석 + 닮은 셀럽 찾기" 서비스로 개편 되었어요.<br>
                                 얼굴 분석 결과와 함께 확인해보세요!
@@ -436,7 +449,7 @@
             <br>
             <!-- app banner -->
             <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-                
+
 
                 <p class="text-app-center">
                     AI 프로필, 일상 프로필, 바디 프로필 기능 추가!</br>
@@ -517,13 +530,13 @@
         if (window.wcs) {
             wcs_do();
         }
-        
+
         if (!window.location.href.includes("result")) {
-            $('#appModal').modal();    
+            $('#appModal').modal();
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    
+
 </body>
 <!--
 image input box
