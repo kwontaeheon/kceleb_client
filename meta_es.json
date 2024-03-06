@@ -1,0 +1,35 @@
+{
+  "man": "hombre",
+  "woman": "mujer",
+  "angry": "Enojado😡",
+  "disgust": "asco😱",
+  "fear": "miedo😨",
+  "happy": "Feliz🥳",
+  "neutral": "Inexpresivo 🙂",
+  "sad": "Tristeza😭",
+  "surprise": "sorpresa😳",
+  "asian": "asiático",
+  "black": "negro",
+  "indian": "indio",
+  "latino hispanic": "latino americano",
+  "middle eastern": "Oriente Medio",
+  "white": "blanco",
+
+  "face_in_picture": "La cara en la imagen es ",
+ 
+  "age": "edad",
+  "gender": "género",
+  "emotion": "emoción",
+  "race": "carrera",
+  "age_val": "edad",
+  "i_guess": "Parece .",
+  "it_resembles": "Se parece más a .",
+
+  "analyzing_face": "Analizando la cara.",
+  "finding_lookalike_celeb": "Buscando una celebridad que se parezca a mí.",
+  "copied_link_with_result": "Copiaste el enlace con los resultados.",
+  "copied_link": "Los resultados fueron copiados."
+
+ 
+
+}

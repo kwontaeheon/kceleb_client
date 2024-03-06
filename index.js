@@ -1,145 +1,468 @@
-const repoUrl =
-  "https://raw.githubusercontent.com/kwontaeheon/kceleb_model/main/";
-const menModelUrl = repoUrl + "tfjs_men/tfjs/model.json";
-const menLabelUrl = repoUrl + "men_label/labels.txt";
-const womenModelUrl = repoUrl + "tfjs_women/tfjs/model.json";
-const womenLabelUrl = repoUrl + "women_label/labels.txt";
 
-let menModel, womenModel, isMale, menLabel, womenLabel;
-async function init() {
-  isMale = document.getElementById("fmselector").checked;
-  if (isMale) {
-    if (!menModel) {
-      menModel = await tf.loadGraphModel(menModelUrl);
-      response = await fetch(menLabelUrl);
-      text = await response.text();
-      menLabel = text.split("\n");
-      // console.log(menLabel);
-      console.log("loaded");
-    }
-  } else {
-    if (!womenModel) {
-      womenModel = await tf.loadGraphModel(womenModelUrl);
-      response = await fetch(womenLabelUrl);
-      text = await response.text();
-      womenLabel = text.split("\n");
-      // console.log(womenLabel);
-      console.log("loaded");
-    }
+// const compressor = require('./compression.js');
+const apiUrl = "http://celebme.duckdns.org:8181"
+
+// 닮은 셀럽 목록 변수
+var similarIdolData;
+// 얼굴 분석 변수
+var faceData;
+
+
+const lang = $( "#lang option:selected" ).val();
+var faceNames = {};
+(function () {
+  
+  fetch("names_" + (lang === "ko" ? "ko" : "en") + ".json")
+    .then(response => response.json())
+    .then(jsonData => {
+      // Use jsonData as needed
+      faceNames = jsonData;
+      const jsonKeys = Object.keys(faceNames);
+      jsonKeys.forEach(key => {
+        const keyValueContainer = document.createElement('div');
+        const keyElement = document.createElement('span');
+        const valueElement = document.createElement('span');
+
+        keyElement.classList.add('json-key');
+        valueElement.classList.add('json-string');
+
+        keyElement.textContent = `"${key}": `;
+        valueElement.textContent = `"${faceNames[key]}"`;
+
+        keyValueContainer.appendChild(keyElement);
+        keyValueContainer.appendChild(valueElement);
+
+        jsonContainer.appendChild(keyValueContainer);
+      });
+        console.log(jsonData);
+    })
+    .catch(error => {
+      console.error("Error fetching JSON:", error);
+    });
+})();
+
+
+var resultMeta = {};
+(function () {
+  fetch("meta_" + lang + ".json")
+    .then(response => response.json())
+    .then(jsonData => {
+      // Use jsonData as needed
+      resultMeta = jsonData;
+      console.log(resultMeta);
+    })
+    .catch(error => {
+      console.error("Error fetching JSON:", error);
+    });
+})();
+
+function getMeta(name) {
+
+  try {
+    return resultMeta[name.toLowerCase()];
+
+  } catch (error) {
+    console.log(error);
+    return name;
   }
+
 }
 
-function displayIdolPrediction(values, indices) {
-  var resultTitle = indices[0];
-  var resultExplain = (values[0] * 100).toFixed(1);
-  var title =
-    "<div class='h2'> 셀럽미: 닮은 아이돌 찾기 결과 </div>" +
-    "<div class='h3' style='padding: 10px;'>" +
-    resultTitle +
-    " (" +
-    resultExplain +
-    "%) </div>";
-  var explain =
-    "<div class='h5' > " +
-    indices[1] +
-    " (" +
-    (values[1] * 100).toFixed(1) +
-    "%) / " +
-    indices[2] +
-    " (" +
-    (values[2] * 100).toFixed(1) +
-    "%) </div>";
-  $(".result-message").html(title + explain);
-  $("#search").attr(
-    "src",
-    "search.html?q=allintitle:" + resultTitle + " -청량 -단체사진 -닮은"
-  );
 
-  gtag("event", resultTitle, {
-    event_category: resultExplain,
-    result_face: true,
+const jsonContainer = document.getElementById('json-container');
+const toggleButton = document.getElementById('toggleButton');
+
+
+function toggleCelebList() {
+  const x = jsonContainer;
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+// toggleButton.addEventListener('click', function () {
+
+// });
+$(".result-message").hide();
+
+
+
+// 쿠키 확인 
+function getCookie(name) {
+  var nameOfCookie=name+"=";
+  var a=0;
+      while(a<=document.cookie.length) {
+      var b=(a+nameOfCookie.length);
+          if(document.cookie.substring(a,b)==nameOfCookie) {
+              if((endOfCookie=document.cookie.indexOf(";",b))==-1)
+              endOfCookie=document.cookie.length;
+              return unescape(document.cookie.substring(b,endOfCookie));
+          }
+          a=document.cookie.indexOf(" ",a) +1;
+          if(a==0)
+          break;
+      }
+  return "";
+}
+
+// 쿠키 설정
+function setCookie(name, value, expiredays){
+  var todayDate = new Date();
+  todayDate.setDate( todayDate.getDate() + expiredays );
+  document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+}
+
+
+function cropImage(imgElement, callback, maxWidth = 512, maxHeight = 512) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const img = imgElement;
+
+  const aspectRatio = img.naturalWidth / img.naturalHeight;
+  let newWidth = maxWidth;
+  let newHeight = maxHeight;
+
+  if (aspectRatio > 1) {
+    newHeight = Math.min(maxHeight, img.naturalHeight);
+    newWidth = newHeight * aspectRatio;
+  } else {
+    newWidth = Math.min(maxWidth, img.naturalWidth);
+    newHeight = newWidth / aspectRatio;
+  }
+
+  canvas.width = maxWidth;
+  canvas.height = maxHeight;
+  ctx.drawImage(img, (maxWidth - newWidth) / 2, (maxHeight - newHeight) / 2, newWidth, newHeight);
+
+  canvas.toBlob(function (blob) {
+    callback(blob);
+  }, 'image/webp');
+}
+
+var ageChart, emotionChart, genderChart, raceChart;
+function drawChart(userData) {
+
+  const autocolors = window['chartjs-plugin-autocolors'];
+
+
+  Chart.register(autocolors);
+  Chart.defaults.font.size = 14;
+  // Chart.register(ChartDataLabels);
+  $("#face-analysis-result").html(
+    getMeta("face_in_picture") + getMeta(userData.dominant_race) + ", <br/>"
+    + getMeta("age") + " " + userData.age + getMeta("age_val") + " " + getMeta(userData.dominant_gender) + ", "
+    + getMeta(userData.dominant_emotion) + getMeta("i_guess") + " <br/>"
+
+
+  )
+
+  const ageData = {
+    labels: [getMeta("age")],
+    datasets: [{
+      label: getMeta("age"),
+      data: [userData.age],
+      backgroundColor: ['#11BB84']
+    }]
+  };
+  if (ageChart != null) {
+    ageChart.destroy();
+  }
+  ageChart = new Chart(document.getElementById('ageChart'), {
+    type: 'bar',
+    data: ageData,
+    plugins: [ChartDataLabels],
+    options: {
+      maintainAspectRatio: false,
+      // indexAxis: 'y',
+      plugins: {
+        // autocolors: {
+        //   mode: 'label'
+        // },
+        legend: {
+          display: false,
+        }
+      }
+    }
   });
+
+
+  console.log(Object.keys(userData.gender));
+  console.log(Object.keys(userData.gender).flatMap(value => { return getMeta(value); }));
+  // Display gender in pie chart
+  const genderData = {
+    labels: Object.keys(userData.gender).flatMap(value => {
+      return getMeta(value);
+    }),
+    datasets: [{
+      label: getMeta("gender"),
+      maintainAspectRatio: false,
+      data: Object.values(userData.gender),
+      backgroundColor: ['#36A2EB', '#FF6384']
+    }]
+  };
+
+  if (genderChart != null) {
+    genderChart.destroy();
+  }
+  genderChart = new Chart(document.getElementById('genderChart'), {
+    type: 'bar',
+    data: genderData,
+    plugins: [ChartDataLabels],
+    options: {
+      maintainAspectRatio: false,
+      plugins: {
+        autocolors: {
+          mode: 'data'
+        },
+        datalabels: {
+          formatter: function (value, context) {
+            console.log(value);//context.chart.data.labels[context.dataIndex]
+            return value.toFixed(1);
+          }
+        },
+        legend: {
+          display: false,
+        }
+      },
+    }
+  });
+
+  // Display emotion in radar chart
+  const emotionData = {
+    labels: Object.keys(userData.emotion).flatMap(value => {
+      return getMeta(value);
+    }),
+    datasets: [{
+      label: getMeta("emotion"),
+      data: Object.values(userData.emotion),
+      hoverOffset: 50,
+      borderWidth: 0,
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(125, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(54, 162, 135)',
+        'rgb(255, 205, 86)',
+        'rgb(125, 125, 86)',
+        'rgb(225, 125, 86)',
+      ],
+      circumference: 180,
+      rotation: 90
+    }],
+
+  };
+
+  if (emotionChart != null) {
+    emotionChart.destroy();
+  }
+  emotionChart = new Chart(document.getElementById('emotionChart'), {
+    type: 'doughnut',
+    data: emotionData,
+    options: {
+      indexAxis: 'y',
+      maintainAspectRatio: false,
+      plugins: {
+        autocolors: {
+          mode: 'data'
+        },
+        datalabels: {
+          formatter: function (value, context) {
+            console.log(value); //context.chart.data.labels[context.dataIndex]
+            return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
+          }
+        },
+        legend: {
+          display: true,
+          position: 'bottom'
+        }
+      },
+    }
+  });
+
+  // Display race in radar chart
+  const raceData = {
+    labels: Object.keys(userData.race).flatMap(value => {
+      return getMeta(value);
+    }),
+    datasets: [{
+      label: getMeta("race"),
+      data: Object.values(userData.race),
+      hoverOffset: 50,
+      borderWidth: 0,
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(125, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(54, 162, 135)',
+        'rgb(255, 205, 86)',
+        'rgb(125, 125, 86)'
+      ],
+      circumference: 180,
+      rotation: -90
+    }]
+  };
+  if (raceChart != null) {
+    raceChart.destroy();
+  }
+  raceChart = new Chart(document.getElementById('raceChart'), {
+    type: 'doughnut',
+    data: raceData,
+    options: {
+      // indexAxis: 'y',
+      maintainAspectRatio: false,
+      plugins: {
+
+        autocolors: {
+          mode: 'data'
+        },
+        datalabels: {
+          formatter: function (value, context) {
+            console.log(value);//context.chart.data.labels[context.dataIndex]
+            return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
+          }
+        },
+        legend: {
+          display: true
+        }
+      },
+
+    }
+  });
+}
+
+async function analyzeFace(inputImage) {
+  const formData = new FormData();
+  formData.append("img", inputImage); // Adjust file type as needed
+  return await fetch(apiUrl + '/analyze', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response data here
+      console.log("analyze");
+      console.log(data);
+      faceData = data;
+      drawChart(data);
+
+    })
+    .catch(error => {
+      // Handle errors here
+      console.error('Error:', error);
+    });
+
+}
+
+
+async function getSimilarCeleb(inputImage) {
+  const formData = new FormData();
+  formData.append("img", inputImage); // Adjust file type as needed
+
+  return await fetch(apiUrl + '/find', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response data here
+      console.log(data);
+      similarIdolData = data;
+      for (var rank = 0; rank < 10; rank++) {
+        similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
+      }
+      displayIdolPredictionBriefly(data);
+      // displayIdolPrediction(1);
+
+      updateKakaoLink();
+      $(".try-again-btn").show();
+      $(".result-message").show();
+      $("#loading").hide();
+      // window.history.replaceState({}, document.title, "/");
+      $("html, body").scrollTop(
+        document.getElementsByClassName("title")[0].offsetTop
+      );
+
+    })
+    .catch(error => {
+      // Handle errors here
+      console.error('Error:', error);
+    });
+
+}
+function displayIdolPredictionBriefly(data) {
+  $("#result-similar-idol").show();
+  for (var rank = 1; rank <= 10; rank++) {
+    try {
+      const r = data[rank - 1].identity; // .split("/")[1]]
+
+      // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
+
+      $('#search' + rank).hide();
+      // $('#s' + rank).show();
+      if (rank == 1) {
+        displayIdolPrediction(1);
+        $('#celeb-result').html(getMeta("face_in_picture") + r + getMeta("it_resembles")
+          // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
+        )
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+}
+
+function displayIdolPrediction(rank) {
+  data = similarIdolData;
+
+  // console.log(data);
+  const r = data[rank - 1].identity; // .split("/")[1]];
+  try {
+    if ($('#search' + rank).is(":visible")) {
+      $('#search' + rank).hide();
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
+    }
+    else {
+
+      console.log(r);
+      q = 'allintitle:"' + r + '"';
+
+      var element = google.search.cse.element.getElement('q' + rank);
+      element.execute(q);
+      $('#search' + rank).show();
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% _");
+
+      // window.history.replaceState({}, document.title, "/");
+      window.history.replaceState({}, document.title, getBaseUrl());
+
+      gtag("event", "similar_idol_result", {
+        celeb: r.replaceAll(" ", ""),
+        rank: rank
+      });
+      gtag("event", r.replaceAll(" ", ""), {
+        event_category: "similar_idol_result",
+        rank: rank,
+        result_face: true,
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+
+
 }
 
 /**
   Displays Similar idol name from model prediction
 */
-async function predict() {
-  var image = document.getElementById("face-image");
-  // 흑백여부 false
-  console.log("Loaded TensorFlow.js - version: " + tf.version.tfjs);
-  const imageData = tf.browser.fromPixels(image, (numChannels = 3)).toFloat();;
-  console.log(imageData.shape);
-  const imgSize = Math.min(image.naturalWidth, image.naturalHeight);
-  console.log(image.naturalWidth, image.naturalHeight);
-  const left = (image.naturalWidth - imgSize) / 2.0;
-  const top = (image.naturalHeight - imgSize) / 2.0;
-  const right = (image.naturalWidth + imgSize) / 2.0;
-  const bottom = (image.naturalHeight + imgSize) / 2.0;
-  let boxes = [
-    [
-      top / image.naturalHeight,
-      left / image.naturalWidth,
-      bottom / image.naturalHeight,
-      right / image.naturalWidth,
-    ],
-  ];
-  console.log(boxes);
-  // let resizedImage = tf.image.resizeBilinear(imageData, [300, 300]);
-  //resizedImage = tf.expandDims(resizedImage, axis=0);
-  const img4dResized = tf.expandDims(imageData, (axis = 0));
-  let resizedImage = tf.image.cropAndResize(
-    img4dResized,
-    boxes,
-    [0],
-    [300, 300]
-  );
-  
-//   const canvas = document.getElementById("test");
-//   canvas.width = resizedImage.shape.width;
-//   canvas.height = resizedImage.shape.height;
-//   drawTensor = resizedImage.reshape([300, 300, 3]).clipByValue(0, 255)
-//   .cast('int32');
-//   await tf.browser.toPixels(drawTensor, canvas).then(() => {
-//     drawTensor.dispose();
-//     img4dResized.dispose();
-//     imageData.dispose();
-//     // console.log(
-//     //   "Make sure we cleaned up",
-//     //   tf.memory().numTensors
-//     // );
-//   });
+// async function predict() {
 
-  let pred;
-  if (isMale) {
-    pred = await menModel.predict(resizedImage);
-  } else {
-    pred = await womenModel.predict(resizedImage);
-  }
-  const { values, indices } = tf.topk(pred, 3, true);
-  // values.print();
-  // indices.print();
-  const valuesArr = values.arraySync()[0];
-  const indicesArr = indices.arraySync()[0];
-  pred.dispose();
-  values.dispose();
-  indices.dispose();
-  resizedImage.dispose();
-  let namesArr = ["", "", ""];
-
-  for (var x in [0, 1, 2]) {
-    // console.log(x, indicesArr[x]);
-    // console.log( menLabel);
-    // console.log( womenLabel);
-    if (isMale) {
-      namesArr[x] = menLabel[indicesArr[x]];
-    } else {
-      namesArr[x] = womenLabel[indicesArr[x]];
-    }
-  }
-  // console.log(valuesArr, indicesArr, namesArr);
-  displayIdolPrediction(valuesArr, namesArr);
-}
+//   displayIdolPrediction(valuesArr, namesArr);
+// }
 
 async function loadImage(url, elem) {
   return new Promise(function (resolve, reject) {
@@ -152,26 +475,47 @@ async function loadImage(url, elem) {
 async function readURL(input) {
   if (input.files && input.files[0]) {
     $(".try-again-btn").hide();
+    
+    // 동의모드는 추후구현
+    // gtag('consent', 'default', {
+    //   'ad_storage': 'denied',
+    //   'ad_user_data': 'denied',
+    //   'ad_personalization': 'denied',
+    //   'analytics_storage': 'denied',
+    //   'wait_for_update': 500
+    // });
+
     gtag("event", "AI호출시작", {
       event_category: "AI호출시작",
     });
     var reader = new FileReader();
     reader.onload = function (e) {
       $(".image-upload-wrap").hide();
-      $("#face-image").attr("src", e.target.result);
+      var imgData = e.target.result;
+      $("#face-image").attr("src", imgData);
       $("#title").html(input.files[0].name);
     };
     await reader.readAsDataURL(input.files[0]);
     $(".file-upload-content").show();
+    $("#loading-message").html(getMeta("analyzing_face"))
     $("#loading").show();
-    document.getElementById("face-image").onload = function () {
-      init().then(function () {
-        predict().then(function (prom) {
-          $(".try-again-btn").show();
-          $(".result-message").show();
-          $("#loading").hide();
-        });
-      });
+    $(".result-message").hide();
+    $("#result-similar-idol").hide();
+    document.getElementById("face-image").onload = function (e) {
+      var imgData = document.getElementById("face-image");
+      cropImage(imgData, function (resizedImg) {
+        analyzeFace(resizedImg).then(function () {
+          $("#loading-message").html(getMeta("finding_lookalike_celeb"))
+          getSimilarCeleb(resizedImg);
+        })
+
+
+      })
+
+      // predict().then(function (prom) {
+
+      //     });
+
     };
   } else {
     removeUpload();
@@ -186,7 +530,9 @@ function removeUpload() {
   $(".file-upload-content").hide();
   $(".image-upload-wrap").show();
   $(".result-message").hide();
-  document.getElementById("search").height = 0;
+
+  window.location.href = getBaseUrl();
+  // document.getElementById("search").height = 0;
   $("html, body").scrollTop(
     document.getElementsByClassName("title")[0].offsetTop
   );
@@ -209,3 +555,160 @@ function iosApp() {
   }
   document.getElementById("yotube-top-link").style.display = "none";
 }
+
+
+// function arrayToQueryString(array) {
+//   return array.map(item => encodeURIComponent(item)).join('&');
+// }
+
+async function copyToClipboard(textToCopy) {
+  // Navigator clipboard api needs a secure context (https)
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(textToCopy);
+  } else {
+    // Use the 'out of viewport hidden text area' trick
+    const textArea = document.createElement("textarea");
+    textArea.value = textToCopy;
+
+    // Move textarea out of the viewport so it's not visible
+    textArea.style.position = "absolute";
+    textArea.style.left = "-999999px";
+
+    document.body.prepend(textArea);
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      textArea.remove();
+    }
+  }
+}
+
+
+
+function getUriComponents() {
+  if (similarIdolData && faceData) {
+    const simStr = encodeURI(encodeURIComponent(JSON.stringify(similarIdolData)));
+    const faceStr = encodeURI(encodeURIComponent(JSON.stringify(faceData)));
+    $('#modalMessage').html(getMeta("copied_with_result"));
+    return "?result=" + simStr + "&face=" + faceStr;
+  }
+  $('#modalMessage').html(getMeta("copied_link"));
+  return "";
+}
+
+function getBaseUrl() {
+  console.log(window.location.href.split("?"));
+  var name = window.location.href.split("?")[0];
+  name = name.split("#")[0];
+  console.log(name);
+  return name;
+}
+
+function getIndexParamsUrl() {
+  var linkUrl = getBaseUrl();
+  linkUrl = linkUrl.split("/").pop();
+  return linkUrl + getUriComponents();
+}
+
+function getShareUrl() {
+  var linkUrl = getBaseUrl();
+  return linkUrl + getUriComponents();
+}
+
+async function shareUrl() {
+
+  const linkUrl = getShareUrl();
+  try {
+    await copyToClipboard(linkUrl);
+    console.log('url copied to the clipboard.');
+    $('#modalMessage').fadeIn();
+    setTimeout(function () {
+      $('#modalMessage').fadeOut();
+    }, 3000); // 3000 milliseconds = 3 seconds
+
+  } catch (error) {
+    console.error("copy to clipboard error.");
+  }
+
+}
+
+function showResults(resultParam, faceParam) {
+  $(".image-upload-wrap").hide();
+  $("#face-image").attr("src", "https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw");
+  $(".file-upload-content").show();
+  const resultDecoded = decodeURI(decodeURIComponent(resultParam));
+  const resultJson = JSON.parse(resultDecoded.split("#")[0]);
+  similarIdolData = resultJson;
+
+  const faceDecoded = decodeURI(decodeURIComponent(faceParam));
+  const faceJson = JSON.parse(faceDecoded.split("#")[0]);
+  faceData = faceJson;
+  console.log(faceData);
+
+  var int = setInterval(function () {
+    if (typeof google != 'undefined' && google.search.cse) {
+      // google.search.cse.element.getElement('ap_search').execute("#{@term}")  
+
+
+      drawChart(faceData);
+      displayIdolPredictionBriefly(similarIdolData);
+      const name = getBaseUrl()
+      window.history.replaceState({}, document.title, name);
+      clearInterval(int);
+
+    }
+  }, 200)
+
+
+
+  $(".try-again-btn").show();
+  $(".result-message").show();
+  // window.location.href = window.location.pathname + "?q1=" + faceNames[similarIdolData[0].identity];
+  // displayIdolPrediction(1);
+}
+
+
+// {{ result 쿼리파라미터가 존재할 땐 바로 결과표시 시작
+
+// 카카오 공유
+// Function to get URL parameter by name
+function getUrlParameter(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
+
+Kakao.init('8b998f0abc3beae40dc620c58067dd55');
+
+function updateKakaoLink() {
+
+  Kakao.Share.createCustomButton({
+    container: '#shareKt1',
+    templateId: 104987, // 나의 앱 ID 작성
+    templateArgs: {
+      'result_url': getIndexParamsUrl(),    // encoded url
+      'result': similarIdolData[0].identity + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%"
+      ,    // result text '에스파 닝닝: 56%'
+    }
+  });
+}
+// Get the value of the 'result' parameter
+const resultParam = getUrlParameter('result');   // resultParam: 'key:value' 형태 ex. '에스파 닝닝: 56%' 로 할수도 있는데, encode 로 10명 결과를 담자.
+const faceParam = getUrlParameter('face');
+// Replace content based on the value of 'result' parameter
+if (resultParam != null) {
+
+  showResults(resultParam, faceParam);  // 구현필요
+
+} else {
+
+}
+Kakao.Share.createCustomButton({
+  container: '#shareKt1',
+  templateId: 104987, // 나의 앱 ID 작성
+});
+
+// }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Data Display</title>
+<style>
+  .big-font {
+    font-size: 32px;
+  }
+</style>
+</head>
+<body>
+  <!-- <p id="age" class="big-font"></p> -->
+  <canvas id="ageChart"></canvas>
+  <canvas id="emotionChart"></canvas>
+  <canvas id="genderChart"></canvas>
+  <canvas id="raceChart"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
+<script>
+  // User data
+  const userData = {
+    age: 35,
+    emotion: {
+      angry: 0.00005873934014744009,
+      disgust: 6.504813181151814e-10,
+      fear: 0.00010167374284719699,
+      happy: 99.99803304672241,
+      neutral: 0.0016742740626796149
+    },
+    gender: {
+      Man: 99.99074935913086,
+      Woman: 0.009244316606782377
+    },
+    race: {
+      asian: 0.0186897799721919,
+      black: 0.009834171214606613,
+      indian: 0.22660295944660902,
+      latino_hispanic: 7.015107572078705,
+      middle_eastern: 15.224747359752655
+    }
+  };
+  const autocolors = window['chartjs-plugin-autocolors'];
+  
+
+  Chart.register(autocolors);
+  Chart.register(ChartDataLabels);
+
+  // Display age in big font
+  // Display emotion in radar chart
+  const ageData = {
+    labels: ["age"],
+    datasets: [{
+      label: 'Age',
+      data: [userData.age]
+    }]
+  };
+  new Chart(document.getElementById('ageChart'), {
+    type: 'bar',
+    data: ageData,
+    options: {
+        plugins: {
+          autocolors: {
+            mode: 'data'
+          }
+        }
+      }
+  });
+
+  
+
+  // Display emotion in radar chart
+  const emotionData = {
+    labels: Object.keys(userData.emotion),
+    datasets: [{
+      label: 'Emotion',
+      data: Object.values(userData.emotion)
+    }]
+  };
+  new Chart(document.getElementById('emotionChart'), {
+    type: 'bar',
+    data: emotionData,
+    options: {
+        plugins: {
+            autocolors: {
+                mode: 'data'
+            },
+            datalabels: {
+                formatter: function(value, context) {
+                    console.log(value);//context.chart.data.labels[context.dataIndex]
+                    return value.toFixed(1);
+                }
+            }
+        }
+      }
+  });
+
+  // Display gender in pie chart
+  const genderData = {
+    labels: Object.keys(userData.gender),
+    datasets: [{
+      label: 'Gender',
+      data: Object.values(userData.gender),
+      backgroundColor: ['#36A2EB', '#FF6384']
+    }]
+  };
+  new Chart(document.getElementById('genderChart'), {
+    type: 'bar',
+    data: genderData,
+    options: {
+        plugins: {
+          autocolors: {
+            mode: 'data'
+          },
+          datalabels: {
+              formatter: function(value, context) {
+                  console.log(value);//context.chart.data.labels[context.dataIndex]
+                  return value.toFixed(1);
+              }
+          }
+        }
+      }
+  });
+
+  // Display race in radar chart
+  const raceData = {
+    labels: Object.keys(userData.race),
+    datasets: [{
+      label: 'Race',
+      data: Object.values(userData.race)
+    }]
+  };
+  new Chart(document.getElementById('raceChart'), {
+    type: 'bar',
+    data: raceData,
+    options: {
+        plugins: {
+          autocolors: {
+            mode: 'data'
+          },
+          datalabels: {
+              formatter: function(value, context) {
+                  console.log(value);//context.chart.data.labels[context.dataIndex]
+                  return value.toFixed(1);
+              }
+          }
+        }
+      }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
+

@@ -2,14 +2,13 @@ html, body: {
     margin: 0;
     padding: 0;
     height: 100%;
-    /* max-height: 50%; */
-    /* min-height: 500px; */
+    max-height: 200px;
 }
 body {
-    /* height: 500px; */
+    height: 0px;
 }
 .mainbar {
-    min-height: 100px;
+    min-height: 0px;
 }
 .gsc-expansionArea {
 	
