@@ -448,6 +448,15 @@ async function loadImage(url, elem) {
 async function readURL(input) {
   if (input.files && input.files[0]) {
     $(".try-again-btn").hide();
+    
+    // 동의모드는 추후구현
+    // gtag('consent', 'default', {
+    //   'ad_storage': 'denied',
+    //   'ad_user_data': 'denied',
+    //   'ad_personalization': 'denied',
+    //   'analytics_storage': 'denied',
+    //   'wait_for_update': 500
+    // });
 
     gtag("event", "AI호출시작", {
       event_category: "AI호출시작",

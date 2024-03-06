@@ -21,7 +21,7 @@
   "gender": "gender",
   "emotion": "emotion",
   "race": "race",
-  "age_val": "age",
+  "age_val": "years old",
   "i_guess": ", I guess.",
   "it_resembles": ", it most resembles.",
 
