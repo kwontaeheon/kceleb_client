@@ -123,17 +123,17 @@ function drawChart(userData) {
   Chart.defaults.font.size = 14;
   // Chart.register(ChartDataLabels);
   $("#face-analysis-result").html(
-    "사진 속 얼굴은 " + getMeta(userData.dominant_race) + ", <br/>"
-    + "나이 " + userData.age + " 세 " + getMeta(userData.dominant_gender) + ", "
-    + getMeta(userData.dominant_emotion) + " 으로 보입니다.<br/>"
+    getMeta("face_in_picture") + getMeta(userData.dominant_race) + ", <br/>"
+    + getMeta("age") + " " + userData.age + getMeta("age_val") + " " + getMeta(userData.dominant_gender) + ", "
+    + getMeta(userData.dominant_emotion) + getMeta("i_guess") + " <br/>"
 
 
   )
 
   const ageData = {
-    labels: ["나이"],
+    labels: [getMeta("age")],
     datasets: [{
-      label: '나이',
+      label: getMeta("age"),
       data: [userData.age],
       backgroundColor: ['#11BB84']
     }]
@@ -168,7 +168,7 @@ function drawChart(userData) {
       return getMeta(value);
     }),
     datasets: [{
-      label: '성별',
+      label: getMeta("gender"),
       maintainAspectRatio: false,
       data: Object.values(userData.gender),
       backgroundColor: ['#36A2EB', '#FF6384']
@@ -207,7 +207,7 @@ function drawChart(userData) {
       return getMeta(value);
     }),
     datasets: [{
-      label: '감정',
+      label: getMeta("emotion"),
       data: Object.values(userData.emotion),
       hoverOffset: 50,
       borderWidth: 0,
@@ -259,7 +259,7 @@ function drawChart(userData) {
       return getMeta(value);
     }),
     datasets: [{
-      label: '인종',
+      label: getMeta("race"),
       data: Object.values(userData.race),
       hoverOffset: 50,
       borderWidth: 0,
@@ -376,7 +376,7 @@ function displayIdolPredictionBriefly(data) {
       // $('#s' + rank).show();
       if (rank == 1) {
         displayIdolPrediction(1);
-        $('#celeb-result').html("사진 속 얼굴이 " + r + " 을(를) 가장 닮았어요."
+        $('#celeb-result').html(getMeta("face_in_picture") + r + getMeta("it_resembles")
           // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
         )
       }
@@ -461,7 +461,7 @@ async function readURL(input) {
     };
     await reader.readAsDataURL(input.files[0]);
     $(".file-upload-content").show();
-    $("#loading-message").html("얼굴을 분석하고 있어요.")
+    $("#loading-message").html(getMeta("analyzing_face"))
     $("#loading").show();
     $(".result-message").hide();
     $("#result-similar-idol").hide();
@@ -469,7 +469,7 @@ async function readURL(input) {
       var imgData = document.getElementById("face-image");
       cropImage(imgData, function (resizedImg) {
         analyzeFace(resizedImg).then(function () {
-          $("#loading-message").html("닮은 아이돌을 찾고 있어요.")
+          $("#loading-message").html(getMeta("finding_lookalike_celeb"))
           getSimilarCeleb(resizedImg);
         })
 
@@ -557,10 +557,10 @@ function getUriComponents() {
   if (similarIdolData && faceData) {
     const simStr = encodeURI(encodeURIComponent(JSON.stringify(similarIdolData)));
     const faceStr = encodeURI(encodeURIComponent(JSON.stringify(faceData)));
-    $('#modalMessage').html("결과를 포함한 링크를 복사했어요.");
+    $('#modalMessage').html(getMeta("copied_with_result"));
     return "?result=" + simStr + "&face=" + faceStr;
   }
-  $('#modalMessage').html("링크를 복사했어요.");
+  $('#modalMessage').html(getMeta("copied_link"));
   return "";
 }
 

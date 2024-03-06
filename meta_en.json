@@ -1,0 +1,35 @@
+{
+  "man": "man",
+  "woman": "woman",
+  "angry": "Angry😡",
+  "disgust": "disgust😱",
+  "fear": "fear😨",
+  "happy": "Happy🥳",
+  "neutral": "Expressionless 🙂",
+  "sad": "Sadness😭",
+  "surprise": "surprise😳",
+  "asian": "Asian",
+  "black": "black",
+  "indian": "Indian",
+  "latino hispanic": "Latino American",
+  "middle eastern": "Middle Easterner",
+  "white": "white",
+
+  "face_in_picture": "The face in the picture is ",
+ 
+  "age": "age",
+  "gender": "gender",
+  "emotion": "emotion",
+  "race": "race",
+  "age_val": "age",
+  "i_guess": ", I guess.",
+  "it_resembles": ", it most resembles.",
+
+  "analyzing_face": "Analyzing the face.",
+  "finding_lookalike_celeb": "Looking for a celebrity that looks like me.",
+  "copied_link_with_result": "You copied the link with the results.",
+  "copied_link": "The results were copied."
+
+ 
+
+}

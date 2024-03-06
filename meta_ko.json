@@ -13,5 +13,23 @@
     "indian": "인도인",
     "latino hispanic": "라틴 계열 미국인",
     "middle eastern": "중동인",
-    "white": "백인"
+    "white": "백인",
+
+    "face_in_picture": "사진 속 얼굴은 ",
+    
+    "age": "나이",
+    "gender": "성별",
+    "emotion": "감정",
+    "race": "인종",
+    "age_val": "세",  
+    "i_guess": " 으로 보여요.",
+    "it_resembles": " 을(를) 가장 닮았어요.",
+
+    "analyzing_face": "얼굴을 분석하고 있어요.",
+    "finding_lookalike_celeb": "닮은 셀럽을 찾고있어요.",
+    "copied_link_with_result": "결과를 포함한 링크를 복사했어요.",
+    "copied_link": "결과를 복사했어요."
+
+    
+
   }
