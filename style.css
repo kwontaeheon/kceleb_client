@@ -204,11 +204,17 @@ div.gsc-above-wrapper-area {
     padding: 0;
 }
 .my-share-btn {
+    margin:10px; height: 40px;
     border-radius: 40px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border-collapse: separate;
     border: 1px;
 	margin-top: 2%;
     padding: 4px 16px;
-    background-color: #fd8114;
+    background-color: #35885d;
 }
 
 .search-btn {
