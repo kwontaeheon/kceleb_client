@@ -1,6 +1,6 @@
 
 // const compressor = require('./compression.js');
-const apiUrl = "http://celebme.duckdns.org:8181"
+const apiUrl = "https://celebme.duckdns.org:8181"
 
 // 닮은 셀럽 목록 변수
 var similarIdolData;
@@ -34,7 +34,7 @@ var faceNames = {};
 
         jsonContainer.appendChild(keyValueContainer);
       });
-        console.log(jsonData);
+        // console.log(jsonData);
     })
     .catch(error => {
       console.error("Error fetching JSON:", error);
@@ -49,7 +49,7 @@ var resultMeta = {};
     .then(jsonData => {
       // Use jsonData as needed
       resultMeta = jsonData;
-      console.log(resultMeta);
+      // console.log(resultMeta);
     })
     .catch(error => {
       console.error("Error fetching JSON:", error);
@@ -187,8 +187,8 @@ function drawChart(userData) {
   });
 
 
-  console.log(Object.keys(userData.gender));
-  console.log(Object.keys(userData.gender).flatMap(value => { return getMeta(value); }));
+  // console.log(Object.keys(userData.gender));
+  // console.log(Object.keys(userData.gender).flatMap(value => { return getMeta(value); }));
   // Display gender in pie chart
   const genderData = {
     labels: Object.keys(userData.gender).flatMap(value => {
@@ -217,7 +217,7 @@ function drawChart(userData) {
         },
         datalabels: {
           formatter: function (value, context) {
-            console.log(value);//context.chart.data.labels[context.dataIndex]
+            // console.log(value);//context.chart.data.labels[context.dataIndex]
             return value.toFixed(1);
           }
         },
@@ -268,7 +268,7 @@ function drawChart(userData) {
         },
         datalabels: {
           formatter: function (value, context) {
-            console.log(value); //context.chart.data.labels[context.dataIndex]
+            // console.log(value); //context.chart.data.labels[context.dataIndex]
             return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
           }
         },
@@ -318,7 +318,7 @@ function drawChart(userData) {
         },
         datalabels: {
           formatter: function (value, context) {
-            console.log(value);//context.chart.data.labels[context.dataIndex]
+            // console.log(value);//context.chart.data.labels[context.dataIndex]
             return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
           }
         },
@@ -341,8 +341,8 @@ async function analyzeFace(inputImage) {
     .then(response => response.json())
     .then(data => {
       // Handle the response data here
-      console.log("analyze");
-      console.log(data);
+      // console.log("analyze");
+      // console.log(data);
       faceData = data;
       drawChart(data);
 
@@ -366,7 +366,7 @@ async function getSimilarCeleb(inputImage) {
     .then(response => response.json())
     .then(data => {
       // Handle the response data here
-      console.log(data);
+      // console.log(data);
       similarIdolData = data;
       for (var rank = 0; rank < 10; rank++) {
         similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
@@ -427,7 +427,7 @@ function displayIdolPrediction(rank) {
     }
     else {
 
-      console.log(r);
+      // console.log(r);
       q = 'allintitle:"' + r + '"';
 
       var element = google.search.cse.element.getElement('q' + rank);
@@ -601,10 +601,10 @@ function getUriComponents() {
 }
 
 function getBaseUrl() {
-  console.log(window.location.href.split("?"));
+  // console.log(window.location.href.split("?"));
   var name = window.location.href.split("?")[0];
   name = name.split("#")[0];
-  console.log(name);
+  // console.log(name);
   return name;
 }
 
@@ -647,7 +647,7 @@ function showResults(resultParam, faceParam) {
   const faceDecoded = decodeURI(decodeURIComponent(faceParam));
   const faceJson = JSON.parse(faceDecoded.split("#")[0]);
   faceData = faceJson;
-  console.log(faceData);
+  // console.log(faceData);
 
   var int = setInterval(function () {
     if (typeof google != 'undefined' && google.search.cse) {
