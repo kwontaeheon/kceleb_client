@@ -352,7 +352,8 @@
             
 
             <!-- <div class="normaltext">결과 화면에서 공유하면 닮은 셀럽 목록을 공유할 수 있어요</div> -->
-            <button type="button p-2"  class="my-share-btn" style="background-color: #4d9349" onclick="toggleCelebList();">
+            <button type="button p-2"  class="my-share-btn" onclick="toggleCelebList();"
+                style="margin:10px; background-color: #35885d;">
                 <span class="try-again-text" style="font-size: 1.4rem;">셀럽 목록 보기</span>
             </button>
             <div id="json-container" class="json-container" style="display: none;"></div>
@@ -360,14 +361,16 @@
             
             
             <button type="button p-2"  class="my-share-btn" id="shareKt1"
-                onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'}); shareKakao();">
+                onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'}); shareKakao();"
+                style="margin:10px; height: 40px; background-color: #353709;">
                 <span class="try-again-text" style="font-size: 1.4rem;">카카오 공유 하기
                     <img src="puppy/talk-share.png" style="width: 30px; height: 30px;" />
                 </span>
             </button>
 
             <button type="button p-2" class="my-share-btn"
-                onclick="gtag('event', 'URL공유클릭', {'event_category': '공유클릭','event_label': 'URL공유클릭'}); shareUrl();">
+                onclick="gtag('event', 'URL공유클릭', {'event_category': '공유클릭','event_label': 'URL공유클릭'}); shareUrl();"
+                style="margin:10px; height: 40px; background-color: #353709;">
                 <span class="try-again-text" style="font-size: 1.4rem;">링크 복사하기 🔗</span>
             </button>
             
