@@ -636,6 +636,11 @@ async function shareUrl() {
 
 }
 
+function sleep(ms) {
+  const wakeUpTime = Date.now() + ms;
+  while (Date.now() < wakeUpTime) {}
+}
+
 function showResults(resultParam, faceParam) {
   $(".image-upload-wrap").hide();
   $("#face-image").attr("src", "https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw");
@@ -648,12 +653,13 @@ function showResults(resultParam, faceParam) {
   const faceJson = JSON.parse(faceDecoded.split("#")[0]);
   faceData = faceJson;
   // console.log(faceData);
+  
 
   var int = setInterval(function () {
     if (typeof google != 'undefined' && google.search.cse) {
       // google.search.cse.element.getElement('ap_search').execute("#{@term}")  
 
-
+      sleep(500);
       drawChart(faceData);
       displayIdolPredictionBriefly(similarIdolData);
       const name = getBaseUrl()
@@ -681,7 +687,7 @@ function getUrlParameter(name) {
   return urlParams.get(name);
 }
 
-Kakao.init('8b998f0abc3beae40dc620c58067dd55');
+Kakao.init('0ed053a93843ba490a37bb2964e5baaa');
 
 function updateKakaoLink() {
 
@@ -700,7 +706,7 @@ const resultParam = getUrlParameter('result');   // resultParam: 'key:value' 형
 const faceParam = getUrlParameter('face');
 // Replace content based on the value of 'result' parameter
 if (resultParam != null) {
-
+ 
   showResults(resultParam, faceParam);  // 구현필요
 
 } else {
