@@ -374,7 +374,7 @@ async function getSimilarCeleb(inputImage) {
       displayIdolPredictionBriefly(data);
       // displayIdolPrediction(1);
 
-      updateKakaoLink();
+      // updateKakaoLink();
       $(".try-again-btn").show();
       $(".result-message").show();
       $("#loading").hide();
@@ -604,14 +604,20 @@ function getBaseUrl() {
   // console.log(window.location.href.split("?"));
   var name = window.location.href.split("?")[0];
   name = name.split("#")[0];
-  // console.log(name);
   return name;
 }
 
 function getIndexParamsUrl() {
   var linkUrl = getBaseUrl();
-  linkUrl = linkUrl.split("/").pop();
-  return linkUrl + getUriComponents();
+  var linkUrls = linkUrl.split("/")
+  var link = "";
+  if (linkUrls.length > 0) {
+    link = linkUrls.pop();
+    return link;
+  } else {
+    return "";
+  }
+  
 }
 
 function getShareUrl() {
@@ -621,7 +627,7 @@ function getShareUrl() {
 
 async function shareUrl() {
 
-  const linkUrl = getShareUrl();
+  const linkUrl = getBaseUrl();
   try {
     await copyToClipboard(linkUrl);
     console.log('url copied to the clipboard.');
@@ -689,17 +695,33 @@ function getUrlParameter(name) {
 
 Kakao.init('0ed053a93843ba490a37bb2964e5baaa');
 
-function updateKakaoLink() {
+function shareKakao() {
+  var link = getIndexParamsUrl();
+  if (similarIdolData != null) {
+    
+    console.log(link);
+    Kakao.Share.sendCustom(
+      {
+        templateId: 104987,
+      templateArgs: {
+        'result_url': link,    // encoded url
+        'result': similarIdolData[0].identity + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
+      }
+      }
+    );
+  } else {
+    console.log(link);
+    Kakao.Share.sendCustom(
+      {
+        templateId: 104987,
+        templateArgs: {
+          'result_url': link,
+        }
+      }
+    );
+  }
 
-  Kakao.Share.createCustomButton({
-    container: '#shareKt1',
-    templateId: 104987, // 나의 앱 ID 작성
-    templateArgs: {
-      'result_url': getIndexParamsUrl(),    // encoded url
-      'result': similarIdolData[0].identity + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%"
-      ,    // result text '에스파 닝닝: 56%'
-    }
-  });
+  
 }
 // Get the value of the 'result' parameter
 const resultParam = getUrlParameter('result');   // resultParam: 'key:value' 형태 ex. '에스파 닝닝: 56%' 로 할수도 있는데, encode 로 10명 결과를 담자.
@@ -712,9 +734,6 @@ if (resultParam != null) {
 } else {
 
 }
-Kakao.Share.createCustomButton({
-  container: '#shareKt1',
-  templateId: 104987, // 나의 앱 ID 작성
-});
+
 
 // }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝

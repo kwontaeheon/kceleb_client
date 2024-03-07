@@ -357,10 +357,10 @@
 
 
             <br />
-            <div class="normaltext">Bạn có thể chia sẻ danh sách những người nổi tiếng mà bạn giống bằng cách chia sẻ trên màn hình kết quả.</div>
+            <!-- <div class="normaltext">Bạn có thể chia sẻ danh sách những người nổi tiếng mà bạn giống bằng cách chia sẻ trên màn hình kết quả.</div> -->
 
             <button type="button p-2" class="share-btn" id="shareKt1"
-                onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'});"
+                onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'}); shareKakao();"
                 style="margin:10px; height: 40px; background-color: #353709;">
                 <span class="try-again-text" style="font-size: 1.3rem;">Chia sẻ Kakao
                     <img src="puppy/talk-share.png" style="width: 30px; height: 30px;" />
@@ -522,7 +522,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="index.js">
+    <script type="text/javascript" src="index_20240307.js">
     </script>
 
 
