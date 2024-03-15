@@ -355,40 +355,42 @@ async function analyzeFace(inputImage) {
 }
 
 
-async function getSimilarCeleb(inputImage) {
+function getSimilarCeleb(inputImage) {
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
 
-  return await fetch(apiUrl + '/find', {
-    method: 'POST',
-    body: formData
-  })
-    .then(response => response.json())
-    .then(data => {
-      // Handle the response data here
-      // console.log(data);
-      similarIdolData = data;
-      for (var rank = 0; rank < 10; rank++) {
-        similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
-      }
-      displayIdolPredictionBriefly(data);
-      // displayIdolPrediction(1);
-
-      // updateKakaoLink();
-      $(".try-again-btn").show();
-      $(".result-message").show();
-      $("#loading").hide();
-      // window.history.replaceState({}, document.title, "/");
-      $("html, body").scrollTop(
-        document.getElementsByClassName("title")[0].offsetTop
-      );
-
+  setTimeout( function () {
+      fetch(apiUrl + '/find', {
+      method: 'POST',
+      body: formData
     })
-    .catch(error => {
-      // Handle errors here
-      console.error('Error:', error);
-    });
+      .then(response => response.json())
+      .then(data => {
+        // Handle the response data here
+        // console.log(data);
+        
+        similarIdolData = data;
+        for (var rank = 0; rank < 10; rank++) {
+          similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
+        }
+        displayIdolPredictionBriefly(data);
+        // displayIdolPrediction(1);
 
+        // updateKakaoLink();
+        $(".try-again-btn").show();
+        $(".result-message").show();
+        $("#loading").hide();
+        // window.history.replaceState({}, document.title, "/");
+        $("html, body").scrollTop(
+          document.getElementsByClassName("title")[0].offsetTop
+        );
+
+      })
+      .catch(error => {
+        // Handle errors here
+        console.error('Error:', error);
+      });
+    }, 3000);
 }
 function displayIdolPredictionBriefly(data) {
   $("#result-similar-idol").show();
