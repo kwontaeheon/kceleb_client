@@ -1,6 +1,7 @@
 
 // const compressor = require('./compression.js');
-const apiUrl = "https://celebme.duckdns.org:8181"
+const apiUrl = "https://celebme.duckdns.org:8181";
+// const apiUrl = "http://localhost:8181"
 
 // 닮은 셀럽 목록 변수
 var similarIdolData;
@@ -149,8 +150,15 @@ function drawChart(userData) {
   Chart.register(autocolors);
   Chart.defaults.font.size = 14;
   // Chart.register(ChartDataLabels);
+  var confidenceStr = "";
+  if (userData.face_cnt > 1) {
+    confidenceStr = getMeta("face_gt1");
+  } else if (userData.face_confidence == 0) {
+    confidenceStr = getMeta("face_confidence_low");
+  }
   $("#face-analysis-result").html(
-    getMeta("face_in_picture") + getMeta(userData.dominant_race) + ", <br/>"
+    confidenceStr + "<br/>"
+    + getMeta("face_in_picture") + getMeta(userData.dominant_race) + ", <br/>"
     + getMeta("age") + " " + userData.age + getMeta("age_val") + " " + getMeta(userData.dominant_gender) + ", "
     + getMeta(userData.dominant_emotion) + getMeta("i_guess") + " <br/>"
 

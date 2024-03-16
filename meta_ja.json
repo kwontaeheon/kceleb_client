@@ -28,7 +28,10 @@
   "analyzing_face": "顔を分析しています。",
   "finding_lookalike_celeb": "似たセレブを探しています。",
   "copied_link_with_result": "結果を含むリンクをコピーしました。",
-  "copied_link": "結果をコピーしました。"
+  "copied_link": "結果をコピーしました。",
+
+  "face_gt1" : "複数の顔が認識されました。 <br/> 最初の顔で分析します。",
+  "face_confidence_low" : "顔が認識されません。 <br/> 代わりに、画像の類似性を分析するために使用されます。"
 
  
 

@@ -28,8 +28,10 @@
     "analyzing_face": "얼굴을 분석하고 있어요.",
     "finding_lookalike_celeb": "닮은 셀럽을 찾고있어요.",
     "copied_link_with_result": "결과를 포함한 링크를 복사했어요.",
-    "copied_link": "결과를 복사했어요."
-
+    "copied_link": "결과를 복사했어요.",
+    
+    "face_gt1" : "하나 이상의 얼굴이 인식되었어요. <br/> 첫번째 인식된 얼굴을 분석합니다.",
+    "face_confidence_low" : "얼굴이 인식되지 않았어요. <br/> 얼굴 대신 이미지의 유사성으로 분석합니다."
     
 
   }

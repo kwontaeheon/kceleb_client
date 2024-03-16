@@ -28,7 +28,10 @@
   "analyzing_face": "Đang phân tích khuôn mặt.",
   "finding_lookalike_celeb": "Tìm kiếm người nổi tiếng giống tôi.",
   "copied_link_with_result": "Bạn đã sao chép liên kết có kết quả.",
-  "copied_link": "Kết quả đã được sao chép."
+  "copied_link": "Kết quả đã được sao chép.",
+
+  "face_gt1" : "Lebih dari satu wajah dikenali. <br/> Menganalisis dengan wajah pertama.",
+  "face_confidence_low" : "Wajah tidak dikenali. <br/> Sebagai gantinya, kemiripan gambar digunakan untuk menganalisis."
 
  
 

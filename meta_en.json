@@ -28,8 +28,10 @@
   "analyzing_face": "Analyzing the face.",
   "finding_lookalike_celeb": "Looking for a celebrity that looks like me.",
   "copied_link_with_result": "You copied the link with the results.",
-  "copied_link": "The results were copied."
+  "copied_link": "The results were copied.",
 
+  "face_gt1" : "More than one face recognized. <br/> Analyzing by the first face.",
+  "face_confidence_low" : "Face isn't recognized. <br/> Instead, image similarity used to analyze."
  
 
 }
