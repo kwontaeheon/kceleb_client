@@ -8,6 +8,12 @@ var similarIdolData;
 // 얼굴 분석 변수
 var faceData;
 
+caches.keys().then(function(keyList) {
+  return Promise.all(keyList.map(function(key) {
+    return caches.delete(key);
+  }));
+});
+
 
 const lang = $( "#lang option:selected" ).val();
 var faceNames = {};
