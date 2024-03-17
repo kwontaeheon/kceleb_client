@@ -10,10 +10,11 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
+const version = "v_20240317";
 var faceNames = {};
 (function () {
   
-  fetch("names_" + (lang === "ko" ? "ko" : "en") + ".json")
+  fetch(version + "/names_" + (lang === "ko" ? "ko" : "en") + ".json")
     .then(response => response.json())
     .then(jsonData => {
       // Use jsonData as needed
@@ -45,7 +46,7 @@ var faceNames = {};
 
 var resultMeta = {};
 (function () {
-  fetch("meta_" + lang + ".json")
+  fetch(version +"/meta_" + lang + ".json")
     .then(response => response.json())
     .then(jsonData => {
       // Use jsonData as needed

@@ -2,7 +2,7 @@
 
 set -x
 
-patterns=('*.html' '*.js' 'favicon*' '*.css' '*.png' 'img' '*.txt' 'animaltest' 'puppy' '*.json' '*.webmanifest' '*.xml' 'client')
+patterns=('*.html' '*.js' 'favicon*' '*.css' '*.png' 'img' '*.txt' 'animaltest' 'puppy' '*.json' '*.webmanifest' '*.xml' 'client', 'v_*')
 
 wp_path=/home/ubuntu/wordpress/wordpress
 git_path=/home/ubuntu/wordpress/kceleb_client
