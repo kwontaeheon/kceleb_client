@@ -551,6 +551,7 @@ function removeUpload() {
   $(".file-upload-content").hide();
   $(".image-upload-wrap").show();
   $(".result-message").hide();
+  window.location.reload(true);
 
   window.location.href = getBaseUrl();
   // document.getElementById("search").height = 0;
