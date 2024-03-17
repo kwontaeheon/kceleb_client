@@ -207,39 +207,41 @@
             </div>
             <div class="result-message" id="result-message">
                 <div class="h2" style="padding: 16px;">
-                    <Celeb Me: Face Analysis Results>
+                    Celeb Me: Face Analysis Results
                         <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
                     Age, gender, emotion, and race analysis results for faces
                 </div>
-
-                <div class="row">
-                    <div style="position: relative; height: 20vh; width: 50%; padding: 10px 10px 10px 50px;">
-                        <canvas id="ageChart"></canvas>
-                    </div>
-                    <div style="position: relative; height: 20vh; width: 50%; padding: 10px 50px 10px 10px;">
-                        <canvas id="genderChart"></canvas>
-                    </div>
-                </div>
-                <center>
+                
+                <div id="charts">
                     <div class="row">
-
-                        <div
-                            style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto; ">
-                            <canvas id="raceChart"></canvas>
-
+                        <div style="position: relative; height: 20vh; width: 50%; padding: 10px 10px 10px 50px;">
+                            <canvas id="ageChart"></canvas>
                         </div>
-
-                        <div
-                            style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto;">
-                            <canvas id="emotionChart"></canvas>
+                        <div style="position: relative; height: 20vh; width: 50%; padding: 10px 50px 10px 10px;">
+                            <canvas id="genderChart"></canvas>
                         </div>
-
                     </div>
-                    <br />
-                    <br />
-                </center>
+                    <center>
+                        <div class="row">
+
+                            <div
+                                style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto; ">
+                                <canvas id="raceChart"></canvas>
+
+                            </div>
+
+                            <div
+                                style="position: relative; height:20vh; max-height: 180px; width: 80%;  padding: 5px; margin: auto;">
+                                <canvas id="emotionChart"></canvas>
+                            </div>
+
+                        </div>
+                        <br />
+                        <br />
+                    </center>
+                </div>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
@@ -248,7 +250,7 @@
 
             <div class="result-message" id="result-similar-idol">
                 <div class="h2" style="padding: 10px;">
-                    <Celeb Me: Celebrity Lookalike Image>
+                    Celeb Me: Celebrity Lookalike Image
                         <hr style="background-color:black;" />
                 </div>
 
@@ -553,7 +555,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="index_20240316.js">
+    <script type="text/javascript" src="index_20240317.js">
     </script>
 
 

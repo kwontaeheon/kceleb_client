@@ -30,8 +30,8 @@
   "copied_link_with_result": "Copiaste el enlace con los resultados.",
   "copied_link": "Los resultados fueron copiados.",
 
-  "face_gt1" : "Más de un rostro reconocido. <br/> Analizando por la primera cara.",
-  "face_confidence_low" : "Cara no reconocida. <br/> En cambio, se utiliza la similitud de imágenes para analizar."
+  "face_gt1" : "Más de un rostro reconocido. <br/> Analizando por la primera cara. <br/>",
+  "face_confidence_low" : "Cara no reconocida. <br/> En cambio, se utiliza la similitud de imágenes para analizar. <br/> ¿Qué tal intentarlo de nuevo con una foto diferente?<br/>"
 
  
 

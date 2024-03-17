@@ -29,7 +29,7 @@
 "copied_link_with_result": "Anda menyalin tautan dengan hasilnya.",
 "copied_link": "Hasilnya disalin.",
 
-"face_gt1": "Lebih dari satu wajah dikenali. <br/> Menganalisis dengan wajah pertama.",
-"face_confidence_low": "Wajah tidak dikenali. <br/> Sebagai gantinya, kemiripan gambar digunakan untuk menganalisis"
+"face_gt1": "Lebih dari satu wajah dikenali. <br/> Menganalisis dengan wajah pertama. <br/>",
+"face_confidence_low": "Wajah tidak dikenali. <br/> Sebagai gantinya, kemiripan gambar digunakan untuk menganalisis <br/> Bagaimana kalau mencoba lagi dengan foto yang berbeda?<br/>"
 
 }
