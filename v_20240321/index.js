@@ -705,18 +705,24 @@ function showResults(resultParam, faceParam) {
     if (typeof google != 'undefined' && google.search.cse) {
       // google.search.cse.element.getElement('ap_search').execute("#{@term}")  
 
-      sleep(500);
+      // sleep(500);
+    // }
       // drawChart(faceData);
       $('#result-message').hide();
-      displayIdolPredictionBriefly(similarIdolData);
+      // displayIdolPredictionBriefly(similarIdolData);
+      displayIdolPrediction(1);
+      $('#celeb-result').html(getMeta("face_in_picture") + similarIdolData[0].identity + getMeta("it_resembles")
+        // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
+      )
+
       $('#extra-similars').hide();
       
       
       const name = getBaseUrl()
-      window.history.replaceState({}, document.title, name);
+      // window.history.replaceState({}, document.title, name);
       clearInterval(int);
-
     }
+    
   }, 200)
 
 
