@@ -10,7 +10,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "v_20240317";
+const version = "v_20240321";
 var faceNames = {};
 (function () {
   
@@ -160,6 +160,7 @@ function drawChart(userData) {
       + getMeta("age") + " " + userData.age + getMeta("age_val") + " " + getMeta(userData.dominant_gender) + ", "
       + getMeta(userData.dominant_emotion) + getMeta("i_guess") + " <br/>"
     );
+    $("#charts").show();
   } else if (userData.face_confidence == 0) {
     confidenceStr = getMeta("face_confidence_low");
     $("#face-analysis-result").html(
@@ -168,6 +169,14 @@ function drawChart(userData) {
     $("#charts").hide();
     // $("#result-message").html("");
 
+  } else {
+    $("#face-analysis-result").html(
+      confidenceStr + "<br/>"
+      + getMeta("face_in_picture") + getMeta(userData.dominant_race) + ", <br/>"
+      + getMeta("age") + " " + userData.age + getMeta("age_val") + " " + getMeta(userData.dominant_gender) + ", "
+      + getMeta(userData.dominant_emotion) + getMeta("i_guess") + " <br/>"
+    );
+    $("#charts").show();
   }
   
 
@@ -356,7 +365,8 @@ async function analyzeFace(inputImage) {
     .then(data => {
       // Handle the response data here
       // console.log("analyze");
-      // console.log(data);
+      console.log(data);
+      
       faceData = data;
       drawChart(data);
 
@@ -382,14 +392,25 @@ function getSimilarCeleb(inputImage) {
       .then(data => {
         // Handle the response data here
         // console.log(data);
-        
+        for (var rank = 0; rank < 10; rank++) {
+          delete data[rank].source_h ;
+          delete data[rank].source_w;
+          delete data[rank].source_x ;
+          delete data[rank].source_y;
+          delete data[rank].target_h;
+          delete data[rank].target_w;
+          delete data[rank].target_x;
+          delete data[rank].target_y;
+          delete data[rank].threshold;
+        }
+
         similarIdolData = data;
         for (var rank = 0; rank < 10; rank++) {
           similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
         }
         displayIdolPredictionBriefly(data);
         // displayIdolPrediction(1);
-
+        $('#extra-similars').show();
         // updateKakaoLink();
         $(".try-again-btn").show();
         $(".result-message").show();
@@ -547,7 +568,7 @@ function removeUpload() {
   $(".image-upload-wrap").show();
   $(".result-message").hide();
 
-  window.location.href = getBaseUrl();
+  // window.location.href = getBaseUrl();
   // document.getElementById("search").height = 0;
   $("html, body").scrollTop(
     document.getElementsByClassName("title")[0].offsetTop
@@ -606,11 +627,14 @@ async function copyToClipboard(textToCopy) {
 
 
 function getUriComponents() {
-  if (similarIdolData && faceData) {
-    const simStr = encodeURI(encodeURIComponent(JSON.stringify(similarIdolData)));
-    const faceStr = encodeURI(encodeURIComponent(JSON.stringify(faceData)));
+  if (similarIdolData) {
+    // result 공유용도, 버그있을수있음
+    // 한명만 공유하자
+    
+    const simStr = encodeURI(encodeURIComponent(JSON.stringify(similarIdolData[0])));
+    // const faceStr = encodeURIComponent(JSON.stringify(faceData));
     $('#modalMessage').html(getMeta("copied_with_result"));
-    return "?result=" + simStr + "&face=" + faceStr;
+    return "?result=" + simStr; //  + "&face=" + faceStr;
   }
   $('#modalMessage').html(getMeta("copied_link"));
   return "";
@@ -643,7 +667,7 @@ function getShareUrl() {
 
 async function shareUrl() {
 
-  const linkUrl = getBaseUrl();
+  const linkUrl = getBaseUrl() + getUriComponents(); // getUriComponents() : result 공유용도, 버그있을수있음
   try {
     await copyToClipboard(linkUrl);
     console.log('url copied to the clipboard.');
@@ -669,12 +693,12 @@ function showResults(resultParam, faceParam) {
   $(".file-upload-content").show();
   const resultDecoded = decodeURI(decodeURIComponent(resultParam));
   const resultJson = JSON.parse(resultDecoded.split("#")[0]);
-  similarIdolData = resultJson;
+  similarIdolData = Array(resultJson);  // 한개만 처리하면서 array 로 생성이 필요함
 
   const faceDecoded = decodeURI(decodeURIComponent(faceParam));
   const faceJson = JSON.parse(faceDecoded.split("#")[0]);
   faceData = faceJson;
-  // console.log(faceData);
+  console.log(faceData);
   
 
   var int = setInterval(function () {
@@ -682,8 +706,12 @@ function showResults(resultParam, faceParam) {
       // google.search.cse.element.getElement('ap_search').execute("#{@term}")  
 
       sleep(500);
-      drawChart(faceData);
+      // drawChart(faceData);
+      $('#result-message').hide();
       displayIdolPredictionBriefly(similarIdolData);
+      $('#extra-similars').hide();
+      
+      
       const name = getBaseUrl()
       window.history.replaceState({}, document.title, name);
       clearInterval(int);
@@ -712,9 +740,9 @@ function getUrlParameter(name) {
 Kakao.init('0ed053a93843ba490a37bb2964e5baaa');
 
 function shareKakao() {
-  var link = getIndexParamsUrl();
+  var link = getIndexParamsUrl(); // + getUriComoponents: 버그로 막아둠
   if (similarIdolData != null) {
-    
+    link = link + getUriComponents(); // 결과공유url
     console.log(link);
     Kakao.Share.sendCustom(
       {
