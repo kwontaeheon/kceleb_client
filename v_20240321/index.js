@@ -365,7 +365,7 @@ async function analyzeFace(inputImage) {
     .then(data => {
       // Handle the response data here
       // console.log("analyze");
-      console.log(data);
+      // console.log(data);
       
       faceData = data;
       drawChart(data);
@@ -644,6 +644,11 @@ function getBaseUrl() {
   // console.log(window.location.href.split("?"));
   var name = window.location.href.split("?")[0];
   name = name.split("#")[0];
+  // console.log(name);
+  if (name.includes("index") == false) {
+    name = name + "index.html"
+  }
+  // console.log(name);
   return name;
 }
 
@@ -698,7 +703,7 @@ function showResults(resultParam, faceParam) {
   const faceDecoded = decodeURI(decodeURIComponent(faceParam));
   const faceJson = JSON.parse(faceDecoded.split("#")[0]);
   faceData = faceJson;
-  console.log(faceData);
+  // console.log(faceData);
   
 
   var int = setInterval(function () {
@@ -719,7 +724,7 @@ function showResults(resultParam, faceParam) {
       
       
       const name = getBaseUrl()
-      // window.history.replaceState({}, document.title, name);
+      window.history.replaceState({}, document.title, name);
       clearInterval(int);
     }
     
@@ -749,7 +754,7 @@ function shareKakao() {
   var link = getIndexParamsUrl(); // + getUriComoponents: 버그로 막아둠
   if (similarIdolData != null) {
     link = link + getUriComponents(); // 결과공유url
-    console.log(link);
+    // console.log(link);
     Kakao.Share.sendCustom(
       {
         templateId: 104987,
@@ -760,7 +765,7 @@ function shareKakao() {
       }
     );
   } else {
-    console.log(link);
+    // console.log(link);
     Kakao.Share.sendCustom(
       {
         templateId: 104987,
