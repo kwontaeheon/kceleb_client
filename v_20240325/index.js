@@ -10,7 +10,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "v_20240324";
+const version = "v_20240325";
 var faceNames = {};
 (function () {
   
@@ -658,6 +658,9 @@ function getIndexParamsUrl() {
   var linkUrl = getBaseUrl();
   var link = "";
   link = linkUrl.split(window.location.host).pop();
+  if (link.length > 0) {
+    link = link.substring(1);
+  }
   // var linkUrls = linkUrl.split("/")
   
   // if (linkUrls.length > 0) {
