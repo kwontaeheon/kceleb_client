@@ -10,7 +10,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "v_20240323";
+const version = "v_20240324";
 var faceNames = {};
 (function () {
   
@@ -656,14 +656,18 @@ function getBaseUrl() {
 
 function getIndexParamsUrl() {
   var linkUrl = getBaseUrl();
-  var linkUrls = linkUrl.split("/")
   var link = "";
-  if (linkUrls.length > 0) {
-    link = linkUrls.pop();
-    return link;
-  } else {
-    return "";
-  }
+  link = linkUrl.split(window.location.host).pop();
+  // var linkUrls = linkUrl.split("/")
+  
+  // if (linkUrls.length > 0) {
+  //   link = linkUrls.pop();
+  //   link = 
+  //   return link;
+  // } else {
+  //   return "";
+  // }
+  return link;
   
 }
 
