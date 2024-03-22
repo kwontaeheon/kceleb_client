@@ -10,7 +10,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "v_20240321_2";
+const version = "v_20240322";
 var faceNames = {};
 (function () {
   
@@ -630,8 +630,9 @@ function getUriComponents() {
   if (similarIdolData) {
     // result 공유용도, 버그있을수있음
     // 한명만 공유하자
-    
-    const simStr = encodeURI(encodeURIComponent(JSON.stringify(similarIdolData[0])));
+    var rsStr = encodeURIComponent(JSON.stringify(similarIdolData[0]));
+    const simStr = btoa(rsStr);
+    console.log(rsStr + ":" + simStr);
     // const faceStr = encodeURIComponent(JSON.stringify(faceData));
     $('#modalMessage').html(getMeta("copied_with_result"));
     return "?result=" + simStr; //  + "&face=" + faceStr;
@@ -696,8 +697,10 @@ function showResults(resultParam, faceParam) {
   $(".image-upload-wrap").hide();
   $("#face-image").attr("src", "https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw");
   $(".file-upload-content").show();
-  const resultDecoded = decodeURI(decodeURIComponent(resultParam));
-  const resultJson = JSON.parse(resultDecoded.split("#")[0]);
+  const resultDecoded = decodeURIComponent(atob(resultParam));
+  console.log(resultDecoded);
+  const resultJson = JSON.parse(resultDecoded);
+  console.log(resultJson);
   similarIdolData = Array(resultJson);  // 한개만 처리하면서 array 로 생성이 필요함
 
   const faceDecoded = decodeURI(decodeURIComponent(faceParam));
