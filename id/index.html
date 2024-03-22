@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <base href="../">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,29 +14,79 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
-    <title>名人我：找到你看起来像的名人</title>
-    <meta name="title" content="名人我：找到你看起来像的名人" />
-    <meta name="subject" content="人工智能根据你的脸型进行偶像测试，找到一个和你长得很像的偶像！" />
+    <title>CelebMe: Temukan selebriti yang mirip dengan Anda</title>
+    <meta name="title" content="CelebMe: Temukan selebriti yang mirip dengan Anda" />
+    <meta name="subject" content="Tes idola kecerdasan buatan berdasarkan wajah Anda, temukan idola yang mirip dengan Anda!" />
     <meta name="keywords"
-        content="明星美女, 偶像测试, 偶像脸测试, 明星脸测试, 长得像我的偶像, 寻找长得像我的名人, 长得像我的偶像, 偶像长得像我, 名人长得像我测试, 偶像长得像我我，长得像我的偶像测试，偶像长得像我的脸测试，偶像脸测试，长得像我的偶像测试，Nachickum 偶像，找到一个长得像我的偶像，长得像我的偶像测试，找到一个长得像我的偶像, 长得像我的名人, 长得像我的名人测试, 我的人工智能面孔测试, 鸡找偶像, 长得像名人面孔的面孔查找测试, 名人形象测试, 偶像照片测试, 寻找偶像般的面孔, 名人形象测试, 人工智能偶像测试, 名人形象测试, 偶像相似度测试, 名人相似度测试, 偶像相似度测试, 我的人工智能面孔测试, 寻找偶像相似度, 相似度测试, 偶像面孔, 偶像相似度, 找到相似的面孔, 名人相似度测试, 面孔图像测试, 名人图像测试, 偶像面孔图像测试, 偶像相似, 名人面孔测试, 与我相似的偶像, 找到与我相似的偶像, 名人相似测试, 相似外观测试, 偶像相似, 人工智能人脸图像测试, 人脸图像, 人脸图像测试, 偶像谁长得像我, 名人相似度测试, 名人, 人工智能名人, 名人搜索, 名人靠脸, 人脸名人, 名人脸, 名人, 人工智能名人奖,面孔奖，AI名人奖，相似名人测试，面孔相似测试，名人相似测试，面孔相似测试，偶像相似测试，偶像面孔测试，面孔偶像测试，面孔名人测试，名人查找器，相似查找名人，分析我的脸、人脸年龄分析、人脸情感分析、人脸性别分析、人脸种族分析" />
-    <meta name="author" content="권태헌(kwontaeheon@gmail.com)" />
+        content="Kecantikan selebriti, tes idola, tes wajah idola, tes wajah selebriti, idola yang mirip dengan saya, temukan selebriti yang mirip dengan saya, idola yang mirip dengan saya, idola yang mirip dengan saya, tes selebriti yang mirip dengan saya, idola yang mirip saya, tes idola yang mirip dengan saya, tes wajah mirip idola, tes wajah idola, tes idola yang mirip dengan saya, idola Nachickum, temukan idola yang mirip dengan saya, tes idola yang mirip dengan saya, temukan idola yang mirip dengan saya , selebriti yang mirip dengan saya, tes selebriti yang mirip dengan saya, tes wajah kecerdasan buatan saya, ayam menemukan idola, wajah yang mirip wajah selebriti Temukan tes, tes gambar selebriti, tes foto idola, temukan wajah mirip idola, selebriti tes gambar, tes kecerdasan buatan idola, tes gambar selebriti, tes kemiripan idola, tes kemiripan selebriti, tes kemiripan idola, tes wajah kecerdasan buatan saya, temukan kemiripan idola, tes kemiripan, wajah idola, kemiripan idola , temukan wajah yang mirip, tes kemiripan selebriti, tes gambar wajah, tes gambar selebriti, tes gambar wajah idola, mirip idola, tes wajah selebriti, idola yang mirip dengan saya, temukan idola yang mirip dengan saya, tes mirip selebriti, tes terlihat mirip, mirip idola , tes gambar wajah kecerdasan buatan, gambar wajah, tes gambar wajah, idola yang mirip dengan saya, tes kemiripan selebriti, selebriti, kecerdasan buatan selebriti, pencarian selebriti, selebriti dengan wajah, wajah selebriti, wajah selebriti, selebriti, kecerdasan buatan Penghargaan Selebriti, Penghargaan Wajah, Penghargaan Selebriti AI, Tes Mirip Selebriti, Tes Mirip Wajah, Tes Mirip Wajah, Tes Mirip Wajah, Tes Mirip Idola, Tes Mirip Wajah Idol, Tes Wajah Idola, Tes Wajah Selebriti, Pencari Selebriti, Temukan Selebriti, Analisis Wajahku , analisis usia wajah, analisis emosi wajah, analisis gender wajah, analisis ras wajah, KPOP,k-pop,k pop" />
+    <meta name="author" content="Terry Kwon(kwontaeheon@gmail.com)" />
     <meta name="description"
-        content="人工智能根据你的脸型进行偶像测试，找到与你长相相似的偶像。 人工智能从代表性偶像照片数据中学习，会找到与你脸型相似的偶像。 无需注册即可直接在屏幕上查看！ 照片数据不会传输到任何地方。 来测试一下人工智能眼中我的名人形象吧！ 通过测试，您可以找到与您相似的名人。" />
-    <link rel="stylesheet" href="v_20240322/style.css" />
-    <link rel="canonical" href="https://celebme.kr/index_zh.html" />
-    <link rel="alternate" href="https://celebme.kr/index_en.html" hreflang="en"/>
-    <link rel="alternate" href="https://celebme.kr/index_en.html" hreflang="x-default"/>
-    <link rel="alternate" href="https://celebme.kr/index_es.html" hreflang="es"/>
-    <link rel="alternate" href="https://celebme.kr/index_id.html" hreflang="id"/>
-    <link rel="alternate" href="https://celebme.kr/index_ja.html" hreflang="ja"/>
+        content="Tes kecerdasan buatan selebriti berdasarkan wajah, temukan selebriti yang mirip dengan Anda.
+        Kecerdasan buatan yang dipelajari dari data foto perwakilan selebriti akan menemukan selebriti yang mirip dengan Anda berdasarkan wajah Anda.
+        Lihat langsung di layar tanpa harus mendaftar! Data foto tidak dikirimkan ke mana pun.
+        Uji citra selebriti saya seperti yang dilihat oleh kecerdasan buatan!
+        Anda dapat menganalisis jenis kelamin dan emosi wajah Anda dan menemukan selebriti yang mirip dengan Anda melalui Tes Temukan Mirip Selebriti, Tes Mirip Selebriti, Temukan Mirip Selebriti, Mirip Selebriti, Tes Mirip Selebriti, Tes Mirip Selebriti.
+        Temukan idola yang mirip dengan Anda, temukan idola yang mirip dengan Anda. Coba CelebMe dengan mudah di situsnya tanpa mendaftar.
+        CelebMe adalah layanan seru dan unik yang menggunakan teknologi kecerdasan buatan (AI) untuk menemukan selebriti yang mirip dengan foto saat pengguna mengunggah foto dirinya.
+        Situs ini menganalisis wajah pengguna untuk menentukan perkiraan usia, jenis kelamin, dan emosi, serta merekomendasikan selebriti yang mirip dengan mereka berdasarkan hal tersebut.
+        Hal ini ditandai dengan antarmuka yang ramah pengguna dan aksesibilitas tinggi yang dapat digunakan tanpa registrasi keanggotaan.
+        Baru-baru ini, pembaruan model telah dilakukan untuk meningkatkan akurasi dan kinerja layanan.
+        Pencari Mirip Selebriti adalah fungsi yang menganalisis foto pengguna dan menemukan selebritas yang mirip dengan mereka.
+        Kecerdasan buatan yang dipelajari dari data foto perwakilan selebriti menemukan selebriti yang menyerupai wajah pengguna.
+        Analisis gender dan emosi memberikan kemampuan untuk menganalisis gender dan emosi pengguna dalam foto yang diunggah.
+        Anda dapat dengan mudah menggunakannya langsung di situs tanpa mendaftar, dan kami juga memperhatikan untuk melindungi informasi pribadi Anda karena data foto tidak dikirimkan ke mana pun.
+        Itu diproduksi menggunakan mesin pengajaran teknologi AI kecerdasan buatan Google 2.0, dan kemudian dilatih ulang dan diatur ulang menggunakan Tensorflow berbasis Javascript.
+        Melalui ini, kami menemukan selebritas yang mirip dengan pengguna dan terus meningkatkan akurasi dan kinerja.
+        Aplikasi CelebMe memiliki fitur tambahan dan pembaruan. Profil AI, profil harian, dan fungsi profil tubuh telah ditambahkan.
+        Aplikasi CelebMe telah menambahkan fitur baru untuk memenuhi beragam kebutuhan pengguna.
+        CelebMe terus memperbarui layanannya dengan mencerminkan masukan pengguna.
+        Baru-baru ini, kami telah meningkatkan fungsi pencarian idola yang mirip dan berupaya meningkatkan keakuratan layanan melalui pembelajaran model.
+        Mencerminkan pengalaman kenyamanan pengguna dan umpan balik. CelebMe dirancang agar mudah diakses dan digunakan oleh pengguna.
+        Anda dapat memeriksa hasilnya dalam hitungan detik setelah mengunggah foto, dan menariknya Anda dapat langsung menggunakannya tanpa prosedur yang rumit.
+        CelebMe tidak menyimpan atau mengirimkan data foto pengguna ke server, sehingga Anda dapat yakin bahwa informasi pribadi Anda terlindungi.
+        Kami melakukan yang terbaik untuk melindungi informasi pribadi Anda dengan segera menghapus foto Anda setelah dianalisis.
+        Menemukan selebritas yang mirip dengan Anda melalui CelebMe lebih dari sekadar menyenangkan; ini memberikan kesempatan untuk menemukan fitur wajah Anda sendiri dan hubungan dengan berbagai selebriti.
+        Analisis foto Anda sekarang dan lihat hasil yang luar biasa! Pengalaman menyenangkan dan mengasyikkan menanti Anda." />
+    <link rel="stylesheet" href="v_20240323/style.css" />
+    <link rel="canonical" href="https://celebme.kr/id/index.html" />
+    <link rel="alternate" href="https://celebme.kr/en/index.html" hreflang="en"/>
+    <link rel="alternate" href="https://celebme.kr/en/index.html" hreflang="x-default"/>
+    <link rel="alternate" href="https://celebme.kr/es/index.html" hreflang="es"/>
+    <link rel="alternate" href="https://celebme.kr/id/index.html" hreflang="id"/>
+    <link rel="alternate" href="https://celebme.kr/ja/index.html" hreflang="ja"/>
     <link rel="alternate" href="https://celebme.kr" hreflang="ko"/>
-    <link rel="alternate" href="https://celebme.kr/index_vi.html" hreflang="vi"/>
-    <link rel="alternate" href="https://celebme.kr/index_zh.html" hreflang="zh"/>
-    <meta property="og:url" content="https://celebme.kr/index_zh.html" />
+    <link rel="alternate" href="https://celebme.kr/vi/index.html" hreflang="vi"/>
+    <link rel="alternate" href="https://celebme.kr/zh/index.html" hreflang="zh"/>
+    <meta property="og:url" content="https://celebme.kr/id/index.html" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="名人我：找到你看起来像的名人" />
+    <meta property="og:title" content="CelebMe: Temukan selebriti yang mirip dengan Anda" />
     <meta property="og:description"
-        content="人工智能根据你的脸型进行偶像测试，找到与你长相相似的偶像。 人工智能从代表性偶像照片数据中学习，会找到与你脸型相似的偶像。 无需注册即可直接在屏幕上查看！ 照片数据不会传输到任何地方。 来测试一下人工智能眼中我的名人形象吧！ 通过测试，您可以找到与您相似的名人。" />
+        content="Tes kecerdasan buatan selebriti berdasarkan wajah, temukan selebriti yang mirip dengan Anda.
+        Kecerdasan buatan yang dipelajari dari data foto perwakilan selebriti akan menemukan selebriti yang mirip dengan Anda berdasarkan wajah Anda.
+        Lihat langsung di layar tanpa harus mendaftar! Data foto tidak dikirimkan ke mana pun.
+        Uji citra selebriti saya seperti yang dilihat oleh kecerdasan buatan!
+        Anda dapat menganalisis jenis kelamin dan emosi wajah Anda dan menemukan selebriti yang mirip dengan Anda melalui Tes Temukan Mirip Selebriti, Tes Mirip Selebriti, Temukan Mirip Selebriti, Mirip Selebriti, Tes Mirip Selebriti, Tes Mirip Selebriti.
+        Temukan idola yang mirip dengan Anda, temukan idola yang mirip dengan Anda. Coba CelebMe dengan mudah di situsnya tanpa mendaftar.
+        CelebMe adalah layanan seru dan unik yang menggunakan teknologi kecerdasan buatan (AI) untuk menemukan selebriti yang mirip dengan foto saat pengguna mengunggah foto dirinya.
+        Situs ini menganalisis wajah pengguna untuk menentukan perkiraan usia, jenis kelamin, dan emosi, serta merekomendasikan selebriti yang mirip dengan mereka berdasarkan hal tersebut.
+        Hal ini ditandai dengan antarmuka yang ramah pengguna dan aksesibilitas tinggi yang dapat digunakan tanpa registrasi keanggotaan.
+        Baru-baru ini, pembaruan model telah dilakukan untuk meningkatkan akurasi dan kinerja layanan.
+        Pencari Mirip Selebriti adalah fungsi yang menganalisis foto pengguna dan menemukan selebritas yang mirip dengan mereka.
+        Kecerdasan buatan yang dipelajari dari data foto perwakilan selebriti menemukan selebriti yang menyerupai wajah pengguna.
+        Analisis gender dan emosi memberikan kemampuan untuk menganalisis gender dan emosi pengguna dalam foto yang diunggah.
+        Anda dapat dengan mudah menggunakannya langsung di situs tanpa mendaftar, dan kami juga memperhatikan untuk melindungi informasi pribadi Anda karena data foto tidak dikirimkan ke mana pun.
+        Itu diproduksi menggunakan mesin pengajaran teknologi AI kecerdasan buatan Google 2.0, dan kemudian dilatih ulang dan diatur ulang menggunakan Tensorflow berbasis Javascript.
+        Melalui ini, kami menemukan selebritas yang mirip dengan pengguna dan terus meningkatkan akurasi dan kinerja.
+        Aplikasi CelebMe memiliki fitur tambahan dan pembaruan. Profil AI, profil harian, dan fungsi profil tubuh telah ditambahkan.
+        Aplikasi CelebMe telah menambahkan fitur baru untuk memenuhi beragam kebutuhan pengguna.
+        CelebMe terus memperbarui layanannya dengan mencerminkan masukan pengguna.
+        Baru-baru ini, kami telah meningkatkan fungsi pencarian idola yang mirip dan berupaya meningkatkan keakuratan layanan melalui pembelajaran model.
+        Mencerminkan pengalaman kenyamanan pengguna dan umpan balik. CelebMe dirancang agar mudah diakses dan digunakan oleh pengguna.
+        Anda dapat memeriksa hasilnya dalam hitungan detik setelah mengunggah foto, dan menariknya Anda dapat langsung menggunakannya tanpa prosedur yang rumit.
+        CelebMe tidak menyimpan atau mengirimkan data foto pengguna ke server, sehingga Anda dapat yakin bahwa informasi pribadi Anda terlindungi.
+        Kami melakukan yang terbaik untuk melindungi informasi pribadi Anda dengan segera menghapus foto Anda setelah dianalisis.
+        Menemukan selebritas yang mirip dengan Anda melalui CelebMe lebih dari sekadar menyenangkan; ini memberikan kesempatan untuk menemukan fitur wajah Anda sendiri dan hubungan dengan berbagai selebriti.
+        Analisis foto Anda sekarang dan lihat hasil yang luar biasa! Pengalaman menyenangkan dan mengasyikkan menanti Anda." />
     <meta property="og:image"
         content="https://post-phinf.pstatic.net/MjAxNzA4MThfNzAg/MDAxNTAzMDM2NzgxNzI3.qKkqFtWHJficRmXz264zLAKCCz_gT0qW7CHrpTTYGUIg.rvJvitIBypvQkuiffIdOQzHCRBEE3kcJmRIGPeynVC4g.JPEG/g.jpg" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -70,7 +121,7 @@
 
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
 
-        <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">名人我：找到你看起来像的名人</a>
+        <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">CelebMe: Temukan selebriti yang mirip dengan Anda</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -79,20 +130,20 @@
             <ul class="navbar-nav">
                 <li class="nav-item active"
                     onclick="gtag('event', '닮은 아이돌 찾기 클릭', {'event_category': '닮은 아이돌 찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/client/index.html">(On-device) 名人我：找到你看起来像的名人
+                    <a class="nav-link" href="/client/index.html">(On-device) CelebMe: Temukan selebriti yang mirip dengan Anda
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item active"
                     onclick="gtag('event', '퍼피테스트 클릭', {'event_category': '퍼피테스트 클릭','event_label': '상단 메뉴'});">
                     <a class="nav-link" href="/puppy/index.html"
-                        onClick="top.location='javascript:location.reload()'">MBTI 相似狗测试
+                        onClick="top.location='javascript:location.reload()'">MBTI Personality Test: Puppy
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item active"
                     onclick="gtag('event', '과제생활 동물찾기 클릭', {'event_category': '과제생활 동물찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/animaltest/index.html">MBTI 相似动物测试
+                    <a class="nav-link" href="/animaltest/index.html">MBTI Personailty Test: Animals
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -100,7 +151,7 @@
                 <li class="nav-item active"
                     onclick="gtag('event', '러블리햄의 블로그 클릭', {'event_category': '러블리햄의 블로그 클릭','event_label': '상단 메뉴'});">
                     <a class="nav-link" href="/blog">
-                        博客</a>
+                        Blog</a>
                 </li>
             </ul>
         </div>
@@ -109,14 +160,14 @@
         <div class="row">
             <div class="language">Language:</div>
             <div>
-                <select id="lang" onchange="changeLanguage(this)" class="custom-select col-8" >
+                <select id="lang" onchange="changeLanguage(this)" class="custom-select col-8">
                     <option value="ko" lang="ko">한국어</option>
-                    <option value="en" lang="en">English</option>
+                    <option value="en" lang="en" >English</option>
                     <option value="es" lang="es">español</option>
                     <option value="ja" lang="ja">日本語</option>
-                    <option value="zh" lang="zh" selected>中文</option>
+                    <option value="zh" lang="zh">中文</option>
                     <option value="vi" lang="vi">tiếng Việt</option>
-                    <option value="id" lang="id">Bahasa Indonesia</option>
+                    <option value="id" lang="id" selected>Bahasa Indonesia</option>
                 </select>
             </div>
         </div>
@@ -125,7 +176,7 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/index_" + lang.value + ".html";
+            window.location.href = "/" + lang.value + "/index.html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>
@@ -151,23 +202,26 @@
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-<section class="section">
-        <h1 class="title">名人我：找到你看起来像的名人</h1>
-        <h4 class="subtitle">人工智能名人用脸测试</h4>
-        <h5 class="subtitle">查看人工智能预测的年龄、性别、情绪，</h5>
-        <h5 class="subtitle">寻找与您相似的名人！</h5>
-        <h4 class="sr-only">我像哪位名人？ 尝试寻找我的名人！ </h4>
+    <section class="section">
+        <h1 class="title">CelebMe: Temukan selebriti yang mirip dengan Anda</h1>
+        <h4 class="subtitle">Tes selebriti kecerdasan buatan dengan wajah</h4>
+        <h5 class="subtitle">Periksa usia, jenis kelamin, dan emosi yang diprediksi oleh kecerdasan buatan,</h5>
+        <h5 class="subtitle">Temukan selebriti yang mirip dengan Anda!</h5>
+        <h4 class="sr-only">Selebriti apa yang mirip dengan saya? Coba Temukan Selebriti Saya! </h4>
         <h4 class="sr-only">
-            人工智能从代表性名人的照片数据中学习，会找到与你的脸相似的名人。
+            Kecerdasan buatan yang dipelajari dari data foto perwakilan selebriti akan menemukan selebriti tersebut
+             menyerupai wajahmu.
         </h4>
         <h4 class="sr-only">
-            该服务是使用 Google 的人工智能可教机器 2.0 创建的，然后使用基于 Javascript 的 Tensorflow 重新训练和重组。
+            Layanan ini dibuat menggunakan mesin pembelajaran kecerdasan buatan Google 2.0, lalu dilatih ulang dan ditata ulang menggunakan Tensorflow berbasis Javascript.
         </h4>
         <p class="sr-only">
-            人工智能根据你的脸进行名人测试，找到一个与你长得像的名人！ 
-            人工智能从代表性名人的照片数据中学习，会找到与你的脸相似的名人。 
-            无需注册即可直接在屏幕上查看！ 照片数据不会传输到任何地方。
-             来测试一下人工智能眼中的我的名人吧！ 通过测试，您可以找到与您相似的名人。
+            Tes selebriti kecerdasan buatan berdasarkan wajah Anda, temukan selebriti yang mirip dengan Anda!
+            Kecerdasan buatan yang dipelajari dari data foto perwakilan selebriti akan menemukan selebriti tersebut
+            menyerupai wajahmu.
+            Lihat langsung di layar tanpa harus mendaftar!
+            Data foto tidak dikirimkan ke mana pun. Ikuti tes selebriti saya seperti yang dilihat oleh kecerdasan buatan!
+            Melalui tes tersebut, Anda dapat menemukan selebriti yang mirip dengan Anda.
         </p>
     </section>
     <center>
@@ -179,8 +233,7 @@
                     <div class="drag-text">
                         <img src="img/upload.svg" class="mt-5 upload" />
                         <div class="upload-text">
-                            发布一张你的脸部照片 <br />
-                            单击开始。
+                            Mulailah dengan mengunggah atau mengetuk foto wajah Anda
 
                         </div>
                     </div>
@@ -192,29 +245,30 @@
                     </div>
                     <div id="loading" class="animated bounce">
                         <div class="spinner-border" role="status">
-                            <span class="sr-only">加载中...</span>
+                            <span class="sr-only">Memuat...</span>
                         </div>
                         <div class="loading-message" id="loading-message">
-                            分析你的脸。
+                            Menganalisis wajah Anda.
                         </div>
                     </div>
                 </div>
             </div>
             <div class="result-message" id="result-message">
                 <div class="h2" style="padding: 16px;">
-                    名人我：面部分析结果
+                    CelebMe: Hasil Analisis Wajah
                         <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
-                    人脸的年龄、性别、情绪和种族分析结果
+                    Hasil analisis usia, jenis kelamin, emosi, dan ras untuk wajah
                 </div>
 
                 <div id="charts">
+
                     <div class="row">
-                        <div style="position: relative; height: 20vh; width: 50%; padding: 20px 20px 20px 50px;">
+                        <div style="position: relative; height: 20vh; width: 50%; padding: 10px 10px 10px 50px;">
                             <canvas id="ageChart"></canvas>
                         </div>
-                        <div style="position: relative; height: 20vh; width: 50%; padding: 20px 50px 20px 20px;">
+                        <div style="position: relative; height: 20vh; width: 50%; padding: 10px 50px 10px 10px;">
                             <canvas id="genderChart"></canvas>
                         </div>
                     </div>
@@ -245,16 +299,15 @@
 
             <div class="result-message" id="result-similar-idol">
                 <div class="h2" style="padding: 10px;">
-                    名人我：名人相似形象
+                    CelebMe: Gambar Mirip Selebriti
                         <hr style="background-color:black;" />
                 </div>
 
-
                 <div class="normaltext" id="celeb-result-desc">
                     <div class="normaltext" id="celeb-result">
-                        单击名人姓名即可搜索图像。
+                        Klik pada nama selebriti untuk mencari gambar.
                     </div>
-                    单击名人姓名即可搜索图像。 <br /><br />
+                    Klik pada nama selebriti untuk mencari gambar.<br /><br />
                 </div>
 
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
@@ -361,7 +414,7 @@
                 <br />
 
                 <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
-                    <span class="try-again-text" style="font-size: 2.2rem;">再次庆祝我</span>
+                    <span class="try-again-text" style="font-size: 2.2rem;">Lakukan CelebMe lagi</span>
                 </button>
 
 
@@ -381,18 +434,18 @@
             </script>
             <button type="button p-2" class="my-share-btn" onclick="toggleCelebList();"
                 style="margin:10px; background-color: #35885d;">
-                <span class="try-again-text" style="font-size: 1.8rem;">查看名人名单</span>
+                <span class="try-again-text" style="font-size: 1.8rem;">Lihat daftar selebriti</span>
             </button>
             <div id="json-container" class="json-container" style="display: none;"></div>
 
 
             <br />
-            <!-- <div class="normaltext">您可以通过在结果屏幕上分享来分享您相似的名人列表。</div> -->
+            <!-- <div class="normaltext">You can share a list of celebrities you resemble by sharing on the results screen.</div> -->
 
             <button type="button p-2" class="my-share-btn" id="shareKt1"
                 onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'}); shareKakao();"
                 style="margin:10px; height: 40px; background-color: #353709;">
-                <span class="try-again-text" style="font-size: 1.3rem;">分享Kakao
+                <span class="try-again-text" style="font-size: 1.3rem;">Bagikan Kakao
                     <img src="puppy/talk-share.png" style="width: 30px; height: 30px;" />
                 </span>
             </button>
@@ -400,7 +453,7 @@
             <button type="button p-2" class="my-share-btn"
                 onclick="gtag('event', 'URL공유클릭', {'event_category': '공유클릭','event_label': 'URL공유클릭'}); shareUrl();"
                 style="margin:10px; height: 40px; background-color: #353709;">
-                <span class="try-again-text" style="font-size: 1.3rem;">复制链接 🔗</span>
+                <span class="try-again-text" style="font-size: 1.3rem;">Salin tautan 🔗</span>
             </button>
 
 
@@ -414,7 +467,7 @@
 
             <br />
             <br />
-            <div id="modalMessage">它被复制了。</div>
+            <div id="modalMessage">copied</div>
             <!-- App modal -->
             <div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="appModalLabel"
                 aria-hidden="true">
@@ -422,7 +475,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="appModalLabel">
-                                名人我：找到你看起来像的名人 更新! <br>
+                                CelebMe: Temukan idola serupa yang diperbarui! <br>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -434,14 +487,13 @@
                                 src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
                                 alt='app icon'>
                             <p class="text-app-center">
-                                现已重组为“人脸分析+寻找相似明星”服务。<br>
-                                看看面部分析结果吧！
+                                Ini telah direorganisasi menjadi layanan “Analisis Wajah + Temukan Selebriti Serupa”.<br>
+                                CSimak hasil analisa wajahnya!
                             </p>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="setCookie('celebme-popup', 'done', 7);">
                                 <span aria-hidden="true">&times;</span>
-                                一周内看不到弹出窗口
+                                Jangan muncul selama seminggu
                             </button>
-                            
                             <!-- <a href="/puppy/index.html">
                                 <button type="button" class="my-button">
                                     <h3 class="modal-title" id="appModalLabel">퍼피테스트 하러가기!</h3>
@@ -485,8 +537,8 @@
 
 
                 <p class="text-app-center">
-                    新增AI档案、每日档案、身体档案功能！</br>
-                    查看 Play 商店中的 Celeb Me 应用。
+                    Menambahkan fungsi profil AI, profil harian, dan profil tubuh!</br>
+                    Lihat aplikasi CelebMe di Play Store.
                 </p>
                 <a href="https://play.google.com/store/apps/details?id=com.terrykwon.kceleb">
                     <div class="grid-image">
@@ -527,8 +579,8 @@
 
     <script>
         var disqus_config = function () {
-            this.page.url = 'https://celebme.kr/index_zh.html';
-            this.page.identifier = 'index_zh.html';
+            this.page.url = 'https://celebme.kr/index_en.html';
+            this.page.identifier = 'index_en.html';
         };
 
         (function () {
@@ -552,7 +604,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="v_20240322/index.js">
+    <script type="text/javascript" src="v_20240323/index.js">
     </script>
 
 
