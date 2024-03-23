@@ -10,7 +10,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "v_20240325";
+const version = "v_20240326";
 var faceNames = {};
 (function () {
   
@@ -568,11 +568,14 @@ function removeUpload() {
   $(".image-upload-wrap").show();
   $(".result-message").hide();
 
-  // window.location.href = getBaseUrl();
+  
   // document.getElementById("search").height = 0;
   $("html, body").scrollTop(
     document.getElementsByClassName("title")[0].offsetTop
   );
+
+  // 페이지 새로고침해서 광고 다시 로드하기 위한 용도
+  window.location.href = getBaseUrl();
 }
 $(".image-upload-wrap").bind("dragover", function () {
   $(".image-upload-wrap").addClass("image-dropping");
@@ -648,8 +651,14 @@ function getBaseUrl() {
   name = name.split("#")[0];
   // console.log(name);
   if (name.includes("index") == false) {
-    name = name  + lang + "/index.html"
+    if (lang == "ko") {
+      name = name + "index.html";
+    } else {
+      name = name  + lang + "/index.html";
+    }
   }
+
+  
   // console.log(name);
   return name; // name + "/" + lang + "/index.html";
 }
