@@ -10,7 +10,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "v_20240326";
+const version = "v_20240327";
 var faceNames = {};
 (function () {
   
@@ -392,16 +392,20 @@ function getSimilarCeleb(inputImage) {
       .then(data => {
         // Handle the response data here
         // console.log(data);
-        for (var rank = 0; rank < 10; rank++) {
-          delete data[rank].source_h ;
-          delete data[rank].source_w;
-          delete data[rank].source_x ;
-          delete data[rank].source_y;
-          delete data[rank].target_h;
-          delete data[rank].target_w;
-          delete data[rank].target_x;
-          delete data[rank].target_y;
-          delete data[rank].threshold;
+        try{
+          for (var rank = 0; rank < 10; rank++) {
+            delete data[rank].source_h ;
+            delete data[rank].source_w;
+            delete data[rank].source_x ;
+            delete data[rank].source_y;
+            delete data[rank].target_h;
+            delete data[rank].target_w;
+            delete data[rank].target_x;
+            delete data[rank].target_y;
+            delete data[rank].threshold;
+          }
+        } catch (error) {
+          console.log(error);
         }
 
         similarIdolData = data;
@@ -414,11 +418,18 @@ function getSimilarCeleb(inputImage) {
         // updateKakaoLink();
         $(".try-again-btn").show();
         $(".result-message").show();
-        $("#loading").hide();
+        // $("#loading").hide();
+        $("#celeb-spinner").hide();
+        $("#loading-message").html(getMeta("celeb_finished"))
         // window.history.replaceState({}, document.title, "/");
         $("html, body").scrollTop(
           document.getElementsByClassName("title")[0].offsetTop
         );
+        try{
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch(error) {
+
+        }
 
       })
       .catch(error => {
@@ -536,6 +547,7 @@ async function readURL(input) {
     $(".file-upload-content").show();
     $("#loading-message").html(getMeta("analyzing_face"))
     $("#loading").show();
+    $("#celeb-spinner").show();
     $(".result-message").hide();
     $("#result-similar-idol").hide();
     document.getElementById("face-image").onload = function (e) {
@@ -635,7 +647,7 @@ function getUriComponents() {
     // 한명만 공유하자
     var rsStr = encodeURIComponent(JSON.stringify(similarIdolData[0]));
     const simStr = btoa(rsStr);
-    console.log(rsStr + ":" + simStr);
+    // console.log(rsStr + ":" + simStr);
     // const faceStr = encodeURIComponent(JSON.stringify(faceData));
     $('#modalMessage').html(getMeta("copied_with_result"));
     return "?result=" + simStr; //  + "&face=" + faceStr;
@@ -645,7 +657,7 @@ function getUriComponents() {
 }
 
 function getBaseUrl() {
-  console.log(window.location.href.split("?"));
+  // console.log(window.location.href.split("?"));
   var name = window.location.href.split("?")[0];
   // var name = window.location.hostname;
   name = name.split("#")[0];

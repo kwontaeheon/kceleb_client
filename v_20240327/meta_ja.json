@@ -27,6 +27,7 @@
 
   "analyzing_face": "顔を分析しています。",
   "finding_lookalike_celeb": "似たセレブを探しています。",
+  "celeb_finished": "スクロールしてセレブの結果を確認してください。",
   "copied_link_with_result": "結果を含むリンクをコピーしました。",
   "copied_link": "結果をコピーしました。",
 
