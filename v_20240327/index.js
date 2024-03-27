@@ -723,6 +723,11 @@ function sleep(ms) {
 }
 
 function showResults(resultParam, faceParam) {
+  $("#display4").hide();
+  $("#display3").hide();
+  $("#display5").hide();
+  $(".section").hide();
+  $(".file-upload").hide();
   $(".image-upload-wrap").hide();
   $("#face-image").attr("src", "https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw");
   $(".file-upload-content").show();
