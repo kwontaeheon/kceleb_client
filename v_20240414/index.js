@@ -10,7 +10,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "v_20240327";
+const version = "/v_20240414";
 var faceNames = {};
 (function () {
   
