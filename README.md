@@ -8,4 +8,4 @@
 > 정면 1인의 얼굴을 입력받아 가장 비슷한 아이돌을 확인합니다.
 
 
-* URL Link: https://celebme.kr
+* URL Link: https://celebme.net

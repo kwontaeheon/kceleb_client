@@ -1,4 +1,4 @@
 User-Agent:*
 Allow: /
 
-Sitemap: https://celebme.kr/sitemap.xml
+Sitemap: https://celebme.net/sitemap.xml
