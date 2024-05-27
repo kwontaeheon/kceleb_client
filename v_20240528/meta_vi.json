@@ -32,7 +32,9 @@
   "copied_link": "Kết quả đã được sao chép.",
 
   "face_gt1" : "Nhiều hơn một khuôn mặt được nhận dạng. <br/> Phân tích bằng khuôn mặt đầu tiên. <br/>",
-  "face_confidence_low" : "Khuôn mặt không được nhận dạng. <br/> Thay vào đó, độ tương tự của hình ảnh được sử dụng để phân tích. <br/> Bạn thử lại bằng một bức ảnh khác thì sao?<br/>"
+  "face_confidence_low" : "Khuôn mặt không được nhận dạng. <br/> Thay vào đó, độ tương tự của hình ảnh được sử dụng để phân tích. <br/> Bạn thử lại bằng một bức ảnh khác thì sao?<br/>",
+ 
+  "error_msg": "Error occured. <br/> Please try again.<br/>"
 
  
 

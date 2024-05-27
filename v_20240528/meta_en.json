@@ -32,7 +32,7 @@
   "copied_link": "The results were copied.",
 
   "face_gt1" : "More than one face recognized. <br/> Analyzing by the first face. <br/>",
-  "face_confidence_low" : "Face isn't recognized. <br/> Instead, image similarity used to analyze. <br/> Why not try again with another photo?<br/>"
+  "face_confidence_low" : "Face isn't recognized. <br/> Instead, image similarity used to analyze. <br/> Why not try again with another photo?<br/>",
  
-
+  "error_msg": "Error occured. <br/> Please try again.<br/>"
 }

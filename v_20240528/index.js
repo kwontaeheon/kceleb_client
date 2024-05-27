@@ -12,7 +12,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "/v_20240527";
+const version = "/v_20240528";
 var faceNames = {};
 (function () {
   
@@ -376,6 +376,11 @@ async function analyzeFace(inputImage) {
     .catch(error => {
       // Handle errors here
       console.error('Error:', error);
+      $("#celeb-spinner").hide();
+      $("#loading-message").html(
+        getMeta("error_msg")
+      );
+
     });
 
 }
@@ -388,6 +393,14 @@ function getSimilarCeleb(inputImage) {
     fetch(apiUrl + '/find', {
     method: 'POST',
     body: formData
+  })
+  .catch(error => {
+    // Handle errors here
+    console.error('Error:', error);
+    $("#celeb-spinner").hide();
+    $("#loading-message").html(
+      getMeta("error_msg")
+    );
   })
     .then(response => response.json())
     .then(data => {
@@ -436,6 +449,10 @@ function getSimilarCeleb(inputImage) {
     .catch(error => {
       // Handle errors here
       console.error('Error:', error);
+      $("#celeb-spinner").hide();
+      $("#loading-message").html(
+        getMeta("error_msg")
+      );
     });
 }
 function displayIdolPredictionBriefly(data) {

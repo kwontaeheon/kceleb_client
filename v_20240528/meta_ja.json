@@ -32,7 +32,9 @@
   "copied_link": "結果をコピーしました。",
 
   "face_gt1" : "複数の顔が認識されました。 <br/> 最初の顔で分析します。 <br/>",
-  "face_confidence_low" : "顔が認識されません。 <br/> 代わりに、画像の類似性を分析するために使用されます。 <br/>別の写真でもう一度やり直してみてはいかがですか？<br/>"
+  "face_confidence_low" : "顔が認識されません。 <br/> 代わりに、画像の類似性を分析するために使用されます。 <br/>別の写真でもう一度やり直してみてはいかがですか？<br/>",
+ 
+  "error_msg": "Error occured. <br/> Please try again.<br/>"
 
  
 
