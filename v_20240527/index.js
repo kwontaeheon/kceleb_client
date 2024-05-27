@@ -1,7 +1,9 @@
 
 // const compressor = require('./compression.js');
-const apiUrl = "https://celebme.duckdns.org:8181";
-// const apiUrl = "http://localhost:8181"
+// const apiUrl = "https://celebme.duckdns.org:8181";
+// const apiUrl = "https://knnlnzvrb56n7cvift2sajvyza.apigateway.ap-chuncheon-1.oci.customer-oci.com/v1"
+// const apiUrl = "http://158.180.71.186:8181";
+const apiUrl = "https://celebme-api.duckdns.org:8181";
 
 // 닮은 셀럽 목록 변수
 var similarIdolData;
@@ -10,7 +12,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "/v_20240414";
+const version = "/v_20240527";
 var faceNames = {};
 (function () {
   
@@ -383,60 +385,58 @@ function getSimilarCeleb(inputImage) {
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
 
-  setTimeout( function () {
-      fetch(apiUrl + '/find', {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Handle the response data here
-        // console.log(data);
-        try{
-          for (var rank = 0; rank < 10; rank++) {
-            delete data[rank].source_h ;
-            delete data[rank].source_w;
-            delete data[rank].source_x ;
-            delete data[rank].source_y;
-            delete data[rank].target_h;
-            delete data[rank].target_w;
-            delete data[rank].target_x;
-            delete data[rank].target_y;
-            delete data[rank].threshold;
-          }
-        } catch (error) {
-          console.log(error);
-        }
-
-        similarIdolData = data;
+    fetch(apiUrl + '/find', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response data here
+      // console.log(data);
+      try{
         for (var rank = 0; rank < 10; rank++) {
-          similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
+          delete data[rank].source_h ;
+          delete data[rank].source_w;
+          delete data[rank].source_x ;
+          delete data[rank].source_y;
+          delete data[rank].target_h;
+          delete data[rank].target_w;
+          delete data[rank].target_x;
+          delete data[rank].target_y;
+          delete data[rank].threshold;
         }
-        displayIdolPredictionBriefly(data);
-        // displayIdolPrediction(1);
-        $('#extra-similars').show();
-        // updateKakaoLink();
-        $(".try-again-btn").show();
-        $(".result-message").show();
-        // $("#loading").hide();
-        $("#celeb-spinner").hide();
-        $("#loading-message").html(getMeta("celeb_finished"))
-        // window.history.replaceState({}, document.title, "/");
-        $("html, body").scrollTop(
-          document.getElementsByClassName("title")[0].offsetTop
-        );
-        try{
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch(error) {
+      } catch (error) {
+        console.log(error);
+      }
 
-        }
+      similarIdolData = data;
+      for (var rank = 0; rank < 10; rank++) {
+        similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
+      }
+      displayIdolPredictionBriefly(data);
+      // displayIdolPrediction(1);
+      $('#extra-similars').show();
+      // updateKakaoLink();
+      $(".try-again-btn").show();
+      $(".result-message").show();
+      // $("#loading").hide();
+      $("#celeb-spinner").hide();
+      $("#loading-message").html(getMeta("celeb_finished"))
+      // window.history.replaceState({}, document.title, "/");
+      $("html, body").scrollTop(
+        document.getElementsByClassName("title")[0].offsetTop
+      );
+      try{
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch(error) {
 
-      })
-      .catch(error => {
-        // Handle errors here
-        console.error('Error:', error);
-      });
-    }, 3000);
+      }
+
+    })
+    .catch(error => {
+      // Handle errors here
+      console.error('Error:', error);
+    });
 }
 function displayIdolPredictionBriefly(data) {
   $("#result-similar-idol").show();
