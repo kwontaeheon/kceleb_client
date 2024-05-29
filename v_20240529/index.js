@@ -12,7 +12,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "/v_20240528";
+const version = "/v_20240529";
 var faceNames = {};
 (function () {
   
@@ -571,8 +571,10 @@ async function readURL(input) {
       var imgData = document.getElementById("face-image");
       cropImage(imgData, function (resizedImg) {
         analyzeFace(resizedImg).then(function () {
-          $("#loading-message").html(getMeta("finding_lookalike_celeb"))
-          getSimilarCeleb(resizedImg);
+          $("#loading-message").html(getMeta("finding_lookalike_celeb"));
+          setTimeout(function () {
+            getSimilarCeleb(resizedImg);
+          }, 3000);
         })
 
 
