@@ -12,7 +12,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "/v_20240529";
+const version = "/v_20240601";
 var faceNames = {};
 (function () {
   
@@ -119,7 +119,7 @@ function setCookie(name, value, expiredays){
 
 
 function cropImage(imgElement, callback, maxWidth = 512, maxHeight = 512) {
-  const canvas = document.createElement('canvas');
+  const canvas = document.getElementById('cropped-face-image-1');
   const ctx = canvas.getContext('2d');
   const img = imgElement;
 
@@ -153,34 +153,47 @@ function drawChart(userData) {
   Chart.register(autocolors);
   Chart.defaults.font.size = 14;
   // Chart.register(ChartDataLabels);
+  var cropSuccess = true;
   var confidenceStr = "";
-  if (userData.face_cnt > 1) {
-    confidenceStr = getMeta("face_gt1");
-    $("#face-analysis-result").html(
-      confidenceStr + "<br/>"
-      + getMeta("face_in_picture") + getMeta(userData.dominant_race) + ", <br/>"
-      + getMeta("age") + " " + userData.age + getMeta("age_val") + " " + getMeta(userData.dominant_gender) + ", "
-      + getMeta(userData.dominant_emotion) + getMeta("i_guess") + " <br/>"
-    );
-    $("#charts").show();
-  } else if (userData.face_confidence == 0) {
+  if (userData.face_confidence == 0) {
     confidenceStr = getMeta("face_confidence_low");
     $("#face-analysis-result").html(
       confidenceStr + "<br/>"
     );
+    
     $("#charts").hide();
-    // $("#result-message").html("");
-
+    cropSuccess = false;
   } else {
+    if (userData.face_cnt > 1) {
+      confidenceStr = getMeta("face_gt1");
+    }
+
     $("#face-analysis-result").html(
       confidenceStr + "<br/>"
       + getMeta("face_in_picture") + getMeta(userData.dominant_race) + ", <br/>"
       + getMeta("age") + " " + userData.age + getMeta("age_val") + " " + getMeta(userData.dominant_gender) + ", "
       + getMeta(userData.dominant_emotion) + getMeta("i_guess") + " <br/>"
     );
+    
+    
+    
     $("#charts").show();
-  }
-  
+  } 
+  var canvas = document.getElementById('cropped-face-image-2');
+    canvas.width = userData.region['w'];
+    canvas.height = userData.region['h'];
+    ctx    = canvas.getContext('2d');
+    image  = document.getElementById('cropped-face-image-1');
+    
+    ctx.drawImage(image, userData.region['x'], userData.region['y'], userData.region['w'], userData.region['h'],  0, 0, userData.region['w'], userData.region['h']);
+    
+    canvas.toBlob((croppedImage) => {
+      $("#loading-message").html(getMeta("finding_lookalike_celeb"));
+          setTimeout(function () {
+            getSimilarCeleb(croppedImage);
+          }, 3000);
+
+    }, 'image/webp');
 
   const ageData = {
     labels: [getMeta("age")],
@@ -354,6 +367,9 @@ function drawChart(userData) {
 
     }
   });
+
+  return cropSuccess;
+  
 }
 
 async function analyzeFace(inputImage) {
@@ -370,8 +386,16 @@ async function analyzeFace(inputImage) {
       // console.log(data);
       
       faceData = data;
-      drawChart(data);
+      var cropSuccess = drawChart(data);
+      if (cropSuccess == false) {
+        // $("#loading-message").html(getMeta("finding_lookalike_celeb"));
+          setTimeout(function () {
+            // crop 실패시 이미지 유사성 비교를 위해 이미지 그대로 입력
+            getSimilarCeleb(inputImage);
+          }, 3000);
+      }
 
+  
     })
     .catch(error => {
       // Handle errors here
@@ -570,12 +594,10 @@ async function readURL(input) {
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");
       cropImage(imgData, function (resizedImg) {
-        analyzeFace(resizedImg).then(function () {
-          $("#loading-message").html(getMeta("finding_lookalike_celeb"));
-          setTimeout(function () {
-            getSimilarCeleb(resizedImg);
-          }, 3000);
-        })
+        
+        analyzeFace(resizedImg).then(function (croppedImage) {
+          // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
+        });
 
 
       })

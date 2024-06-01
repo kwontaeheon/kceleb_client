@@ -614,3 +614,21 @@ color: #28a745;
 div#disqus_thread iframe[sandbox] {
 max-height: 0px !important;
 }
+
+@keyframes borderAnimation {
+    0% {
+        border-color: #4a90e2;
+    }
+    50% {
+        border-color: #f06;
+    }
+    100% {
+        border-color: #4a90e2;
+    }
+}
+
+.styled-canvas {
+    border: 5px solid #4a90e2;
+    border-radius: 10px;
+    animation: borderAnimation 2s infinite;
+}
