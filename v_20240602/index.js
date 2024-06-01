@@ -12,7 +12,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "/v_20240601";
+const version = "/v_20240602";
 var faceNames = {};
 (function () {
   
@@ -180,10 +180,11 @@ function drawChart(userData) {
     $("#charts").show();
   } 
   var canvas = document.getElementById('cropped-face-image-2');
-    canvas.width = userData.region['w'];
-    canvas.height = userData.region['h'];
-    ctx    = canvas.getContext('2d');
-    image  = document.getElementById('cropped-face-image-1');
+  canvas.width = userData.region['w'];
+  canvas.height = userData.region['h'];
+  canvas.style.border = "5px solid";
+  var ctx    = canvas.getContext('2d');
+  var image  = document.getElementById('cropped-face-image-1');
     
     ctx.drawImage(image, userData.region['x'], userData.region['y'], userData.region['w'], userData.region['h'],  0, 0, userData.region['w'], userData.region['h']);
     

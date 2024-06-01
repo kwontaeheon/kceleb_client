@@ -25,7 +25,7 @@
         사진은 어디에도 저장되지 않습니다. 회원가입 없이 바로 확인해보세요!
         얼굴로 성별과 감정을 분석하고, 내 얼굴과 닮은 연예인 찾기를 해보세요.
         한 번에 최대 열 명의 닮은 연예인을 찾고, SNS에 공유 가능한 연예인 이미지를 검색합니다." />
-    <link rel="stylesheet" href="/v_20240601/style.css" />
+    <link rel="stylesheet" href="/v_20240602/style.css" />
     <link rel="canonical" href="https://celebme.net" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="en" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="x-default" />
@@ -263,7 +263,7 @@
                 <br/>
                 <br/>
                 <canvas id="cropped-face-image-1" style="display: none;"></canvas>
-                <canvas id="cropped-face-image-2" class="styled-canvas" width="100" height="100" style="max-width: 30%; max-height: 30%;"></canvas>
+                <canvas id="cropped-face-image-2" class="styled-canvas" width="100" height="100" style="max-width: 30%; max-height: 30%; border: 0px;"></canvas>
                 <br/>
                 <br/>
                 
@@ -279,7 +279,8 @@
                     </div>
                     연예인 이름을 눌러서 이미지를 검색해보세요. <br /><br />
                 </div>
-
+                
+                <!-- https://developers.google.com/custom-search/docs/element?hl=ko#supported_attributes -->
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
                     <div class='result-title' id="r1"> 1순위 </div>
                 </button>
@@ -287,7 +288,7 @@
                     <div id="search1" class="gcse-searchresults-only"
                         data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                         data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
-                        data-gname="q1"></div>
+                        data-image_type="face" data-gname="q1"></div>
                 </div>
                 <div class="row" style="font-size: 1.1rem; margin: 10px;" id="extra-similars">
                     <div style="width: 33%; max-height: 20%; overflow: hidden;">
@@ -298,7 +299,7 @@
                         <div id="search2" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q2"></div>
+                            data-image_type="face" data-gname="q2"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(5);">
@@ -307,7 +308,7 @@
                         <div id="search5" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q5"></div>
+                            data-image_type="face" data-gname="q5"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(8);">
@@ -316,7 +317,7 @@
                         <div id="search8" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q8"></div>
+                            data-image_type="face" data-gname="q8"></div>
 
 
                     </div>
@@ -327,7 +328,7 @@
                         <div id="search3" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q3"></div>
+                            data-image_type="face" data-gname="q3"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(6);">
@@ -337,7 +338,7 @@
                         <div id="search6" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q6"></div>
+                            data-image_type="face" data-gname="q6"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(9);">
@@ -346,7 +347,7 @@
                         <div id="search9" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q9"></div>
+                            data-image_type="face" data-gname="q9"></div>
 
 
                     </div>
@@ -357,7 +358,7 @@
                         <div id="search4" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q4"></div>
+                            data-image_type="face" data-gname="q4"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(7);">
@@ -367,7 +368,7 @@
                         <div id="search7" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q7"></div>
+                            data-image_type="face" data-gname="q7"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(10);">
@@ -376,7 +377,7 @@
                         <div id="search10" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-gname="q10"></div>
+                            data-image_type="face" data-gname="q10"></div>
 
 
                     </div>
@@ -386,8 +387,16 @@
                 <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
                     <span class="try-again-text" style="font-size: 2.2rem;">셀럽미 다시 하기</span>
                 </button>
-
-
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-9636274019237410"
+                    data-ad-slot="2779061210"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+    
 
 
             </div>
@@ -566,7 +575,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/v_20240601/index.js">
+    <script type="text/javascript" src="/v_20240602/index.js">
     </script>
 
 
