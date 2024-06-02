@@ -12,7 +12,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "/v_20240602";
+const version = "/v_20240603";
 var faceNames = {};
 (function () {
   
@@ -765,9 +765,10 @@ function sleep(ms) {
 }
 
 function showResults(resultParam, faceParam) {
-  // $("#display4").hide();
-  // $("#display3").hide();
-  // $("#display5").hide();
+  $("#display4").hide();
+  $("#display3").hide();
+  $("#display5").hide();
+  $("#display6").hide();
   $(".section").hide();
   $(".file-upload").hide();
   $(".image-upload-wrap").hide();
