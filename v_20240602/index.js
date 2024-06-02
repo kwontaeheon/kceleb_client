@@ -765,9 +765,9 @@ function sleep(ms) {
 }
 
 function showResults(resultParam, faceParam) {
-  $("#display4").hide();
-  $("#display3").hide();
-  $("#display5").hide();
+  // $("#display4").hide();
+  // $("#display3").hide();
+  // $("#display5").hide();
   $(".section").hide();
   $(".file-upload").hide();
   $(".image-upload-wrap").hide();
