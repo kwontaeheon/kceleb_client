@@ -632,3 +632,8 @@ max-height: 0px !important;
     border-radius: 10px;
     animation: borderAnimation 2s infinite;
 }
+
+.gs-image {
+  object-fit: cover;
+  width: 100%;
+}
