@@ -429,20 +429,23 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="appModalLabel">
-                                셀럽미: 닮은 아이돌 찾기 업데이트! <br>
+                                셀럽미: 닮은 연예인 찾기 가이드<br>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-
-                            <img class="" width="200px"
+                            
+                            <!-- <img class="" width="200px"
                                 src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
-                                alt='app icon'>
+                                alt='app icon'> -->
+                            
+                            <iframe id="youtube-video" width="100%" height="300vh" src="https://youtube.com/embed/aFLerbjh_uA?controls=0&mute=1&showinfo=0&rel=0&autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="left: 0; top: 0; border: none;"></iframe>
+                            
                             <p class="text-app-center">
-                                "얼굴 분석 + 닮은 연예인 찾기" 서비스로 개편 되었어요.<br>
-                                얼굴 분석 결과와 함께 확인해보세요!
+                                얼굴 사진을 선택하여 나랑 닮은 연예인을 회원가입없이 빠르게 찾아보세요!<br>
+                                사진 데이터는 어디에도 저장되지 않습니다.
                             </p>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                 onclick="setCookie('celebme-popup', 'done', 7);">
@@ -590,8 +593,13 @@
 
         if (!window.location.href.includes("result") && getCookie('celebme-popup') != 'done') {
             // 팝업
-            // $('#appModal').modal();
+            $('#appModal').modal();
+            // .contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
         }
+        $(document).on('hide.bs.modal','#appModal', function () {
+            // modal 종료시 youtube 중지
+            $("#youtube-video").attr("src", "");
+        });
 
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
