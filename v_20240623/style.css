@@ -278,6 +278,7 @@ div.gsc-above-wrapper-area {
 
 .title {
     line-height: 1.67;
+    font-size: 2.0rem;
     text-align: center;
     color: #35465d;
 }
@@ -342,7 +343,7 @@ div.gsc-above-wrapper-area {
     width: 35%;
 	max-height: 200px;
 	margin: 0 auto;
-    filter: invert(48%) sepia(0%) saturate(2841%) hue-rotate(251deg) brightness(67%) contrast(80%);
+    /* filter: invert(48%) sepia(0%) saturate(2841%) hue-rotate(251deg) brightness(67%) contrast(80%); */
 }
 
 .upload-text {

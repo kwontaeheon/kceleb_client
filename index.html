@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
-    <title>셀럽미: 닮은 연예인 찾기</title>
+    <title>셀럽미: 닮은 연예인 찾기, 내 얼굴과 닮은 연예인을 찾아보세요. 인공지능 닮은 꼴 연예인 테스트</title>
     <meta name="title" content="셀럽미: 닮은 연예인 찾기" />
     <meta name="subject" content="얼굴로 보는 인공지능 연예인 테스트, 나와 닮은 연예인을 찾아보세요!" />
     <meta name="keywords"
@@ -25,7 +25,7 @@
         사진은 어디에도 저장되지 않습니다. 회원가입 없이 바로 확인해보세요!
         얼굴로 성별과 감정을 분석하고, 내 얼굴과 닮은 연예인 찾기를 해보세요.
         한 번에 최대 열 명의 닮은 연예인을 찾고, SNS에 공유 가능한 연예인 이미지를 검색합니다." />
-    <link rel="stylesheet" href="/v_20240608/style.css" />
+    <link rel="stylesheet" href="/v_20240623/style.css" />
     <link rel="canonical" href="https://celebme.net" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="en" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="x-default" />
@@ -45,7 +45,7 @@
         얼굴로 성별과 감정을 분석하고, 내 얼굴과 닮은 연예인 찾기를 해보세요.
         한 번에 최대 열 명의 닮은 연예인을 찾고, SNS에 공유 가능한 연예인 이미지를 검색합니다." />
     <meta property="og:image"
-        content="https://post-phinf.pstatic.net/MjAxNzA4MThfNzAg/MDAxNTAzMDM2NzgxNzI3.qKkqFtWHJficRmXz264zLAKCCz_gT0qW7CHrpTTYGUIg.rvJvitIBypvQkuiffIdOQzHCRBEE3kcJmRIGPeynVC4g.JPEG/g.jpg" />
+        content="/banner_wb_512.webp" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -156,17 +156,19 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
     <section class="section">
-        <h1 class="title">셀럽미: 닮은 연예인 찾기</h1>
+        <h1 class="title">셀럽미: 내 얼굴과 닮은 연예인 찾기</h1>
         <h4 class="subtitle">얼굴로 보는 인공지능 연예인 테스트</h4>
         <h5 class="subtitle">인공지능이 예상한 나이, 성별, 감정을 확인해보고,</h5>
-        <h5 class="subtitle">나와 닮은 연예인을 찾아보세요!</h5>
+        <h5 class="subtitle">내 얼굴과 닮은 연예인 찾기 해보세요!</h5>
         <h4 class="sr-only">나는 어떤 연예인과 닮았을까? 나의 연예인 찾기를 해보세요! </h4>
-        <h4 class="sr-only">
-            대표 연예인 사진 데이터로 학습한 인공지능이 나의 얼굴로 닮은 연예인을 찾아드립니다.
-        </h4>
         <h4 class="sr-only">
             본 서비스는 Google의 인공지능 teachable machine 2.0을 활용하여 제작되었다가, Javascript 기반의 Tensorflow 로 재학습하여 개편하였습니다.
         </h4>
+        <!-- <h5 class="subtitle">
+            대표 연예인 사진 데이터로 학습한 인공지능이 <br/>
+            나의 얼굴로 닮은 연예인을 찾아드립니다.
+        </h5> -->
+        
         <p class="sr-only">
             얼굴로 보는 인공지능 연예인 테스트, 나와 닮은 연예인을 찾아보세요! 대표 연예인 사진
             데이터로 학습한 인공지능이 나의 얼굴로 닮은 연예인을 찾아드립니다. 회원가입도
@@ -182,10 +184,11 @@
                 <div class="image-upload-wrap">
                     <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
                     <div class="drag-text">
-                        <img src="/img/upload.svg" class="mt-5 upload" />
+                        <img src="/banner_wb_512.webp" class="mt-5 upload" alt='내 얼굴로 닮은 연예인 찾기 시작하기'>
+                        <!-- <img src="/img/upload.svg" class="mt-5 upload" alt="내 얼굴로 닮은 연예인 찾기 시작하기"/> -->
                         <div class="upload-text">
                             얼굴 사진을 올려놓거나 <br />
-                            눌러서 시작하세요.
+                            여기를 눌러서 시작하세요.
 
                         </div>
                     </div>
@@ -378,10 +381,14 @@
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q10"></div>
-
+                        
 
                     </div>
+                    <div class="col" style="text-align:center;"><h4 class="subtitle">나랑 닮은 연예인 찾기 결과를 공유해보세요!</h4></div>
+                    
+                    
                 </div>
+                
                 <br />
 
                 <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
@@ -389,11 +396,11 @@
                 </button>
     
 
-
+            
             </div>
 
 
-            <!-- <div class="normaltext">결과 화면에서 공유하면 닮은 연예인 목록을 공유할 수 있어요</div> -->
+            
             <button type="button p-2" class="my-share-btn" onclick="toggleCelebList();"
                 style="margin:10px; background-color: #35885d;">
                 <span class="try-again-text" style="font-size: 1.4rem;">연예인 목록 보기</span>
@@ -423,6 +430,15 @@
             <br />
             <div id="modalMessage">복사되었어요.</div>
             <!-- App modal -->
+            <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+                <p class="text-app-center">
+                    닮은 연예인 찾기 셀럽미에서<br/>
+                    나와 닮은 꼴 연예인을 손쉽게 찾아보세요.<br/>
+                    가장 비슷한 연예인과 닮은 비율을 공유해보세요.
+                </p>
+                <img class="" src="/banner.jpg" alt='셀럽미: 닮은 연예인 찾기 K-POP 아이돌 닮은꼴 테스트' style="max-width: 40%;">
+            </div>
+
             <div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="appModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -579,7 +595,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/v_20240608/index.js">
+    <script type="text/javascript" src="/v_20240623/index.js">
     </script>
 
 
