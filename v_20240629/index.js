@@ -3,7 +3,9 @@
 // const apiUrl = "https://celebme.duckdns.org:8181";
 // const apiUrl = "https://knnlnzvrb56n7cvift2sajvyza.apigateway.ap-chuncheon-1.oci.customer-oci.com/v1"
 // const apiUrl = "http://158.180.71.186:8181";
-const apiUrl = "https://celebme-api.duckdns.org:8181";
+// const apiUrl = "https://celebme-api.duckdns.org:8181";
+const apiUrl = "https://celebme.duckdns.org:8181";
+// const apiUrl = "http://149.130.218.11:8181";
 
 // 닮은 셀럽 목록 변수
 var similarIdolData;
@@ -12,7 +14,7 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "/v_20240623";
+const version = "/v_20240629";
 var faceNames = {};
 (function () {
   
@@ -564,7 +566,7 @@ async function loadImage(url, elem) {
 }
 async function readURL(input) {
   if (input.files && input.files[0]) {
-    $(".try-again-btn").hide();
+    // $(".try-again-btn").hide();
     
     // 동의모드는 추후구현
     // gtag('consent', 'default', {

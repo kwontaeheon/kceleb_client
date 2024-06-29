@@ -25,7 +25,7 @@
         사진은 어디에도 저장되지 않습니다. 회원가입 없이 바로 확인해보세요!
         얼굴로 성별과 감정을 분석하고, 내 얼굴과 닮은 연예인 찾기를 해보세요.
         한 번에 최대 열 명의 닮은 연예인을 찾고, SNS에 공유 가능한 연예인 이미지를 검색합니다." />
-    <link rel="stylesheet" href="/v_20240623/style.css" />
+    <link rel="stylesheet" href="/v_20240629/style.css" />
     <link rel="canonical" href="https://celebme.net" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="en" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="x-default" />
@@ -391,15 +391,12 @@
                 
                 <br />
 
-                <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
-                    <span class="try-again-text" style="font-size: 2.2rem;">셀럽미 다시 하기</span>
-                </button>
+                
     
 
             
             </div>
-
-
+            
             
             <button type="button p-2" class="my-share-btn" onclick="toggleCelebList();"
                 style="margin:10px; background-color: #35885d;">
@@ -422,6 +419,10 @@
                 style="margin:10px; height: 40px; background-color: #353709;">
                 <span class="try-again-text" style="font-size: 1.4rem;">링크 복사하기 🔗</span>
             </button>
+
+            <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
+                <span class="try-again-text" style="font-size: 2.2rem;">셀럽미 다시 하기</span>
+            </button><br>
 
             <br />
             <div id="label-container" class="d-flex flex-column justify-content-around"></div>
@@ -450,10 +451,10 @@
                                 src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
                                 alt='app icon'> -->
                             
-                            <iframe id="youtube-video" width="100%" height="300vh" src="https://youtube.com/embed/aFLerbjh_uA?controls=0&mute=1&showinfo=0&rel=0&autoplay=0&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="left: 0; top: 0; border: none;"></iframe>
+                            <iframe id="youtube-video" width="100%" height="300vh" src="https://youtube.com/embed/aFLerbjh_uA?controls=0&mute=1&showinfo=0&rel=0&autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="left: 0; top: 0; border: none;"></iframe>
                             
                             <p class="text-app-center">
-                                얼굴 사진을 선택하여 나랑 닮은 연예인을 회원가입없이 빠르게 찾아보세요!<br>
+                                얼굴 사진을 선택하면 나랑 닮은 연예인을 회원가입없이 빠르게 찾아보세요!<br>
                                 사진 데이터는 어디에도 저장되지 않습니다.
                             </p>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"
@@ -518,15 +519,23 @@
             <div class="modal-body d-flex flex-column justify-content-center align-items-center">
                 <p class="text-app-center">
                     닮은 연예인 찾기 셀럽미에서<br/>
-                    나와 닮은 꼴 연예인을 손쉽게 찾아보세요.<br/>
+                    나와 닮은 꼴 연예인을 손쉽게 찾아보고,<br/>
                     가장 비슷한 연예인과 닮은 비율을 공유해보세요.<br/>
                 </p>
                     <img class="" src="/banner.jpg" alt='셀럽미: 닮은 연예인 찾기 K-POP 아이돌 닮은꼴 테스트' style="max-width: 40%;"><br/>
-                <p class="text-app-center">
-                    <a href="https://celebme.net/blog/%eb%8b%ae%ec%9d%80-%ec%97%b0%ec%98%88%ec%9d%b8-%ec%b0%be%ea%b8%b0/%eb%8b%ae%ec%9d%80-%ec%97%b0%ec%98%88%ec%9d%b8-%ec%b0%be%ea%b8%b0-%eb%b0%b0%ec%9a%b0-%ea%b3%b5%ec%9c%a0-%ea%b8%b0%ec%95%8884">닮은 연예인 찾기 셀럽미 - 배우 공유, 기안84</a><br/><br/>
-                    <a href="https://blog.naver.com/honth/223378825032">닮은 연예인 찾기 셀럽미 - 간단 샘플 확인해보기</a>
-                </p>
+                    <p class="text-app-center">
+                        얼굴 사진을 선택하고<br>
+                        나랑 닮은 연예인을 회원가입없이 빠르게 찾아보세요!<br>
+                        사진 데이터는 어디에도 저장되지 않습니다.
+                    </p>
+                <iframe id="youtube-video" width="80%" height="500vh" src="https://youtube.com/embed/aFLerbjh_uA?controls=0&mute=1&showinfo=0&rel=0&autoplay=0&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="left: 0; top: 0; border: none;"></iframe><br>
+                            
                 
+                
+                <p class="text-app-center">
+                    <a href="https://celebme.net/blog/%eb%8b%ae%ec%9d%80-%ec%97%b0%ec%98%88%ec%9d%b8-%ec%b0%be%ea%b8%b0/%eb%8b%ae%ec%9d%80-%ec%97%b0%ec%98%88%ec%9d%b8-%ec%b0%be%ea%b8%b0-%eb%b0%b0%ec%9a%b0-%ea%b3%b5%ec%9c%a0-%ea%b8%b0%ec%95%8884"><u>닮은 연예인 찾기 셀럽미 - 배우 공유, 기안84</u></a><br/><br/>
+                    <a href="https://blog.naver.com/honth/223378825032"><u>닮은 연예인 찾기 셀럽미 - 간단 샘플 확인해보기</u></a>
+                </p>
                 
             </div>
 
@@ -603,7 +612,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/v_20240623/index.js">
+    <script type="text/javascript" src="/v_20240629/index.js">
     </script>
 
 
@@ -617,7 +626,7 @@
 
         if (!window.location.href.includes("result") && getCookie('celebme-popup') != 'done') {
             // 팝업
-            $('#appModal').modal();
+            // $('#appModal').modal();
             // .contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
         }
         $(document).on('hide.bs.modal','#appModal', function () {
