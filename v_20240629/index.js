@@ -5,7 +5,6 @@
 // const apiUrl = "http://158.180.71.186:8181";
 // const apiUrl = "https://celebme-api.duckdns.org:8181";
 const apiUrl = "https://celebme.duckdns.org:8181";
-// const apiUrl = "http://localhost:8181";
 // const apiUrl = "http://149.130.218.11:8181";
 
 // 닮은 셀럽 목록 변수
@@ -181,22 +180,24 @@ function drawChart(userData) {
     
     
     $("#charts").show();
-  
-    var canvas = document.getElementById('cropped-face-image-2');
-    canvas.width = userData.region['w'];
-    canvas.height = userData.region['h'];
-    canvas.style.border = "5px solid";
-    var ctx    = canvas.getContext('2d');
-    var image  = document.getElementById('cropped-face-image-1');
-      
+  } 
+  var canvas = document.getElementById('cropped-face-image-2');
+  canvas.width = userData.region['w'];
+  canvas.height = userData.region['h'];
+  canvas.style.border = "5px solid";
+  var ctx    = canvas.getContext('2d');
+  var image  = document.getElementById('cropped-face-image-1');
+    
     ctx.drawImage(image, userData.region['x'], userData.region['y'], userData.region['w'], userData.region['h'],  0, 0, userData.region['w'], userData.region['h']);
     
     canvas.toBlob((croppedImage) => {
       $("#loading-message").html(getMeta("finding_lookalike_celeb"));
-      setTimeout(getSimilarCeleb, 3000, croppedImage);
+          setTimeout(function () {
+            getSimilarCeleb(croppedImage);
+          }, 3000);
 
     }, 'image/webp');
-  }
+
   const ageData = {
     labels: [getMeta("age")],
     datasets: [{
@@ -391,8 +392,10 @@ async function analyzeFace(inputImage) {
       var cropSuccess = drawChart(data);
       if (cropSuccess == false) {
         // $("#loading-message").html(getMeta("finding_lookalike_celeb"));
-        // crop 실패시 이미지 유사성 비교를 위해 이미지 그대로 입력
-        setTimeout(getSimilarCeleb, 3000, inputImage);
+          setTimeout(function () {
+            // crop 실패시 이미지 유사성 비교를 위해 이미지 그대로 입력
+            getSimilarCeleb(inputImage);
+          }, 3000);
       }
 
   
@@ -411,11 +414,10 @@ async function analyzeFace(inputImage) {
 
 
 function getSimilarCeleb(inputImage) {
-  
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
 
-    fetch(apiUrl + '/find2', {
+    fetch(apiUrl + '/find', {
     method: 'POST',
     body: formData
   })
@@ -487,7 +489,7 @@ function displayIdolPredictionBriefly(data) {
       const r = data[rank - 1].identity; // .split("/")[1]]
 
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
-      $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
 
       $('#search' + rank).hide();
       // $('#s' + rank).show();
@@ -513,7 +515,7 @@ function displayIdolPrediction(rank) {
   try {
     if ($('#search' + rank).is(":visible")) {
       $('#search' + rank).hide();
-      $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
     }
     else {
 
@@ -523,7 +525,7 @@ function displayIdolPrediction(rank) {
       var element = google.search.cse.element.getElement('q' + rank);
       element.execute(q);
       $('#search' + rank).show();
-      $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% _");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% _");
 
       // window.history.replaceState({}, document.title, "/");
       window.history.replaceState({}, document.title, getBaseUrl());
@@ -840,7 +842,7 @@ function shareKakao() {
         templateId: 104987,
       templateArgs: {
         'result_url': link,    // encoded url
-        'result': similarIdolData[0].identity + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
+        'result': similarIdolData[0].identity + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
       }
       }
     );
