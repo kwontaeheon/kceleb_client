@@ -15,10 +15,16 @@ var faceData;
 
 
 const lang = $( "#lang option:selected" ).val();
-const version = "/v_20240708";
+const version = "/v_20240804";
 var faceNames = {};
+var faceNamesKo = {};
 (function () {
-  
+  fetch(version + "/names_ko.json")
+  .then(response => response.json())
+  .then(jsonData => {
+    faceNamesKo = jsonData;
+  });
+
   fetch(version + "/names_" + (lang === "ko" ? "ko" : "en") + ".json")
     .then(response => response.json())
     .then(jsonData => {
@@ -411,7 +417,6 @@ async function analyzeFace(inputImage) {
 
 
 function getSimilarCeleb(inputImage) {
-  
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
 
@@ -449,8 +454,10 @@ function getSimilarCeleb(inputImage) {
 
       similarIdolData = data;
       for (var rank = 0; rank < 10; rank++) {
-        similarIdolData[rank].identity = faceNames[similarIdolData[rank].identity];
+        similarIdolData[rank].name = faceNames[similarIdolData[rank].identity];
+        similarIdolData[rank].nameKo = faceNamesKo[similarIdolData[rank].identity];
       }
+      // console.log(faceNames, faceNamesKo,similarIdolData );
       displayIdolPredictionBriefly(data);
       // displayIdolPrediction(1);
       $('#extra-similars').show();
@@ -484,7 +491,7 @@ function displayIdolPredictionBriefly(data) {
   $("#result-similar-idol").show();
   for (var rank = 1; rank <= 10; rank++) {
     try {
-      const r = data[rank - 1].identity; // .split("/")[1]]
+      const r = data[rank - 1].name; // .split("/")[1]]
 
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
       $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
@@ -509,7 +516,8 @@ function displayIdolPrediction(rank) {
   data = similarIdolData;
 
   // console.log(data);
-  const r = data[rank - 1].identity; // .split("/")[1]];
+  const r = data[rank - 1].name; // .split("/")[1]];
+  const koName = data[rank - 1].nameKo; // .split("/")[1]];
   try {
     if ($('#search' + rank).is(":visible")) {
       $('#search' + rank).hide();
@@ -518,7 +526,7 @@ function displayIdolPrediction(rank) {
     else {
 
       // console.log(r);
-      q = 'allintitle:"' + r + '"';
+      q = 'allintitle: "' + koName + '"';
 
       var element = google.search.cse.element.getElement('q' + rank);
       element.execute(q);
@@ -796,7 +804,7 @@ function showResults(resultParam, faceParam) {
       $('#result-message').hide();
       // displayIdolPredictionBriefly(similarIdolData);
       displayIdolPrediction(1);
-      $('#celeb-result').html(getMeta("face_in_picture") + similarIdolData[0].identity + getMeta("it_resembles")
+      $('#celeb-result').html(getMeta("face_in_picture") + similarIdolData[0].name + getMeta("it_resembles")
         // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
       )
 
@@ -840,7 +848,7 @@ function shareKakao() {
         templateId: 104987,
       templateArgs: {
         'result_url': link,    // encoded url
-        'result': similarIdolData[0].identity + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
+        'result': similarIdolData[0].name + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
       }
       }
     );
