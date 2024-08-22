@@ -606,6 +606,8 @@ async function readURL(input) {
         
         analyzeFace(resizedImg).then(function (croppedImage) {
           // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
+
+          displayAnimation();
         });
 
 
@@ -880,3 +882,90 @@ if (resultParam != null) {
 
 
 // }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝
+
+function displayAnimation() {
+  document.getElementById('createGif').addEventListener('click', function () {
+      const canvas = document.getElementById('hiddenCanvas');
+      const ctx = canvas.getContext('2d');
+      var animation = document.getElementById('animation');
+      animation.style.display = 'block';
+
+      let gif = new GIF({
+          workers: 1,
+          // workerScript: URL.createObjectURL(workerBlob),
+          quality: 1,
+          width: canvas.width,
+          height: canvas.height,
+          dither: false, // 'Atkinson-serpentine',
+          background: 0x00FF00,
+          transparent: null, // 0xFF0000, // '#0f0', //  0x00FF00,
+          debug: true
+          //width: 1024,
+          // height: 500,
+      });
+
+
+      console.log("ani");
+      var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
+      var image2 = document.getElementById('cropped-face-image-1');
+
+
+      const transitionFrames = 20; // Number of frames for the transition
+
+      // Draw image1
+      ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
+      gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
+      ctx.globalCompositeOperation = 'source-over';
+      // Transition frames
+      for (let i = 0; i <= transitionFrames; i++) {
+          ctx.globalAlpha = i / transitionFrames;
+          ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+          gif.addFrame(ctx, { copy: true, delay: 100 });
+      }
+
+      // Draw image2
+      ctx.globalAlpha = 1.0;
+      ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+      gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay after transition
+      console.log("finished1");
+      // Render the GIF
+      gif.on('finished', (blob) => {
+
+          console.log("finished");
+          var reader = new FileReader();
+          reader.readAsDataURL(blob); // Convert blob to base64
+          reader.onloadend = function () {
+              var base64data = reader.result; // This is the base64 string
+              var gifImage = document.getElementById('outputGIF');
+              gifImage.src = base64data;
+
+          };
+
+          var downloadButton = document.getElementById('downloadGif');
+          downloadButton.style.display = 'block';
+          downloadButton.addEventListener('click', function () {
+              var a = document.createElement('a');
+              a.href = URL.createObjectURL(blob);
+              var now = new Date();
+              var year = now.getFullYear();
+              var month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+              var day = String(now.getDate()).padStart(2, '0');
+
+              var hours = String(now.getHours()).padStart(2, '0');
+              var minutes = String(now.getMinutes()).padStart(2, '0');
+              var seconds = String(now.getSeconds()).padStart(2, '0');
+
+              a.download = `celebme_${year}-${month}-${day}_${hours}${minutes}${seconds}.gif`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+          });
+
+      });
+
+      gif.render();
+
+
+
+  });
+}

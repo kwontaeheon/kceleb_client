@@ -264,7 +264,7 @@
             <div class="result-message" id="result-similar-idol">
                 <br/>
                 <br/>
-                <canvas id="cropped-face-image-1" style="display: none;"></canvas>
+                <canvas id="cropped-face-image-1" style="display: block;"></canvas>
                 <canvas id="cropped-face-image-2" class="styled-canvas" width="100" height="100" style="max-width: 30%; max-height: 30%; border: 0px;"></canvas>
                 <br/>
                 <br/>
@@ -521,7 +521,7 @@
                     나와 닮은 꼴 연예인을 손쉽게 찾아보고,<br/>
                     가장 비슷한 연예인과 닮은 얼굴 비율을 공유해보세요.<br/>
                 </p>
-                    <img class="" src="/banner.jpg" alt='셀럽미: 닮은 연예인 찾기 K-POP 아이돌 닮은꼴 테스트' style="max-width: 40%;"><br/>
+                    <img class="" id="banner" src="/banner.jpg" alt='셀럽미: 닮은 연예인 찾기 K-POP 아이돌 닮은꼴 테스트' style="max-width: 40%;"><br/>
                     <p class="text-app-center">
                         얼굴이 잘 나온 사진을 선택하고<br>
                         나랑 닮은 얼굴을 가진 사람 중에서 <br>
@@ -537,7 +537,14 @@
                     <a href="https://celebme.net/blog/%eb%8b%ae%ec%9d%80-%ec%97%b0%ec%98%88%ec%9d%b8-%ec%b0%be%ea%b8%b0/%eb%8b%ae%ec%9d%80-%ec%97%b0%ec%98%88%ec%9d%b8-%ec%b0%be%ea%b8%b0-%eb%b0%b0%ec%9a%b0-%ea%b3%b5%ec%9c%a0-%ea%b8%b0%ec%95%8884"><u>닮은 연예인 찾기 셀럽미 - 배우 공유, 기안84</u></a><br/><br/>
                     <a href="https://blog.naver.com/honth/223378825032"><u>닮은 연예인 찾기 셀럽미 - 간단 샘플 확인해보기</u></a>
                 </p>
-                
+                <canvas id="hiddenCanvas" width="500" height="500" style="display: none;"></canvas>
+                <button id="createGif">Create GIF</button>
+                <div id="animation" style="display: none;">
+                    <center>
+                    <img id="outputGIF" style="width: 30vh; height: 30vh;">
+                    <button id="downloadGif" style="display: none;">Download GIF</button>
+                    </center>
+                </div>
             </div>
 
             <!-- app banner -->
@@ -637,7 +644,8 @@
 
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+    <!-- gif animation -->
+    <script src="/gif.js"></script>
 </body>
 <!--
 image input box

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create GIF from Images</title>
 </head>
+
 <body>
     <button id="createGif">Create GIF</button>
-    <img id="image1" src="banner_org.png" style="display: none;">
+    <img id="image1" src="test1.png" style="display: none;">
     <img id="image2" src="banner.jpg" style="display: none;">
     <canvas id="canvas" width="500" height="500" style="display: none;"></canvas>
     <div id="output">
         <center>
-        <img id="outputGIF" style="width: 30vh; height: 30vh;">
-        <button id="downloadGif" style="display: none;">Download GIF</button>
+            <img id="outputGIF" style="width: 30vh; height: 30vh;">
+            <button id="downloadGif" style="display: none;">Download GIF</button>
         </center>
     </div>
-    
-    
+
+
 
     <script src="/gif.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script> -->
@@ -27,101 +29,105 @@
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
 
-       //     let gifLoading =  fetch('https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js') //  fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js') // fetch('/gif.js/dist/gif.worker.js') //  // fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js') // fetch('/gif.js/dist/gif.worker.js') // fetch('https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js')
-     //   .then((response) => {
-     //       if (!response.ok)
-     //       throw new Error("Network response was not OK");
-     //       return response.blob();
-     //   }) ;
-     //   gifLoading.then(workerBlob => {
-            
-    let gif = new GIF({
-        workers: 2,
-        // workerScript: URL.createObjectURL(workerBlob),
-        quality: 10,
-        width: canvas.width,
-        height: canvas.height,
-        dither: 'Atkinson-serpentine',
-        background: '#fff',
-        // transparent: '#00FF00',
-        // transparent: '#FF00FF',
-        transparent: 0x00FF00,
-        debug: true,
-        //width: 1024,
-        // height: 500,
-    });
+            let gif = new GIF({
+                workers: 1,
+                // workerScript: URL.createObjectURL(workerBlob),
+                quality: 1,
+                width: canvas.width,
+                height: canvas.height,
+                dither: false, // 'Atkinson-serpentine',
+                background: 0x00FF00,
+                transparent: null, // 0xFF0000, // '#0f0', //  0x00FF00,
+                debug: true
 
-   
+                
+                // workerScript: URL.createObjectURL(workerBlob),
+                
+                
+                // dither: 'Atkinson-serpentine',
+                // background: '#0f0',
+               //  transparent: 'rgba(0, 255, 0, 255)',
+                // background: '#fff',
+                // transparent: '#00FF00',
+                // transparent: '#FF00FF',
+                // transparent: 0x00FF00,
+                
+                //width: 1024,
+                // height: 500,
+            });
 
-    var image1 = document.getElementById('image1');
-    var image2 = document.getElementById('image2');
 
-    
-    const transitionFrames = 20; // Number of frames for the transition
 
-    // Draw image1
-    ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
-    gif.addFrame(ctx, {copy: true, delay: 500}); // Delay before transition
+            var image1 = document.getElementById('image1');
+            var image2 = document.getElementById('image2');
 
-    // Transition frames
-    for (let i = 0; i <= transitionFrames; i++) {
-        ctx.globalAlpha = i / transitionFrames;
-        ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
-        gif.addFrame(ctx, {copy: true, delay: 100});
-    }
 
-    // Draw image2
-    ctx.globalAlpha = 1.0;
-    ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
-    gif.addFrame(ctx, {copy: true, delay: 500}); // Delay after transition
-    console.log("finished1");
-    // Render the GIF
-    gif.on('finished', (blob) => { 
-        
-        console.log("finished");
-        var reader = new FileReader();
-        reader.readAsDataURL(blob); // Convert blob to base64
-        reader.onloadend = function () {
-            var base64data = reader.result; // This is the base64 string
-            var gifImage = document.getElementById('outputGIF');
-            gifImage.src = base64data;
+            const transitionFrames = 20; // Number of frames for the transition
 
-        };
+            // Draw image1
+            ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
+            gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
 
-        // 
-        // gifImage.src = URL.createObjectURL(blob);
-        // console.log("src");
-        // document.getElementById('output').appendChild(gifImage);
+            // Transition frames
+            for (let i = 0; i <= transitionFrames; i++) {
+                ctx.globalAlpha = i / transitionFrames;
+                ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+                gif.addFrame(ctx, { copy: true, delay: 100 });
+            }
 
-        var downloadButton = document.getElementById('downloadGif');
-        downloadButton.style.display = 'block';
-        downloadButton.addEventListener('click', function() {
-            var a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            var now = new Date();
-            var year = now.getFullYear();
-            var month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-            var day = String(now.getDate()).padStart(2, '0');
-            
-            var hours = String(now.getHours()).padStart(2, '0');
-            var minutes = String(now.getMinutes()).padStart(2, '0');
-            var seconds = String(now.getSeconds()).padStart(2, '0');
-    
-            a.download = `celebme_${year}-${month}-${day}_${hours}${minutes}${seconds}.gif`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        });
+            // Draw image2
+            ctx.globalAlpha = 1.0;
+            ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+            gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay after transition
+            console.log("finished1");
+            // Render the GIF
+            gif.on('finished', (blob) => {
 
-    });
+                console.log("finished");
+                var reader = new FileReader();
+                reader.readAsDataURL(blob); // Convert blob to base64
+                reader.onloadend = function () {
+                    var base64data = reader.result; // This is the base64 string
+                    var gifImage = document.getElementById('outputGIF');
+                    gifImage.src = base64data;
 
-    gif.render();
-       
+                };
 
-          
+                // 
+                // gifImage.src = URL.createObjectURL(blob);
+                // console.log("src");
+                // document.getElementById('output').appendChild(gifImage);
+
+                var downloadButton = document.getElementById('downloadGif');
+                downloadButton.style.display = 'block';
+                downloadButton.addEventListener('click', function () {
+                    var a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    var now = new Date();
+                    var year = now.getFullYear();
+                    var month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                    var day = String(now.getDate()).padStart(2, '0');
+
+                    var hours = String(now.getHours()).padStart(2, '0');
+                    var minutes = String(now.getMinutes()).padStart(2, '0');
+                    var seconds = String(now.getSeconds()).padStart(2, '0');
+
+                    a.download = `celebme_${year}-${month}-${day}_${hours}${minutes}${seconds}.gif`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                });
+
+            });
+
+            gif.render();
+
+
+
         });
     // });
     </script>
-    
+
 </body>
+
 </html>
