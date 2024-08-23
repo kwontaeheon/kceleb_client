@@ -885,12 +885,40 @@ if (resultParam != null) {
 
 function displayAnimation() {
   document.getElementById('createGif').addEventListener('click', function () {
-      const canvas = document.getElementById('hiddenCanvas');
-      const ctx = canvas.getContext('2d');
-      var animation = document.getElementById('animation');
-      animation.style.display = 'block';
+      
 
-      let gif = new GIF({
+      
+
+
+      console.log("ani");
+      var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
+      // var image2 = document.getElementById('cropped-face-image-1');
+      var target = document.getElementsByClassName('gs-image-scalable').item(1);
+      // target.setAttribute('crossOrigin', 'Anonymous');
+      const image2 = new Image();
+      // var image2 = document.getElementById('top-similar-face-img');
+      image2.src = target.src;
+      image2.crossOrigin = 'anonymous';
+
+      // var image2 = document.getElementById('top-similar-face');
+      // var image2Ctx = image2.getContext('2d');
+      // image2Ctx.drawImage(target, 0, 0);
+      
+      // image2.src = target.src;
+      
+      // image1 = image2;
+
+      
+
+      
+
+      image2.onload = () => {
+        const canvas = document.getElementById('hiddenCanvas');
+        const ctx = canvas.getContext('2d');
+        var animation = document.getElementById('animation');
+        animation.style.display = 'block';
+
+        let gif = new GIF({
           workers: 1,
           // workerScript: URL.createObjectURL(workerBlob),
           quality: 1,
@@ -902,34 +930,29 @@ function displayAnimation() {
           debug: true
           //width: 1024,
           // height: 500,
-      });
+        });
 
 
-      console.log("ani");
-      var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
-      var image2 = document.getElementById('cropped-face-image-1');
+        const transitionFrames = 20; // Number of frames for the transition
+        // Draw image1
+        ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
+        gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
+        ctx.globalCompositeOperation = 'source-over';
+        // Transition frames
+        for (let i = 0; i <= transitionFrames; i++) {
+            ctx.globalAlpha = i / transitionFrames;
+            ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+            gif.addFrame(ctx, { copy: true, delay: 100 });
+        }
 
+        // Draw image2
+        ctx.globalAlpha = 1.0;
+        ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+        gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay after transition
+        console.log("finished1");
 
-      const transitionFrames = 20; // Number of frames for the transition
-
-      // Draw image1
-      ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
-      gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
-      ctx.globalCompositeOperation = 'source-over';
-      // Transition frames
-      for (let i = 0; i <= transitionFrames; i++) {
-          ctx.globalAlpha = i / transitionFrames;
-          ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
-          gif.addFrame(ctx, { copy: true, delay: 100 });
-      }
-
-      // Draw image2
-      ctx.globalAlpha = 1.0;
-      ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
-      gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay after transition
-      console.log("finished1");
-      // Render the GIF
-      gif.on('finished', (blob) => {
+        // Render the GIF
+        gif.on('finished', (blob) => {
 
           console.log("finished");
           var reader = new FileReader();
@@ -961,9 +984,13 @@ function displayAnimation() {
               document.body.removeChild(a);
           });
 
-      });
+        });
 
-      gif.render();
+        gif.render();
+        
+      };
+      
+      
 
 
 
