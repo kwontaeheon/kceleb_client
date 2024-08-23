@@ -288,11 +288,18 @@
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
                     <div class='result-title' id="r1"> 1순위 </div>
                 </button>
-                <div style="max-height: 30%; overflow: hidden;">
+                <div id="search1-head"  style="max-height: 30%; overflow: hidden;">
                     <div id="search1" class="gcse-searchresults-only"
                         data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                         data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
                         data-image_type="face" data-gname="q1"></div>
+                    <button id="createGif" onclick="displayAnimation(1)">Create GIF</button>
+                    <div id="animation" style="display: none;">
+                        <center>
+                        <img id="outputGIF" style="width: 30vh; height: 30vh;">
+                        <button id="downloadGif" style="display: none;">Download GIF</button>
+                        </center>
+                    </div>
                 </div>
                 <div class="row" style="font-size: 1.1rem; margin: 10px;" id="extra-similars">
                     <div style="width: 33%; max-height: 20%; overflow: hidden;">
@@ -540,13 +547,7 @@
                     <a href="https://blog.naver.com/honth/223378825032"><u>닮은 연예인 찾기 셀럽미 - 간단 샘플 확인해보기</u></a>
                 </p>
                 <canvas id="hiddenCanvas" width="500" height="500" style="display: none;"></canvas>
-                <button id="createGif">Create GIF</button>
-                <div id="animation" style="display: none;">
-                    <center>
-                    <img id="outputGIF" style="width: 30vh; height: 30vh;">
-                    <button id="downloadGif" style="display: none;">Download GIF</button>
-                    </center>
-                </div>
+                
             </div>
 
             <!-- app banner -->

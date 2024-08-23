@@ -607,7 +607,7 @@ async function readURL(input) {
         analyzeFace(resizedImg).then(function (croppedImage) {
           // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
 
-          displayAnimation();
+          // displayAnimation();
         });
 
 
@@ -883,8 +883,8 @@ if (resultParam != null) {
 
 // }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝
 
-function displayAnimation() {
-  document.getElementById('createGif').addEventListener('click', function () {
+function displayAnimation(searchIdx) {
+  // document.getElementById('createGif').addEventListener('click', function () {
       
 
       
@@ -893,7 +893,8 @@ function displayAnimation() {
       console.log("ani");
       var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
       // var image2 = document.getElementById('cropped-face-image-1');
-      var target = document.getElementsByClassName('gs-image-scalable').item(1);
+      var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
+      var target = search1.getElementsByClassName('gs-image-scalable').item(1);
       // target.setAttribute('crossOrigin', 'Anonymous');
       const image2 = new Image();
       // var image2 = document.getElementById('top-similar-face-img');
@@ -994,5 +995,5 @@ function displayAnimation() {
 
 
 
-  });
+  // });
 }
