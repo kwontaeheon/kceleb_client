@@ -638,3 +638,13 @@ max-height: 0px !important;
   object-fit: cover;
   width: 100%;
 }
+
+.giffont {
+    font-size: 1.0em;
+}
+
+.gifloading {
+    width: 5rem;
+    height: 5rem;
+    margin: 50px;
+}

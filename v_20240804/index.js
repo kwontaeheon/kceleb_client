@@ -910,14 +910,14 @@ function displayAnimation(searchIdx) {
       // image1 = image2;
 
       
-
+      var loadingGif = document.getElementById('gifLoading');
+      loadingGif.style.display = 'block'; // loading
       
 
       image2.onload = () => {
         const canvas = document.getElementById('hiddenCanvas');
         const ctx = canvas.getContext('2d');
-        var animation = document.getElementById('animation');
-        animation.style.display = 'block';
+        
 
         let gif = new GIF({
           workers: 1,
@@ -937,18 +937,33 @@ function displayAnimation(searchIdx) {
         const transitionFrames = 20; // Number of frames for the transition
         // Draw image1
         ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
+        ctx.font = "15px MaruBuriBold";
+        var fontWidth = 15;
+        var fontHeight = canvas.height - fontWidth;
+        ctx.fillStyle = "#ffffff";
+        ctx.lineWidth = 1;
+        ctx.lineJoin = 'miter';
+        ctx.miterLimit = 2;
+        ctx.strokeStyle = '#ef7822';
+        var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + ((similarIdolData[searchIdx - 1].distance) * 100).toFixed(1) + "%";
+        ctx.fillText(contentText, fontWidth, fontHeight);
+        ctx.strokeText(contentText, fontWidth, fontHeight);
         gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
         ctx.globalCompositeOperation = 'source-over';
         // Transition frames
         for (let i = 0; i <= transitionFrames; i++) {
             ctx.globalAlpha = i / transitionFrames;
             ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+            ctx.fillText(contentText, fontWidth, fontHeight);
+            ctx.strokeText(contentText, fontWidth, fontHeight);
             gif.addFrame(ctx, { copy: true, delay: 100 });
         }
 
         // Draw image2
         ctx.globalAlpha = 1.0;
         ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+        ctx.fillText(contentText, fontWidth, fontHeight);
+        ctx.strokeText(contentText, fontWidth, fontHeight);
         gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay after transition
         console.log("finished1");
 
@@ -985,9 +1000,14 @@ function displayAnimation(searchIdx) {
               document.body.removeChild(a);
           });
 
+          loadingGif.style.display = 'none';
+          var animation = document.getElementById('animation');
+          animation.style.display = 'block';
+
         });
 
         gif.render();
+        
         
       };
       

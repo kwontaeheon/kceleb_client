@@ -9,7 +9,7 @@
 
 <body>
     <button id="createGif">Create GIF</button>
-    <img id="image1" src="test1.png" style="display: none;">
+    <img id="image1" src="banner_wb_512.jpeg" style="display: none;">
     <img id="image2" src="banner.jpg" style="display: none;">
     <canvas id="canvas" width="500" height="500" style="display: none;"></canvas>
     <div id="output">
@@ -62,9 +62,20 @@
             var image2 = document.getElementById('image2');
 
 
-            const transitionFrames = 20; // Number of frames for the transition
+            const transitionFrames = 5; // Number of frames for the transition
 
             // Draw image1
+            ctx.font = "2.0em MaruBuriBold";
+            var fontWidth = 15;
+            var fontHeight = canvas.height - fontWidth;
+            ctx.fillStyle = "#ffffff";
+            ctx.lineWidth = 1;
+            ctx.lineJoin = 'miter';
+            ctx.miterLimit = 2;
+            ctx.strokeStyle = '#ef7822';
+            var contentText = "celebme.net";
+            ctx.fillText(contentText, fontWidth, fontHeight);
+            ctx.strokeText(contentText, fontWidth, fontHeight);
             ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
             gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
 
@@ -72,13 +83,17 @@
             for (let i = 0; i <= transitionFrames; i++) {
                 ctx.globalAlpha = i / transitionFrames;
                 ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+                ctx.fillText(contentText, fontWidth, fontHeight);
+                ctx.strokeText(contentText, fontWidth, fontHeight);
                 gif.addFrame(ctx, { copy: true, delay: 100 });
             }
 
             // Draw image2
             ctx.globalAlpha = 1.0;
             ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
-            gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay after transition
+            ctx.fillText(contentText, fontWidth, fontHeight);
+            ctx.strokeText(contentText, fontWidth, fontHeight);
+            gif.addFrame(ctx, { copy: true, delay: 1000 }); // Delay after transition
             console.log("finished1");
             // Render the GIF
             gif.on('finished', (blob) => {

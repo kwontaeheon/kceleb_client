@@ -293,11 +293,16 @@
                         data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                         data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
                         data-image_type="face" data-gname="q1"></div>
-                    <button id="createGif" onclick="displayAnimation(1)">Create GIF</button>
+                    <button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont">움짤 만들기!</button>
+                    <div id="gifLoading" class="animated bounce" style="display: none;">
+                        <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                     <div id="animation" style="display: none;">
                         <center>
                         <img id="outputGIF" style="width: 30vh; height: 30vh;">
-                        <button id="downloadGif" style="display: none;">Download GIF</button>
+                        <button id="downloadGif" style="display: none;" class="styled-canvas giffont">움짤 다운받기</button>
                         </center>
                     </div>
                 </div>
