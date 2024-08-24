@@ -175,7 +175,10 @@ function drawChart(userData) {
   } else {
     if (userData.face_cnt > 1) {
       confidenceStr = getMeta("face_gt1");
-    }
+      
+    } 
+    // 한 명 이상 인식되었을때에만 gif 생성버튼을 표시한다.
+    document.getElementById("createGif").style.display = "block";
 
     $("#face-analysis-result").html(
       confidenceStr + "<br/>"
@@ -476,7 +479,7 @@ function getSimilarCeleb(inputImage) {
       } catch(error) {
 
       }
-
+      
     })
     .catch(error => {
       // Handle errors here
@@ -937,14 +940,14 @@ function displayAnimation(searchIdx) {
         const transitionFrames = 20; // Number of frames for the transition
         // Draw image1
         ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
-        ctx.font = "15px MaruBuriBold";
+        ctx.font = "16px MaruBuriBold";
         var fontWidth = 15;
         var fontHeight = canvas.height - fontWidth;
         ctx.fillStyle = "#ffffff";
         ctx.lineWidth = 1;
         ctx.lineJoin = 'miter';
         ctx.miterLimit = 2;
-        ctx.strokeStyle = '#ef7822';
+        ctx.strokeStyle = '#ffffff';
         var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + ((similarIdolData[searchIdx - 1].distance) * 100).toFixed(1) + "%";
         ctx.fillText(contentText, fontWidth, fontHeight);
         ctx.strokeText(contentText, fontWidth, fontHeight);

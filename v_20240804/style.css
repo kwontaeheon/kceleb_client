@@ -632,6 +632,7 @@ max-height: 0px !important;
     border: 5px solid #4a90e2;
     border-radius: 10px;
     animation: borderAnimation 2s infinite;
+    margin: 10px;
 }
 
 .gs-image {
@@ -640,7 +641,7 @@ max-height: 0px !important;
 }
 
 .giffont {
-    font-size: 1.0em;
+    font-size: 1.8em;
 }
 
 .gifloading {

@@ -293,18 +293,7 @@
                         data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                         data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
                         data-image_type="face" data-gname="q1"></div>
-                    <button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont">움짤 만들기!</button>
-                    <div id="gifLoading" class="animated bounce" style="display: none;">
-                        <div id="celeb-spinner" class="spinner-border gifloading" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                    <div id="animation" style="display: none;">
-                        <center>
-                        <img id="outputGIF" style="width: 30vh; height: 30vh;">
-                        <button id="downloadGif" style="display: none;" class="styled-canvas giffont">움짤 다운받기</button>
-                        </center>
-                    </div>
+                    
                 </div>
                 <div class="row" style="font-size: 1.1rem; margin: 10px;" id="extra-similars">
                     <div style="width: 33%; max-height: 20%; overflow: hidden;">
@@ -397,7 +386,23 @@
                         
 
                     </div>
-                    <div class="col" style="text-align:center;"><h4 class="subtitle">나랑 닮은 연예인 찾기 결과를 공유해보세요!</h4></div>
+                    <div class="col" style="text-align:center;">
+                        <h4 class="subtitle">나랑 닮은 연예인 찾기 결과를 공유해보세요!</h4>
+                        <center><button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont" style="display: none;">가장 닮은 연예인 움짤 만들기!</button></center>
+                        <div id="gifLoading" class="animated bounce" style="display: none;">
+                            <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <div id="animation" style="display: none;">
+                            <center>
+                            <img id="outputGIF" style="width: 30vh; height: 30vh;">
+                            <button id="downloadGif" style="display: none;" class="styled-canvas giffont">움짤 다운받기</button>
+                            </center>
+                        </div>
+                    </div>
+
+                    
                     
                     
                 </div>
