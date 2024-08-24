@@ -14,16 +14,16 @@ var similarIdolData;
 var faceData;
 
 
-const lang = $( "#lang option:selected" ).val();
+const lang = $("#lang option:selected").val();
 const version = "/v_20240804";
 var faceNames = {};
 var faceNamesKo = {};
 (function () {
   fetch(version + "/names_ko.json")
-  .then(response => response.json())
-  .then(jsonData => {
-    faceNamesKo = jsonData;
-  });
+    .then(response => response.json())
+    .then(jsonData => {
+      faceNamesKo = jsonData;
+    });
 
   fetch(version + "/names_" + (lang === "ko" ? "ko" : "en") + ".json")
     .then(response => response.json())
@@ -47,7 +47,7 @@ var faceNamesKo = {};
 
         jsonContainer.appendChild(keyValueContainer);
       });
-        // console.log(jsonData);
+      // console.log(jsonData);
     })
     .catch(error => {
       console.error("Error fetching JSON:", error);
@@ -57,7 +57,7 @@ var faceNamesKo = {};
 
 var resultMeta = {};
 (function () {
-  fetch(version +"/meta_" + lang + ".json")
+  fetch(version + "/meta_" + lang + ".json")
     .then(response => response.json())
     .then(jsonData => {
       // Use jsonData as needed
@@ -103,27 +103,27 @@ $(".result-message").hide();
 
 // 쿠키 확인 
 function getCookie(name) {
-  var nameOfCookie=name+"=";
-  var a=0;
-      while(a<=document.cookie.length) {
-      var b=(a+nameOfCookie.length);
-          if(document.cookie.substring(a,b)==nameOfCookie) {
-              if((endOfCookie=document.cookie.indexOf(";",b))==-1)
-              endOfCookie=document.cookie.length;
-              return unescape(document.cookie.substring(b,endOfCookie));
-          }
-          a=document.cookie.indexOf(" ",a) +1;
-          if(a==0)
-          break;
-      }
+  var nameOfCookie = name + "=";
+  var a = 0;
+  while (a <= document.cookie.length) {
+    var b = (a + nameOfCookie.length);
+    if (document.cookie.substring(a, b) == nameOfCookie) {
+      if ((endOfCookie = document.cookie.indexOf(";", b)) == -1)
+        endOfCookie = document.cookie.length;
+      return unescape(document.cookie.substring(b, endOfCookie));
+    }
+    a = document.cookie.indexOf(" ", a) + 1;
+    if (a == 0)
+      break;
+  }
   return "";
 }
 
 // 쿠키 설정
-function setCookie(name, value, expiredays){
+function setCookie(name, value, expiredays) {
   var todayDate = new Date();
-  todayDate.setDate( todayDate.getDate() + expiredays );
-  document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+  todayDate.setDate(todayDate.getDate() + expiredays);
+  document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
 }
 
 
@@ -169,14 +169,14 @@ function drawChart(userData) {
     $("#face-analysis-result").html(
       confidenceStr + "<br/>"
     );
-    
+
     $("#charts").hide();
     cropSuccess = false;
   } else {
     if (userData.face_cnt > 1) {
       confidenceStr = getMeta("face_gt1");
-      
-    } 
+
+    }
     // 한 명 이상 인식되었을때에만 gif 생성버튼을 표시한다.
     document.getElementById("createGif").style.display = "block";
 
@@ -186,20 +186,20 @@ function drawChart(userData) {
       + getMeta("age") + " " + userData.age + getMeta("age_val") + " " + getMeta(userData.dominant_gender) + ", "
       + getMeta(userData.dominant_emotion) + getMeta("i_guess") + " <br/>"
     );
-    
-    
-    
+
+
+
     $("#charts").show();
-  
+
     var canvas = document.getElementById('cropped-face-image-2');
     canvas.width = userData.region['w'];
     canvas.height = userData.region['h'];
     canvas.style.border = "5px solid";
-    var ctx    = canvas.getContext('2d');
-    var image  = document.getElementById('cropped-face-image-1');
-      
-    ctx.drawImage(image, userData.region['x'], userData.region['y'], userData.region['w'], userData.region['h'],  0, 0, userData.region['w'], userData.region['h']);
-    
+    var ctx = canvas.getContext('2d');
+    var image = document.getElementById('cropped-face-image-1');
+
+    ctx.drawImage(image, userData.region['x'], userData.region['y'], userData.region['w'], userData.region['h'], 0, 0, userData.region['w'], userData.region['h']);
+
     canvas.toBlob((croppedImage) => {
       $("#loading-message").html(getMeta("finding_lookalike_celeb"));
       setTimeout(getSimilarCeleb, 3000, croppedImage);
@@ -380,7 +380,7 @@ function drawChart(userData) {
   });
 
   return cropSuccess;
-  
+
 }
 
 async function analyzeFace(inputImage) {
@@ -395,7 +395,7 @@ async function analyzeFace(inputImage) {
       // Handle the response data here
       // console.log("analyze");
       // console.log(data);
-      
+
       faceData = data;
       var cropSuccess = drawChart(data);
       if (cropSuccess == false) {
@@ -404,7 +404,7 @@ async function analyzeFace(inputImage) {
         setTimeout(getSimilarCeleb, 3000, inputImage);
       }
 
-  
+
     })
     .catch(error => {
       // Handle errors here
@@ -423,27 +423,27 @@ function getSimilarCeleb(inputImage) {
   const formData = new FormData();
   formData.append("img", inputImage); // Adjust file type as needed
 
-    fetch(apiUrl + '/find2', {
+  fetch(apiUrl + '/find2', {
     method: 'POST',
     body: formData
   })
-  .catch(error => {
-    // Handle errors here
-    console.error('Error:', error);
-    $("#celeb-spinner").hide();
-    $("#loading-message").html(
-      getMeta("error_msg")
-    );
-  })
+    .catch(error => {
+      // Handle errors here
+      console.error('Error:', error);
+      $("#celeb-spinner").hide();
+      $("#loading-message").html(
+        getMeta("error_msg")
+      );
+    })
     .then(response => response.json())
     .then(data => {
       // Handle the response data here
       // console.log(data);
-      try{
+      try {
         for (var rank = 0; rank < 10; rank++) {
-          delete data[rank].source_h ;
+          delete data[rank].source_h;
           delete data[rank].source_w;
-          delete data[rank].source_x ;
+          delete data[rank].source_x;
           delete data[rank].source_y;
           delete data[rank].target_h;
           delete data[rank].target_w;
@@ -474,12 +474,12 @@ function getSimilarCeleb(inputImage) {
       $("html, body").scrollTop(
         document.getElementsByClassName("title")[0].offsetTop
       );
-      try{
+      try {
         (adsbygoogle = window.adsbygoogle || []).push({});
-      } catch(error) {
+      } catch (error) {
 
       }
-      
+
     })
     .catch(error => {
       // Handle errors here
@@ -576,7 +576,7 @@ async function loadImage(url, elem) {
 async function readURL(input) {
   if (input.files && input.files[0]) {
     // $(".try-again-btn").hide();
-    
+
     // 동의모드는 추후구현
     // gtag('consent', 'default', {
     //   'ad_storage': 'denied',
@@ -606,7 +606,7 @@ async function readURL(input) {
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");
       cropImage(imgData, function (resizedImg) {
-        
+
         analyzeFace(resizedImg).then(function (croppedImage) {
           // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
 
@@ -635,7 +635,7 @@ function removeUpload() {
   $(".image-upload-wrap").show();
   $(".result-message").hide();
 
-  
+
   // document.getElementById("search").height = 0;
   $("html, body").scrollTop(
     document.getElementsByClassName("title")[0].offsetTop
@@ -721,11 +721,11 @@ function getBaseUrl() {
     if (lang == "ko") {
       name = name + "index.html";
     } else {
-      name = name  + lang + "/index.html";
+      name = name + lang + "/index.html";
     }
   }
 
-  
+
   // console.log(name);
   return name; // name + "/" + lang + "/index.html";
 }
@@ -738,7 +738,7 @@ function getIndexParamsUrl() {
     link = link.substring(1);
   }
   // var linkUrls = linkUrl.split("/")
-  
+
   // if (linkUrls.length > 0) {
   //   link = linkUrls.pop();
   //   link = 
@@ -747,7 +747,7 @@ function getIndexParamsUrl() {
   //   return "";
   // }
   return link;
-  
+
 }
 
 function getShareUrl() {
@@ -774,7 +774,7 @@ async function shareUrl() {
 
 function sleep(ms) {
   const wakeUpTime = Date.now() + ms;
-  while (Date.now() < wakeUpTime) {}
+  while (Date.now() < wakeUpTime) { }
 }
 
 function showResults(resultParam, faceParam) {
@@ -797,14 +797,14 @@ function showResults(resultParam, faceParam) {
   const faceJson = JSON.parse(faceDecoded.split("#")[0]);
   faceData = faceJson;
   // console.log(faceData);
-  
+
 
   var int = setInterval(function () {
     if (typeof google != 'undefined' && google.search.cse) {
       // google.search.cse.element.getElement('ap_search').execute("#{@term}")  
 
       // sleep(500);
-    // }
+      // }
       // drawChart(faceData);
       $('#result-message').hide();
       // displayIdolPredictionBriefly(similarIdolData);
@@ -814,13 +814,13 @@ function showResults(resultParam, faceParam) {
       )
 
       $('#extra-similars').hide();
-      
-      
+
+
       const name = getBaseUrl()
       window.history.replaceState({}, document.title, name);
       clearInterval(int);
     }
-    
+
   }, 200)
 
 
@@ -851,10 +851,10 @@ function shareKakao() {
     Kakao.Share.sendCustom(
       {
         templateId: 104987,
-      templateArgs: {
-        'result_url': link,    // encoded url
-        'result': similarIdolData[0].name + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
-      }
+        templateArgs: {
+          'result_url': link,    // encoded url
+          'result': similarIdolData[0].name + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
+        }
       }
     );
   } else {
@@ -869,14 +869,14 @@ function shareKakao() {
     );
   }
 
-  
+
 }
 // Get the value of the 'result' parameter
 const resultParam = getUrlParameter('result');   // resultParam: 'key:value' 형태 ex. '에스파 닝닝: 56%' 로 할수도 있는데, encode 로 10명 결과를 담자.
 const faceParam = getUrlParameter('face');
 // Replace content based on the value of 'result' parameter
 if (resultParam != null) {
- 
+
   showResults(resultParam, faceParam);  // 구현필요
 
 } else {
@@ -888,133 +888,133 @@ if (resultParam != null) {
 
 function displayAnimation(searchIdx) {
   // document.getElementById('createGif').addEventListener('click', function () {
-      
-
-      
 
 
-      console.log("ani");
-      var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
-      // var image2 = document.getElementById('cropped-face-image-1');
-      var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
-      var target = search1.getElementsByClassName('gs-image-scalable').item(1);
-      // target.setAttribute('crossOrigin', 'Anonymous');
-      const image2 = new Image();
-      // var image2 = document.getElementById('top-similar-face-img');
-      image2.src = target.src;
-      image2.crossOrigin = 'anonymous';
-
-      // var image2 = document.getElementById('top-similar-face');
-      // var image2Ctx = image2.getContext('2d');
-      // image2Ctx.drawImage(target, 0, 0);
-      
-      // image2.src = target.src;
-      
-      // image1 = image2;
-
-      
-      var loadingGif = document.getElementById('gifLoading');
-      loadingGif.style.display = 'block'; // loading
-      
-
-      image2.onload = () => {
-        const canvas = document.getElementById('hiddenCanvas');
-        const ctx = canvas.getContext('2d');
-        
-
-        let gif = new GIF({
-          workers: 1,
-          // workerScript: URL.createObjectURL(workerBlob),
-          quality: 1,
-          width: canvas.width,
-          height: canvas.height,
-          dither: false, // 'Atkinson-serpentine',
-          background: 0x00FF00,
-          transparent: null, // 0xFF0000, // '#0f0', //  0x00FF00,
-          debug: true
-          //width: 1024,
-          // height: 500,
-        });
 
 
-        const transitionFrames = 20; // Number of frames for the transition
-        // Draw image1
-        ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
-        ctx.font = "16px MaruBuriBold";
-        var fontWidth = 15;
-        var fontHeight = canvas.height - fontWidth;
-        ctx.fillStyle = "#ffffff";
-        ctx.lineWidth = 1;
-        ctx.lineJoin = 'miter';
-        ctx.miterLimit = 2;
-        ctx.strokeStyle = '#ffffff';
-        var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + ((similarIdolData[searchIdx - 1].distance) * 100).toFixed(1) + "%";
-        ctx.fillText(contentText, fontWidth, fontHeight);
-        ctx.strokeText(contentText, fontWidth, fontHeight);
-        gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
-        ctx.globalCompositeOperation = 'source-over';
-        // Transition frames
-        for (let i = 0; i <= transitionFrames; i++) {
-            ctx.globalAlpha = i / transitionFrames;
-            ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
-            ctx.fillText(contentText, fontWidth, fontHeight);
-            ctx.strokeText(contentText, fontWidth, fontHeight);
-            gif.addFrame(ctx, { copy: true, delay: 100 });
-        }
 
-        // Draw image2
-        ctx.globalAlpha = 1.0;
-        ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
-        ctx.fillText(contentText, fontWidth, fontHeight);
-        ctx.strokeText(contentText, fontWidth, fontHeight);
-        gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay after transition
-        console.log("finished1");
+  console.log("ani");
+  var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
+  // var image2 = document.getElementById('cropped-face-image-1');
+  var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
+  var target = search1.getElementsByClassName('gs-image-scalable').item(1);
+  // target.setAttribute('crossOrigin', 'Anonymous');
+  const image2 = new Image();
+  // var image2 = document.getElementById('top-similar-face-img');
+  image2.src = target.src;
+  image2.crossOrigin = 'anonymous';
 
-        // Render the GIF
-        gif.on('finished', (blob) => {
+  // var image2 = document.getElementById('top-similar-face');
+  // var image2Ctx = image2.getContext('2d');
+  // image2Ctx.drawImage(target, 0, 0);
 
-          console.log("finished");
-          var reader = new FileReader();
-          reader.readAsDataURL(blob); // Convert blob to base64
-          reader.onloadend = function () {
-              var base64data = reader.result; // This is the base64 string
-              var gifImage = document.getElementById('outputGIF');
-              gifImage.src = base64data;
+  // image2.src = target.src;
 
-          };
+  // image1 = image2;
 
-          var downloadButton = document.getElementById('downloadGif');
-          downloadButton.style.display = 'block';
-          downloadButton.addEventListener('click', function () {
-              var a = document.createElement('a');
-              a.href = URL.createObjectURL(blob);
-              var now = new Date();
-              var year = now.getFullYear();
-              var month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-              var day = String(now.getDate()).padStart(2, '0');
 
-              var hours = String(now.getHours()).padStart(2, '0');
-              var minutes = String(now.getMinutes()).padStart(2, '0');
-              var seconds = String(now.getSeconds()).padStart(2, '0');
+  var loadingGif = document.getElementById('gifLoading');
+  loadingGif.style.display = 'block'; // loading
 
-              a.download = `celebme_${year}-${month}-${day}_${hours}${minutes}${seconds}.gif`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-          });
 
-          loadingGif.style.display = 'none';
-          var animation = document.getElementById('animation');
-          animation.style.display = 'block';
+  image2.onload = () => {
+    const canvas = document.getElementById('hiddenCanvas');
+    const ctx = canvas.getContext('2d');
 
-        });
 
-        gif.render();
-        
-        
+    let gif = new GIF({
+      workers: 1,
+      // workerScript: URL.createObjectURL(workerBlob),
+      quality: 1,
+      width: canvas.width,
+      height: canvas.height,
+      dither: false, // 'Atkinson-serpentine',
+      background: 0x00FF00,
+      transparent: null, // 0xFF0000, // '#0f0', //  0x00FF00,
+      debug: true
+      //width: 1024,
+      // height: 500,
+    });
+
+
+    const transitionFrames = 20; // Number of frames for the transition
+    // Draw image1
+    ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
+    ctx.font = "16px MaruBuriBold";
+    var fontWidth = 15;
+    var fontHeight = canvas.height - fontWidth;
+    ctx.fillStyle = "#ffffff";
+    ctx.lineWidth = 1;
+    ctx.lineJoin = 'miter';
+    ctx.miterLimit = 2;
+    ctx.strokeStyle = '#ffffff';
+    var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + ((similarIdolData[searchIdx - 1].distance) * 100).toFixed(1) + "%";
+    ctx.fillText(contentText, fontWidth, fontHeight);
+    ctx.strokeText(contentText, fontWidth, fontHeight);
+    gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
+    ctx.globalCompositeOperation = 'source-over';
+    // Transition frames
+    for (let i = 0; i <= transitionFrames; i++) {
+      ctx.globalAlpha = i / transitionFrames;
+      ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+      ctx.fillText(contentText, fontWidth, fontHeight);
+      ctx.strokeText(contentText, fontWidth, fontHeight);
+      gif.addFrame(ctx, { copy: true, delay: 100 });
+    }
+
+    // Draw image2
+    ctx.globalAlpha = 1.0;
+    ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+    ctx.fillText(contentText, fontWidth, fontHeight);
+    ctx.strokeText(contentText, fontWidth, fontHeight);
+    gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay after transition
+    console.log("finished1");
+
+    // Render the GIF
+    gif.on('finished', (blob) => {
+
+      console.log("finished");
+      var reader = new FileReader();
+      reader.readAsDataURL(blob); // Convert blob to base64
+      reader.onloadend = function () {
+        var base64data = reader.result; // This is the base64 string
+        var gifImage = document.getElementById('outputGIF');
+        gifImage.src = base64data;
+
       };
-      
-      
+
+      var downloadButton = document.getElementById('downloadGif');
+      downloadButton.style.display = 'block';
+      downloadButton.addEventListener('click', function () {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        var day = String(now.getDate()).padStart(2, '0');
+
+        var hours = String(now.getHours()).padStart(2, '0');
+        var minutes = String(now.getMinutes()).padStart(2, '0');
+        var seconds = String(now.getSeconds()).padStart(2, '0');
+
+        a.download = `celebme_${year}-${month}-${day}_${hours}${minutes}${seconds}.gif`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
+
+      loadingGif.style.display = 'none';
+      var animation = document.getElementById('animation');
+      animation.style.display = 'block';
+
+    });
+
+    gif.render();
+
+
+  };
+
+
 
 
 
