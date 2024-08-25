@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create GIF from Images</title>
+</head>
+
+<body>
+    <button id="createGif">Create GIF</button>
+    <img id="image1" src="banner_wb_512.jpeg" style="display: none;">
+    <img id="image2" src="banner.jpg" style="display: none;">
+    <canvas id="canvas" width="500" height="500" style="display: none;"></canvas>
+    <div id="output">
+        <center>
+            <img id="outputGIF" style="width: 30vh; height: 30vh;">
+            <button id="downloadGif" style="display: none;">Download GIF</button>
+        </center>
+    </div>
+
+
+
+    <script src="/gif.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script> -->
+    <!-- <script src="/gif.js/dist/gif.js"></script> -->
+    <script>
+        document.getElementById('createGif').addEventListener('click', function () {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            let gif = new GIF({
+                workers: 1,
+                // workerScript: URL.createObjectURL(workerBlob),
+                quality: 1,
+                width: canvas.width,
+                height: canvas.height,
+                dither: false, // 'Atkinson-serpentine',
+                background: 0x00FF00,
+                transparent: null, // 0xFF0000, // '#0f0', //  0x00FF00,
+                debug: true
+
+                
+                // workerScript: URL.createObjectURL(workerBlob),
+                
+                
+                // dither: 'Atkinson-serpentine',
+                // background: '#0f0',
+               //  transparent: 'rgba(0, 255, 0, 255)',
+                // background: '#fff',
+                // transparent: '#00FF00',
+                // transparent: '#FF00FF',
+                // transparent: 0x00FF00,
+                
+                //width: 1024,
+                // height: 500,
+            });
+
+
+
+            var image1 = document.getElementById('image1');
+            var image2 = document.getElementById('image2');
+
+
+            const transitionFrames = 5; // Number of frames for the transition
+
+            // Draw image1
+            ctx.font = "2.0em MaruBuriBold";
+            var fontWidth = 15;
+            var fontHeight = canvas.height - fontWidth;
+            ctx.fillStyle = "#ffffff";
+            ctx.lineWidth = 1;
+            ctx.lineJoin = 'miter';
+            ctx.miterLimit = 2;
+            ctx.strokeStyle = '#ef7822';
+            var contentText = "celebme.net";
+            ctx.fillText(contentText, fontWidth, fontHeight);
+            ctx.strokeText(contentText, fontWidth, fontHeight);
+            ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
+            gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
+
+            // Transition frames
+            for (let i = 0; i <= transitionFrames; i++) {
+                ctx.globalAlpha = i / transitionFrames;
+                ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+                ctx.fillText(contentText, fontWidth, fontHeight);
+                ctx.strokeText(contentText, fontWidth, fontHeight);
+                gif.addFrame(ctx, { copy: true, delay: 100 });
+            }
+
+            // Draw image2
+            ctx.globalAlpha = 1.0;
+            ctx.drawImage(image2, 0, 0, canvas.width, canvas.height);
+            ctx.fillText(contentText, fontWidth, fontHeight);
+            ctx.strokeText(contentText, fontWidth, fontHeight);
+            gif.addFrame(ctx, { copy: true, delay: 1000 }); // Delay after transition
+            console.log("finished1");
+            // Render the GIF
+            gif.on('finished', (blob) => {
+
+                console.log("finished");
+                var reader = new FileReader();
+                reader.readAsDataURL(blob); // Convert blob to base64
+                reader.onloadend = function () {
+                    var base64data = reader.result; // This is the base64 string
+                    var gifImage = document.getElementById('outputGIF');
+                    gifImage.src = base64data;
+
+                };
+
+                // 
+                // gifImage.src = URL.createObjectURL(blob);
+                // console.log("src");
+                // document.getElementById('output').appendChild(gifImage);
+
+                var downloadButton = document.getElementById('downloadGif');
+                downloadButton.style.display = 'block';
+                downloadButton.addEventListener('click', function () {
+                    var a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    var now = new Date();
+                    var year = now.getFullYear();
+                    var month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                    var day = String(now.getDate()).padStart(2, '0');
+
+                    var hours = String(now.getHours()).padStart(2, '0');
+                    var minutes = String(now.getMinutes()).padStart(2, '0');
+                    var seconds = String(now.getSeconds()).padStart(2, '0');
+
+                    a.download = `celebme_${year}-${month}-${day}_${hours}${minutes}${seconds}.gif`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                });
+
+            });
+
+            gif.render();
+
+
+
+        });
+    // });
+    </script>
+
+</body>
+
+</html>

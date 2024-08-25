@@ -632,9 +632,20 @@ max-height: 0px !important;
     border: 5px solid #4a90e2;
     border-radius: 10px;
     animation: borderAnimation 2s infinite;
+    margin: 10px;
 }
 
 .gs-image {
   object-fit: cover;
   width: 100%;
+}
+
+.giffont {
+    font-size: 1.8em;
+}
+
+.gifloading {
+    width: 5rem;
+    height: 5rem;
+    margin: 50px;
 }
