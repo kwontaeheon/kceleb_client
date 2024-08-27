@@ -892,8 +892,8 @@ function displayAnimation(searchIdx) {
 
 
 
-
-  console.log("ani");
+  gtag('event', 'gif생성클릭', {'event_category': 'gif생성클릭', 'event_label': 'gif생성클릭'});
+  
   var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
   // var image2 = document.getElementById('cropped-face-image-1');
   var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
