@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 
 <head>
     
@@ -87,8 +87,7 @@
         我们正在尽最大努力保护您的个人信息，在分析后立即删除您的照片。
         通过 CelebMe 寻找与您相像的名人不仅有趣，而且还很有趣。 它提供了一个发现自己的面部特征以及与各种名人的联系的机会。
         立即分析您的照片并查看惊人的结果！ 有趣而令人兴奋的体验等待着您。" />
-    <meta property="og:image"
-        content="https://post-phinf.pstatic.net/MjAxNzA4MThfNzAg/MDAxNTAzMDM2NzgxNzI3.qKkqFtWHJficRmXz264zLAKCCz_gT0qW7CHrpTTYGUIg.rvJvitIBypvQkuiffIdOQzHCRBEE3kcJmRIGPeynVC4g.JPEG/g.jpg" />
+    <meta property="og:image" content="/banner_wb_512.webp" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -229,7 +228,8 @@
                 <div class="image-upload-wrap">
                     <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
                     <div class="drag-text">
-                        <img src="/img/upload.svg" class="mt-5 upload" />
+                        <img src="/banner_org.png" class="mt-5 upload" alt='开始寻找与您脸型相似的名人'>
+                        <!-- <img src="/img/upload.svg" class="mt-5 upload" alt="내 얼굴로 닮은 연예인 찾기 시작하기"/> -->
                         <div class="upload-text">
                             发布一张你的脸部照片 <br />
                             单击开始。
@@ -320,6 +320,8 @@
                 <br/>
                 <br/>
                 <canvas id="cropped-face-image-1" style="display: none;"></canvas>
+                <canvas id="top-similar-face" style="display: block;" width="100" height="100"></canvas>
+                <img id="top-similar-face-img" style="display: block;"></img>
                 <canvas id="cropped-face-image-2" class="styled-canvas" width="100" height="100" style="max-width: 30%; max-height: 30%; border: 0px;"></canvas>
                 <br/>
                 <br/>
@@ -339,11 +341,11 @@
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
                     <div class='result-title' id="r1"> #1 </div>
                 </button>
-                <div style="max-height: 30%; overflow: hidden;">
+                <div id="search1-head" style="max-height: 30%; overflow: hidden;">
                     <div id="search1" class="gcse-searchresults-only"
                         data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                         data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
-                        data-image_type="face" data-gname="q1" style="max-height: 30%;"></div>
+                        data-image_type="face" data-gname="q1"></div>
                 </div>
                 <div class="row" style="font-size: 1.1rem; margin: 10px;" id="extra-similars">
                     <div style="width: 33%; max-height: 20%; overflow: hidden;">
@@ -436,33 +438,52 @@
 
 
                     </div>
+                    <div class="col" style="text-align:center;">
+                        
+                        <center><button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
+                                style="display: none;">创建与您最相似的名人的 GIF！</button></center>
+                        <div id="gifLoading" class="animated bounce" style="display: none;">
+                            <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                                <span class="sr-only">加载中...</span>
+                            </div>
+                        </div>
+                        <div id="animation" style="display: none;">
+                            <center>
+                                <img id="outputGIF" style="width: 30vh; height: 30vh;">
+                                <button id="downloadGif" style="display: none;" class="styled-canvas giffont">动图下载</button>
+                            </center>
+                        </div>
+
+                        <h4 class="subtitle">Chia sẻ kết quả tìm kiếm những người nổi tiếng giống bạn!</h4>
+                    </div>
+
+
+
+
                 </div>
                 <br />
 
-                <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
-                    <span class="try-again-text" style="font-size: 2.2rem;">再次庆祝我</span>
-                </button>
-                
 
 
 
 
             </div>
-            
+
+
             <button type="button p-2" class="my-share-btn" onclick="toggleCelebList();"
                 style="margin:10px; background-color: #35885d;">
-                <span class="try-again-text" style="font-size: 1.8rem;">查看名人名单</span>
+                <span class="try-again-text" style="font-size: 1.4rem;">查看名人名单</span>
             </button>
             <div id="json-container" class="json-container" style="display: none;"></div>
 
 
             <br />
-            <!-- <div class="normaltext">您可以通过在结果屏幕上分享来分享您相似的名人列表。</div> -->
+
 
             <button type="button p-2" class="my-share-btn" id="shareKt1"
                 onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'}); shareKakao();"
                 style="margin:10px; height: 40px; background-color: #353709;">
-                <span class="try-again-text" style="font-size: 1.3rem;">分享Kakao
+                <span class="try-again-text" style="font-size: 1.4rem;">分享Kakao
                     <img src="/puppy/talk-share.png" style="width: 30px; height: 30px;" />
                 </span>
             </button>
@@ -470,13 +491,12 @@
             <button type="button p-2" class="my-share-btn"
                 onclick="gtag('event', 'URL공유클릭', {'event_category': '공유클릭','event_label': 'URL공유클릭'}); shareUrl();"
                 style="margin:10px; height: 40px; background-color: #353709;">
-                <span class="try-again-text" style="font-size: 1.3rem;">复制链接 🔗</span>
+                <span class="try-again-text" style="font-size: 1.4rem;">复制链接 🔗</span>
             </button>
 
-
-
-
-
+            <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
+                <span class="try-again-text" style="font-size: 2.2rem;">再次庆祝我</span>
+            </button><br>
 
             <br />
             <div id="label-container" class="d-flex flex-column justify-content-around"></div>
@@ -500,12 +520,19 @@
                         </div>
                         <div class="modal-body d-flex flex-column justify-content-center align-items-center">
 
-                            <img class="" width="200px"
+                            <!-- <img class="" width="200px"
                                 src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
-                                alt='app icon'>
+                                alt='app icon'> -->
+
+                            <iframe id="youtube-video" width="100%" height="300vh"
+                                src="https://youtube.com/embed/aFLerbjh_uA?controls=0&mute=1&showinfo=0&rel=0&autoplay=1&loop=1"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen style="left: 0; top: 0; border: none;"></iframe>
+
                             <p class="text-app-center">
-                                现已重组为“人脸分析+寻找相似明星”服务。<br>
-                                看看面部分析结果吧！
+                                选择一张脸部照片即可快速找到像您一样的名人，无需注册！<br>
+                                照片数据不存储在任何地方。
                             </p>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="setCookie('celebme-popup', 'done', 7);">
                                 <span aria-hidden="true">&times;</span>
@@ -550,16 +577,54 @@
                 }
             </style>
             <br>
+
+
+
+            <br />
             <!-- 디스플레이6 -->
-            <ins class="adsbygoogle"
-                    style="display:block"
-                    data-ad-client="ca-pub-9636274019237410"
-                    data-ad-slot="2779061210"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true" id="display6"></ins>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9636274019237410"
+                data-ad-slot="2779061210" data-ad-format="auto" data-full-width-responsive="true" id="display6"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
+
+            <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+                <p class="text-app-center">
+                    在 Celeb Me 上查找与您相似的名人<br />
+                    轻松找到与您相似的名人，<br />
+                    与最相似的名人分享您的面部比例。<br />
+                </p>
+                <img class="" id="banner" src="/banner.jpg" alt='Celeb Me：查找有关 K-POP 偶像的名人相似度测试'
+                    style="max-width: 40%;"><br />
+                <p class="text-app-center">
+                    选择一张清晰显示您脸部的照片<br>
+                    在像我这样的面孔的人中 <br>
+                    <br>韩国名人，包括韩国流行偶像
+                    无需注册即可快速搜索！<br>
+                    照片数据不存储在任何地方。
+                </p>
+                <iframe id="youtube-video" width="80%" height="500vh"
+                    src="https://youtube.com/embed/aFLerbjh_uA?controls=0&mute=1&showinfo=0&rel=0&autoplay=0&loop=1"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen style="left: 0; top: 0; border: none;"></iframe><br>
+
+
+
+                <p class="text-app-center">
+                    <a
+                        href="https://celebme.net/blog/%eb%8b%ae%ec%9d%80-%ec%97%b0%ec%98%88%ec%9d%b8-%ec%b0%be%ea%b8%b0/%eb%8b%ae%ec%9d%80-%ec%97%b0%ec%98%88%ec%9d%b8-%ec%b0%be%ea%b8%b0-%eb%b0%b0%ec%9a%b0-%ea%b3%b5%ec%9c%a0-%ea%b8%b0%ec%95%8884"><u>喜欢
+                            寻找我的名人 - 演员孔侑、Kian84</u></a><br /><br />
+                    <a href="https://blog.naver.com/honth/223378825032"><u>查找与 Celeb Me 类似的名人 - 查看简单示例</u></a>
+
+                    <br/><br/>
+
+                    CelebMe 已添加动画 GIF 创建功能！<br/>
+                    创建与您相似的名人的 GIF。
+                </p>
+                <canvas id="hiddenCanvas" width="500" height="500" style="display: none;"></canvas>
+
+            </div>
 
             <!-- app banner -->
             <!-- <div class="modal-body d-flex flex-column justify-content-center align-items-center">
@@ -579,13 +644,15 @@
                             alt="Android Playstore" />
                 </a>
             </div> -->
-            <div class="container pt-3">
-                <div id="disqus_thread"></div>
-            </div>
+
 
             <br />
         </div>
+        </div>
     </center>
+    <div class="container pt-3">
+        <div id="disqus_thread"></div>
+    </div>
 
     <footer class="footer pt-5 container d-flex justify-content-center">
         <div>
@@ -646,11 +713,19 @@
         }
 
         if (!window.location.href.includes("result") && getCookie('celebme-popup') != 'done') {
-            $('#appModal').modal();
+            // 팝업
+            // $('#appModal').modal();
+            // .contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
         }
+        $(document).on('hide.bs.modal', '#appModal', function () {
+            // modal 종료시 youtube 중지
+            $("#youtube-video").attr("src", "");
+        });
+
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+    <!-- gif animation -->
+    <script src="/gif.js"></script>
 </body>
 <!--
 image input box
