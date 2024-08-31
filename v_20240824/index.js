@@ -178,7 +178,7 @@ function drawChart(userData) {
 
     }
     // 한 명 이상 인식되었을때에만 gif 생성버튼을 표시한다.
-    document.getElementById("createGif").style.display = "block";
+    // document.getElementById("createGif").style.display = "block";
 
     $("#face-analysis-result").html(
       confidenceStr + "<br/>"
