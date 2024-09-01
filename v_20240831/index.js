@@ -63,6 +63,16 @@ var resultMeta = {};
       // Use jsonData as needed
       resultMeta = jsonData;
       // console.log(resultMeta);
+
+      drawDefaultChart();
+      // 초기 설정: 쿼리가 있는 경우 base url로 점프뛰기
+      if (window.location.href.includes("gsc.q"))
+        window.location.href = getBaseUrl();
+      // for (var rank = 1; rank <= 2; rank++) {
+      //   console.log("hide.."); 
+      //   document.getElementById("search" + rank + "-head").style.display = "none";
+        
+      // }
     })
     .catch(error => {
       console.error("Error fetching JSON:", error);
@@ -97,7 +107,8 @@ function toggleCelebList() {
 // toggleButton.addEventListener('click', function () {
 
 // });
-$(".result-message").hide();
+// $(".result-message").hide();
+
 
 
 
@@ -153,24 +164,19 @@ function cropImage(imgElement, callback, maxWidth = 512, maxHeight = 512) {
   }, 'image/webp');
 }
 
-var ageChart, emotionChart, genderChart, raceChart;
+var ageChart, emotionChart, genderChart, raceChart, confidenceStr;
 function drawChart(userData) {
 
-  const autocolors = window['chartjs-plugin-autocolors'];
-
-
-  Chart.register(autocolors);
-  Chart.defaults.font.size = 14;
   // Chart.register(ChartDataLabels);
   var cropSuccess = true;
-  var confidenceStr = "";
+  confidenceStr = "";
   if (userData.face_confidence == 0) {
     confidenceStr = getMeta("face_confidence_low");
     $("#face-analysis-result").html(
       confidenceStr + "<br/>"
     );
 
-    $("#charts").hide();
+    // $("#charts").hide();
     cropSuccess = false;
   } else {
     if (userData.face_cnt > 1) {
@@ -178,7 +184,11 @@ function drawChart(userData) {
 
     }
     // 한 명 이상 인식되었을때에만 gif 생성버튼을 표시한다.
-    // document.getElementById("createGif").style.display = "block";
+    try{ 
+    document.getElementById("createGif").style.display = "block";
+    } catch (e) {
+
+    }
 
     $("#face-analysis-result").html(
       confidenceStr + "<br/>"
@@ -276,7 +286,6 @@ function drawChart(userData) {
       },
     }
   });
-
   // Display emotion in radar chart
   const emotionData = {
     labels: Object.keys(userData.emotion).flatMap(value => {
@@ -469,7 +478,10 @@ function getSimilarCeleb(inputImage) {
       $(".result-message").show();
       // $("#loading").hide();
       $("#celeb-spinner").hide();
+      
+
       $("#loading-message").html(getMeta("celeb_finished"))
+
       // window.history.replaceState({}, document.title, "/");
       $("html, body").scrollTop(
         document.getElementsByClassName("title")[0].offsetTop
@@ -503,7 +515,9 @@ function displayIdolPredictionBriefly(data) {
       // $('#s' + rank).show();
       if (rank == 1) {
         displayIdolPrediction(1);
-        $('#celeb-result').html(getMeta("face_in_picture") + r + getMeta("it_resembles")
+        $('#celeb-result').html(
+          confidenceStr + "<br/>" +
+          getMeta("face_in_picture") + r + getMeta("it_resembles")
           // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
         )
       }
@@ -601,8 +615,8 @@ async function readURL(input) {
     $("#loading-message").html(getMeta("analyzing_face"))
     $("#loading").show();
     $("#celeb-spinner").show();
-    $(".result-message").hide();
-    $("#result-similar-idol").hide();
+    // $(".result-message").hide();
+    // $("#result-similar-idol").hide();
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");
       cropImage(imgData, function (resizedImg) {
@@ -610,7 +624,6 @@ async function readURL(input) {
         analyzeFace(resizedImg).then(function (croppedImage) {
           // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
 
-          // displayAnimation();
         });
 
 
@@ -893,6 +906,11 @@ function displayAnimation(searchIdx) {
 
 
   gtag('event', 'gif생성클릭', {'event_category': 'gif생성클릭', 'event_label': 'gif생성클릭'});
+  try {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  } catch (error) {
+
+  }
   
   var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
   // var image2 = document.getElementById('cropped-face-image-1');
@@ -1019,4 +1037,213 @@ function displayAnimation(searchIdx) {
 
 
   // });
+}
+
+
+
+
+function drawDefaultChart() {
+  const autocolors = window['chartjs-plugin-autocolors'];
+  Chart.register(autocolors);
+  //  Chart.register(ChartDataLabels);  // 표시하면 너무 난잡해짐
+  Chart.defaults.font.size = 14;
+
+  var ageData = {
+    labels: [getMeta("age")],
+    datasets: [{
+      label: getMeta("age"),
+      data: [15],
+      backgroundColor: ['#11BB84']
+    }]
+  };
+
+  ageChart = new Chart(document.getElementById('ageChart'), {
+    type: 'bar',
+    data: ageData,
+    plugins: [ChartDataLabels],
+    options: {
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+        }
+      }
+    }
+  });
+  
+  const genderData = {
+    labels: [getMeta("man"), getMeta("woman"), ],
+    datasets: [{
+      label: getMeta("gender"),
+      maintainAspectRatio: false,
+      data: [9.1, 90.9],
+      backgroundColor: ['#36A2EB', '#FF6384']
+    }]
+  };
+
+  genderChart = new Chart(document.getElementById('genderChart'), {
+    type: 'bar',
+    data: genderData,
+    plugins: [ChartDataLabels],
+    options: {
+      maintainAspectRatio: false,
+      plugins: {
+        autocolors: {
+          mode: 'data'
+        },
+        datalabels: {
+          formatter: function (value, context) {
+            return value.toFixed(1);
+          }
+        },
+        legend: {
+          display: false,
+        }
+      },
+    }
+  });
+
+  // Display emotion in radar chart
+  var sampleEmotion = {
+    angry
+    : 
+    0.24389417376369238,
+    disgust
+    : 
+    0.000049055682893595076,
+    fear
+    : 
+    0.1466436544433236,
+    happy
+    : 
+    94.46457028388977
+    ,
+    neutral
+    : 
+    1.4133663848042488,
+    sad
+    : 
+    3.7277135998010635,
+    surprise
+    :  
+    0.0037621048250002787}
+  const emotionData = {
+    labels: Object.keys(sampleEmotion).flatMap(value => {
+      return getMeta(value);
+    }),
+    datasets: [{
+      label: getMeta("emotion"),
+      data: Object.values(sampleEmotion),
+      hoverOffset: 50,
+      borderWidth: 0,
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(125, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(54, 162, 135)',
+        'rgb(255, 205, 86)',
+        'rgb(125, 125, 86)',
+        'rgb(225, 125, 86)',
+      ],
+      circumference: 180,
+      rotation: 90
+    }],
+
+  };
+
+  emotionChart = new Chart(document.getElementById('emotionChart'), {
+    type: 'doughnut',
+    data: emotionData,
+    options: {
+      indexAxis: 'y',
+      maintainAspectRatio: false,
+      plugins: {
+        autocolors: {
+          mode: 'data'
+        },
+        datalabels: {
+          formatter: function (value, context) {
+            // console.log(value); //context.chart.data.labels[context.dataIndex]
+            return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
+          }
+        },
+        legend: {
+          display: true,
+          position: 'bottom'
+        }
+      },
+    }
+  });
+
+  // Display race in radar chart
+  var raceSampleData = {
+    asian
+      : 
+      97.17755913734436,
+      
+      black
+      : 
+      0.00031450833830604097,
+      indian
+      : 
+      0.000944622115639504,
+      "latino hispanic"
+      : 
+      2.0162636414170265,
+      "middle eastern"
+      : 
+      0.2743645804002881,
+      white
+      : 
+      0.5305574741214514
+  }
+  const raceData = {
+    labels: Object.keys(raceSampleData).flatMap(value => {
+      return getMeta(value);
+    }),
+    datasets: [{
+      label: getMeta("race"),
+      data: Object.values(raceSampleData),
+      hoverOffset: 50,
+      borderWidth: 0,
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(125, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(54, 162, 135)',
+        'rgb(255, 205, 86)',
+        'rgb(125, 125, 86)'
+      ],
+      circumference: 180,
+      rotation: -90
+    }]
+  };
+  if (raceChart != null) {
+    raceChart.destroy();
+  }
+  raceChart = new Chart(document.getElementById('raceChart'), {
+    type: 'doughnut',
+    data: raceData,
+    options: {
+      // indexAxis: 'y',
+      maintainAspectRatio: false,
+      plugins: {
+
+        autocolors: {
+          mode: 'data'
+        },
+        datalabels: {
+          formatter: function (value, context) {
+            // console.log(value);//context.chart.data.labels[context.dataIndex]
+            return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
+          }
+        },
+        legend: {
+          display: true
+        }
+      },
+
+    }
+  });
+
 }

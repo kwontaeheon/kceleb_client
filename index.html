@@ -219,7 +219,7 @@
                     <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
-                    얼굴에 대한 나이, 성별, 감정, 인종 분석 결과
+                    얼굴에 대한 나이, 성별, 감정, 인종 분석 결과 샘플
                 </div>
                 <div id="charts">
                     <div class="row">
@@ -261,15 +261,9 @@
             </script>
 
             <div class="result-message" id="result-similar-idol">
-                <br />
-                <br />
                 <canvas id="cropped-face-image-1" style="display: none;"></canvas>
-                <canvas id="top-similar-face" style="display: block;" width="100" height="100"></canvas>
-                <img id="top-similar-face-img" style="display: block;"></img>
                 <canvas id="cropped-face-image-2" class="styled-canvas" width="100" height="100" style="max-width: 30%; max-height: 30%; border: 0px;"></canvas>
-                <br />
-                <br />
-
+                
                 <div class="h2" style="padding: 10px;">
                     셀럽미:닮은 연예인 이미지
                     <hr style="background-color:black;" />
@@ -278,7 +272,7 @@
 
                 <div class="normaltext" id="celeb-result-desc">
                     <div class="normaltext" id="celeb-result">
-                        연예인 이름을 눌러서 이미지를 검색해보세요.
+                        <h3>검색 결과 샘플</h3>
                     </div>
                     연예인 이름을 눌러서 이미지를 검색해보세요. <br /><br />
                 </div>
@@ -288,7 +282,7 @@
                     <div class='result-title' id="r1"> 1순위 </div>
                 </button>
                 <div id="search1-head" style="max-height: 30%; overflow: hidden;">
-                    <div id="search1" class="gcse-searchresults-only"
+                    <div id="search1" data-cfasync="false" class="gcse-searchresults-only"
                         data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                         data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
                         data-image_type="face" data-gname="q1"></div>
@@ -387,8 +381,8 @@
                     </div>
                     <div class="col" style="text-align:center;">
                         
-                        <!-- <center><button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
-                                style="display: none;">가장 닮은 연예인 움짤 만들기!</button></center> -->
+                        <center><button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
+                                style="display: none;">가장 닮은 연예인 움짤 만들기!</button></center>
                            <!-- 디스플레이7 -->
                             <ins class="adsbygoogle"
                             style="display:block"
@@ -574,8 +568,8 @@
                             연예인 찾기 셀럽미 - 배우 공유, 기안84</u></a><br /><br />
                     <a href="https://blog.naver.com/honth/223378825032"><u>닮은 연예인 찾기 셀럽미 - 간단 샘플 확인해보기</u></a><br /><br />
 
-                    <!-- 셀럽미에 애니메이션 짤 만들기 기능이 추가되었어요! <br/>
-                    나랑 닮은 연예인을 움짤 GIF 로 만들어보세요. -->
+                    셀럽미에 애니메이션 짤 만들기 기능이 추가되었어요! <br/>
+                    나랑 닮은 연예인을 움짤 GIF 로 만들어보세요.
                 </p>
                 <canvas id="hiddenCanvas" width="500" height="500" style="display: none;"></canvas>
 
