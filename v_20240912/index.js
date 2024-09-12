@@ -15,7 +15,7 @@ var faceData;
 
 
 const lang = $("#lang option:selected").val();
-const version = "/v_20240901";
+const version = "/v_20240912";
 var faceNames = {};
 var faceNamesKo = {};
 (function () {
@@ -107,7 +107,7 @@ function toggleCelebList() {
 // toggleButton.addEventListener('click', function () {
 
 // });
-// $(".result-message").hide();
+$(".result-message").hide();  // 셀럽미 결과화면 토글 
 
 
 
@@ -615,15 +615,15 @@ async function readURL(input) {
     $("#loading-message").html(getMeta("analyzing_face"))
     $("#loading").show();
     $("#celeb-spinner").show();
-    // $(".result-message").hide();
-    // $("#result-similar-idol").hide();
+    $(".result-message").hide();
+    $("#result-similar-idol").hide();
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");
       cropImage(imgData, function (resizedImg) {
 
         analyzeFace(resizedImg).then(function (croppedImage) {
           // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
-
+          
         });
 
 
@@ -949,7 +949,7 @@ function displayAnimation(searchIdx) {
       dither: false, // 'Atkinson-serpentine',
       background: 0x00FF00,
       transparent: null, // 0xFF0000, // '#0f0', //  0x00FF00,
-      debug: true
+      debug: false
       //width: 1024,
       // height: 500,
     });
@@ -958,14 +958,14 @@ function displayAnimation(searchIdx) {
     const transitionFrames = 20; // Number of frames for the transition
     // Draw image1
     ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
-    ctx.font = "16px MaruBuriBold";
-    var fontWidth = 15;
+    ctx.font = "22px MaruBuriBold";
+    var fontWidth = 22;
     var fontHeight = canvas.height - fontWidth;
     ctx.fillStyle = "#ffffff";
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 1.2;
     ctx.lineJoin = 'miter';
     ctx.miterLimit = 2;
-    ctx.strokeStyle = '#ffffff';
+    ctx.strokeStyle = '#000000';
     var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + ((similarIdolData[searchIdx - 1].distance) * 100).toFixed(1) + "%";
     ctx.fillText(contentText, fontWidth, fontHeight);
     ctx.strokeText(contentText, fontWidth, fontHeight);
