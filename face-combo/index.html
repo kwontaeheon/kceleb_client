@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" rel="stylesheet" />
+    <meta name="naver-site-verification" content="73b65ec60ffe57eee8ef9a8e0dec61175fc3c0f0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+    <title>셀럽미: 얼굴합 테스트</title>
+    <meta name="title" content="셀럽미: 얼굴합 테스트" />
+    <meta name="subject" content="얼굴로 보는 인공지능 연예인 테스트, 나와 닮은 연예인을 찾아보세요!" />
+    <meta name="keywords"
+        content="셀럽미, 연예인 테스트, 연예인 얼굴 테스트, 연예인 닮은꼴 테스트, 나와 닮음꼴 연예인, 닮은 연예인 찾기, 나 닮은 연예인, 나랑 닮은 연예인, 나를 닮은 연예인테스트, 닮은 아이돟, 닮은 연예인 테스트, 연예인 테스트, 연예인 닮은 얼굴 테스트, 연예인 얼굴 테스트, 나 닮은 연예인 테스트, 나닭음 연예인, 나닮은 연예인찾기, 나랑닮은연예인테스트, 나와 닮은 연예인 찾기, 	나와 닮은 연예인, 나의 닮은연예인테스트, 나의인공지능 얼굴 테스트, 닭은 연예인 찾기, 연예인 얼굴 닮은 얼굴찾기 테스트, 연예인상테스트, 	연예인 사진 테스트, 연예인 닮은 얼굴 찾기, 연예인상테스트, 인공지능 연예인 테스트,  연예인 상 테스트, 연예인 닮은 테스트, 닮은 연예인 테스트, 닮은 연예인 테스트, 나의 인공지능 얼굴 테스트, 닮은 연예인 찾기, 닮은꼴 테스트, 연예인 얼굴, 연예인 닮은, 닮은얼굴찾기, 닮은 연예인 테스트,  얼굴상 테스트, 연예인상 테스트, 연예인 얼굴상 테스트, 닮은 연예인, 연예인 얼굴 테스트, 나와 비슷한 연예인, 닮은 연예인 찾기, 닮은연예인테스트, 닮은꼴테스트, 닮은꼴 연예인,  인공지능 얼굴상 테스트, 얼굴상, 얼굴상 테스트, 나와 닮은 연예인, 나와 닮은 연예인 테스트, 연예인, 인공지능 연예인, 연예인 찾기, 얼굴로 보는 연예인, 얼굴 연예인, 연예인 얼굴, celebrity, 인공지능 연예인상, 얼굴상, AI 연예인상, 닮은꼴 연예인 테스트, 얼굴 닮은꼴 테스트, 연예인 닮은꼴 테스트, 얼굴상 닮은꼴 테스트, 연예인 닮은꼴 테스트, 연예인 얼굴상 테스트, 얼굴 연예인 테스트, 얼굴 연예인 테스트, 셀럽찾기, 닮은 연예인 찾기, 나의 얼굴 분석, 얼굴 나이 분석, 얼굴 감정 분석, 얼굴 성별 분석, 얼굴 인종 분석, 닮음꼴테스트, 연예인 닮음꼴, 닮음꼴 연예인, 닮은꼴 연예인 테스트, 닮은 사람 찾기" />
+    <meta name="author" content="권태헌(kwontaeheon@gmail.com)" />
+    <meta name="description" content="대표 연예인으로 학습한 AI가 당신과 닮은 연예인을 찾아드려요. 사진은 어디에도 저장되지 않습니다. 열 명의 닮은 연예인을 바로 확인해보세요!" />
+    <link rel="stylesheet" href="/v_20240912/style.css" />
+    <link rel="canonical" href="https://celebme.net" />
+    <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="en" />
+    <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="x-default" />
+    <link rel="alternate" href="https://celebme.net/es/index.html" hreflang="es" />
+    <link rel="alternate" href="https://celebme.net/id/index.html" hreflang="id" />
+    <link rel="alternate" href="https://celebme.net/ja/index.html" hreflang="ja" />
+    <link rel="alternate" href="https://celebme.net" hreflang="ko" />
+    <link rel="alternate" href="https://celebme.net/vi/index.html" hreflang="vi" />
+    <link rel="alternate" href="https://celebme.net/zh/index.html" hreflang="zh" />
+    <meta property="og:url" content="https://celebme.net" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="셀럽미: 얼굴합 테스트" />
+    <meta property="og:description" content="AI가 당신과 커플 얼굴의 닮은 비율을 알려드려요 . 사진은 어디에도 저장되지 않습니다. 연예인이나, 커플의 얼굴이 당신과 얼마나 닮았는지 확인해보세요!" />
+    <meta property="og:image" content="/banner_small.jpg" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LCDF4Z1GX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2LCDF4Z1GX');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636274019237410"
+        crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<body>
+    <script async data-cfasync="false" src="https://cse.google.com/cse.js?cx=2346e8f4411dd44c7"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+        integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
+        crossorigin="anonymous"></script>
+
+    <nav class="p-3 container navbar navbar-expand-lg navbar-light">
+
+        <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">셀럽미: 얼굴합 테스트</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active"
+                    onclick="gtag('event', '닮은 연예인 찾기 클릭', {'event_category': '닮은 연예인 찾기 클릭','event_label': '상단 메뉴'});">
+                    <a class="nav-link" href="/index.html">셀럽미: 닮은 연예인 찾기
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active"
+                    onclick="gtag('event', '퍼피테스트 클릭', {'event_category': '퍼피테스트 클릭','event_label': '상단 메뉴'});">
+                    <a class="nav-link" href="/puppy/index.html"
+                        onClick="top.location='javascript:location.reload()'">닮은 강아지 테스트 MBTI
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active"
+                    onclick="gtag('event', '과제생활 동물찾기 클릭', {'event_category': '과제생활 동물찾기 클릭','event_label': '상단 메뉴'});">
+                    <a class="nav-link" href="/animaltest/index.html">닮은 동물 테스트 MBTI
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item active"
+                    onclick="gtag('event', '러블리햄의 블로그 클릭', {'event_category': '러블리햄의 블로그 클릭','event_label': '상단 메뉴'});">
+                    <a class="nav-link" href="/blog">
+                        셀럽미: 블로그</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section class="container d-flex flex-column justify-content-center align-items-center">
+        <div class="row">
+            <div class="language">Language:</div>
+            <div>
+                <select id="lang" onchange="changeLanguage(this)" class="custom-select col-8">
+                    <option value="ko" lang="ko" selected>한국어</option>
+                    <!-- <option value="en" lang="en">English</option>
+                    <option value="es" lang="es">español</option>
+                    <option value="ja" lang="ja">日本語</option>
+                    <option value="zh" lang="zh">中文</option>
+                    <option value="vi" lang="vi">tiếng Việt</option>
+                    <option value="id" lang="id">Bahasa Indonesia</option> -->
+                </select>
+            </div>
+        </div>
+        </div>
+    </section>
+    <script>
+        var ua = navigator.userAgent.toLowerCase();
+        function changeLanguage(lang) {
+            window.location.href = "/face-combo/" + lang.value + "/index.html";
+        }
+    </script>
+    
+    
+    <section class="section">
+        <h1 class="title">셀럽미: 얼굴합 테스트</h1>
+        <h3 class="subtitle">얼굴로 보는 인공지능 닮은꼴 테스트</h3>
+        <h4 class="subtitle">두 얼굴의 닮은 비율 확인하기!</h4>
+        <p class="text-app-center">
+            AI가 두 얼굴의 닮은 정도를 분석합니다. <br/>
+            커플, 연예인, 가족과 얼굴합 테스트 해보세요!<br/>
+            <img class="" id="banner" src="/banner.jpg" alt='셀럽미: 얼굴합 테스트 K-POP 아이돌 닮은꼴 테스트' style="max-width: 40%; max-height: 400px;"><br />
+            얼굴이 잘 나온 두 가지 사진을 선택하고<br>
+            두 얼굴이 얼마나 닮았는지 빠르게 확인해보세요. <br>
+            회원가입없이 빠르게 찾아보세요!<br>
+            사진 데이터는 어디에도 저장되지 않습니다.
+        </p>
+    </section>
+    <center>
+        <div class="result-section">
+            <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+            <div class="file-upload-container">
+                <div class="file-upload-area">
+                    <div class="couple-image-upload-wrap">
+                        <input class="file-upload-input" type="file" onchange="selectImage(this, 1);" accept="image/*" />
+                        <div class="drag-text">
+                            <img src="/banner_org.png" class="mt-5 upload" alt='내 얼굴로 닮은 얼굴 비율 확인하기 시작하기'>
+                            <!-- <img src="/img/upload.svg" class="mt-5 upload" alt="내 얼굴로 닮은 연예인 찾기 시작하기"/> -->
+                            <div class="upload-text">
+                                1번 얼굴 고르기 <br />
+
+                            </div>
+                        </div>
+                        <img class="preview-image" id="preview-1" src="#" alt="미리보기 1" style="display: none;">
+                    </div>
+                    
+                </div>
+
+                <div class="file-upload-area">
+                    <div class="couple-image-upload-wrap">
+                        <input class="file-upload-input" type="file" onchange="selectImage(this, 2);" accept="image/*" />
+                        <div class="drag-text">
+                            <img src="/banner_org.png" class="mt-5 upload" alt='내 얼굴로 닮은 연예인 찾기 시작하기'>
+                            <!-- <img src="/img/upload.svg" class="mt-5 upload" alt="내 얼굴로 닮은 연예인 찾기 시작하기"/> -->
+                            <div class="upload-text">
+                                2번 얼굴 고르기<br />
+
+                            </div>
+                        </div>
+                        <img class="preview-image" id="preview-2" src="#" alt="미리보기 2" style="display: none;">
+                    </div>
+                    
+                </div>
+            </div>
+            <button id="start-button" class="start-button" style="margin-top: 20px;" onclick="startFaceComb()">분석 시작하기</button><br/>
+
+            <div class="result-message" id="result-similar-idol">
+                <div id="result-message-section" style="display: none;">
+                    <h2>셀럽미: 얼굴합 테스트 결과</h2>
+                    <p>닮은 비율: <span id="similarity-score"></span></p>
+                    <p>일치 여부: <span id="verification-result"></span></p>
+                    <div class="image-comparison">
+                        <div>
+                            <h3>이미지 1</h3>
+                            <img id="cropped-image-1" alt="Cropped Image 1">
+                        </div>
+                        <div>
+                            <h3>이미지 2</h3>
+                            <img id="cropped-image-2" alt="Cropped Image 2">
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:center;">
+                        
+                    <center><button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
+                            style="display: none;">닮은 얼굴 움짤 만들기!</button></center>
+                        
+                    <div id="gifLoading" class="animated bounce" style="display: none;">
+                        <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div id="animation" style="display: none;">
+                        <center>
+                            <img id="outputGIF" style="width: 30vh; height: 30vh;">
+                            <button id="downloadGif" style="display: none;" class="styled-canvas giffont">움짤
+                                다운받기</button>
+                        </center>
+                    </div>
+
+                    <h4 class="subtitle">얼굴합 테스트 결과를 공유해보세요!</h4>
+                </div>
+
+                <br />
+
+
+
+
+
+            </div>
+            <button type="button p-2" class="my-share-btn" id="shareKt1"
+                onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'}); shareKakao();"
+                style="margin:10px; height: 40px; background-color: #353709;">
+                <span class="try-again-text" style="font-size: 1.4rem;">카카오 공유 하기
+                    <img src="/puppy/talk-share.png" style="width: 30px; height: 30px;" />
+                </span>
+            </button>
+
+            <button type="button p-2" class="my-share-btn"
+                onclick="gtag('event', 'URL공유클릭', {'event_category': '공유클릭','event_label': 'URL공유클릭'}); shareUrl();"
+                style="margin:10px; height: 40px; background-color: #353709;">
+                <span class="try-again-text" style="font-size: 1.4rem;">링크 복사하기 🔗</span>
+            </button>
+
+            <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
+                <span class="try-again-text" style="font-size: 2.2rem;">얼굴합 테스트 다시 하기</span>
+            </button><br>
+
+            <br />
+            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
+
+            <br />
+            <br />
+            <div id="modalMessage">복사되었어요.</div>
+            <!-- App modal -->
+
+
+            <div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="appModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="appModalLabel">
+                                셀럽미: 얼굴합 테스트 가이드<br>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+
+                            <p class="text-app-center">
+                                얼굴 사진을 선택하면 나랑 닮은 연예인을 회원가입없이 빠르게 찾아보세요!<br>
+                                사진 데이터는 어디에도 저장되지 않습니다.
+                            </p>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                onclick="setCookie('celebme-popup', 'done', 7);">
+                                <span aria-hidden="true">&times;</span>
+                                팝업 일주일간 보지 않기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style type="text/css">
+                .img-wrapper {
+                    position: relative;
+                    width: 95%;
+                    max-width: 400px;
+                    height: 100px;
+                }
+
+                .img-wrapper img {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+
+                    object-fit: cover;
+                    margin: auto;
+
+                }
+            </style>
+            <br>
+            <br />
+        </div>
+        </div>
+    </center>
+    <div class="container pt-3">
+        <div id="disqus_thread"></div>
+    </div>
+
+    <footer class="footer pt-5 container d-flex justify-content-center">
+        <div>
+            <p>&copy; 테리 Terry 2022. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        function gaReload() {
+            gtag('event', '다른 사진으로 재시도', {
+                event_category: '다른 사진으로 재시도',
+            });
+            removeUpload();
+        }
+        function donate() {
+            gtag('event', '개발자에게 커피한잔! 후원하기', {
+                event_category: '개발자에게 커피한잔! 후원하기',
+            });
+        }
+    </script>
+
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'https://celebme.net/face-combo/index.html';
+            this.page.identifier = 'face-combo-index.html';
+        };
+
+        (function () {
+            var d = document,
+                s = d.createElement('script');
+            s.src = 'https://k-celeb.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+    <noscript>Please enable JavaScript to view the
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/v_20240912/index.js">
+    </script>
+
+
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+        if (!wcs_add) var wcs_add = {};
+        wcs_add["wa"] = "b042cce2e3b650";
+        if (window.wcs) {
+            wcs_do();
+        }
+
+        if (!window.location.href.includes("result") && getCookie('celebme-popup') != 'done') {
+            // 팝업
+            // $('#appModal').modal();
+            // .contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+        }
+        $(document).on('hide.bs.modal', '#appModal', function () {
+            // modal 종료시 youtube 중지
+            $("#youtube-video").attr("src", "");
+        });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- gif animation -->
+    <script src="/gif.js"></script>
+</body>
+
+
+</html>

@@ -4,8 +4,8 @@
 // const apiUrl = "https://knnlnzvrb56n7cvift2sajvyza.apigateway.ap-chuncheon-1.oci.customer-oci.com/v1"
 // const apiUrl = "http://158.180.71.186:8181";
 // const apiUrl = "https://celebme-api.duckdns.org:8181";
-const apiUrl = "https://celebme.duckdns.org:8181";
-// const apiUrl = "http://localhost:8181";
+// const apiUrl = "https://celebme.duckdns.org:8181";
+const apiUrl = "http://localhost:8181";
 // const apiUrl = "http://149.130.218.11:8181";
 
 // 닮은 셀럽 목록 변수
@@ -107,7 +107,7 @@ function toggleCelebList() {
 // toggleButton.addEventListener('click', function () {
 
 // });
-$(".result-message").hide();  // 셀럽미 결과화면 토글 
+// $(".result-message").hide();  // 셀럽미 결과화면 토글 
 
 
 
@@ -587,6 +587,80 @@ async function loadImage(url, elem) {
     elem.src = url;
   });
 }
+
+let selectedImages = [null, null];
+function selectImage(input, imageNumber) {
+  // TODO: 닮은비율찾기 구현
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            let previewImg = document.getElementById('preview-' + imageNumber);
+            previewImg.src = e.target.result;
+            previewImg.style.display = 'block';
+            selectedImages[imageNumber - 1] = input.files[0];
+            
+            // 두 이미지가 모두 선택되었는지 확인
+            // if (selectedImages[0] && selectedImages[1]) {
+            //     document.getElementById('start-button').style.display = 'block';
+            // }
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+async function startFaceComb() {
+  if (selectedImages[0] == null || selectedImages[1] == null) {
+    alert("두 이미지를 선택해주세요.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("img1", selectedImages[0]); // Adjust file type as needed
+  formData.append("img2", selectedImages[1]); // Adjust file type as needed
+  try {
+    const response = await fetch(apiUrl + '/verify', {
+      method: 'POST',
+      body: formData
+    });
+    const faceCombResponse = await response.json();
+    displayResults(faceCombResponse);
+  } catch (error) {
+    console.error('Error:', error);
+    alert('얼굴 비교 중 오류가 발생했습니다.');
+  }
+}
+function displayResults(result) {
+  // 결과 섹션 표시
+  document.getElementById('result-message-section').style.display = 'block';
+  
+  // 유사도 점수 표시 (1에서 distance를 빼서 유사도로 변환)
+  const similarityScore = (1 - result.distance) * 100;
+  document.getElementById('similarity-score').textContent = `${similarityScore.toFixed(2)}%`;
+  
+  // 일치 여부 표시
+  document.getElementById('verification-result').textContent = result.verified ? '일치' : '불일치';
+  document.getElementById('verification-result').style.color = result.verified ? 'green' : 'red';
+  
+  // 이미지 자르기 및 표시
+  cropAndDisplayImage(selectedImages[0], result.facial_areas.img1, 'cropped-image-1');
+  cropAndDisplayImage(selectedImages[1], result.facial_areas.img2, 'cropped-image-2');
+}
+
+function cropAndDisplayImage(imageFile, area, elementId) {
+  const img = new Image();
+  img.onload = function() {
+    const canvas = document.createElement('canvas');
+    canvas.width = area.w;
+    canvas.height = area.h;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, area.x, area.y, area.w, area.h, 0, 0, area.w, area.h);
+    document.getElementById(elementId).src = canvas.toDataURL();
+  };
+  img.src = URL.createObjectURL(imageFile);
+}
+
 async function readURL(input) {
   if (input.files && input.files[0]) {
     // $(".try-again-btn").hide();

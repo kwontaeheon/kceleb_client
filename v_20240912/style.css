@@ -41,7 +41,7 @@ body {
     font-weight: 700;
 }
 .result-section {
-    max-width: 600px;
+    max-width: 1100px;
 }
 
 .file-upload-btn:hover {
@@ -302,6 +302,7 @@ div.gsc-above-wrapper-area {
 
 .custom-select{
     font-size: 1.5rem;
+    max-width: 50vw;
 }
 
 /* On screens that are 600px or less, set the background color to olive */
@@ -340,9 +341,14 @@ div.gsc-above-wrapper-area {
 }
 
 .upload {
-    width: 35%;
-	max-height: 200px;
-	margin: 0 auto;
+    width: 80%;
+    max-width: 30vw;
+	max-height: 30vw;
+	align-items: center;
+    justify-content: center;
+    object-fit: contain;
+    overflow: hidden; 
+    margin-top: 1rem !important;
     /* filter: invert(48%) sepia(0%) saturate(2841%) hue-rotate(251deg) brightness(67%) contrast(80%); */
 }
 
@@ -648,4 +654,113 @@ max-height: 0px !important;
     width: 5rem;
     height: 5rem;
     margin: 50px;
+}
+
+.file-upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 2px;
+    margin-top: 20px;
+    flex-wrap: nowrap; 
+    width: 100%;
+}
+
+.file-upload-area {
+    width: 45%;
+    
+    /* max-width: 300px; */
+    /* min-width: 200px; */
+    align-items: center;
+    /* flex: 1; */
+}
+@media (max-width: 300px) {
+    .file-upload-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .file-upload-area {
+        width: 100%;
+        max-width: 30vw;
+        max-height: 30vw;
+    }
+}
+.preview-image {
+    display: none;
+    max-width: 100%;
+    max-height: 100%;  /* 이미지 최대 높이 설정 */
+    object-fit: contain;
+    
+    position: absolute;  /* 추가 */
+    top: 0;  /* 추가 */
+    left: 0;  /* 추가 */
+    width: 100%;  /* 추가 */
+    height: 100%;  /* 추가 */
+}
+
+.couple-image-upload-wrap {
+    border: 2px dashed #1FB264;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+    /* margin: 20px; */
+    overflow: hidden; 
+    width: 40vw;  /* 추가 */
+    height: 40vw;  /* 높이 설정, 필요에 따라 조정 가능 */
+    max-width: 400px;
+    max-height: 400px;
+}
+.couple-image-upload-wrap:hover {
+    background-color: #a8a8a8;
+}
+
+.preview-image {
+    display: none;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.start-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 4px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 40px;
+}
+
+.start-button:hover {
+    background-color: #45a049;
+}
+
+.image-comparison {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.image-comparison img {
+    width: 80%;
+    max-width: 300px;
+    height: 80%;
+    max-height: 300px;
 }
