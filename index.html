@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8" />
@@ -20,7 +20,7 @@
         content="셀럽미, 연예인 테스트, 연예인 얼굴 테스트, 연예인 닮은꼴 테스트, 나와 닮음꼴 연예인, 닮은 연예인 찾기, 나 닮은 연예인, 나랑 닮은 연예인, 나를 닮은 연예인테스트, 닮은 아이돟, 닮은 연예인 테스트, 연예인 테스트, 연예인 닮은 얼굴 테스트, 연예인 얼굴 테스트, 나 닮은 연예인 테스트, 나닭음 연예인, 나닮은 연예인찾기, 나랑닮은연예인테스트, 나와 닮은 연예인 찾기, 	나와 닮은 연예인, 나의 닮은연예인테스트, 나의인공지능 얼굴 테스트, 닭은 연예인 찾기, 연예인 얼굴 닮은 얼굴찾기 테스트, 연예인상테스트, 	연예인 사진 테스트, 연예인 닮은 얼굴 찾기, 연예인상테스트, 인공지능 연예인 테스트,  연예인 상 테스트, 연예인 닮은 테스트, 닮은 연예인 테스트, 닮은 연예인 테스트, 나의 인공지능 얼굴 테스트, 닮은 연예인 찾기, 닮은꼴 테스트, 연예인 얼굴, 연예인 닮은, 닮은얼굴찾기, 닮은 연예인 테스트,  얼굴상 테스트, 연예인상 테스트, 연예인 얼굴상 테스트, 닮은 연예인, 연예인 얼굴 테스트, 나와 비슷한 연예인, 닮은 연예인 찾기, 닮은연예인테스트, 닮은꼴테스트, 닮은꼴 연예인,  인공지능 얼굴상 테스트, 얼굴상, 얼굴상 테스트, 나와 닮은 연예인, 나와 닮은 연예인 테스트, 연예인, 인공지능 연예인, 연예인 찾기, 얼굴로 보는 연예인, 얼굴 연예인, 연예인 얼굴, celebrity, 인공지능 연예인상, 얼굴상, AI 연예인상, 닮은꼴 연예인 테스트, 얼굴 닮은꼴 테스트, 연예인 닮은꼴 테스트, 얼굴상 닮은꼴 테스트, 연예인 닮은꼴 테스트, 연예인 얼굴상 테스트, 얼굴 연예인 테스트, 얼굴 연예인 테스트, 셀럽찾기, 닮은 연예인 찾기, 나의 얼굴 분석, 얼굴 나이 분석, 얼굴 감정 분석, 얼굴 성별 분석, 얼굴 인종 분석, 닮음꼴테스트, 연예인 닮음꼴, 닮음꼴 연예인, 닮은꼴 연예인 테스트, 닮은 사람 찾기" />
     <meta name="author" content="권태헌(kwontaeheon@gmail.com)" />
     <meta name="description" content="대표 연예인으로 학습한 AI가 당신과 닮은 연예인을 찾아드려요. 사진은 어디에도 저장되지 않습니다. 열 명의 닮은 연예인을 바로 확인해보세요!" />
-    <link rel="stylesheet" href="/v_20240912/style.css" />
+    <link rel="stylesheet" href="/v_20240921/style.css" />
     <link rel="canonical" href="https://celebme.net" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="en" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="x-default" />
@@ -122,7 +122,10 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/" + lang.value + "/index.html";
+            if (lang.value == "ko") 
+                window.location.href = "/index.html";
+            else 
+                window.location.href = "/" + lang.value + "/index.html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>
@@ -454,7 +457,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="appModalLabel">
-                                셀럽미: 닮은 연예인 찾기 가이드<br>
+                                셀럽미: 얼굴 매칭 테스트 출시!<br>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -462,11 +465,19 @@
                         </div>
                         <div class="modal-body d-flex flex-column justify-content-center align-items-center">
 
+                            <div id="innerlink" class="text-center">
+                                <p><a href="/match/index.html" class="text-decoration-none">
+                                        우리 얼굴은 얼마나 닮았을까? <br>
+                                        커플, 연예인, 가족과 얼굴 매치 테스트 해보세요!<br>
+                                        셀럽미: 얼굴 매치 테스트 하러 가기
+                                        <img src="/match/celebme-matching-small.png" alt="셀럽미: 얼굴 매치 테스트" class="img-fluid mb-2" style="max-width: 300px;">
+                                    </a></p>
+                            </div>
                             <!-- <img class="" width="200px"
                                 src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
                                 alt='app icon'> -->
 
-                            <iframe id="youtube-video" width="100%" height="300vh"
+                            <!-- <iframe id="youtube-video" width="100%" height="300vh"
                                 src="https://youtube.com/embed/aFLerbjh_uA?controls=0&mute=1&showinfo=0&rel=0&autoplay=1&loop=1"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -475,7 +486,7 @@
                             <p class="text-app-center">
                                 얼굴 사진을 선택하면 나랑 닮은 연예인을 회원가입없이 빠르게 찾아보세요!<br>
                                 사진 데이터는 어디에도 저장되지 않습니다.
-                            </p>
+                            </p> -->
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                 onclick="setCookie('celebme-popup', 'done', 7);">
                                 <span aria-hidden="true">&times;</span>
@@ -520,8 +531,15 @@
                 }
             </style>
             <br>
-
-
+            
+            <div id="innerlink" class="text-center">
+                <p><a href="/match/index.html" class="text-decoration-none">
+                        우리 얼굴은 얼마나 닮았을까?<br>
+                        커플, 연예인, 가족과 얼굴 매치 테스트 해보세요!<br>
+                        셀럽미: 얼굴 매치 테스트 하러 가기
+                        <img src="/match/celebme-matching-small.png" alt="셀럽미: 얼굴 매치 테스트" class="img-fluid mb-2" style="max-width: 300px;">
+                    </a></p>
+            </div>
 
             <br />
             <!-- 디스플레이6 -->
@@ -640,7 +658,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/v_20240912/index.js">
+    <script type="text/javascript" src="/v_20240921/index.js">
     </script>
 
 
@@ -654,7 +672,7 @@
 
         if (!window.location.href.includes("result") && getCookie('celebme-popup') != 'done') {
             // 팝업
-            // $('#appModal').modal();
+            $('#appModal').modal(); 
             // .contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
         }
         $(document).on('hide.bs.modal', '#appModal', function () {

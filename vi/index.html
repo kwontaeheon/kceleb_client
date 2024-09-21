@@ -26,7 +26,7 @@
         Hình ảnh không được lưu trữ ở bất cứ đâu. Kiểm tra nó ngay lập tức mà không cần đăng ký!
         Phân tích giới tính và cảm xúc theo khuôn mặt, đồng thời tìm những người nổi tiếng có khuôn mặt giống bạn.
         Tìm tối đa mười người nổi tiếng tương tự cùng một lúc và tìm kiếm hình ảnh của người nổi tiếng có thể chia sẻ trên mạng xã hội." />
-    <link rel="stylesheet" href="/v_20240912/style.css" />
+    <link rel="stylesheet" href="/v_20240921/style.css" />
     <link rel="canonical" href="https://celebme.net/vi/index.html" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="en"/>
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="x-default"/>
@@ -133,7 +133,10 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/" + lang.value + "/index.html";
+            if (lang.value == "ko") 
+                window.location.href = "/index.html";
+            else 
+                window.location.href = "/" + lang.value + "/index.html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>
@@ -532,6 +535,14 @@
             </style>
             <br>
 
+            <div id="innerlink" class="text-center">
+                <p><a href="/match/en/index.html" class="text-decoration-none">
+                        Khuôn mặt của chúng ta giống nhau đến mức nào?<br>
+                        Hãy thử kiểm tra độ tương đồng khuôn mặt với cặp đôi, người nổi tiếng hoặc các thành viên trong gia đình!<br>
+                        CelebMe: Đi đến Kiểm tra Tương đồng Khuôn mặt
+                        <img src="/match/celebme-matching-small.png" alt="셀럽미: 얼굴 매치 테스트" class="img-fluid mb-2" style="max-width: 300px;">
+                    </a></p>
+            </div>
 
 
             <br />
@@ -654,7 +665,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/v_20240912/index.js">
+    <script type="text/javascript" src="/v_20240921/index.js">
     </script>
 
 

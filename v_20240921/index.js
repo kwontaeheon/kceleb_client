@@ -15,7 +15,7 @@ var faceData;
 
 
 const lang = $("#lang option:selected").val();
-const version = "/v_20240912";
+const version = "/v_20240921";
 var faceNames = {};
 var faceNamesKo = {};
 (function () {
@@ -579,14 +579,241 @@ function displayIdolPrediction(rank) {
 //   displayIdolPrediction(valuesArr, namesArr);
 // }
 
-async function loadImage(url, elem) {
-  return new Promise(function (resolve, reject) {
-    elem.onload = function () {
-      resolve(elem);
+
+let selectedImages = [null, null];
+function selectImage(input, imageNumber) {
+  // TODO: 닮은비율찾기 구현
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            let previewImg = document.getElementById('preview-' + imageNumber);
+            previewImg.src = e.target.result;
+            previewImg.style.display = 'block';
+            selectedImages[imageNumber - 1] = input.files[0];
+            
+            // 두 이미지가 모두 선택되었는지 확인
+            // if (selectedImages[0] && selectedImages[1]) {
+            //     document.getElementById('start-button').style.display = 'block';
+            // }
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+function resizeAndCropImage(file, targetSize) {
+  // match 에서 사용하는 crop image 모듈 (얼굴이 아닌 512로 자르기))
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      let width = img.width;
+      let height = img.height;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      // 짧은 쪽을 targetSize에 맞춤
+      if (width < height) {
+        height = height * (targetSize / width);
+        width = targetSize;
+      } else {
+        width = width * (targetSize / height);
+        height = targetSize;
+      }
+
+      // 크롭할 위치 계산
+      offsetX = (width - targetSize) / 2;
+      offsetY = (height - targetSize) / 2;
+
+      // 캔버스 크기 설정
+      canvas.width = targetSize;
+      canvas.height = targetSize;
+      
+      // 이미지를 리사이즈하고 크롭하여 그리기
+      ctx.drawImage(img, -offsetX, -offsetY, width, height);
+      
+      // 캔버스를 Blob으로 변환
+      canvas.toBlob((blob) => {
+        resolve(blob);
+      }, 'image/jpeg', 0.95);
     };
-    elem.src = url;
+    img.src = URL.createObjectURL(file);
   });
 }
+
+// 이미지 처리 및 FormData에 추가하는 함수
+async function processAndAppendImage(file, formData, name) {
+  const processedImage = await resizeAndCropImage(file, 512);
+  formData.append(name, processedImage, file.name);
+  const img = document.getElementById("processed-" + name);
+  img.src = URL.createObjectURL(processedImage);
+}
+
+async function startMatch() {
+  if (selectedImages[0] == null || selectedImages[1] == null) {
+    alert("두 이미지를 선택해주세요.");
+    return;
+  }
+  
+  $("#loading-message").html(getMeta("analyzing_face"))
+  $("#loading").show();
+  // 3초 대기
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  $("#loading").hide();
+
+  const formData = new FormData();
+  await processAndAppendImage(selectedImages[0], formData, "img1");
+  await processAndAppendImage(selectedImages[1], formData, "img2");
+  
+  // formData.append("img1", selectedImages[0]); // Adjust file type as needed
+  // formData.append("img2", selectedImages[1]); // Adjust file type as needed
+  try {
+    const response = await fetch(apiUrl + '/verify', {
+      method: 'POST',
+      body: formData
+    });
+    const faceCombResponse = await response.json();
+    displayResults(faceCombResponse);
+  } catch (error) {
+    console.error('Error:', error);
+    alert(getMeta("error_msg"));
+  }
+}
+
+function createComparisonImage(img1, img2) {
+    const canvas = document.getElementById('comparison-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // 캔버스 크기 설정
+    canvas.width = 800;
+    canvas.height = 200;
+    
+    // 이미지 그리기 함수
+    function drawImage(img, x, y, width, height) {
+        ctx.drawImage(img, 0, 0, img.width, img.height, x, y, width, height);
+    }
+    
+    // 왼쪽 이미지
+    drawImage(img1, 0, 0, 200, 200);
+    
+    // 오른쪽 이미지
+    drawImage(img2, 600, 0, 200, 200);
+    
+    // 중앙 왼쪽 (66% img1, 33% img2)
+    ctx.globalAlpha = 0.66;
+    drawImage(img1, 200, 0, 200, 200);
+    ctx.globalAlpha = 0.33;
+    drawImage(img2, 200, 0, 200, 200);
+    
+    // 중앙 오른쪽 (33% img1, 66% img2)
+    ctx.globalAlpha = 0.33;
+    drawImage(img1, 400, 0, 200, 200);
+    ctx.globalAlpha = 0.66;
+    drawImage(img2, 400, 0, 200, 200);
+    
+    // 투명도 초기화
+    ctx.globalAlpha = 1;
+    
+    // 캡처 및 다운로드 버튼 표시
+    const captureButton = document.getElementById('download-comparison');
+    captureButton.style.display = 'block';
+    captureButton.addEventListener('click', captureAndDownload);
+}
+
+// 이미지 다운로드 함수
+function captureAndDownload() {
+    const element = document.getElementById('result-message-section');
+    html2canvas(element).then(function(canvas) {
+        const link = document.createElement('a');
+        link.download = 'face-match-result.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
+}
+
+// 이미지 로딩을 Promise로 감싸는 함수
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+async function displayResults(result) {
+  // 결과 섹션 표시
+  document.getElementById('match-result-message').style.display = 'block';
+  
+  // 다운로드 버튼에 이벤트 리스너 추가
+  const downloadButton = document.getElementById('download-comparison');
+  downloadButton.style.display = 'block';
+  downloadButton.addEventListener('click', captureAndDownload);
+
+  // 얼굴 인식 여부 확인
+  const isFace1Detected = !(result.facial_areas.img1.w === 512 && result.facial_areas.img1.h === 512);
+  const isFace2Detected = !(result.facial_areas.img2.w === 512 && result.facial_areas.img2.h === 512);
+  
+  if (!isFace1Detected || !isFace2Detected) {
+    // 하나 이상의 이미지에서 얼굴이 인식되지 않은 경우
+    $("#img1-face-detected").html(!isFace1Detected ? getMeta('face_img1') : "");
+    $("#img2-face-detected").html(!isFace2Detected ? getMeta('face_img2') : "");
+    $("#face-not-detected").html(getMeta('face_not_detected'));
+  } 
+
+  // console.log(result);
+  // 유사도 점수 계산 (0에서 100 사이의 값으로 정규화)
+  const similarityScore = Math.max(0, Math.min(100, (1 - result.distance) * 100));
+  document.getElementById('similarity-score').textContent = `${similarityScore.toFixed(2)}%`;
+  
+  // 일치 여부 표시
+  const threshold1 = 65; // 예시 임계값, 실제 사용 시 조정 필요
+  const threshold2 = 55; // 예시 임계값, 실제 사용 시 조정 필요
+  var similarType = "face_not_match";
+  if (similarityScore <= threshold2) {
+    similarType = "face_not_match";
+  } else if(similarityScore <= threshold1) {
+    similarType = "face_not_match_but_similar";
+  } else {
+    similarType = "face_match";
+  }
+  
+  $("#verification-result").html(getMeta(similarType));
+  document.getElementById('verification-result').style.color = similarType == "face_match" ? 'green' : 'blue';
+  
+  // 이미지를 얼굴영역으로  자르기 및 표시
+  cropAndDisplayImage(document.getElementById('processed-img1'), result.facial_areas.img1, 'cropped-image-1');
+  cropAndDisplayImage(document.getElementById('processed-img2'), result.facial_areas.img2, 'cropped-image-2');
+
+  // 연결되는 이미지 생성
+  const img1Src = document.getElementById('cropped-image-1').src;
+  const img2Src = document.getElementById('cropped-image-2').src;
+  
+  // 두 이미지를 동시에 로드
+  const [img1, img2] = await Promise.all([
+      loadImage(img1Src),
+      loadImage(img2Src)
+  ]);
+
+  // 이미지가 모두 로드된 후 비교 이미지 생성
+  createComparisonImage(img1, img2);
+  
+}
+
+function cropAndDisplayImage(imgSource, area, elementId) {
+  
+  
+  const canvas = document.createElement('canvas');
+  canvas.width = area.w;
+  canvas.height = area.h;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(imgSource, area.x, area.y, area.w, area.h, 0, 0, area.w, area.h);
+  document.getElementById(elementId).src = canvas.toDataURL();
+  
+}
+
 async function readURL(input) {
   if (input.files && input.files[0]) {
     // $(".try-again-btn").hide();
@@ -730,13 +957,13 @@ function getBaseUrl() {
   // var name = window.location.hostname;
   name = name.split("#")[0];
   // console.log(name);
-  if (name.includes("index") == false) {
-    if (lang == "ko") {
-      name = name + "index.html";
-    } else {
-      name = name + lang + "/index.html";
-    }
-  }
+  // if (name.includes("index") == false) {
+  //   if (lang == "ko") {
+  //     name = name + "index.html";
+  //   } else {
+  //     name = name + lang + "/index.html";
+  //   }
+  // }
 
 
   // console.log(name);
@@ -856,14 +1083,15 @@ function getUrlParameter(name) {
 
 Kakao.init('0ed053a93843ba490a37bb2964e5baaa');
 
-function shareKakao() {
+function shareKakao(customTemplateId) {
+  var templateId = customTemplateId || 104987;
   var link = getIndexParamsUrl(); // + getUriComoponents: 버그로 막아둠
   if (similarIdolData != null) {
     link = link + getUriComponents(); // 결과공유url
     // console.log(link);
     Kakao.Share.sendCustom(
       {
-        templateId: 104987,
+        templateId: templateId,
         templateArgs: {
           'result_url': link,    // encoded url
           'result': similarIdolData[0].name + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
@@ -874,7 +1102,7 @@ function shareKakao() {
     // console.log(link);
     Kakao.Share.sendCustom(
       {
-        templateId: 104987,
+        templateId: templateId,
         templateArgs: {
           'result_url': link,
         }
