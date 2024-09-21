@@ -4,8 +4,8 @@
 // const apiUrl = "https://knnlnzvrb56n7cvift2sajvyza.apigateway.ap-chuncheon-1.oci.customer-oci.com/v1"
 // const apiUrl = "http://158.180.71.186:8181";
 // const apiUrl = "https://celebme-api.duckdns.org:8181";
-// const apiUrl = "https://celebme.duckdns.org:8181";
-const apiUrl = "http://localhost:8181";
+const apiUrl = "https://celebme.duckdns.org:8181";
+// const apiUrl = "http://localhost:8181";
 // const apiUrl = "http://149.130.218.11:8181";
 
 // 닮은 셀럽 목록 변수
@@ -15,7 +15,7 @@ var faceData;
 
 
 const lang = $("#lang option:selected").val();
-const version = "/v_20240912";
+const version = "/v_20240921";
 var faceNames = {};
 var faceNamesKo = {};
 (function () {
