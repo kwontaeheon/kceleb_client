@@ -34,5 +34,11 @@
   "face_gt1" : "More than one face recognized. <br/> Analyzing by the first face. <br/>",
   "face_confidence_low" : "Face isn't recognized. <br/> Instead, image similarity used to analyze. <br/> Why not try again with another photo?<br/>",
  
+  "face_match": "It's a match! The faces are almost identical. <br/> Is it you or a family member?",
+  "face_not_match_but_similar": "The faces look very similar. Are you a couple?",
+  "face_not_match": "The faces don't seem to look alike.",
+  "face_not_detected": "No face was detected in the image. <br/> Instead of faces, we compared the similarity of the images. <br/> Try again with a different photo.",
+  "face_img1": "Face 1",
+  "face_img2": "Face 2",
   "error_msg": "Error occured. <br/> Please try again.<br/>"
 }

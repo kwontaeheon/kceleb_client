@@ -133,7 +133,10 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/" + lang.value + "/index.html";
+            if (lang.value == "ko") 
+                window.location.href = "/index.html";
+            else 
+                window.location.href = "/" + lang.value + "/index.html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>
@@ -532,6 +535,14 @@
             </style>
             <br>
 
+            <div id="innerlink" class="text-center">
+                <p><a href="/match/en/index.html" class="text-decoration-none">
+                        Khuôn mặt của chúng ta giống nhau đến mức nào?<br>
+                        Hãy thử kiểm tra độ tương đồng khuôn mặt với cặp đôi, người nổi tiếng hoặc các thành viên trong gia đình!<br>
+                        CelebMe: Đi đến Kiểm tra Tương đồng Khuôn mặt
+                        <img src="/match/celebme-matching-small.png" alt="셀럽미: 얼굴 매치 테스트" class="img-fluid mb-2" style="max-width: 300px;">
+                    </a></p>
+            </div>
 
 
             <br />

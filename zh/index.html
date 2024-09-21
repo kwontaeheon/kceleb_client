@@ -175,7 +175,10 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/" + lang.value + "/index.html";
+            if (lang.value == "ko") 
+                window.location.href = "/index.html";
+            else 
+                window.location.href = "/" + lang.value + "/index.html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>
@@ -575,7 +578,14 @@
             </style>
             <br>
 
-
+            <div id="innerlink" class="text-center">
+                <p><a href="/match/en/index.html" class="text-decoration-none">
+                        我们的脸有多相似？<br>
+                        快来测试与情侣、名人、家人的脸部匹配度！<br>
+                        CelebMe: 前往脸部匹配测试
+                        <img src="/match/celebme-matching-small.png" alt="CelebMe: 脸部匹配测试" class="img-fluid mb-2" style="max-width: 300px;">
+                    </a></p>
+            </div>
 
             <br />
             <!-- 디스플레이6 -->

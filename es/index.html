@@ -133,7 +133,10 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/" + lang.value + "/index.html";
+            if (lang.value == "ko") 
+                window.location.href = "/index.html";
+            else 
+                window.location.href = "/" + lang.value + "/index.html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>
@@ -522,6 +525,14 @@
             </style>
             <br>
 
+            <div id="innerlink" class="text-center">
+                <p><a href="/match/en/index.html" class="text-decoration-none">
+                        ¿Cuánto se parecen nuestros rostros?<br>
+                        ¡Prueba el test de coincidencia facial con parejas, celebridades o familiares!<br>
+                        CelebMe: Ir al test de coincidencia facial
+                        <img src="/match/celebme-matching-small.png" alt="CelebMe: Test de coincidencia facial" class="img-fluid mb-2" style="max-width: 300px;">
+                    </a></p>
+            </div>
 
 
             <br />

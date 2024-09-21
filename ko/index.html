@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8" />
@@ -132,7 +132,10 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/" + lang.value + "/index.html";
+            if (lang.value == "ko") 
+                window.location.href = "/index.html";
+            else 
+                window.location.href = "/" + lang.value + "/index.html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>

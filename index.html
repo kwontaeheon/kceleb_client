@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8" />
@@ -122,7 +122,10 @@
     <script>
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
-            window.location.href = "/" + lang.value + "/index.html";
+            if (lang.value == "ko") 
+                window.location.href = "/index.html";
+            else 
+                window.location.href = "/" + lang.value + "/index.html";
         }
     </script>
     <!-- <div id="google_translate_element"></div>
@@ -454,7 +457,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="appModalLabel">
-                                셀럽미: 닮은 연예인 찾기 가이드<br>
+                                셀럽미: 얼굴 매칭 테스트 출시!<br>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -462,11 +465,19 @@
                         </div>
                         <div class="modal-body d-flex flex-column justify-content-center align-items-center">
 
+                            <div id="innerlink" class="text-center">
+                                <p><a href="/match/index.html" class="text-decoration-none">
+                                        우리 얼굴은 얼마나 닮았을까? <br>
+                                        커플, 연예인, 가족과 얼굴 매치 테스트 해보세요!<br>
+                                        셀럽미: 얼굴 매치 테스트 하러 가기
+                                        <img src="/match/celebme-matching-small.png" alt="셀럽미: 얼굴 매치 테스트" class="img-fluid mb-2" style="max-width: 300px;">
+                                    </a></p>
+                            </div>
                             <!-- <img class="" width="200px"
                                 src="https://play-lh.googleusercontent.com/IidzGfx6ICCRnHqGsQYOoyyVcqNnF4sLZTycK5y0fQ0gUhTpd23KwNNgE3c403wkR1s=s128-rw"
                                 alt='app icon'> -->
 
-                            <iframe id="youtube-video" width="100%" height="300vh"
+                            <!-- <iframe id="youtube-video" width="100%" height="300vh"
                                 src="https://youtube.com/embed/aFLerbjh_uA?controls=0&mute=1&showinfo=0&rel=0&autoplay=1&loop=1"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -475,7 +486,7 @@
                             <p class="text-app-center">
                                 얼굴 사진을 선택하면 나랑 닮은 연예인을 회원가입없이 빠르게 찾아보세요!<br>
                                 사진 데이터는 어디에도 저장되지 않습니다.
-                            </p>
+                            </p> -->
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                 onclick="setCookie('celebme-popup', 'done', 7);">
                                 <span aria-hidden="true">&times;</span>
@@ -520,8 +531,15 @@
                 }
             </style>
             <br>
-
-
+            
+            <div id="innerlink" class="text-center">
+                <p><a href="/match/index.html" class="text-decoration-none">
+                        우리 얼굴은 얼마나 닮았을까?<br>
+                        커플, 연예인, 가족과 얼굴 매치 테스트 해보세요!<br>
+                        셀럽미: 얼굴 매치 테스트 하러 가기
+                        <img src="/match/celebme-matching-small.png" alt="셀럽미: 얼굴 매치 테스트" class="img-fluid mb-2" style="max-width: 300px;">
+                    </a></p>
+            </div>
 
             <br />
             <!-- 디스플레이6 -->
@@ -654,7 +672,7 @@
 
         if (!window.location.href.includes("result") && getCookie('celebme-popup') != 'done') {
             // 팝업
-            // $('#appModal').modal();
+            $('#appModal').modal(); 
             // .contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
         }
         $(document).on('hide.bs.modal', '#appModal', function () {
