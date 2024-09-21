@@ -603,9 +603,14 @@ function selectImage(input, imageNumber) {
 }
 function resizeAndCropImage(file, targetSize) {
   // match 에서 사용하는 crop image 모듈 (얼굴이 아닌 512로 자르기))
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => {
+      reject(new Error('파일 읽기 실패'));
+    };
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       
@@ -634,34 +639,52 @@ function resizeAndCropImage(file, targetSize) {
       // 이미지를 리사이즈하고 크롭하여 그리기
       ctx.drawImage(img, -offsetX, -offsetY, width, height);
       
-      // 캔버스를 Blob으로 변환
-      canvas.toBlob((blob) => {
-        resolve(blob);
-      }, 'image/jpeg', 0.95);
+      resolve(canvas.toDataURL('image/jpeg', 0.95));
+
+      // // 캔버스를 Blob으로 변환
+      // canvas.toBlob((blob) => {
+      //   resolve(blob);
+      // }, 'image/jpeg', 0.95);
+      };
+      img.onerror = () => {
+        reject(new Error('이미지 로딩 실패'));
+      };
+      img.src = e.target.result;//
     };
-    img.src = URL.createObjectURL(file);
+    //  URL.createObjectURL(file);
+    reader.readAsDataURL(file);
   });
 }
 
 // 이미지 처리 및 FormData에 추가하는 함수
 async function processAndAppendImage(file, formData, name) {
   const processedImage = await resizeAndCropImage(file, 512);
-  formData.append(name, processedImage, file.name);
+  // Base64 데이터 URL을 Blob으로 변환
+  const response = await fetch(processedImage);
+  const blob = await response.blob();
+  formData.append(name, blob, file.name);
+
   const img = document.getElementById("processed-" + name);
-  img.src = URL.createObjectURL(processedImage);
+  img.src = processedImage;
 }
 
 async function startMatch() {
   if (selectedImages[0] == null || selectedImages[1] == null) {
-    alert("두 이미지를 선택해주세요.");
+    gtag("event", "matchStartError", {
+      event_category: "startMatch",
+    });
+    alert(getMeta('face_error_select'));
     return;
   }
+  gtag("event", "matchStartOK", {
+    event_category: "startMatch",
+  });
   
   $("#loading-message").html(getMeta("analyzing_face"))
   $("#loading").show();
   // 3초 대기
   await new Promise(resolve => setTimeout(resolve, 3000));
-  $("#loading").hide();
+  
 
   const formData = new FormData();
   await processAndAppendImage(selectedImages[0], formData, "img1");
@@ -676,10 +699,17 @@ async function startMatch() {
     });
     const faceCombResponse = await response.json();
     displayResults(faceCombResponse);
+    gtag("event", "matchFinish", {
+      event_category: "startMatch",
+    });
   } catch (error) {
     console.error('Error:', error);
+    gtag("event", "matchFinishError", {
+      event_category: "startMatch",
+    });
     alert(getMeta("error_msg"));
   }
+  $("#loading").hide();
 }
 
 function createComparisonImage(img1, img2) {
@@ -724,6 +754,9 @@ function createComparisonImage(img1, img2) {
 
 // 이미지 다운로드 함수
 function captureAndDownload() {
+  gtag("event", "matchCaptureAndDownload", {
+    event_category: "startMatch",
+  });
     const element = document.getElementById('result-message-section');
     html2canvas(element).then(function(canvas) {
         const link = document.createElement('a');
@@ -779,6 +812,9 @@ async function displayResults(result) {
   } else {
     similarType = "face_match";
   }
+  gtag("event", "matchType_" + similarType, {
+    event_category: "startMatch",
+  });
   
   $("#verification-result").html(getMeta(similarType));
   document.getElementById('verification-result').style.color = similarType == "face_match" ? 'green' : 'blue';

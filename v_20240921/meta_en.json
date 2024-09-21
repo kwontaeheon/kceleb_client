@@ -34,6 +34,7 @@
   "face_gt1" : "More than one face recognized. <br/> Analyzing by the first face. <br/>",
   "face_confidence_low" : "Face isn't recognized. <br/> Instead, image similarity used to analyze. <br/> Why not try again with another photo?<br/>",
  
+  "face_error_select": "Please select two images.",
   "face_match": "It's a match! The faces are almost identical. <br/> Is it you or a family member?",
   "face_not_match_but_similar": "The faces look very similar. Are you a couple?",
   "face_not_match": "The faces don't seem to look alike.",
