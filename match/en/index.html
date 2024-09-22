@@ -21,11 +21,11 @@
     <meta name="author" content="Terry (kwontaeheon@gmail.com)" />
     <meta name="description" content="AI will tell you the similarity ratio between two faces. Photos are not stored anywhere. Try the face matching test with couples, celebrities, or family members!" />
     <link rel="stylesheet" href="/v_20240922/style.css" />
-    <link rel="canonical" href="https://celebme.net/match/en" />
-    <link rel="alternate" href="https://celebme.net/match/en" hreflang="x-default" />
-    <link rel="alternate" href="https://celebme.net/match/en" hreflang="en" />
-    <link rel="alternate" href="https://celebme.net/match" hreflang="ko" />
-    <meta property="og:url" content="https://celebme.net/match" />
+    <link rel="canonical" href="https://celebme.net/match/en/" />
+    <link rel="alternate" href="https://celebme.net/match/en/" hreflang="x-default" />
+    <link rel="alternate" href="https://celebme.net/match/en/" hreflang="en" />
+    <link rel="alternate" href="https://celebme.net/match/" hreflang="ko" />
+    <meta property="og:url" content="https://celebme.net/match/en/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="CelebMe: Face Matching Test" />
     <meta property="og:description" content="AI will tell you the similarity ratio between two faces. Photos are not stored anywhere. Try the face matching test with couples, celebrities, or family members!" />
@@ -118,9 +118,9 @@
         var ua = navigator.userAgent.toLowerCase();
         function changeLanguage(lang) {
             if (lang.value == "ko") 
-                window.location.href = "/match";
+                window.location.href = "/match/";
             else 
-                window.location.href = "/match/" + lang.value;
+                window.location.href = "/match/" + lang.value + "/";
         }
     </script>
     
@@ -327,7 +327,7 @@
 
     <script>
         var disqus_config = function () {
-            this.page.url = 'https://celebme.net/match/en';
+            this.page.url = 'https://celebme.net/match/en/';
             this.page.identifier = 'match-en-index.html';
         };
 
