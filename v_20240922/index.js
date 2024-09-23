@@ -1056,7 +1056,7 @@ function sleep(ms) {
 function showResults(resultParam, faceParam) {
   // result 가 있을경우 canonical url 에 추가  : 셀럽미는 결과가 너무 많아서 일단 보류
   // var uC = document.querySelector("link[rel='canonical']");
-  // var newURL = window.location.href;
+  // var newURL = window.location.href.split("#")[0];
   // uC.setAttribute("href", newURL);
 
   $("#display4").hide();

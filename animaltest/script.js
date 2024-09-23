@@ -702,7 +702,7 @@ function determineResult(answers) {
 function showResults(result = "none") {
     // result 가 있을경우 canonical url 에 추가
     var uC = document.querySelector("link[rel='canonical']");
-    var newURL = window.location.href;
+    var newURL = window.location.href.split("#")[0];
     uC.setAttribute("href", newURL);
 
     // Logic to determine the result based on answers
