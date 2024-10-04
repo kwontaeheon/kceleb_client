@@ -54,7 +54,9 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636274019237410"
         crossorigin="anonymous"></script>
-
+    
+    <!-- 스크린샷 -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 
 </head>
@@ -376,23 +378,40 @@
                     </div>
                     <div class="col" style="text-align:center;">
                         
-                        <center><button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
-                                style="display: none;">가장 닮은 연예인 움짤 만들기!</button></center>
-                           
-                        <div id="gifLoading" class="animated bounce" style="display: none;">
-                            <div id="celeb-spinner" class="spinner-border gifloading" role="status">
-                                <span class="sr-only">Loading...</span>
+                        <center>
+                            <button id="createComparisonPic" onclick="displayComparisonCelebMe(1)" class="styled-canvas giffont"
+                            style="display: none;">가장 닮은 연예인 사진 만들기</button>
+                            <div id="comparisonLoading" class="animated bounce" style="display: none;">
+                                <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
                             </div>
-                        </div>
-                        <div id="animation" style="display: none;">
-                            <center>
+                            <div id="result-message-section" style="display: none;">
+                                <h2>셀럽미: 닮은 연예인 찾기 결과</h2>
+                                <p class="result-text">가장 닮은 연예인: <span id="similar-celeb"></span></p>
+                                <p class="result-text">닮은 비율: <span id="similarity-score"></span></p>
+                                <p class="result-text"><span id="verification-result"></span></p>
+                                <canvas id="comparison-canvas" style="width: 80vw; height: 20vw; max-width: 800px; max-height: 200px;"></canvas>
+                            </div>
+                            <button id="download-comparison" class="start-button" style="display: none;">이미지 다운받기</button>
+                            
+                            <button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
+                                style="display: none;">움짤 만들기</button>
+                            <div id="gifLoading" class="animated bounce" style="display: none;">
+                                <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div id="animation" style="display: none;">
+                                
                                 <img id="outputGIF" style="width: 30vh; height: 30vh;">
                                 <button id="downloadGif" style="display: none;" class="styled-canvas giffont">움짤
                                     다운받기</button>
-                            </center>
-                        </div>
-
+                                
+                            </div>
+                        
                         <h4 class="subtitle">나랑 닮은 연예인 찾기 결과를 공유해보세요!</h4>
+                        </center>
                     </div>
 
 

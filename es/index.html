@@ -67,7 +67,8 @@
         crossorigin="anonymous"></script>
 
 
-
+    <!-- 스크린샷 -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -380,28 +381,39 @@
                     </div>
                     <div class="col" style="text-align:center;">
                         
-                        <!-- <center><button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
-                                style="display: none;">Hacer animación GIF!</button></center> -->
-                           <!-- 디스플레이7 -->
-                            <ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-client="ca-pub-9636274019237410"
-                            data-ad-slot="1424610037"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"></ins>
-                        <div id="gifLoading" class="animated bounce" style="display: none;">
-                            <div id="celeb-spinner" class="spinner-border gifloading" role="status">
-                                <span class="sr-only">Cargando...</span>
+                        <center>
+                            <button id="createComparisonPic" onclick="displayComparisonCelebMe(1)" class="styled-canvas giffont"
+                            style="display: none;">Crear imagen del famoso más parecido</button>
+                            <div id="comparisonLoading" class="animated bounce" style="display: none;">
+                                <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                                    <span class="sr-only">Cargando...</span>
+                                </div>
                             </div>
-                        </div>
-                        <div id="animation" style="display: none;">
-                            <center>
+                            <div id="result-message-section" style="display: none;">
+                                <h2>CelebMe: Resultados de encontrar un famoso parecido</h2>
+                                <p class="result-text">Famoso más parecido: <span id="similar-celeb"></span></p>
+                                <p class="result-text">Proporción de parecido: <span id="similarity-score"></span></p>
+                                <p class="result-text"><span id="verification-result"></span></p>
+                                <canvas id="comparison-canvas" style="width: 80vw; height: 20vw; max-width: 800px; max-height: 200px;"></canvas>
+                            </div>
+                            <button id="download-comparison" class="start-button" style="display: none;">Descargar imagen</button>
+                            
+                            <button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
+                                style="display: none;">Crear GIF</button>
+                            <div id="gifLoading" class="animated bounce" style="display: none;">
+                                <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                                    <span class="sr-only">Cargando...</span>
+                                </div>
+                            </div>
+                            <div id="animation" style="display: none;">
+                                
                                 <img id="outputGIF" style="width: 30vh; height: 30vh;">
                                 <button id="downloadGif" style="display: none;" class="styled-canvas giffont">Descargar</button>
-                            </center>
+                            
                         </div>
 
                         <h4 class="subtitle">¡Comparte el resultado de CelebMe!</h4>
+                        </center>
                     </div>
 
 
@@ -446,11 +458,6 @@
                 <span class="try-again-text" style="font-size: 2.2rem;">Hazme celebre otra vez</span>
             </button><br>
 
-            <br />
-            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
-
-
-            <br />
             <br />
             <div id="modalMessage">copied</div>
             <!-- App modal -->

@@ -41,7 +41,7 @@
     <meta property="og:title" content="CelebMe: Tìm những người nổi tiếng mà bạn trông giống" />
     <meta property="og:description"
         content="Celeb Me: Một bài kiểm tra để tìm những người nổi tiếng tương tự dựa trên khuôn mặt của họ!
-        Trí tuệ nhân tạo học được từ dữ liệu người nổi tiếng đại diện sẽ tìm ra những người nổi tiếng giống bạn.
+        Trí tu��� nhân tạo học được từ dữ liệu người nổi tiếng đại diện sẽ tìm ra những người nổi tiếng giống bạn.
         Hình ảnh không được lưu trữ ở bất cứ đâu. Kiểm tra nó ngay lập tức mà không cần đăng ký!
         Phân tích giới tính và cảm xúc theo khuôn mặt, đồng thời tìm những người nổi tiếng có khuôn mặt giống bạn.
         Tìm tối đa mười người nổi tiếng tương tự cùng một lúc và tìm kiếm hình ảnh của người nổi tiếng có thể chia sẻ trên mạng xã hội." />
@@ -65,7 +65,9 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636274019237410"
         crossorigin="anonymous"></script>
-
+    
+    <!-- 스크린샷 -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 
 </head>
@@ -100,7 +102,7 @@
                 </li>
                 <li class="nav-item active"
                     onclick="gtag('event', '과제생활 동물찾기 클릭', {'event_category': '과제생활 동물찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/animaltest/index.html">Thử nghiệm động vật giống MBTI
+                    <a class="nav-link" href="/animaltest/index.html">Thử nghiệm đ���ng vật giống MBTI
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -389,31 +391,39 @@
                     </div>
                     <div class="col" style="text-align:center;">
                         
-                        <!-- <center><button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
-                                style="display: none;">Tạo ảnh GIF của người nổi tiếng mà bạn giống nhất!</button></center> -->
-                           <!-- 디스플레이7 -->
-                            <ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-client="ca-pub-9636274019237410"
-                            data-ad-slot="1424610037"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"></ins>
-                        <div id="gifLoading" class="animated bounce" style="display: none;">
-                            <div id="celeb-spinner" class="spinner-border gifloading" role="status">
-                                <span class="sr-only">Đang tải...</span>
+                        <center>
+                            <button id="createComparisonPic" onclick="displayComparisonCelebMe(1)" class="styled-canvas giffont"
+                            style="display: none;">Tạo hình ảnh người nổi tiếng giống nhất</button>
+                            <div id="comparisonLoading" class="animated bounce" style="display: none;">
+                                <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
                             </div>
-                        </div>
-                        <div id="animation" style="display: none;">
-                            <center>
+                            <div id="result-message-section" style="display: none;">
+                                <h2>CelebMe: Kết quả tìm kiếm người nổi tiếng giống bạn</h2>
+                                <p class="result-text">Người nổi tiếng giống nhất: <span id="similar-celeb"></span></p>
+                                <p class="result-text">Tỷ lệ giống: <span id="similarity-score"></span></p>
+                                <p class="result-text"><span id="verification-result"></span></p>
+                                <canvas id="comparison-canvas" style="width: 80vw; height: 20vw; max-width: 800px; max-height: 200px;"></canvas>
+                            </div>
+                            <button id="download-comparison" class="start-button" style="display: none;">Tải hình ảnh</button>
+                            
+                            <button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
+                                style="display: none;">Tạo GIF</button>
+                            <div id="gifLoading" class="animated bounce" style="display: none;">
+                                <div id="celeb-spinner" class="spinner-border gifloading" role="status">
+                                    <span class="sr-only">Đang tải...</span>
+                                </div>
+                            </div>
+                            <div id="animation" style="display: none;">
+                                
                                 <img id="outputGIF" style="width: 30vh; height: 30vh;">
-                                <button id="downloadGif" style="display: none;" class="styled-canvas giffont">GIF
-                                    Tải xuống</button>
-                            </center>
+                                <button id="downloadGif" style="display: none;" class="styled-canvas giffont">Tải xuống GIF</button>
                         </div>
 
                         <h4 class="subtitle">Chia sẻ kết quả tìm kiếm những người nổi tiếng giống bạn!</h4>
+                        </center>
                     </div>
-
 
 
 
@@ -539,7 +549,7 @@
                 <p><a href="/match/en/index.html" class="text-decoration-none">
                         Khuôn mặt của chúng ta giống nhau đến mức nào?<br>
                         Hãy thử kiểm tra độ tương đồng khuôn mặt với cặp đôi, người nổi tiếng hoặc các thành viên trong gia đình!<br>
-                        CelebMe: Đi đến Kiểm tra Tương đồng Khuôn mặt<br>
+                        CelebMe: ��i đến Kiểm tra Tương đồng Khuôn mặt<br>
                         <img src="/match/celebme-matching-small.png" alt="CelebMe: Face Matching Test" class="img-fluid mb-2" style="max-width: 300px;">
                     </a></p>
             </div>

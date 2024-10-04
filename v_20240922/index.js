@@ -18,6 +18,9 @@ const lang = $("#lang option:selected").val();
 const version = "/v_20240922";
 var faceNames = {};
 var faceNamesKo = {};
+const jsonContainer = document.getElementById('json-container');
+const toggleButton = document.getElementById('toggleButton');
+
 (function () {
   fetch(version + "/names_ko.json")
     .then(response => response.json())
@@ -92,8 +95,7 @@ function getMeta(name) {
 }
 
 
-const jsonContainer = document.getElementById('json-container');
-const toggleButton = document.getElementById('toggleButton');
+
 
 
 function toggleCelebList() {
@@ -186,6 +188,7 @@ function drawChart(userData) {
     // 한 명 이상 인식되었을때에만 gif 생성버튼을 표시한다.
     try{ 
     document.getElementById("createGif").style.display = "block";
+    document.getElementById("createComparisonPic").style.display = "block";
     } catch (e) {
 
     }
@@ -478,6 +481,9 @@ function getSimilarCeleb(inputImage) {
       $(".result-message").show();
       // $("#loading").hide();
       $("#celeb-spinner").hide();
+
+      // document.getElementById('cropped-image-2')
+      // displayComparisonCelebMe(1); // 얼굴분석완료이후에 움짤이미지 생성
       
 
       $("#loading-message").html(getMeta("celeb_finished"))
@@ -563,7 +569,7 @@ function displayIdolPrediction(rank) {
         result_face: true,
       });
     }
-
+    displayComparisonCelebMe(1); // 첫번째 결과로 이미지 표시하기
   } catch (error) {
     console.log(error);
   }
@@ -712,7 +718,7 @@ async function startMatch() {
   $("#loading").hide();
 }
 
-function createComparisonImage(img1, img2) {
+function createComparisonImage(img1, img2, celebme=false) {
     const canvas = document.getElementById('comparison-canvas');
     const ctx = canvas.getContext('2d');
     
@@ -742,13 +748,40 @@ function createComparisonImage(img1, img2) {
     drawImage(img1, 400, 0, 200, 200);
     ctx.globalAlpha = 0.66;
     drawImage(img2, 400, 0, 200, 200);
+
+    // 닮은 정도 표시
+    if (celebme == true) {
+      document.getElementById('similar-celeb').textContent = `${similarIdolData[0].name}`;
+      const similarityScore = ((similarIdolData[0].distance) * 100);
+      document.getElementById('similarity-score').textContent = `${similarityScore.toFixed(2)}%`;
+      
+      // 일치 여부 표시
+      const threshold1 = 65; // 예시 임계값, 실제 사용 시 조정 필요
+      const threshold2 = 55; // 예시 임계값, 실제 사용 시 조정 필요
+      var similarType = "face_not_match";
+      if (similarityScore <= threshold2) {
+        similarType = "face_not_match";
+      } else if(similarityScore <= threshold1) {
+        similarType = "face_not_match_but_similar";
+      } else {
+        similarType = "face_match";
+      }
+      gtag("event", "CelebmeMatchType_" + similarType, {
+        event_category: "celebMe",
+      });
+      $("#verification-result").html(getMeta(similarType));
+    }
     
     // 투명도 초기화
     ctx.globalAlpha = 1;
     
     // 캡처 및 다운로드 버튼 표시
+    const element = document.getElementById('result-message-section');
+    element.style.display = 'block';
     const captureButton = document.getElementById('download-comparison');
     captureButton.style.display = 'block';
+    const createButton = document.getElementById('createComparisonPic');
+    createButton.style.display = 'none';
     captureButton.addEventListener('click', captureAndDownload);
 }
 
@@ -758,9 +791,9 @@ function captureAndDownload() {
     event_category: "startMatch",
   });
     const element = document.getElementById('result-message-section');
-    html2canvas(element).then(function(canvas) {
+    html2canvas(element, {useCORS: true, allowTaint: true}).then(function(canvas) {
         const link = document.createElement('a');
-        link.download = 'face-match-result.png';
+        link.download = 'celebme-' + Date.now().toString() + '.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
     });
@@ -773,6 +806,7 @@ function loadImage(src) {
     img.onload = () => resolve(img);
     img.onerror = reject;
     img.src = src;
+    img.crossOrigin = 'anonymous';
   });
 }
 
@@ -886,6 +920,7 @@ async function readURL(input) {
 
         analyzeFace(resizedImg).then(function (croppedImage) {
           // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
+          
           
         });
 
@@ -1096,7 +1131,6 @@ function showResults(resultParam, faceParam) {
 
       $('#extra-similars').hide();
 
-
       const name = getBaseUrl()
       window.history.replaceState({}, document.title, name);
       clearInterval(int);
@@ -1167,13 +1201,37 @@ if (resultParam != null) {
 
 
 // }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝
+async function displayComparisonCelebMe(searchIdx) {
+  gtag('event', '닮은이미지생성클릭', {'event_category': '닮은이미지생성클릭', 'event_label': '닮은이미지생성클릭'});
+  // 로딩표시
+  var loadingGif = document.getElementById('comparisonLoading');
+  loadingGif.style.display = 'block'; // loading
+
+  // 3초 대기
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
+  // 연결되는 이미지 생성
+  var img1 = document.getElementById('cropped-face-image-2'); 
+  var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
+  var target = search1.getElementsByClassName('gs-image-scalable').item(1);
+  
+  
+  // 두 이미지를 동시에 로드
+  const [img2] = await Promise.all([
+      loadImage(target.src)
+  ]);
+  
+
+  // 이미지가 모두 로드된 후 비교 이미지 생성
+  createComparisonImage(img1, img2, (celebme=true));
+
+  // 로딩 토글
+  loadingGif.style.display = 'none';
+  var downButton = document.getElementById('download-comparison');
+  downButton.style.display = 'block';
+}
 
 function displayAnimation(searchIdx) {
-  // document.getElementById('createGif').addEventListener('click', function () {
-
-
-
-
   gtag('event', 'gif생성클릭', {'event_category': 'gif생성클릭', 'event_label': 'gif생성클릭'});
   try {
     (adsbygoogle = window.adsbygoogle || []).push({});
@@ -1185,20 +1243,9 @@ function displayAnimation(searchIdx) {
   // var image2 = document.getElementById('cropped-face-image-1');
   var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
   var target = search1.getElementsByClassName('gs-image-scalable').item(1);
-  // target.setAttribute('crossOrigin', 'Anonymous');
   const image2 = new Image();
-  // var image2 = document.getElementById('top-similar-face-img');
   image2.src = target.src;
   image2.crossOrigin = 'anonymous';
-
-  // var image2 = document.getElementById('top-similar-face');
-  // var image2Ctx = image2.getContext('2d');
-  // image2Ctx.drawImage(target, 0, 0);
-
-  // image2.src = target.src;
-
-  // image1 = image2;
-
 
   var loadingGif = document.getElementById('gifLoading');
   loadingGif.style.display = 'block'; // loading
