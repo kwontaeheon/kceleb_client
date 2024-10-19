@@ -54,6 +54,9 @@ const toggleButton = document.getElementById('toggleButton');
     })
     .catch(error => {
       console.error("Error fetching JSON:", error);
+      gtag("event", "errorFetchingJson", {
+        event_category: "error",
+      });
     });
 })();
 
@@ -79,6 +82,9 @@ var resultMeta = {};
     })
     .catch(error => {
       console.error("Error fetching JSON:", error);
+      gtag("event", "errorFetchingJson", {
+        event_category: "error",
+      });
     });
 })();
 
@@ -89,6 +95,9 @@ function getMeta(name) {
 
   } catch (error) {
     console.log(error);
+    gtag("event", "errorGetMeta", {
+        event_category: "error",
+      });
     return name;
   }
 
@@ -421,6 +430,9 @@ async function analyzeFace(inputImage) {
     .catch(error => {
       // Handle errors here
       console.error('Error:', error);
+      gtag("event", "errorAnalyzeFace", {
+        event_category: "error",
+      });
       $("#celeb-spinner").hide();
       $("#loading-message").html(
         getMeta("error_msg")
@@ -446,6 +458,9 @@ function getSimilarCeleb(inputImage) {
       $("#loading-message").html(
         getMeta("error_msg")
       );
+      gtag("event", "errorGetSimilarCeleb", {
+        event_category: "error",
+      });
     })
     .then(response => response.json())
     .then(data => {
@@ -465,6 +480,9 @@ function getSimilarCeleb(inputImage) {
         }
       } catch (error) {
         console.log(error);
+        gtag("event", "errorGetSimilarCelebDelete", {
+        event_category: "error",
+      });
       }
 
       similarIdolData = data;
@@ -501,6 +519,9 @@ function getSimilarCeleb(inputImage) {
     })
     .catch(error => {
       // Handle errors here
+      gtag("event", "errorDisplaySimilarCeleb", {
+        event_category: "error",
+      });
       console.error('Error:', error);
       $("#celeb-spinner").hide();
       $("#loading-message").html(
@@ -529,6 +550,9 @@ function displayIdolPredictionBriefly(data) {
       }
     } catch (error) {
       console.log(error);
+      gtag("event", "errorDisplayIdolPredictionBriefly", {
+        event_category: "error",
+      });
     }
   }
 
@@ -572,6 +596,9 @@ function displayIdolPrediction(rank) {
     displayComparisonCelebMe(1); // 첫번째 결과로 이미지 표시하기
   } catch (error) {
     console.log(error);
+    gtag("event", "errorDisplayIdolPrediction", {
+        event_category: "error",
+      });
   }
 
 
@@ -613,6 +640,9 @@ function resizeAndCropImage(file, targetSize) {
     const reader = new FileReader();
     reader.onerror = () => {
       reject(new Error('파일 읽기 실패'));
+      gtag("event", "errorResizing", {
+        event_category: "error",
+      });
     };
     reader.onload = (e) => {
       const img = new Image();
@@ -654,6 +684,9 @@ function resizeAndCropImage(file, targetSize) {
       };
       img.onerror = () => {
         reject(new Error('이미지 로딩 실패'));
+        gtag("event", "errorResizingCrop", {
+        event_category: "error",
+      });
       };
       img.src = e.target.result;//
     };
@@ -999,6 +1032,9 @@ async function copyToClipboard(textToCopy) {
       document.execCommand('copy');
     } catch (error) {
       console.error(error);
+      gtag("event", "errorCopyToClipboard", {
+        event_category: "error",
+      });
     } finally {
       textArea.remove();
     }
@@ -1078,6 +1114,9 @@ async function shareUrl() {
     }, 3000); // 3000 milliseconds = 3 seconds
 
   } catch (error) {
+    gtag("event", "errorShareUrl", {
+        event_category: "error",
+      });
     console.error("copy to clipboard error.");
   }
 
@@ -1236,7 +1275,7 @@ function displayAnimation(searchIdx) {
   try {
     (adsbygoogle = window.adsbygoogle || []).push({});
   } catch (error) {
-
+  
   }
   
   var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
