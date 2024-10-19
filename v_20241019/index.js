@@ -1241,7 +1241,7 @@ if (resultParam != null) {
 
 // }} result 쿼리파라미터가 존재할 땐 바로 결과표시 끝
 async function displayComparisonCelebMe(searchIdx) {
-  gtag('event', '닮은이미지생성클릭', {'event_category': '닮은이미지생성클릭', 'event_label': '닮은이미지생성클릭'});
+  gtag('event', 'displayComparisonCelebMe', {'event_category': 'displayComparisonCelebMe', 'event_label': 'displayComparisonCelebMe'});
   // 로딩표시
   var loadingGif = document.getElementById('comparisonLoading');
   loadingGif.style.display = 'block'; // loading
