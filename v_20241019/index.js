@@ -813,6 +813,8 @@ function createComparisonImage(img1, img2, celebme=false) {
     element.style.display = 'block';
     const captureButton = document.getElementById('download-comparison');
     captureButton.style.display = 'block';
+    const captureCreateButton = document.getElementById('make-comparison');
+    captureCreateButton.style.display = 'block';
     const createButton = document.getElementById('createComparisonPic');
     createButton.style.display = 'none';
     captureButton.addEventListener('click', captureAndDownload);
