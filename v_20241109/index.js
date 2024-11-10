@@ -574,6 +574,8 @@ function displayIdolPrediction(rank) {
 
       // console.log(r);
       q = 'allintitle: "' + koName + '"';
+      // q = '"' + koName + '"' + " portrait -youtube";
+      // q = koName + " portrait -youtube -남편 -아내 -여러명 -논란";
 
       var element = google.search.cse.element.getElement('q' + rank);
       element.execute(q);
@@ -593,7 +595,9 @@ function displayIdolPrediction(rank) {
         result_face: true,
       });
     }
-    displayComparisonCelebMe(1); // 첫번째 결과로 이미지 표시하기
+    
+    displayComparisonCelebMe(rank); // 첫번째 결과로 이미지 표시하기
+    
   } catch (error) {
     console.log(error);
     gtag("event", "errorDisplayIdolPrediction", {
@@ -751,7 +755,7 @@ async function startMatch() {
   $("#loading").hide();
 }
 
-function createComparisonImage(img1, img2, celebme=false) {
+function createComparisonImage(img1, img2, rank, celebme=false) {
     const canvas = document.getElementById('comparison-canvas');
     const ctx = canvas.getContext('2d');
     
@@ -784,8 +788,8 @@ function createComparisonImage(img1, img2, celebme=false) {
 
     // 닮은 정도 표시
     if (celebme == true) {
-      document.getElementById('similar-celeb').textContent = `${similarIdolData[0].name}`;
-      const similarityScore = ((similarIdolData[0].distance) * 100);
+      document.getElementById('similar-celeb').textContent = `${similarIdolData[rank-1].name}`;
+      const similarityScore = ((similarIdolData[rank-1].distance) * 100);
       document.getElementById('similarity-score').textContent = `${similarityScore.toFixed(2)}%`;
       
       // 일치 여부 표시
@@ -903,7 +907,7 @@ async function displayResults(result) {
   ]);
 
   // 이미지가 모두 로드된 후 비교 이미지 생성
-  createComparisonImage(img1, img2);
+  createComparisonImage(img1, img2, 1);
   
 }
 
@@ -1264,7 +1268,7 @@ async function displayComparisonCelebMe(searchIdx) {
   
 
   // 이미지가 모두 로드된 후 비교 이미지 생성
-  createComparisonImage(img1, img2, (celebme=true));
+  createComparisonImage(img1, img2, searchIdx, celebme=true);
 
   // 로딩 토글
   loadingGif.style.display = 'none';
