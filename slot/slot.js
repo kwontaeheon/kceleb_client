@@ -23,7 +23,7 @@ class SlotMachine {
         
         this.isSpinning = false;
         this.score = 0;
-        this.coins = 100;
+        this.coins = 1000;
         
         this.sounds = {
             spin: new Audio('/slot/sounds/spin.mp3'),
@@ -32,6 +32,8 @@ class SlotMachine {
         };
 
         this.textureAtlas = null;  // 텍스처 아틀라스 저장용 변수 추가
+
+        this.finalSymbols = [0, 0, 0];
     }
 
     async loadTextures() {
@@ -171,7 +173,7 @@ class SlotMachine {
         this.animate();
         this.updateUI();
     }
-
+    
     spin() {
         if (this.isSpinning || this.coins < 10) return;
         
@@ -181,22 +183,23 @@ class SlotMachine {
         this.sounds.spin.play();
 
         const spinDurations = [2000, 2500, 3000];
-        const finalSymbols = [];
+        
 
         this.reels.forEach((reel, index) => {
             // 회재 회전 각도
             const currentRotation = reel.mesh.rotation.x;
             
             // 회전 수 계산 (항상 양수로)
-            const rotations = 4 + Math.random() * 2; // 4-6회전
-            const randomSymbol = Math.floor(Math.random() * 6);
+            const randVal = Math.random();
+            const rotations = 4 + randVal * 6; // 4-6회전
+            const randomSymbol = Math.floor(randVal * 6);
             
             // 최종 회전 위치 계산 (항상 증가하는 방향)
             const fullRotations = Math.floor(rotations) * Math.PI * 2;
             const symbolRotation = randomSymbol * this.faceAngle;
             const targetRotation = currentRotation + (fullRotations + symbolRotation) * this.rotationDirection;
             
-            finalSymbols[index] = randomSymbol;
+            this.finalSymbols[index] = (this.finalSymbols[index] + randomSymbol) % 6;
             reel.targetRotation = targetRotation;
             
             // 애니메이션 적용
@@ -213,8 +216,9 @@ class SlotMachine {
                     reel.mesh.rotation.x = targetRotation;
                     
                     if (index === 2) {
+                        console.log(this.finalSymbols);
                         this.isSpinning = false;
-                        this.checkWin(finalSymbols);
+                        this.checkWin(this.finalSymbols);
                     }
                 }
             });
