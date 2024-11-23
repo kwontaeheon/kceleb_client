@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D 슬롯머신</title>
+    <style>
+        body { 
+            margin: 0;
+            background: linear-gradient(to bottom, #1a1a1a, #4a4a4a);
+        }
+        canvas { 
+            display: block;
+        }
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            font-family: Arial;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        #spinButton {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            font-size: 20px;
+            background: #ffd700;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #spinButton:hover {
+            background: #ffed4a;
+            transform: translateX(-50%) scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <div>점수: <span id="score">0</span></div>
+        <div>코인: <span id="coins">100</span></div>
+    </div>
+    <button id="spinButton">회전! (10 코인)</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+    <script src="slot.js"></script>
+</body>
+</html>
