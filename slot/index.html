@@ -3,63 +3,85 @@
 <head>
     <title>3D 슬롯머신</title>
     <style>
-        body { 
+        html, body {
             margin: 0;
+            height: 100%;
+            overflow: hidden; /* 스크롤 방지 */
+        }
+        body { 
             background: linear-gradient(to bottom, #1a1a1a, #4a4a4a);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
         canvas { 
+            flex: 0 0 60%; /* 캔버스 높이를 60%로 설정 */
             display: block;
+            
+            top: 0; /* 상단에 고정 */
+            left: 0; /* 왼쪽에 고정 */
+            width: 100%; /* 너비를 100%로 설정 */
+            height: auto; /* 높이는 자동으로 설정하여 비율 유지 */
         }
         #ui {
-            position: absolute;
-            top: 20px;
+            position: relative;
+            top: 10px;
             left: 20px;
             color: white;
             font-size: 2.5vh;
             font-family: Arial;
             background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
+            padding: 50px 20px;
             border-radius: 5px;
+            z-index: 1;
         }
         .slotButton {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            margin: 10px 50px;
             padding: 15px 30px;
             font-size: 2.5vh;
             background: #ffd700;
             border: none;
-            border-radius: 5px;
+            border-radius: 34px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .slotButton:hover {
             background: #ffed4a;
-            transform: translateX(-50%) scale(1.1);
+            transform: scale(1.02);
         }
-        #spinButton {
-            bottom: 20px;
+        .toggle-button {
+            position: relative;
+            margin: 10px 50px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 34px;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        #autoSpinButton {
-            bottom: 80px;
+        .toggle-button.active {
+            background-color: lightseagreen; /* 활성화 시 배경색을 파란색으로 변경 */
         }
     </style>
 </head>
 <body>
+    
+    
     <div id="ui">
         <div>점수: <span id="score">0</span></div>
         <div>코인: <span id="coins">1000</span></div>
     </div>
     
     <button id="spinButton" class="slotButton">회전! (100 코인)</button>
-    <button id="autoSpinButton" class="slotButton">자동 회전 꺼짐</button>
+    <button id="autoSpinButton" class="slotButton toggle-button">자동 회전 꺼짐</button>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
-
+    
     <script src="slot.js"></script>
 </body>
 </html>

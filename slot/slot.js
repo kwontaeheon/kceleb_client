@@ -3,7 +3,7 @@ class SlotMachine {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(window.innerWidth, window.innerHeight );
         document.body.appendChild(this.renderer.domElement);
 
         this.reels = [];
@@ -115,8 +115,9 @@ class SlotMachine {
 
     async createTextureAtlas() {
         const canvas = document.createElement('canvas');
-        canvas.width = 1024;
-        canvas.height = 170;
+        // const canvas = document.getElementById('cv');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
         const ctx = canvas.getContext('2d');
 
         const symbolWidth = canvas.width / 6;
@@ -613,8 +614,10 @@ async function initSlotMachine() {
         
     });
     document.getElementById('autoSpinButton').addEventListener('click', () => {
-        slotMachine.autoSpinEnabled = !slotMachine.autoSpinEnabled; // 자동 모드 토글
-        document.getElementById('autoSpinButton').textContent = slotMachine.autoSpinEnabled ? "자동 회전 켜짐" : "자동 회전 꺼짐"; // 버튼 텍스트 변경
+        slotMachine.autoSpinEnabled = !slotMachine.autoSpinEnabled; // 자동 회전 토글
+        const button = document.getElementById('autoSpinButton');
+        button.classList.toggle('active'); // 활성화 상태 클래스 토글
+        button.textContent = slotMachine.autoSpinEnabled ? "자동 회전 켜짐" : "자동 회전 꺼짐"; // 버튼 텍스트 변경
     });
 
 
