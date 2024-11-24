@@ -13,17 +13,17 @@ class SlotMachine {
         this.initialRotation = -this.faceAngle / 2; // 초기 회전 각도 (면이 평행하도록)
         this.rotationDirection = 1; // 회전 방향 (1: 아래 방향)
         this.symbolValues = {
-            'cherry': 10,
-            'lemon': 20,
-            'grape': 30,
-            'seven': 100,
-            'bell': 50,
-            'star': 75
+            'cherry': 100,
+            'lemon': 200,
+            'grape': 300,
+            'seven': 1000,
+            'bell': 500,
+            'star': 750
         };
         
         this.isSpinning = false;
         this.score = 0;
-        this.coins = 1000;
+        this.coins = 10000;
         
         this.sounds = {
             spin: new Audio('/slot/sounds/spin.mp3'),
@@ -38,6 +38,12 @@ class SlotMachine {
         this.frameGroup = new THREE.Group(); // 프레임을 담을 그룹
         this.controls = null; // OrbitControls 추가
         this.centerRod = null; // 중심축 저장용 변수 추가
+
+        this.handleGroup = new THREE.Group();
+        const handleGeometry = new THREE.SphereGeometry(0.35, 32, 32);
+        const handleMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+        this.handle = new THREE.Mesh(handleGeometry, handleMaterial);
+        this.autoSpinEnabled = false;
     }
 
     setupControls() {
@@ -65,7 +71,7 @@ class SlotMachine {
         this.controls.autoRotate = false;
         
         // 초기 카메라 위치 설정
-        this.camera.position.set(0, 0, 10);
+        // this.camera.position.set(0, 0, 10);
         this.controls.update();
     }
 
@@ -336,7 +342,7 @@ class SlotMachine {
         this.centerRod = new THREE.Mesh(geometry, material);
         this.centerRod.rotation.z = Math.PI / 2; // 90도 회전하여 세로로 세움
         this.centerRod.position.x = 0; // 릴의 중앙에 위치
-        this.centerRod.position.z = -0.3; // 릴보다 약간 뒤에 위치
+        this.centerRod.position.z = -0.5; // 릴보다 약간 뒤에 위치
         
         // 원기둥 끝부분 장식 추가
         const capGeometry = new THREE.CylinderGeometry(0.2, 0.2, 0.1, 16);
@@ -351,17 +357,97 @@ class SlotMachine {
         // 왼쪽 캡
         const leftCap = new THREE.Mesh(capGeometry, capMaterial);
         leftCap.rotation.z = Math.PI / 2; // 90도 회전하여 가로로 눕힘
-        leftCap.position.set(-3.8, 0, -0.3); // 릴의 왼쪽에 위치
+        leftCap.position.set(-3.8, 0, -0.5); // 릴의 왼쪽에 위치
         
         // 오른쪽 캡
         const rightCap = new THREE.Mesh(capGeometry, capMaterial);
         rightCap.rotation.z = Math.PI / 2; // 90도 회전하여 가로로 눕힘
-        rightCap.position.set(3.8, 0, -0.3); // 릴의 오른쪽에 위치
+        rightCap.position.set(3.8, 0, -0.5); // 릴의 오른쪽에 위치
         
         // 씬에 추가
         this.scene.add(this.centerRod);
         this.scene.add(leftCap);
         this.scene.add(rightCap);
+    }
+
+    createHandle() {
+        
+
+        // 손잡이 (구형)
+        
+        this.handle.position.set(4.6, 4, -0.5); // 슬롯머신 오른쪽에 위치
+
+        // 레버 (더 긴 검정색 부분)
+        const leverGeometry = new THREE.CylinderGeometry(0.1, 0.1, 4, 32); // 반지름 0.1, 높이 4
+        const leverMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
+        const lever = new THREE.Mesh(leverGeometry, leverMaterial);
+        lever.position.set(4.6, 2, -0.5); // 손잡이 아래에 위치
+
+        // 황금색 구 추가 (레버와 프레임 연결 부분)
+        const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const sphereMaterial = new THREE.MeshPhongMaterial({ color: 0xFFD700 });
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.position.set(4.5, 0, -0.5); // 레버와 프레임 연결 부분에 위치
+
+        this.handleGroup.add(this.handle);
+        this.handleGroup.add(lever);
+        // this.handleGroup.add(sphere); // 구 추가
+        
+        this.scene.add(this.handleGroup);
+        this.scene.add(sphere);
+
+        // 클릭 이벤트 추가
+        this.handleGroup.userData = { isPressed: false };
+        // this.handleGroup.onClick = () => {
+        //     if (!this.handleGroup.userData.isPressed) {
+        //         this.handleGroup.userData.isPressed = true;
+        //         this.spin(); // 슬롯머신 회전 시작
+        //         this.animateHandle(handle); // 손잡이 애니메이션 시작
+        //         this.handleGroup.userData.isPressed = false;
+        //     }
+        // };
+    }
+
+    animateHandle(handle) {
+        const x = handle.position.x;
+        const y = handle.position.y;
+        const z = handle.position.z;
+        
+        gsap.to(handle.rotation, {
+            x: Math.PI * 150/180, // 아래로 회전
+            y: -0.2,
+            z: 0,
+            duration: 0.5,
+            ease: "power1.out",
+            onComplete: () => {
+                const checkAndClick = () => {
+                    if (this.isSpinning) {
+                        // spinning 중이면 대기 후 다시 체크
+                        setTimeout(checkAndClick, 100); // 100ms 후 다시 체크
+                        // console.log("spinning");
+                    } else {
+                        handle.userData.isPressed = false; // 다시 클릭 가능
+                        // spinning이 끝나면 클릭 이벤트 발생
+                        if (this.autoSpinEnabled) {
+
+                            // console.log("click");
+                            setTimeout(
+                                () => document.getElementById('spinButton').click(), 2000
+                            );
+                        } else {
+                            // console.log("else");
+                            handle.rotation.x = 0; // 원래 위치로 복귀
+                            handle.rotation.y = 0;
+                            handle.position.x = x;
+                            handle.position.y = y;
+                            handle.position.z = z;
+                            
+                        }
+                    }
+                };
+                checkAndClick(); // 체크 시작
+            }
+        });
     }
 
     async init() {
@@ -375,7 +461,7 @@ class SlotMachine {
         for (let i = 0; i < 3; i++) {
             const prism = this.createHexagonalPrism();
             prism.position.x = (i - 1) * this.reelWidth * 1.1 ;
-            
+            prism.position.z = -0.5; // 뒤로 살짝 가서 프레임에 맞춤
             this.reels.push({ 
                 mesh: prism,
                 currentIndex: 0,
@@ -389,6 +475,7 @@ class SlotMachine {
         this.createFrame(); // 프레임 생성 추가
         this.createCenterRod(); // 중심축 생성 추가
         this.setupControls(); // 컨트롤 설정 추가
+        this.createHandle(); // 손잡이 생성 추가
 
         this.animate();
         this.updateUI();
@@ -405,7 +492,7 @@ class SlotMachine {
     spin() {
         if (this.isSpinning || this.coins < 10) return;
         
-        this.coins -= 10;
+        this.coins -= 100;
         this.updateUI();
         this.isSpinning = true;
         this.sounds.spin.play();
@@ -444,7 +531,7 @@ class SlotMachine {
                     reel.mesh.rotation.x = targetRotation;
                     
                     if (index === 2) {
-                        console.log(this.finalSymbols);
+                        // console.log(this.finalSymbols);
                         this.isSpinning = false;
                         this.checkWin(this.finalSymbols);
                     }
@@ -517,8 +604,19 @@ async function initSlotMachine() {
     
     // 이벤트 리스너 설정
     document.getElementById('spinButton').addEventListener('click', () => {
-        slotMachine.spin();
+        if (!slotMachine.handleGroup.userData.isPressed) {
+            slotMachine.handleGroup.userData.isPressed = true;
+            slotMachine.spin(); // 슬롯머신 회전 시작
+            slotMachine.animateHandle(slotMachine.handleGroup); // 손잡이 애니메이션 시작
+        }
+        
+        
     });
+    document.getElementById('autoSpinButton').addEventListener('click', () => {
+        slotMachine.autoSpinEnabled = !slotMachine.autoSpinEnabled; // 자동 모드 토글
+        document.getElementById('autoSpinButton').textContent = slotMachine.autoSpinEnabled ? "자동 회전 켜짐" : "자동 회전 꺼짐"; // 버튼 텍스트 변경
+    });
+
 
     window.addEventListener('resize', () => {
         slotMachine.camera.aspect = window.innerWidth / window.innerHeight;
