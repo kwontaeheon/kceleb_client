@@ -1,7 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>3D 슬롯머신</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="슬롯머신 시뮬레이션 도구로, 실제와 동일한 3D 슬롯머신을 시뮬레이션 해보세요. 흥미진진한 효과음이 제공되고, 자동 슬롯머신 토글 기능으로 계속 플레이할 수 있습니다.">
+    <meta name="keywords" content="슬롯머신, 3D 게임, 카지노, 자동 회전, 효과음, 재미">
+    <meta name="author" content="권태헌(kwontaeheon@gmail.com)">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636274019237410"
+        crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LCDF4Z1GX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2LCDF4Z1GX');
+    </script>
+    <title>3D 슬롯머신 시뮬레이터</title>
+    
     <style>
         html, body {
             margin: 0;
@@ -16,30 +34,25 @@
             height: 100vh;
         }
         canvas { 
-            flex: 0 0 60%; /* 캔버스 높이를 60%로 설정 */
-            display: block;
             
-            top: 0; /* 상단에 고정 */
-            left: 0; /* 왼쪽에 고정 */
             width: 100%; /* 너비를 100%로 설정 */
-            height: auto; /* 높이는 자동으로 설정하여 비율 유지 */
+            height: 80vh; 
+            
         }
         #ui {
             position: relative;
-            top: 10px;
-            left: 20px;
             color: white;
             font-size: 2.5vh;
             font-family: Arial;
             background: rgba(0, 0, 0, 0.5);
-            padding: 50px 20px;
+            padding: 20px 20px;
             border-radius: 5px;
             z-index: 1;
         }
         .slotButton {
             position: relative;
-            margin: 10px 50px;
-            padding: 15px 30px;
+            margin: 5px 50px;
+            padding: 10px 30px;
             font-size: 2.5vh;
             background: #ffd700;
             border: none;
@@ -53,8 +66,8 @@
         }
         .toggle-button {
             position: relative;
-            margin: 10px 50px;
-            padding: 15px 30px;
+            margin: 5px 50px;
+            padding: 10x 30px;
             border: none;
             border-radius: 34px;
             background-color: #ccc;
@@ -62,13 +75,53 @@
             transition: background-color 0.3s;
         }
         .toggle-button.active {
-            background-color: lightseagreen; /* 활성화 시 배경색을 파란색으로 변경 */
+            background-color: lightseagreen; /* 활성화 시 배경색을 변경 */
+        }
+        .modal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            font-size: 1.4rem;
+            background-color: rgba(0, 0, 0, 0.7); /* 반투명 배경 */
+        }
+        .modal-content {
+            background-color: #000;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* 모달 너비 */
+            text-align: center;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     
-    
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModal">&times;</span>
+            <h2>슬롯머신 시뮬레이션 도구</h2>
+            <p>실제와 동일한 3D 슬롯머신을 시뮬레이션 해보세요. 흥미진진한 효과음이 제공되고, 자동 슬롯머신 토글 기능으로 계속 플레이할 수 있습니다.</p>
+            <button  class="slotButton"  id="confirmButton">확인</button>
+        </div>
+    </div>
+
     <div id="ui">
         <div>점수: <span id="score">0</span></div>
         <div>코인: <span id="coins">1000</span></div>
@@ -83,5 +136,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
     
     <script src="slot.js"></script>
+    <script>
+        window.onload = function() {
+            const modal = document.getElementById('modal');
+            const confirmButton = document.getElementById('confirmButton');
+            const closeButton = document.getElementById('closeModal');
+
+            // 모달 표시
+            modal.style.display = "block";
+
+            // 확인 버튼 클릭 시 모달 닫기
+            confirmButton.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // 닫기 버튼 클릭 시 모달 닫기
+            closeButton.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // 모달 외부 클릭 시 모달 닫기
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>

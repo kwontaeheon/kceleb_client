@@ -3,7 +3,8 @@ class SlotMachine {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
-        this.renderer.setSize(window.innerWidth, window.innerHeight );
+        // this.renderer.setSize(window.innerWidth , window.innerHeight);
+        this.renderer.setPixelRatio(window.devicePixelRatio*2);
         document.body.appendChild(this.renderer.domElement);
 
         this.reels = [];
@@ -81,9 +82,9 @@ class SlotMachine {
         
         let targetZ;
         if (aspectRatio < 1) {
-            targetZ = baseDistance * (1.0 / aspectRatio);
+            targetZ = baseDistance * (0.9 / aspectRatio);
         } else {
-            targetZ = baseDistance * (0.9 / Math.sqrt(aspectRatio));
+            targetZ = baseDistance * (0.8 / Math.sqrt(aspectRatio));
         }
         
         // controls가 있을 때는 minDistance와 maxDistance만 업데이트
