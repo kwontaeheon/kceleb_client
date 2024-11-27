@@ -17,28 +17,35 @@
             border: 1px solid #fff;
             border-radius: 50%;
         }
+        .timerButton{
+            font-size: 1.6rem;
+        }
     </style>
 </head>
 <body>
+
     <div id="timer">
-        <label for="timeSelect">타이머 설정:</label>
-        <select id="timeSelect">
-            <option value="300">5분</option>
-            <option value="600">10분</option>
-            <option value="900">15분</option>
-            <option value="1200">20분</option>
-            <option value="1800">30분</option>
-            <option value="2400">40분</option>
-            <option value="3000">50분</option>
-            <option value="3600">60분</option>
-            <option value="5400">90분</option>
-            <option value="7200">120분</option>
-            <option value="9000">150분</option>
-            <option value="10800">180분</option>
-        </select>
-        <button id="startTimerButton" class="slotButton">타이머 시작</button>
+        <h1>인터벌 타이머</h1>
+        <div id="timerButtons" style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <button class="timerButton" value="300">5분</button>
+            <button class="timerButton" value="600">10분</button>
+            <button class="timerButton" value="900">15분</button>
+            <button class="timerButton" value="1200">20분</button>
+            <button class="timerButton" value="1800">30분</button>
+            <button class="timerButton" value="2400">40분</button>
+            <button class="timerButton" value="3000">50분</button>
+            <button class="timerButton" value="3600">60분</button>
+            <button class="timerButton" value="5400">90분</button>
+            <button class="timerButton" value="7200">120분</button>
+            <button class="timerButton" value="9000">150분</button>
+            <button class="timerButton" value="10800">180분</button>
+        </div>
+        
     </div>
-    <canvas id="timerCanvas" width="200" height="200"></canvas>
+    <center>
+    <canvas id="timerCanvas" width="300" height="300" style="width: 60vw; height: 60vw; aspect-ratio: 1;"></canvas>
+    </center>
+    
 
     <script>
         let timerInterval;
@@ -87,6 +94,13 @@
             }, 1000);
         }
 
+        document.querySelectorAll('.timerButton').forEach(button => {
+            button.addEventListener('click', () => {
+                const selectedTime = parseInt(button.value);
+                startTimer(selectedTime);
+            });
+        });
+
         function drawTimer() {
             const percentage = remainingTime / totalTime;
             const startAngle = -0.5 * Math.PI; // 시작 각도
@@ -94,7 +108,8 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height); // 캔버스 초기화
             ctx.beginPath();
-            ctx.arc(canvas.width / 2, canvas.height / 2, 80, startAngle, endAngle, false);
+            const radius = Math.min(canvas.width, canvas.height) / 2 - 10; // 반지름 계산
+            ctx.arc(canvas.width / 2, canvas.height / 2, radius, startAngle, endAngle, false);
             ctx.lineTo(canvas.width / 2, canvas.height / 2);
             ctx.fillStyle = 'lightseagreen';
             ctx.fill();
@@ -102,17 +117,25 @@
 
             // 원형 테두리
             ctx.beginPath();
-            ctx.arc(canvas.width / 2, canvas.height / 2, 80, 0, 2 * Math.PI);
+            ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI); // 반지름을 동일하게 설정
+            
             ctx.strokeStyle = '#fff';
             ctx.lineWidth = 5;
             ctx.stroke();
             ctx.closePath();
-        }
 
-        document.getElementById('startTimerButton').addEventListener('click', () => {
-            const selectedTime = parseInt(document.getElementById('timeSelect').value);
-            startTimer(selectedTime);
-        });
+            // 남은 시간 표시
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = remainingTime % 60;
+            const timeText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            // 남은 시간 텍스트 가운데 정렬
+            ctx.fillStyle = 'black';
+            ctx.font = 'bold 2rem Arial'; // 글꼴 및 크기 설정
+            ctx.textAlign = 'center'; // 가로 가운데 정렬
+            ctx.textBaseline = 'middle'; // 세로 가운데 정렬
+            ctx.fillText(timeText, canvas.width / 2, canvas.height / 2); // 텍스트 그리기
+        }
     </script>
 </body>
 </html>
