@@ -18,7 +18,7 @@
             border-radius: 50%;
         }
         .timerButton{
-            font-size: 1.6rem;
+            font-size: 2rem;
         }
     </style>
 </head>
@@ -27,7 +27,7 @@
     <div id="timer">
         <h1>인터벌 타이머</h1>
         <div id="timerButtons" style="display: flex; flex-wrap: wrap; justify-content: center;">
-            <button class="timerButton" value="300">5분</button>
+            <button class="timerButton" value="5">5분</button>
             <button class="timerButton" value="600">10분</button>
             <button class="timerButton" value="900">15분</button>
             <button class="timerButton" value="1200">20분</button>
@@ -43,15 +43,17 @@
         
     </div>
     <center>
-    <canvas id="timerCanvas" width="300" height="300" style="width: 60vw; height: 60vw; aspect-ratio: 1;"></canvas>
+    <canvas id="timerCanvas" width="200" height="200" style="aspect-ratio: 1;"></canvas>
     </center>
     
+    <div id="nextTimerDisplay" style="font-size: 1.5rem; color: black; margin-top: 20px;"></div>
 
     <script>
         let timerInterval;
         let totalTime;
         let remainingTime;
         let wakeLock = null;
+        let timerQueue = []; // 타이머 큐 추가
 
         const canvas = document.getElementById('timerCanvas');
         const ctx = canvas.getContext('2d');
@@ -86,18 +88,31 @@
                 if (remainingTime <= 0) {
                     clearInterval(timerInterval);
                     releaseWakeLock(); // 타이머 종료 시 화면 잠금 해제
-                    alert("타이머가 종료되었습니다!");
+                    console.log("타이머가 종료되었습니다!");
+                    const nextTimer = timerQueue.shift();
+
+                    // 다음 타이머가 있으면 시작
+                    if (timerQueue.length > 0) {
+                        startTimer(nextTimer); // 다음 타이머 시작
+                    }
                     return;
                 }
                 remainingTime--;
                 drawTimer();
+                console.log(timerQueue);
             }, 1000);
         }
 
         document.querySelectorAll('.timerButton').forEach(button => {
             button.addEventListener('click', () => {
                 const selectedTime = parseInt(button.value);
-                startTimer(selectedTime);
+                timerQueue.push(selectedTime); // 큐에 추가
+                if (timerQueue.length === 1) {
+                    startTimer(selectedTime); // 큐가 비어있으면 바로 시작
+                    
+                } else {
+                    drawTimer(); // 남은 시간 즉시 표시
+                }
             });
         });
 
@@ -135,6 +150,19 @@
             ctx.textAlign = 'center'; // 가로 가운데 정렬
             ctx.textBaseline = 'middle'; // 세로 가운데 정렬
             ctx.fillText(timeText, canvas.width / 2, canvas.height / 2); // 텍스트 그리기
+
+            // 두 번째 타이머의 남은 시간 표시
+            if (timerQueue.length > 1) {
+                const nextTime = timerQueue[1]; // 다음 타이머의 남은 시간
+                const nextMinutes = Math.floor(nextTime / 60);
+                const nextSeconds = nextTime % 60;
+                const nextTimeText = `${String(nextMinutes).padStart(2, '0')}:${String(nextSeconds).padStart(2, '0')}`;
+                
+                // 두 번째 타이머 텍스트를 HTML 요소에 표시
+                document.getElementById('nextTimerDisplay').innerText = `다음 타이머: ${nextTimeText}`;
+            } else {
+                document.getElementById('nextTimerDisplay').innerText = ''; // 다음 타이머가 없으면 비우기
+            }
         }
     </script>
 </body>
