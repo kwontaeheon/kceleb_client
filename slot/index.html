@@ -35,20 +35,20 @@
     <style>
         html, body {
             margin: 0;
-            height: 100%;
-            overflow: hidden; /* 스크롤 방지 */
+            
+            /* overflow: hidden; /* 스크롤 방지 */
         }
         body { 
             background: linear-gradient(to bottom, #1a1a1a, #4a4a4a);
             color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
+            
+            
         }
         canvas { 
             
             width: 100%; /* 너비를 100%로 설정 */
-            height: 80vh; 
+            height: 100vh; 
+            
             
         }
         #ui {
@@ -62,10 +62,9 @@
             z-index: 1;
         }
         .slotButton {
-            position: relative;
-            margin: 5px 50px;
-            padding: 10px 30px;
-            font-size: 2.5vh;
+            margin: 5px 5px;
+            padding: 10px 20px;
+            font-size: 2.2vh;
             background: #ffd700;
             border: none;
             border-radius: 34px;
@@ -77,9 +76,8 @@
             transform: scale(1.02);
         }
         .toggle-button {
-            position: relative;
-            margin: 5px 50px;
-            padding: 10x 30px;
+            margin: 5px 5px;
+            padding: 10x 20px;
             border: none;
             border-radius: 34px;
             background-color: #ccc;
@@ -120,6 +118,36 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            background-color: #ffd700;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        .scroll-to-bottom {
+            position: fixed;
+            bottom: 60px; /* 위로 이동 버튼과 겹치지 않도록 위치 조정 */
+            right: 20px;
+            background-color: #ffd700;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
         }
     </style>
 </head>
@@ -172,9 +200,12 @@
         </div>
     </div>
 
-    
-    <button id="autoSpinButton" class="slotButton toggle-button">자동 회전 꺼짐</button>
-    <button id="spinButton" class="slotButton">회전! (100 코인)</button>
+    <h2 style="margin: 20px;">3D 슬롯머신 시뮬레이터</h2>
+
+    <div style="display: flex; justify-content: center;">
+        <button id="autoSpinButton" class="slotButton toggle-button">자동 회전 꺼짐</button>
+        <button id="spinButton" class="slotButton">회전! (100 코인)</button>
+    </div>
     
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -195,6 +226,8 @@
             const modal = document.getElementById('modal');
             const confirmButton = document.getElementById('confirmButton');
             const closeButton = document.getElementById('closeModal');
+            const scrollToTopButton = document.getElementById('scrollToTopButton');
+            const scrollToBottomButton = document.getElementById('scrollToBottomButton');
 
             // 모달 표시
             modal.style.display = "block";
@@ -215,7 +248,30 @@
                     modal.style.display = "none";
                 }
             }
+
+            // 버튼 클릭 시 위로 스크롤
+            scrollToTopButton.onclick = function() {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+
+            // 버튼 클릭 시 아래로 스크롤
+            scrollToBottomButton.onclick = function() {
+                window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+            };
+
+            // 스크롤 버튼 표시/숨기기
+            window.onscroll = function() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    scrollToTopButton.style.display = "flex"; // 스크롤 시 위로 버튼 표시
+                    
+                } else {
+                    scrollToTopButton.style.display = "none"; // 스크롤이 위로 올라가면 위로 버튼 숨김
+                    
+                }
+            };
         }
     </script>
+    <button class="scroll-to-top" id="scrollToTopButton" title="위로 이동">&#8593;</button>
+    <button class="scroll-to-bottom" id="scrollToBottomButton" title="아래로 이동">&#8595;</button>
 </body>
 </html>

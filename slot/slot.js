@@ -457,7 +457,9 @@ class SlotMachine {
 
         // this.camera.position.z = 10; // updateCamaraPosition 에서 수행
         this.camera.position.y = 0;
+        this.camera.position.x = 0;
         this.camera.rotation.x = 0;
+        
 
         // 릴 생성
         for (let i = 0; i < 3; i++) {
