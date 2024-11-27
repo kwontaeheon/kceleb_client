@@ -14,12 +14,12 @@ class SlotMachine {
         this.initialRotation = -this.faceAngle / 2; // 초기 회전 각도 (면이 평행하도록)
         this.rotationDirection = 1; // 회전 방향 (1: 아래 방향)
         this.symbolValues = {
-            'cherry': 100,
-            'lemon': 200,
-            'grape': 300,
-            'seven': 1000,
-            'bell': 500,
-            'star': 750
+            'cherry': 1000,
+            'lemon': 2000,
+            'grape': 3000,
+            'seven': 10000,
+            'bell': 5000,
+            'star': 7500
         };
         
         this.isSpinning = false;
@@ -423,7 +423,7 @@ class SlotMachine {
             ease: "power1.out",
             onComplete: () => {
                 const checkAndClick = () => {
-                    if (this.isSpinning) {
+                    if (this.isSpinning || this.winPlaying) {
                         // spinning 중이면 대기 후 다시 체크
                         setTimeout(checkAndClick, 100); // 100ms 후 다시 체크
                         // console.log("spinning");
@@ -551,7 +551,7 @@ class SlotMachine {
                 z: 1.2,
                 duration: 0.3,
                 yoyo: true,
-                repeat: 3,
+                repeat: 9,
                 onComplete: () => {
                     // 크기를 원래대로 복구
                     reel.mesh.scale.set(1, 1, 1);
@@ -562,13 +562,19 @@ class SlotMachine {
 
     checkWin(symbols) {
         if (symbols[0] === symbols[1] && symbols[1] === symbols[2]) {
+            this.winPlaying = true;
             const symbolName = this.symbols[symbols[0]];
             const winAmount = this.symbolValues[symbolName] * 3;
             this.score += winAmount;
             this.coins += winAmount;
             this.sounds.win.play();
             
+
             this.showWinAnimation(symbols);
+            setTimeout(() => 
+                this.winPlaying = false, 3000); // 대기
+            
+
         }
         
         this.updateUI();

@@ -2,7 +2,19 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" rel="stylesheet" />
+    <meta name="naver-site-verification" content="73b65ec60ffe57eee8ef9a8e0dec61175fc3c0f0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <meta property="og:url" content="https://celebme.net/slot/index.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="3D 슬롯머신 시뮬레이터" />
+    <meta property="og:description" content="슬롯머신 시뮬레이션 도구로, 실제와 동일한 3D 슬롯머신을 시뮬레이션 해보세요. 흥미진진한 효과음이 제공되고, 자동 슬롯머신 토글 기능으로 계속 플레이할 수 있습니다." />
+    <meta property="og:image" content="/banner_small.jpg" />
     <meta name="description" content="슬롯머신 시뮬레이션 도구로, 실제와 동일한 3D 슬롯머신을 시뮬레이션 해보세요. 흥미진진한 효과음이 제공되고, 자동 슬롯머신 토글 기능으로 계속 플레이할 수 있습니다.">
     <meta name="keywords" content="슬롯머신, 3D 게임, 카지노, 자동 회전, 효과음, 재미">
     <meta name="author" content="권태헌(kwontaeheon@gmail.com)">
@@ -117,24 +129,66 @@
         <div class="modal-content">
             <span class="close-button" id="closeModal">&times;</span>
             <h2>슬롯머신 시뮬레이션 도구</h2>
-            <p>실제와 동일한 3D 슬롯머신을 시뮬레이션 해보세요. 흥미진진한 효과음이 제공되고, 자동 슬롯머신 토글 기능으로 계속 플레이할 수 있습니다.</p>
+            <p>실제와 동일한 3D 슬롯머신을 시뮬레이션 해보세요.<br>
+                흥미진진한 효과음이 제공되고, <br>
+                자동 슬롯머신 토글 기능으로 계속 플레이할 수 있습니다.</p>
+                <div id="symbolTable" style="margin: auto auto; width: 80%; text-align: center;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">심볼</th>
+                                <th style="text-align: right;">획득 금액</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="/slot/textures/cherry.png" alt="체리" style="width: 3vh; height: 3vh;"></td>
+                                <td>1000</td>
+                            </tr>
+                            <tr>
+                                <td><img src="/slot/textures/lemon.png" alt="레몬" style="width: 3vh; height: 3vh;"></td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td><img src="/slot/textures/grape.png" alt="포도" style="width: 3vh; height: 3vh;"></td>
+                                <td>3000</td>
+                            </tr>
+                            <tr>
+                                <td><img src="/slot/textures/bell.png" alt="벨" style="width: 3vh; height: 3vh;"></td>
+                                <td>5000</td>
+                            </tr>
+                            <tr>
+                                <td><img src="/slot/textures/star.png" alt="별" style="width: 3vh; height: 3vh;"></td>
+                                <td>7500</td>
+                            </tr>
+                            <tr>
+                                <td><img src="/slot/textures/seven.png" alt="세븐" style="width: 3vh; height: 3vh;"></td>
+                                <td>10000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             <button  class="slotButton"  id="confirmButton">확인</button>
         </div>
     </div>
 
-    <div id="ui">
-        <div>점수: <span id="score">0</span></div>
-        <div>코인: <span id="coins">1000</span></div>
-    </div>
     
-    <button id="spinButton" class="slotButton">회전! (100 코인)</button>
     <button id="autoSpinButton" class="slotButton toggle-button">자동 회전 꺼짐</button>
+    <button id="spinButton" class="slotButton">회전! (100 코인)</button>
+    
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
-    
+    <div id="ui">
+        
+        <center>
+            <div>점수: <span id="score">0</span></div>
+            <div>코인: <span id="coins">1000</span></div>
+        </center>
+        
+    </div>
     <script src="slot.js"></script>
     <script>
         window.onload = function() {
