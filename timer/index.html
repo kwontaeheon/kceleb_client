@@ -5,49 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비주얼 타이머</title>
     <style>
-        /* 기존 스타일... */
+        body {
+            font-family: 'Arial', sans-serif; /* 모던한 글씨체 */
+            background-color: #f4f4f4; /* 배경색 */
+            color: #333; /* 글씨 색상 */
+            margin: 0;
+            padding: 20px;
+        }
+
         #timer {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 20px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white; /* 카드 배경 */
+            border-radius: 10px; /* 둥근 모서리 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+            max-width: 600px; /* 최대 너비 */
         }
-        #timerCanvas {
-            margin-top: 20px;
-            border: 1px solid #fff;
-            border-radius: 50%;
+
+        h1 {
+            font-size: 2rem; /* 제목 크기 */
+            margin-bottom: 10px; /* 제목 아래 여백 */
         }
-        .timerButton{
-            font-size: 2rem;
+
+        p {
+            font-size: 1rem; /* 본문 크기 */
+            margin-bottom: 20px; /* 본문 아래 여백 */
+            text-align: center; /* 가운데 정렬 */
+        }
+
+        .timerButton {
+            font-size: 1.5rem; /* 버튼 글씨 크기 */
+            padding: 10px 20px; /* 버튼 패딩 */
+            margin: 5px; /* 버튼 간격 */
+            border: none; /* 기본 테두리 제거 */
+            border-radius: 5px; /* 둥근 모서리 */
+            background-color: #007BFF; /* 버튼 배경색 */
+            color: white; /* 버튼 글씨 색상 */
+            cursor: pointer; /* 커서 모양 변경 */
+            transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+        }
+
+        .timerButton:hover {
+            background-color: #0056b3; /* 호버 시 배경색 변화 */
+        }
+
+        #repeatButton {
+            font-size: 1.5rem; /* 반복 버튼 글씨 크기 */
+            padding: 10px 20px; /* 버튼 패딩 */
+            margin-top: 20px; /* 위 여백 */
+            border: none; /* 기본 테두리 제거 */
+            border-radius: 5px; /* 둥근 모서리 */
+            background-color: #007BFF; /* 기본 배경색 */
+            color: white; /* 글씨 색상 */
+            cursor: pointer; /* 커서 모양 변경 */
+            transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+        }
+
+        #repeatButton.off {
+            background-color: #ccc; /* 꺼���을 때 배경색 */
+            color: #333; /* 꺼졌을 때 글씨 색상 */
+        }
+
+        #timerContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; /* 타이머 캔버스 위 여백 */
+        }
+
+        #nextTimerDisplay {
+            font-size: 1.5rem; /* 다음 타이머 표시 크기 */
+            color: black; /* 다음 타이머 글씨 색상 */
+            margin-top: 20px; /* 다음 타이머 위 여백 */
         }
     </style>
 </head>
 <body>
-
-    <div id="timer">
-        <h1>인터벌 타이머</h1>
-        <p>타이머 버튼을 누르면, 누른 순서대로 인터벌 타이머를 실행합니다.<br>
-        운동할 때, 공부할 때, 업무할 때, 집중이 필요한 모든 곳에!<br>
-        인터벌 타이머를 사용해보세요.</p>
-        <br>
-        <div id="timerButtons" style="display: flex; flex-wrap: wrap; justify-content: center;">
-            <button class="timerButton" value="300">5분</button>
-            <button class="timerButton" value="600">10분</button>
-            <button class="timerButton" value="900">15분</button>
-            <button class="timerButton" value="1200">20분</button>
-            <button class="timerButton" value="1800">30분</button>
-            <button class="timerButton" value="2400">40분</button>
-            <button class="timerButton" value="3000">50분</button>
-            <button class="timerButton" value="3600">60분</button>
-            <button class="timerButton" value="5400">90분</button>
-            <button class="timerButton" value="7200">120분</button>
-            <button class="timerButton" value="9000">150분</button>
-            <button class="timerButton" value="10800">180분</button>
+    <h1>인터벌 타이머</h1>
+    <nav>
+        <div id="hamburger" class="hamburger">☰</div>
+        <div id="navContent" style="display: none;">
+            
+            <p>타이머 버튼을 누르면, 누른 순서대로 인터벌 타이머를 실행합니다.<br>
+            운동할 때, 공부할 때, 업무할 때, 집중이 필요한 모든 곳에!<br>
+            인터벌 타이머를 사용해보세요.</p>
+            <div id="timerButtons" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                <button class="timerButton" value="5">5초</button>
+                <button class="timerButton" value="10">10초</button>
+                <button class="timerButton" value="30">30초</button>
+                <button class="timerButton" value="60">1분</button>
+                <button class="timerButton" value="300">5분</button>
+                <button class="timerButton" value="600">10분</button>
+                <button class="timerButton" value="900">15분</button>
+                <button class="timerButton" value="1200">20분</button>
+                <button class="timerButton" value="1800">30분</button>
+                <button class="timerButton" value="2400">40분</button>
+                <button class="timerButton" value="3000">50분</button>
+                <button class="timerButton" value="3600">60분</button>
+                <button class="timerButton" value="5400">90분</button>
+                <button class="timerButton" value="7200">120분</button>
+                <button class="timerButton" value="9000">150분</button>
+                <button class="timerButton" value="10800">180분</button>
+            </div>
+            <button id="repeatButton" class="on">반복 ON</button>
         </div>
-        
-    </div>
+    </nav>
+
     <div id="timerContainer" style="display: flex; flex-direction: column; align-items: center;"></div>
     <div id="nextTimerDisplay" style="font-size: 1.5rem; color: black; margin-top: 20px;"></div>
+    <!-- 벨 소리 추가 -->
+    <audio id="bellSound" src="/slot/sounds/win.mp3" preload="auto"></audio>
 
     <script>
         let timerInterval;
@@ -56,9 +126,7 @@
         let wakeLock = null;
         let timerQueue = []; // 타이머 큐 추가
         let timerColors = ['#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#FFBAF3', '#FFABAB']; // 무지개 색상 배열
-        const timerCharts = []; // 타이머 차트 배열 추가
-
-        
+        let repeatEnabled = true; // 반복 상태 초기화
 
         async function requestWakeLock() {
             try {
@@ -142,7 +210,16 @@
                     clearInterval(timerInterval);
                     releaseWakeLock(); // 타이머 종료 시 화면 잠금 해제
                     console.log("타이머가 종료되었습니다!");
+                    // 벨 소리 재생
+                    const bellSound = document.getElementById('bellSound');
+                    bellSound.play();
+
                     const nextTimer = timerQueue.shift();
+
+                    // 반복 체크가 되어있으면 타이머 큐의 끝에 처음 설정했던 시간을 추가
+                    if (repeatEnabled) {
+                        timerQueue.push(totalTime);
+                    }
 
                     // 다음 타이머가 있으면 시작
                     if (timerQueue.length > 0) {
@@ -163,62 +240,32 @@
                 timerQueue.push(selectedTime); // 큐에 추가
                 if (timerQueue.length === 1) {
                     startTimer(selectedTime); // 큐가 비어있으면 바로 시작
-                    
                 } else {
-                    // rawTimer(); // 남은 시간 즉시 표시
                     drawAllTimers(); // 모든 타이머 그리기 호출
                 }
             });
         });
 
-        function drawTimer() {
-            const percentage = remainingTime / totalTime;
-            const startAngle = -0.5 * Math.PI; // 시작 각도
-            const endAngle = startAngle + (percentage * 2 * Math.PI); // 끝 각도
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // 캔버스 초기화
-            ctx.beginPath();
-            const radius = Math.min(canvas.width, canvas.height) / 2 - 10; // 반지름 계산
-            ctx.arc(canvas.width / 2, canvas.height / 2, radius, startAngle, endAngle, false);
-            ctx.lineTo(canvas.width / 2, canvas.height / 2);
-            ctx.fillStyle = 'lightseagreen';
-            ctx.fill();
-            ctx.closePath();
-
-            // 원형 테두리
-            ctx.beginPath();
-            ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI); // 반지름을 동일하게 설정
-            
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 5;
-            ctx.stroke();
-            ctx.closePath();
-
-            // 남은 시간 표시
-            const minutes = Math.floor(remainingTime / 60);
-            const seconds = remainingTime % 60;
-            const timeText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            
-            // 남은 시간 텍스트 가운데 정렬
-            ctx.fillStyle = 'black';
-            ctx.font = 'bold 2rem Arial'; // 글꼴 및 크기 설정
-            ctx.textAlign = 'center'; // 가로 가운데 정렬
-            ctx.textBaseline = 'middle'; // 세로 가운데 정렬
-            ctx.fillText(timeText, canvas.width / 2, canvas.height / 2); // 텍스트 그리기
-
-            // 다음 타이머의 남은 시간 표시
-            if (timerQueue.length > 1) {
-                const nextTime = timerQueue[1]; // 다음 타이머의 남은 시간
-                const nextMinutes = Math.floor(nextTime / 60);
-                const nextSeconds = nextTime % 60;
-                const nextTimeText = `${String(nextMinutes).padStart(2, '0')}:${String(nextSeconds).padStart(2, '0')}`;
-                
-                // 두 번째 타이머 텍스트를 HTML 요소에 표시
-                document.getElementById('nextTimerDisplay').innerText = `다음 타이머: ${nextTimeText}`;
+        // 반복 버튼 클릭 이벤트
+        document.getElementById('repeatButton').addEventListener('click', () => {
+            repeatEnabled = !repeatEnabled; // 반복 상태 토글
+            const repeatButton = document.getElementById('repeatButton');
+            if (repeatEnabled) {
+                repeatButton.classList.remove('off');
+                repeatButton.classList.add('on');
+                repeatButton.textContent = '반복 ON'; // 반복 ON으로 변경
             } else {
-                document.getElementById('nextTimerDisplay').innerText = ''; // 다음 타이머가 없으면 비우기
+                repeatButton.classList.add('off');
+                repeatButton.classList.remove('on');
+                repeatButton.textContent = '반복 OFF'; // 반복 OFF로 변경
             }
-        }
+        });
+
+        // 햄버거 버튼 클릭 이벤트
+        document.getElementById('hamburger').addEventListener('click', () => {
+            const navContent = document.getElementById('navContent');
+            navContent.style.display = navContent.style.display === 'none' ? 'block' : 'none'; // 토글
+        });
     </script>
 </body>
 </html>
