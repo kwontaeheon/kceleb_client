@@ -26,8 +26,12 @@
 
     <div id="timer">
         <h1>인터벌 타이머</h1>
+        <p>타이머 버튼을 누르면, 누른 순서대로 인터벌 타이머를 실행합니다.<br>
+        운동할 때, 공부할 때, 업무할 때, 집중이 필요한 모든 곳에!<br>
+        인터벌 타이머를 사용해보세요.</p>
+        <br>
         <div id="timerButtons" style="display: flex; flex-wrap: wrap; justify-content: center;">
-            <button class="timerButton" value="5">5분</button>
+            <button class="timerButton" value="300">5분</button>
             <button class="timerButton" value="600">10분</button>
             <button class="timerButton" value="900">15분</button>
             <button class="timerButton" value="1200">20분</button>
@@ -42,10 +46,7 @@
         </div>
         
     </div>
-    <center>
-    <canvas id="timerCanvas" width="200" height="200" style="aspect-ratio: 1;"></canvas>
-    </center>
-    
+    <div id="timerContainer" style="display: flex; flex-direction: column; align-items: center;"></div>
     <div id="nextTimerDisplay" style="font-size: 1.5rem; color: black; margin-top: 20px;"></div>
 
     <script>
@@ -54,9 +55,10 @@
         let remainingTime;
         let wakeLock = null;
         let timerQueue = []; // 타이머 큐 추가
+        let timerColors = ['#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#FFBAF3', '#FFABAB']; // 무지개 색상 배열
+        const timerCharts = []; // 타이머 차트 배열 추가
 
-        const canvas = document.getElementById('timerCanvas');
-        const ctx = canvas.getContext('2d');
+        
 
         async function requestWakeLock() {
             try {
@@ -76,6 +78,57 @@
             }
         }
 
+        function drawAllTimers() { // 모든 타이머 그리기 함수 추가
+            const container = document.getElementById('timerContainer');
+            container.innerHTML = ''; // 기존 캔버스 초기화
+
+            timerQueue.forEach((time, index) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 200;
+                canvas.height = 200;
+                container.appendChild(canvas);
+
+                const ctx = canvas.getContext('2d');
+                
+                var remainingCurrentTime = time;
+                if (index == 0) {
+                    remainingCurrentTime = remainingTime;
+                }
+                var percentage = remainingCurrentTime / time; // 각 타이머의 비율
+                const startAngle = -0.5 * Math.PI; // 시작 각도
+                const endAngle = startAngle + (percentage * 2 * Math.PI); // 끝 각도
+
+                const radius = Math.min(ctx.canvas.width, ctx.canvas.height) / 2 - 10; // 반지름 계산
+                ctx.beginPath();
+                ctx.arc(ctx.canvas.width / 2, ctx.canvas.height / 2, radius, startAngle, endAngle, false);
+                ctx.lineTo(ctx.canvas.width / 2, ctx.canvas.height / 2);
+                ctx.fillStyle = timerColors[index % timerColors.length]; // 색상 변경
+                ctx.fill();
+                ctx.closePath();
+
+                // 원형 테두리
+                ctx.beginPath();
+                ctx.arc(ctx.canvas.width / 2, ctx.canvas.height / 2, radius, 0, 2 * Math.PI); // 반지름을 동일하게 설정
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 5;
+                ctx.stroke();
+
+                // 남은 시간 표시
+                const minutes = Math.floor(remainingCurrentTime / 60);
+                const seconds = remainingCurrentTime % 60;
+                const timeText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                
+                // 남은 시간 텍스트 가운데 정렬
+                ctx.fillStyle = 'black';
+                ctx.font = 'bold 2rem Arial'; // 글꼴 및 크기 설정
+                ctx.textAlign = 'center'; // 가로 가운데 정렬
+                ctx.textBaseline = 'middle'; // 세로 가운데 정렬
+                ctx.fillText(timeText, canvas.width / 2, canvas.height / 2); // 텍스트 그리기
+
+                ctx.closePath();
+            });
+        }
+
         function startTimer(duration) {
             clearInterval(timerInterval);
             totalTime = duration;
@@ -93,12 +146,13 @@
 
                     // 다음 타이머가 있으면 시작
                     if (timerQueue.length > 0) {
-                        startTimer(nextTimer); // 다음 타이머 시작
+                        startTimer(timerQueue[0]); // 다음 타이머 시작
                     }
                     return;
                 }
                 remainingTime--;
-                drawTimer();
+                // drawTimer();
+                drawAllTimers(); // 모든 타이머 그리기 호출
                 console.log(timerQueue);
             }, 1000);
         }
@@ -111,7 +165,8 @@
                     startTimer(selectedTime); // 큐가 비어있으면 바로 시작
                     
                 } else {
-                    drawTimer(); // 남은 시간 즉시 표시
+                    // rawTimer(); // 남은 시간 즉시 표시
+                    drawAllTimers(); // 모든 타이머 그리기 호출
                 }
             });
         });
@@ -151,7 +206,7 @@
             ctx.textBaseline = 'middle'; // 세로 가운데 정렬
             ctx.fillText(timeText, canvas.width / 2, canvas.height / 2); // 텍스트 그리기
 
-            // 두 번째 타이머의 남은 시간 표시
+            // 다음 타이머의 남은 시간 표시
             if (timerQueue.length > 1) {
                 const nextTime = timerQueue[1]; // 다음 타이머의 남은 시간
                 const nextMinutes = Math.floor(nextTime / 60);
