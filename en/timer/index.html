@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>셀럽미: 인터벌 타이머</title>
+    <title>CelebMe: Interval Timer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" rel="stylesheet" />
     <meta name="naver-site-verification" content="73b65ec60ffe57eee8ef9a8e0dec61175fc3c0f0" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <meta name="title" content="셀럽미: 인터벌 타이머" />
-    <meta name="subject" content="간편한 인터벌 타이머로 시간을 효율적으로 관리하세요!" />
+    <meta name="title" content="CelebMe: Interval Timer" />
+    <meta name="subject" content="Manage your time efficiently with a simple interval timer!" />
     <meta name="keywords"
-        content="인터벌 타이머, 뽀모도로, 공부 타이머, 운동 타이머, 시간 관리, 타이머 앱, 집중력 향상, 생산성 도구, 시간 관리 도구, 스톱워치, 타이머, 인터벌 트레이닝, 시간 측정, 시간 알람, 공부 도구" />
-    <meta name="author" content="권태헌(kwontaeheon@gmail.com)" />
-    <meta name="description" content="간편한 인터벌 타이머로 시간을 효율적으로 관리하세요. 공부, 운동, 업무 등 다양한 상황에서 활용 가능한 무료 타이머입니다." />
+        content="interval timer, pomodoro, study timer, workout timer, time management, timer app, focus improvement, productivity tool, time management tool, stopwatch, timer, interval training, time measurement, time alarm, study tool" />
+    <meta name="author" content="Terry Kwon(kwontaeheon@gmail.com)" />
+    <meta name="description" content="Manage your time efficiently with a simple interval timer. Free timer for various situations like studying, exercising, and work." />
     <link rel="stylesheet" href="/v_20241111/style.css" />
     <link rel="canonical" href="https://celebme.net/timer/" />
     <link rel="alternate" href="https://celebme.net/timer/en/" hreflang="x-default" />
@@ -23,9 +23,9 @@
     <link rel="alternate" href="https://celebme.net/timer/" hreflang="ko" />
     <meta property="og:url" content="https://celebme.net/timer/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="셀럽미: 인터벌 타이머" />
+    <meta property="og:title" content="CelebMe: Interval Timer" />
     <meta property="og:description"
-        content="간편한 인터벌 타이머로 시간을 효율적으로 관리하세요. 공부, 운동, 업무 등 다양한 상황에서 활용 가능한 무료 타이머입니다." />
+        content="Manage your time efficiently with a simple interval timer. Free timer for various situations like studying, exercising, and work." />
     <meta property="og:image" content="/timer/timer.png" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -142,66 +142,59 @@
         crossorigin="anonymous"></script>
     
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">셀럽미: 인터벌 타이머</a>
+        <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">CelebMe: Interval Timer</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+               
                 <li class="nav-item active"
                     onclick="gtag('event', '닮은 연예인 찾기 이동', {'event_category': '닮은 연예인 찾기 이동','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/index.html"> 셀럽미: 닮은 연예인 찾기
+                    <a class="nav-link" href="/en/index.html"> CelebMe: Find Korean celebrity lookalikes
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-
 
                 <li class="nav-item active"
                     onclick="gtag('event', '매칭테스트 이동', {'event_category': '매칭테스트 이동','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/match/index.html"> 셀럽미: 얼굴 매칭 테스트
+                    <a class="nav-link" href="/en/match/index.html"> CelebMe: Face Matching Test
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
 
                 <li class="nav-item active"
-                    onclick="gtag('event', '인터벌타이머 이동', {'event_category': '인터벌타이머 이동','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/timer/index.html"> 셀럽미: 인터벌 타이머
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-
-                <li class="nav-item active"
-                onclick="gtag('event', '슬롯머신 이동', {'event_category': '슬롯머신 이동','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/slot/index.html"> 셀럽미: 3D 슬롯머신 시뮬레이터 사용해보기
+                    onclick="gtag('event', '인터벌 타이머 이동', {'event_category': '인터벌 타이머 이동','event_label': '상단 메뉴'});">
+                    <a class="nav-link" href="/en/timer/index.html"> CelebMe: Interval Timer
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
 
                 <li class="nav-item active"
                     onclick="gtag('event', '닮은 아이돌 찾기 클릭', {'event_category': '닮은 아이돌 찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/client/index.html">(On-device) 셀럽미: 닮은 아이돌 찾기
+                    <a class="nav-link" href="/client/index.html">(On-device) CelebMe: Find celebrities you look like
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item active"
                     onclick="gtag('event', '퍼피테스트 클릭', {'event_category': '퍼피테스트 클릭','event_label': '상단 메뉴'});">
                     <a class="nav-link" href="/puppy/index.html"
-                        onClick="top.location='javascript:location.reload()'">닮은 강아지 테스트 MBTI
+                        onClick="top.location='javascript:location.reload()'">MBTI Personality Test: Puppy
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item active"
                     onclick="gtag('event', '과제생활 동물찾기 클릭', {'event_category': '과제생활 동물찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/animaltest/index.html">닮은 동물 테스트 MBTI
+                    <a class="nav-link" href="/animaltest/index.html">MBTI Personailty Test: Animals
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
 
                 <li class="nav-item active"
                     onclick="gtag('event', '러블리햄의 블로그 클릭', {'event_category': '러블리햄의 블로그 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/blog">
-                        셀럽미: 블로그</a>
+                    <a class="nav-link" href="/en/blog">
+                        Blog</a>
                 </li>
             </ul>
             
@@ -211,8 +204,8 @@
         <section class="container d-flex flex-column justify-content-center align-items-center"></section>
             <div>
                 <select id="lang" onchange="changeLanguage(this)" class="custom-select col-8">
-                    <option value="ko" lang="ko" selected >Language: 한국어</option>
-                    <option value="en" lang="en" >English</option>
+                    <option value="ko" lang="ko"  >Language: 한국어</option>
+                    <option value="en" lang="en" selected >Language: English</option>
                     <!-- <option value="es" lang="es">español</option>
                     <option value="ja" lang="ja">日本語</option>
                     <option value="zh" lang="zh">中文</option>
@@ -224,9 +217,9 @@
         
         </section>
     </center>
-    <h1 class="title">셀럽미: 인터벌 타이머</h1>
+    <h1 class="title">CelebMe: Interval Timer</h1>
     <h4 class="subtitle">
-        시간 관리의 시작, 인터벌 타이머와 함께하세요!<br><br>
+        Start managing your time with Interval Timer!<br><br>
         <span style="color: #666; font-size: 0.9em;">
             💡 사용 방법<br>
             1. 원하는 시간의 타이머 버튼을 순서대로 클릭하세요.<br>
@@ -240,31 +233,27 @@
     </h4>
 
     <div class="usage-examples" style="text-align: center; margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 10px;">
-        <h4 style="color: #007bff;">📌 활용 예시 빠르게 시작하기</h4>
+        <h4 style="color: #007bff;">📌 Quick Start Examples</h4>
         <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 15px;">
-            <div class="example-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 200px; transition: all 0.3s ease;" 
-                onclick="timerOn(1500); timerOn(300); this.style.backgroundColor='#f0f7ff'; this.style.transform='scale(1.3)'; setTimeout(() => {this.style.backgroundColor='white'; this.style.transform='scale(1.0)'; document.getElementById('timerButtons').scrollIntoView({behavior: 'smooth'}); }, 500);">
-                <h5>📚 공부할 때</h5>
+            <div class="example-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 200px;">
+                <h5>📚 For Studying</h5>
                 <p style="font-size: 1.3em; color: #666;">
-                    25분 공부 + 5분 휴식<br>
-                    (뽀모도로 기법)
+                    25min Study + 5min Break<br>
+                    (Pomodoro Technique)
                 </p>
             </div>
-            <div class="example-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 200px; transition: all 0.3s ease;" 
-                onclick="timerOn(40); timerOn(20); this.style.backgroundColor='#f0f7ff'; this.style.transform='scale(1.3)'; setTimeout(() => {this.style.backgroundColor='white'; this.style.transform='scale(1.0)'; document.getElementById('timerButtons').scrollIntoView({behavior: 'smooth'});}, 500);">
-                <h5>💪 운동할 때</h5>
+            <div class="example-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 200px;">
+                <h5>💪 For Exercise</h5>
                 <p style="font-size: 1.3em; color: #666;">
-                    40초 운동 + 20초 휴식<br>
-                    (타바타 운동)
+                    40sec Exercise + 20sec Rest<br>
+                    (Tabata Training)
                 </p>
             </div>
-            
-            <div class="example-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 200px; transition: all 0.3s ease;" 
-                onclick="timerOn(3000); timerOn(600); this.style.backgroundColor='#f0f7ff'; this.style.transform='scale(1.3)'; setTimeout(() => {this.style.backgroundColor='white'; this.style.transform='scale(1.0)'; document.getElementById('timerButtons').scrollIntoView({behavior: 'smooth'});}, 500);">
-                <h5>💼 업무할 때</h5>
+            <div class="example-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 200px;">
+                <h5>💼 For Work</h5>
                 <p style="font-size: 1.3em; color: #666;">
-                    50분 업무 + 10분 휴식<br>
-                    (업무 집중력 향상)
+                    50min Work + 10min Break<br>
+                    (Work Focus Enhancement)
                 </p>
             </div>
         </div>
@@ -272,24 +261,24 @@
     
     <center>
         <div id="timerButtons" style="align-items: center;">
-            <button class="timerButton" value="10">10초</button>
-            <button class="timerButton" value="20">20초</button>
-            <button class="timerButton" value="40">40초</button>
-            <button class="timerButton" value="60">1분</button><br/>
-            <button class="timerButton" value="300">5분</button>
-            <button class="timerButton" value="600">10분</button>
-            <button class="timerButton" value="900">15분</button>
-            <button class="timerButton" value="1200">20분</button><br/>
-            <button class="timerButton" value="1500">25분</button>
-            <button class="timerButton" value="1800">30분</button>
-            <button class="timerButton" value="3000">50분</button>
-            <button class="timerButton" value="3600">60분</button><br/>
-            <button class="timerButton" value="5400">90분</button>
-            <button class="timerButton" value="7200">120분</button>
-            <button class="timerButton" value="9000">150분</button>
-            <button class="timerButton" value="10800">180분</button><br/>
+            <button class="timerButton" value="10">10sec</button>
+            <button class="timerButton" value="20">20sec</button>
+            <button class="timerButton" value="40">40sec</button>
+            <button class="timerButton" value="60">1min</button><br/>
+            <button class="timerButton" value="300">5min</button>
+            <button class="timerButton" value="600">10min</button>
+            <button class="timerButton" value="900">15min</button>
+            <button class="timerButton" value="1200">20min</button><br/>
+            <button class="timerButton" value="1500">25min</button>
+            <button class="timerButton" value="1800">30min</button>
+            <button class="timerButton" value="3000">50min</button>
+            <button class="timerButton" value="3600">60min</button><br/>
+            <button class="timerButton" value="5400">90min</button>
+            <button class="timerButton" value="7200">120min</button>
+            <button class="timerButton" value="9000">150min</button>
+            <button class="timerButton" value="10800">180min</button><br/>
         </div>
-        <button id="repeatButton" class="on">반복 ON</button>
+        <button id="repeatButton" class="on">Repeat ON</button>
     </center>
         
           
@@ -436,11 +425,11 @@
             if (repeatEnabled) {
                 repeatButton.classList.remove('off');
                 repeatButton.classList.add('on');
-                repeatButton.textContent = '반복 ON'; // 반복 ON으로 변경
+                repeatButton.textContent = 'Repeat ON'; // 반복 ON으로 변경
             } else {
                 repeatButton.classList.add('off');
                 repeatButton.classList.remove('on');
-                repeatButton.textContent = '반복 OFF'; // 반복 OFF로 변경
+                repeatButton.textContent = 'Repeat OFF'; // 반복 OFF로 변경
             }
         });
 
@@ -457,7 +446,7 @@
 
     <footer class="footer pt-5 container d-flex justify-content-center">
         <div>
-            <p>&copy; 테리 Terry 2024. All Rights Reserved.</p>
+            <p>&copy; Terry 2024. All Rights Reserved.</p>
         </div>
     </footer>
     <script>
@@ -476,8 +465,8 @@
 
     <script>
         var disqus_config = function () {
-            this.page.url = 'https://celebme.net/timer/';
-            this.page.identifier = 'timer_index.html';
+            this.page.url = 'https://celebme.net/en/timer/';
+            this.page.identifier = 'en_timer_index.html';
         };
 
         (function () {
