@@ -224,7 +224,7 @@ function drawChart(userData) {
 
     canvas.toBlob((croppedImage) => {
       $("#loading-message").html(getMeta("finding_lookalike_celeb"));
-      setTimeout(getSimilarCeleb, 3000, croppedImage);
+      setTimeout(getSimilarCeleb, 1000, croppedImage);
 
     }, 'image/webp');
   }
@@ -422,7 +422,7 @@ async function analyzeFace(inputImage) {
       if (cropSuccess == false) {
         // $("#loading-message").html(getMeta("finding_lookalike_celeb"));
         // crop 실패시 이미지 유사성 비교를 위해 이미지 그대로 입력
-        setTimeout(getSimilarCeleb, 3000, inputImage);
+        setTimeout(getSimilarCeleb, 1000, inputImage);
       }
 
 
@@ -726,7 +726,7 @@ async function startMatch() {
   $("#loading-message").html(getMeta("analyzing_face"))
   $("#loading").show();
   // 3초 대기
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   
 
   const formData = new FormData();
@@ -1253,7 +1253,7 @@ async function displayComparisonCelebMe(searchIdx) {
   loadingGif.style.display = 'block'; // loading
 
   // 3초 대기
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
 
   // 연결되는 이미지 생성
   var img1 = document.getElementById('cropped-face-image-2'); 
