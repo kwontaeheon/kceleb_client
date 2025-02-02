@@ -1,4 +1,3 @@
-
 // const compressor = require('./compression.js');
 // const apiUrl = "https://celebme.duckdns.org:8181";
 // const apiUrl = "https://knnlnzvrb56n7cvift2sajvyza.apigateway.ap-chuncheon-1.oci.customer-oci.com/v1"
@@ -12,7 +11,12 @@ const apiUrl = "https://celebme.duckdns.org:8181";
 var similarIdolData;
 // 얼굴 분석 변수
 var faceData;
-
+// 필터 상태 변수
+var activeFilters = {
+    occupation: [],
+    group: [],
+    gender: []
+};
 
 const lang = $("#lang option:selected").val();
 const version = "/v_20250126";
@@ -20,6 +24,127 @@ var faceNames = {};
 var faceNamesKo = {};
 const jsonContainer = document.getElementById('json-container');
 const toggleButton = document.getElementById('toggleButton');
+
+// 필터 초기화 함수
+function initializeFilters() {
+    const occupationFilters = $('#occupation-filters');
+    const groupFilters = $('#group-filters');
+    
+    // 직종 필터 초기화
+    if (resultMeta.categories) {
+        Object.entries(resultMeta.categories).forEach(([key, value]) => {
+            occupationFilters.append(`
+                <div class="filter-chip" data-filter="occupation" data-value="${key}">${value}</div>
+            `);
+        });
+    }
+
+    // 그룹 필터 초기화
+    if (resultMeta.groups) {
+        Object.entries(resultMeta.groups).forEach(([key, value]) => {
+            groupFilters.append(`
+                <div class="filter-chip" data-filter="group" data-value="${key}">${value}</div>
+            `);
+        });
+    }
+
+    // 필터 클릭 이벤트
+    $('.filter-chip').click(function() {
+        const filter = $(this).data('filter');
+        const value = $(this).data('value');
+        
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            activeFilters[filter] = activeFilters[filter].filter(v => v !== value);
+        } else {
+            $(this).addClass('active');
+            activeFilters[filter].push(value);
+        }
+        
+        if (similarIdolData) {
+            applyFilters();
+        }
+    });
+
+    // 필터 초기화 버튼
+    $('#clear-filters').click(function() {
+        $('.filter-chip').removeClass('active');
+        activeFilters = {
+            occupation: [],
+            group: [],
+            gender: []
+        };
+        if (similarIdolData) {
+            applyFilters();
+        }
+    });
+}
+
+// 필터 적용 함수
+function applyFilters() {
+    if (!similarIdolData) return;
+
+    const filteredResults = similarIdolData.filter(idol => {
+        const celebName = idol.name;
+        const metadata = resultMeta.celebrities[celebName];
+        
+        if (!metadata) return true;
+
+        // 각 필터 조건 확인
+        const occupationMatch = activeFilters.occupation.length === 0 || 
+            (metadata.occupation && activeFilters.occupation.includes(metadata.occupation));
+        
+        const groupMatch = activeFilters.group.length === 0 || 
+            (metadata.group && activeFilters.group.includes(metadata.group));
+        
+        const genderMatch = activeFilters.gender.length === 0 || 
+            (metadata.gender && activeFilters.gender.includes(metadata.gender));
+
+        return occupationMatch && groupMatch && genderMatch;
+    });
+
+    updateDisplayWithFilteredResults(filteredResults);
+}
+
+// 필터링된 결과 표시 함수
+function updateDisplayWithFilteredResults(filteredResults) {
+    $("#result-similar-idol").show();
+    for (var rank = 1; rank <= 10; rank++) {
+        try {
+            if (rank <= filteredResults.length) {
+                const idol = filteredResults[rank - 1];
+                const r = idol.name;
+                $('#r' + rank).html(r + ": " + ((idol.distance) * 100).toFixed(1) + "% 🔍");
+                $('#search' + rank).hide();
+
+                if (rank == 1) {
+                    displayIdolPrediction(1);
+                    $('#celeb-result').html(
+                        confidenceStr + "<br/>" +
+                        getMeta("face_in_picture") + r + getMeta("it_resembles")
+                    );
+                }
+            } else {
+                $('#r' + rank).html(rank + "순위");
+                // $('#search' + rank + '-head').hide();
+            }
+        } catch (error) {
+            console.log(error);
+            gtag("event", "errorUpdateDisplayWithFilteredResults", {
+                event_category: "error",
+            });
+        }
+    }
+}
+
+// displayIdolPredictionBriefly 함수 수정
+function displayIdolPredictionBriefly(data) {
+    if (!data) return;
+    
+    similarIdolData = data;
+    $('#filter-container').show(); // 결과가 있을 때 필터 표시
+    applyFilters();
+}
 
 (function () {
   fetch(version + "/names_ko.json")
@@ -60,7 +185,6 @@ const toggleButton = document.getElementById('toggleButton');
     });
 })();
 
-
 var resultMeta = {};
 (function () {
   fetch(version + "/meta_" + lang + ".json")
@@ -71,6 +195,7 @@ var resultMeta = {};
       // console.log(resultMeta);
 
       drawDefaultChart();
+      initializeFilters();
       // 초기 설정: 쿼리가 있는 경우 base url로 점프뛰기
       if (window.location.href.includes("gsc.q"))
         window.location.href = getBaseUrl();
@@ -529,42 +654,12 @@ function getSimilarCeleb(inputImage) {
       );
     });
 }
-function displayIdolPredictionBriefly(data) {
-  $("#result-similar-idol").show();
-  for (var rank = 1; rank <= 10; rank++) {
-    try {
-      const r = data[rank - 1].name; // .split("/")[1]]
-
-      // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
-      $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
-
-      $('#search' + rank).hide();
-      // $('#s' + rank).show();
-      if (rank == 1) {
-        displayIdolPrediction(1);
-        $('#celeb-result').html(
-          confidenceStr + "<br/>" +
-          getMeta("face_in_picture") + r + getMeta("it_resembles")
-          // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
-        )
-      }
-    } catch (error) {
-      console.log(error);
-      gtag("event", "errorDisplayIdolPredictionBriefly", {
-        event_category: "error",
-      });
-    }
-  }
-
-
-}
-
 function displayIdolPrediction(rank) {
   data = similarIdolData;
 
   // console.log(data);
-  const r = data[rank - 1].name; // .split("/")[1]];
-  const koName = data[rank - 1].nameKo; // .split("/")[1]];
+  const r = data[rank - 1].name; // .split("/")[1];
+  const koName = data[rank - 1].nameKo; // .split("/")[1];
   try {
     if ($('#search' + rank).is(":visible")) {
       $('#search' + rank).hide();
@@ -1070,16 +1165,6 @@ function getBaseUrl() {
   // var name = window.location.hostname;
   name = name.split("#")[0];
   // console.log(name);
-  // if (name.includes("index") == false) {
-  //   if (lang == "ko") {
-  //     name = name + "index.html";
-  //   } else {
-  //     name = name + lang + "/index.html";
-  //   }
-  // }
-
-
-  // console.log(name);
   return name; // name + "/" + lang + "/index.html";
 }
 
@@ -1134,12 +1219,22 @@ function sleep(ms) {
 }
 
 function showResults(resultParam, faceParam) {
+  // 결과가 있을 때 필터 표시
+  $('#filter-container').show();
+  // 결과가 있을 때 필터 초기화
+  activeFilters = {
+    occupation: [],
+    group: [],
+    gender: []
+  };
+  // 결과가 있을 때 필터 적용
+  applyFilters();
+
   // result 가 있을경우 canonical url 에 추가  : 셀럽미는 결과가 너무 많아서 일단 보류
   // var uC = document.querySelector("link[rel='canonical']");
   // var newURL = window.location.href.split("#")[0];
   // uC.setAttribute("href", newURL);
 
-  $("#display4").hide();
   $("#display3").hide();
   $("#display5").hide();
   $("#display6").hide();
@@ -1265,7 +1360,6 @@ async function displayComparisonCelebMe(searchIdx) {
   const [img2] = await Promise.all([
       loadImage(target.src)
   ]);
-  
 
   // 이미지가 모두 로드된 후 비교 이미지 생성
   createComparisonImage(img1, img2, searchIdx, celebme=true);
@@ -1399,9 +1493,6 @@ function displayAnimation(searchIdx) {
 
   // });
 }
-
-
-
 
 function drawDefaultChart() {
   const autocolors = window['chartjs-plugin-autocolors'];

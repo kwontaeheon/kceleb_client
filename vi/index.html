@@ -189,6 +189,24 @@
     </section>
     <center>
         <div class="result-section">
+            <div id="filter-container" class="filter-section">
+                <div class="filter-group">
+                    <div class="filter-title">Bộ lọc</div>
+                    <div class="filter-options" id="occupation-filters"></div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-title">Nhóm</div>
+                    <div class="filter-options" id="group-filters"></div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-title">Giới tính</div>
+                    <div class="filter-options" id="gender-filters">
+                        <div class="filter-chip" data-filter="gender" data-value="man">Nam</div>
+                        <div class="filter-chip" data-filter="gender" data-value="woman">Nữ</div>
+                    </div>
+                </div>
+                <button class="clear-filters" id="clear-filters">Xóa bộ lọc</button>
+            </div>
             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
             <div class="mt-3 container file-upload">
                 <div class="image-upload-wrap">
