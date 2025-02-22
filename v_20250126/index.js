@@ -489,9 +489,10 @@ function getSimilarCeleb(inputImage) {
       for (var rank = 0; rank < 10; rank++) {
         similarIdolData[rank].name = faceNames[similarIdolData[rank].identity];
         similarIdolData[rank].nameKo = faceNamesKo[similarIdolData[rank].identity];
+        similarIdolData[rank].originalIdentity = similarIdolData[rank].originalIdentity;
       }
       // console.log(faceNames, faceNamesKo,similarIdolData );
-      displayIdolPredictionBriefly(data);
+      displayIdolPredictionBriefly(similarIdolData);
       // displayIdolPrediction(1);
       $('#extra-similars').show();
       // updateKakaoLink();
@@ -537,8 +538,19 @@ function displayIdolPredictionBriefly(data) {
 
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
       $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
-
-      $('#search' + rank).hide();
+      // console.log(data[rank-1].originalIdentity);
+      //  object-fit: cover;
+      $('#rank' + rank).html(`
+        <div style="width: 100%; height: 100%; max-width: 512px; max-height: 512px; margin: 0 auto;">
+          <img src="/${data[rank-1].originalIdentity}" 
+               style="padding: 4%; border-radius: 20%; width: 100%; height: 100%;"
+               alt="Original celebrity image"
+               id="imgRank${rank}"
+               crossorigin="anonymous">
+        </div>
+      `);
+      
+     //  $('#search' + rank).hide();
       // $('#s' + rank).show();
       if (rank == 1) {
         displayIdolPrediction(1);
@@ -566,21 +578,26 @@ function displayIdolPrediction(rank) {
   const r = data[rank - 1].name; // .split("/")[1]];
   const koName = data[rank - 1].nameKo; // .split("/")[1]];
   try {
-    if ($('#search' + rank).is(":visible")) {
-      $('#search' + rank).hide();
-      $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
-    }
-    else {
+    // if ($('#search' + rank).is(":visible")) {
+    //   $('#search' + rank).hide();
+    //   $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
+    // }
+    // else {
 
       // console.log(r);
       q = 'allintitle: "' + koName + '"';
       // q = '"' + koName + '"' + " portrait -youtube";
       // q = koName + " portrait -youtube -남편 -아내 -여러명 -논란";
 
-      var element = google.search.cse.element.getElement('q' + rank);
+      // var element = google.search.cse.element.getElement('q' + rank);
+      var element = google.search.cse.element.getElement('q0');
       element.execute(q);
-      $('#search' + rank).show();
-      $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% _");
+
+      $("html, body").scrollTop(
+        document.getElementById("search0").offsetTop
+      );
+      // $('#search' + rank).show();
+      // $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% _");
 
       // window.history.replaceState({}, document.title, "/");
       window.history.replaceState({}, document.title, getBaseUrl());
@@ -594,7 +611,7 @@ function displayIdolPrediction(rank) {
         rank: rank,
         result_face: true,
       });
-    }
+    // }
     
     displayComparisonCelebMe(rank); // 첫번째 결과로 이미지 표시하기
     
@@ -1168,7 +1185,22 @@ function showResults(resultParam, faceParam) {
       // }
       // drawChart(faceData);
       $('#result-message').hide();
+      $('#r1').html(similarIdolData[0].name + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "% 🔍");
       // displayIdolPredictionBriefly(similarIdolData);
+      if (similarIdolData && similarIdolData[0] && similarIdolData[0].originalIdentity) {
+        
+
+        $('#rank1').html(`
+          <div style="width: 100%; height: 100%; max-width: 512px; max-height: 512px; margin: 0 auto;">
+            <img src="/${similarIdolData[0].originalIdentity}" 
+                style="padding: 4%; border-radius: 20%; width: 100%; height: 100%;"
+                alt="Original celebrity image"
+                id="imgRank1"
+                crossorigin="anonymous">
+          </div>
+        `);
+      }
+
       displayIdolPrediction(1);
       $('#celeb-result').html(getMeta("face_in_picture") + similarIdolData[0].name + getMeta("it_resembles")
         // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
@@ -1257,8 +1289,9 @@ async function displayComparisonCelebMe(searchIdx) {
 
   // 연결되는 이미지 생성
   var img1 = document.getElementById('cropped-face-image-2'); 
-  var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
-  var target = search1.getElementsByClassName('gs-image-scalable').item(1);
+  // var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
+  // var target = search1.getElementsByClassName('gs-image-scalable').item(1);
+  var target = document.getElementById('imgRank' + searchIdx);
   
   
   // 두 이미지를 동시에 로드
@@ -1286,8 +1319,11 @@ function displayAnimation(searchIdx) {
   
   var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
   // var image2 = document.getElementById('cropped-face-image-1');
-  var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
-  var target = search1.getElementsByClassName('gs-image-scalable').item(1);
+  
+  // var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
+  // var target = search1.getElementsByClassName('gs-image-scalable').item(1);
+  var target = document.getElementById('imgRank' + searchIdx);
+  
   const image2 = new Image();
   image2.src = target.src;
   image2.crossOrigin = 'anonymous';

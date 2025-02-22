@@ -214,8 +214,8 @@ div.gsc-above-wrapper-area {
 .search-btn {
     border-radius: 20px;
     border: solid 1.5px #35465d;
-	margin-left: 10px;
-    margin-bottom: 10px;
+	margin: 5px;
+    margin-top: 20px;
     background-color: #35465d;
     
 }

@@ -309,42 +309,52 @@
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
                     <div class='result-title' id="r1"> 1순위 </div>
                 </button>
-                <div id="search1-head" style="max-height: 30%; overflow: hidden;">
+                <!-- <div id="search1-head" style="max-height: 30%; overflow: hidden;">
                     <!-- data-image_as_rights="(cc_publicdomain|cc_attribute|cc_sharealike).-(cc_noncommercial|cc_nonderived)" -->
-                    <div id="search1" class="gcse-searchresults-only"
+                    <!-- <div id="search1" class="gcse-searchresults-only"
                         data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
                         data-image_type="face" 
                         data-gname="q1"></div>
 
-                </div>
+                </div> -->
+                <div id="rank1" style="width:45%;" onclick="displayIdolPrediction(1);"></div>
+                <div id="search0" class="gcse-searchresults-only"
+                        data-imageSearchResultSetSize="10" 
+                        data-webSearchResultSetSize="4"
+                        data-image_type="face" 
+                        data-gname="q0"></div> 
                 <div class="row" style="font-size: 1.1rem; margin: 10px;" id="extra-similars">
-                    <div style="width: 33%; max-height: 20%; overflow: hidden;">
+                    <div style="width: 33%; height: 100%; ">
                         <!-- https://wiki.creativecommons.org/wiki/CC_Search_integration -->
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(2);">
                             <div class='result-title' id="r2"> 2순위 </div>
+                            
                         </button>
-                        <div id="search2" class="gcse-searchresults-only"
+                        <div id="rank2" style="max-height:30%;" onclick="displayIdolPrediction(2);"></div>
+                        <!-- <div id="search2" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q2"></div>
+                            data-image_type="face" data-gname="q2"></div> -->
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(5);">
                             <div class='result-title' id="r5"> 5순위 </div>
                         </button>
-                        <div id="search5" class="gcse-searchresults-only"
+                        <div id="rank5" style="max-height:30%;" onclick="displayIdolPrediction(5);"></div>
+                        <!-- <div id="search5" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q5"></div>
+                            data-image_type="face" data-gname="q5"></div> -->
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(8);">
                             <div class='result-title' id="r8"> 8순위 </div>
                         </button>
-                        <div id="search8" class="gcse-searchresults-only"
+                        <div id="rank8" style="max-height:30%;" onclick="displayIdolPrediction(8);"></div>
+                        <!-- <div id="search8" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q8"></div>
+                            data-image_type="face" data-gname="q8"></div> -->
 
 
                     </div>
@@ -352,29 +362,32 @@
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(3);">
                             <div class='result-title' id="r3"> 3순위 </div>
                         </button>
-                        <div id="search3" class="gcse-searchresults-only"
+                        <div id="rank3" style="max-height:30%;" onclick="displayIdolPrediction(3);"></div>
+                        <!-- <div id="search3" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q3"></div>
+                            data-image_type="face" data-gname="q3"></div> -->
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(6);">
                             <div class='result-title' id="r6"> 6순위 </div>
                             <!-- <span class="search-text" id="s6">🔍</span> -->
                         </button>
-                        <div id="search6" class="gcse-searchresults-only"
+                        <div id="rank6" style="max-height:30%;" onclick="displayIdolPrediction(6);"></div>
+                        <!-- <div id="search6" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q6"></div>
+                            data-image_type="face" data-gname="q6"></div> -->
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(9);">
                             <div class='result-title' id="r9"> 9순위 </div>
                         </button>
-                        <div id="search9" class="gcse-searchresults-only"
+                        <div id="rank9" style="max-height:30%;" onclick="displayIdolPrediction(9);"></div>
+                        <!-- <div id="search9" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q9"></div>
+                            data-image_type="face" data-gname="q9"></div> -->
 
 
                     </div>
@@ -382,32 +395,38 @@
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(4);">
                             <div class='result-title' id="r4"> 4순위 </div>
                         </button>
-                        <div id="search4" class="gcse-searchresults-only"
+                        <div id="rank4" style="max-height:30%;" onclick="displayIdolPrediction(4);"></div>
+                        <!-- <div id="search4" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q4"></div>
+                            data-image_type="face" data-gname="q4"></div> -->
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(7);">
                             <div class='result-title' id="r7"> 7순위 </div>
                             <!-- <span class="search-text" id="s7">🔍</span> -->
                         </button>
-                        <div id="search7" class="gcse-searchresults-only"
+                        <div id="rank7" style="max-height:30%;" onclick="displayIdolPrediction(7);"></div>
+                        <!-- <div id="search7" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q7"></div>
+                            data-image_type="face" data-gname="q7"></div> -->
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(10);">
                             <div class='result-title' id="r10"> 10순위 </div>
                         </button>
-                        <div id="search10" class="gcse-searchresults-only"
+                        <div id="rank10" style="max-height:30%;" onclick="displayIdolPrediction(10);"></div>
+                        <!-- <div id="search10" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q10"></div>
+                            data-image_type="face" data-gname="q10"></div> -->
 
 
                     </div>
+                    <!--  data-mobileLayout="disabled" data-disableWebSearch="true"-->
+                    
+                        
                     <div class="col" style="text-align:center;">
                         
                         <center>
@@ -426,7 +445,7 @@
                                 <canvas id="comparison-canvas" style="width: 80vw; height: 20vw; max-width: 800px; max-height: 200px;"></canvas>
                             </div>
                             <button id="download-comparison" class="start-button" style="display: none;">닮은 이미지 다운받기</button>
-                            <button id="make-comparison" class="start-button" style="display: none;" onclick="displayComparisonCelebMe(1)">1순위 연예인 페이지에서 다시 만들기</button>
+                            <button id="make-comparison" class="start-button" style="display: none;" onclick="displayComparisonCelebMe(1)">1순위 연예인으로 다시 만들기</button>
                             
                             <button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
                                 style="display: none;">움짤 만들기</button>
