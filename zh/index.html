@@ -18,7 +18,7 @@
     <meta name="title" content="名人我：找到你看起来像的名人" />
     <meta name="subject" content="人工智能根据你的脸型进行像测试，找到一个和你长得很像的偶像！" />
     <meta name="keywords"
-        content="明星美女, 偶像测试, 偶像脸测试, 明星脸测试, 长得像我的偶像, 寻找长得像我的名人, 长得像我的偶像, 偶像长得像我, 名人长得像我测试, 偶像长得像我我，长得像我的偶像测试，偶像长得像我的脸测试，偶像脸测试，长得像我的偶像测试，Nachickum 偶像，找到一个长得像我的偶像，长得像我的偶像测试，找到一个长得像我的偶像, 长得像我的名人, 长得像我的名人测试, 我的人工智能面孔测试, 鸡找偶像, 长得像名人面孔的面孔找测试, 名人形象测试, 偶像照片测试, 寻找偶像般的面孔, 名人形象测试, 人工智能偶像测试, 名人形象测试, 偶像相似度测试, 名人相似度测试, 偶像相似度测试, 我的人工智能面孔测试, 寻找偶像相似度, 相似度测试, 偶像面孔, 偶像相似度, 找到相似的面孔, 名人相似度测试, 面孔图像测试, 名人图像测试, 偶像面孔图像测试, 偶像相似, 名人面孔测试, 与我相似的偶像, 找到与我相似的偶像, 名人相似测试, 相似外观测试, 偶像相似, 人工智能人脸图像测试, 人脸图像, 人脸图像测试, 偶像谁长得像我, 名人相似度测试, 名人, 人工智能名人, 名人搜索, 名人靠脸, 人脸名人, 名人脸, 名人, 人工智能名人奖,面孔奖，AI名人奖，相似名人测试，面孔相似测试，名人相似测试，面孔相似测试，偶像相似测试，偶像面孔测试，面孔偶像测试，面孔名人测试，名人查找器，相似查找名人，分析我的脸、人脸年龄分析、人脸情感分析、人脸性别分析、人脸种族分析" />
+        content="明星美女, 偶像测试, 偶像脸测试, 明星脸测试, 长得像我的偶像, 寻找长得像我的名人, 长得像我的偶像, 偶像长得像我, 名人长得像我测试, 偶像长得像我我，长得像我的偶像测试，偶像长得像我的脸测试，偶像脸测试，长得像我的偶像测试，Nachickum 偶像，找到一个长得像我的偶像，长得像我的偶像测试，找到一个长得像我的偶像, 长得像我的名人, 长得像我的名人测试, 我的人工智能面孔测试, 鸡找偶像, 长得像名人面孔的面孔找测试, 名人形象测试, 偶像照片测试, 寻找偶像般的面孔, 名人形象测试, 人工智能偶像测试, 名人形象测试, 偶像相似度测试, 名人相似度测试, 偶像相似度测试, 我的人工智能面孔测试, 寻找偶像相似度, 相似度测试, 偶像面孔, 偶像相似度, 找到相似的面孔, 名人相似度测试, 面孔图像测试, 名人图像测试, 偶像面孔图像测试, 偶像相似, 名人面孔测试, 与我相似的偶像, 找到与我相似的偶像, 名人相似测试, 相似外观测试, 偶像相似, 人工智能人脸图像测试, 人脸图像, 人脸图像测试, 偶像谁长得像我, 名人相似度测试, 名人, 人工智能名人, 名人搜索, 名人靠脸, 人脸名人, 名人脸, 名人, 人工智能名人奖,面孔奖，AI名人奖，相似名人测试，面孔相似测试，名人相似测试，面孔相似测试，偶像相似测试，偶像面孔测试，面孔偶像测试，面孔名人测试，名人查找器，相似查找名人，分析我的脸、人脸年龄分析、人脸情感分析、人脸种族分析" />
     <meta name="author" content="권태헌(kwontaeheon@gmail.com)" />
     <meta name="description"
         content="基于人脸的人工智能名人测试，找到与你长得像的名人。
@@ -349,40 +349,48 @@
                 <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(1);" style="width: 90%;">
                     <div class='result-title' id="r1"> #1 </div>
                 </button>
-                <div id="search1-head" style="max-height: 30%; overflow: hidden;">
+                <!-- <div  id="search1-head" style="max-height: 30%; overflow: hidden;">
                     <div id="search1" class="gcse-searchresults-only"
                         data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                         data-mobileLayout="disabled" data-imageSearchResultSetSize="2" data-disableWebSearch="true"
                         data-image_type="face" data-gname="q1"></div>
-                </div>
+                </div> -->
+                <div id="rank1" style="width:45%;" onclick="displayIdolPrediction(1);"></div>
+                <div id="search0" class="gcse-searchresults-only"
+                        data-imageSearchResultSetSize="10" 
+                        data-webSearchResultSetSize="4"
+                        data-image_type="face" 
+                        data-gname="q0"></div> 
                 <div class="row" style="font-size: 1.1rem; margin: 10px;" id="extra-similars">
                     <div style="width: 33%; max-height: 20%; overflow: hidden;">
                         <!-- https://wiki.creativecommons.org/wiki/CC_Search_integration -->
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(2);">
                             <div class='result-title' id="r2"> #2 </div>
                         </button>
-                        <div id="search2" class="gcse-searchresults-only"
+                        <div id="rank2" style="max-height:30%;" onclick="displayIdolPrediction(2);"></div>
+                        <!-- <div id="search2" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q2"></div>
+                            data-image_type="face" data-gname="q2"></div> -->
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(5);">
                             <div class='result-title' id="r5"> #5 </div>
                         </button>
-                        <div id="search5" class="gcse-searchresults-only"
+                        <!-- <div id="search5" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q5"></div>
-
+                            data-image_type="face" data-gname="q5"></div> -->
+                        <div id="rank5" style="max-height:30%;" onclick="displayIdolPrediction(5);"></div>
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(8);">
                             <div class='result-title' id="r8"> #8 </div>
                         </button>
-                        <div id="search8" class="gcse-searchresults-only"
+                        <!-- <div id="search8" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q8"></div>
+                            data-image_type="face" data-gname="q8"></div> -->
+                            <div id="rank8" style="max-height:30%;" onclick="displayIdolPrediction(8);"></div>
 
 
                     </div>
@@ -390,59 +398,64 @@
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(3);">
                             <div class='result-title' id="r3"> #3 </div>
                         </button>
-                        <div id="search3" class="gcse-searchresults-only"
+                        <!-- <div id="search3" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q3"></div>
+                            data-image_type="face" data-gname="q3"></div> -->
+                            <div id="rank3" style="max-height:30%;" onclick="displayIdolPrediction(3);"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(6);">
                             <div class='result-title' id="r6"> #6 </div>
                             <!-- <span class="search-text" id="s6">🔍</span> -->
                         </button>
-                        <div id="search6" class="gcse-searchresults-only"
+                        <!-- <div id="search6" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q6"></div>
+                            data-image_type="face" data-gname="q6"></div> -->
+                            <div id="rank6" style="max-height:30%;" onclick="displayIdolPrediction(6);"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(9);">
                             <div class='result-title' id="r9"> #9 </div>
                         </button>
-                        <div id="search9" class="gcse-searchresults-only"
+                        <!-- <div id="search9" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q9"></div>
-
+                            data-image_type="face" data-gname="q9"></div> -->
+                            <div id="rank9" style="max-height:30%;" onclick="displayIdolPrediction(9);"></div>
 
                     </div>
                     <div style="width: 33%; max-height: 20%;  overflow: hidden;">
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(4);">
                             <div class='result-title' id="r4"> #4 </div>
                         </button>
-                        <div id="search4" class="gcse-searchresults-only"
+                        <!-- <div id="search4" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q4"></div>
+                            data-image_type="face" data-gname="q4"></div> -->
+                            <div id="rank4" style="max-height:30%;" onclick="displayIdolPrediction(4);"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(7);">
                             <div class='result-title' id="r7"> #7 </div>
                             <!-- <span class="search-text" id="s7">🔍</span> -->
                         </button>
-                        <div id="search7" class="gcse-searchresults-only"
+                        <!-- <div id="search7" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q7"></div>
+                            data-image_type="face" data-gname="q7"></div> -->
+                            <div id="rank7" style="max-height:30%;" onclick="displayIdolPrediction(7);"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(10);">
                             <div class='result-title' id="r10"> #10 </div>
                         </button>
-                        <div id="search10" class="gcse-searchresults-only"
+                        <!-- <div id="search10" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
-                            data-image_type="face" data-gname="q10"></div>
+                            data-image_type="face" data-gname="q10"></div> -->
+                            <div id="rank10" style="max-height:30%;" onclick="displayIdolPrediction(10);"></div>
 
 
                     </div>
@@ -464,6 +477,7 @@
                                 <canvas id="comparison-canvas" style="width: 80vw; height: 20vw; max-width: 800px; max-height: 200px;"></canvas>
                             </div>
                             <button id="download-comparison" class="start-button" style="display: none;">下载图片</button>
+                            <button id="make-comparison" class="start-button" style="display: none;" onclick="displayComparisonCelebMe(1)">重新尝试第一个名人</button>
                             
                             <button id="createGif" onclick="displayAnimation(1)" class="styled-canvas giffont"
                                 style="display: none;">制作动图</button>
