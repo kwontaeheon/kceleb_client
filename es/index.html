@@ -297,11 +297,7 @@
                         data-image_type="face" data-gname="q1"></div>
                 </div> -->
                 <div id="rank1" style="width:45%;" onclick="displayIdolPrediction(1);"></div>
-                <div id="search0" class="gcse-searchresults-only"
-                        data-imageSearchResultSetSize="10" 
-                        data-webSearchResultSetSize="4"
-                        data-image_type="face" 
-                        data-gname="q0"></div> 
+                
                 <div class="row" style="font-size: 1.1rem; margin: 10px;" id="extra-similars">
                     <div style="width: 33%; max-height: 20%; overflow: hidden;">
                         <!-- https://wiki.creativecommons.org/wiki/CC_Search_integration -->
@@ -400,7 +396,17 @@
 
 
                     </div>
-                    <div class="col" style="text-align:center;">
+                </div>
+                    
+                <div id="search0" class="gcse-searchresults-only"
+                            data-imageSearchResultSetSize="10" 
+                            data-webSearchResultSetSize="4"
+                            data-image_type="face" 
+                            data-filter="1"
+                            data-image_filter="1" 
+                            data-gname="q0"></div> 
+                            
+                    <div class="col" style="text-align:center;" id="result-creation">
                         
                         <center>
                             <button id="createComparisonPic" onclick="displayComparisonCelebMe(1)" class="styled-canvas giffont"
@@ -450,7 +456,6 @@
 
 
 
-            </div>
 
 
             <button type="button p-2" class="my-share-btn" onclick="toggleCelebList();"

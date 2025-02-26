@@ -495,6 +495,7 @@ function getSimilarCeleb(inputImage) {
       displayIdolPredictionBriefly(similarIdolData);
       // displayIdolPrediction(1);
       $('#extra-similars').show();
+      $('#result-creation').show();
       // updateKakaoLink();
       $(".try-again-btn").show();
       $(".result-message").show();
@@ -1207,6 +1208,7 @@ function showResults(resultParam, faceParam) {
       )
 
       $('#extra-similars').hide();
+      $('#result-creation').hide();
 
       const name = getBaseUrl()
       window.history.replaceState({}, document.title, name);
