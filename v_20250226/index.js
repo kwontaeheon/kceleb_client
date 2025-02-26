@@ -1209,7 +1209,11 @@ function showResults(resultParam, faceParam) {
 
       $('#extra-similars').hide();
       $('#result-creation').hide();
-
+      
+      $("html, body").scrollTop(
+        document.getElementsByClassName("title")[0].offsetTop
+      );
+      
       const name = getBaseUrl()
       window.history.replaceState({}, document.title, name);
       clearInterval(int);
