@@ -15,7 +15,7 @@ var faceData;
 
 
 const lang = $("#lang option:selected").val();
-const version = "/v_20250227";
+const version = "/v_20250228";
 var faceNames = {};
 var faceNamesKo = {};
 const jsonContainer = document.getElementById('json-container');
@@ -509,8 +509,11 @@ function getSimilarCeleb(inputImage) {
       $("#loading-message").html(getMeta("celeb_finished"))
 
       // window.history.replaceState({}, document.title, "/");
-      $("html, body").scrollTop(
-        document.getElementsByClassName("title")[0].offsetTop
+      $("html, body").animate(
+        {
+          scrollTop: document.getElementsByClassName("title")[0].offsetTop - 50 // 50px 여유 공간
+        },
+        800 // 애니메이션 지속 시간(ms)
       );
       try {
         (adsbygoogle = window.adsbygoogle || []).push({});
@@ -594,8 +597,11 @@ function displayIdolPrediction(rank) {
       var element = google.search.cse.element.getElement('q0');
       element.execute(q);
 
-      $("html, body").scrollTop(
-        document.getElementById("search0").offsetTop
+      $("html, body").animate(
+        {
+          scrollTop: $("#result-creation").offset().top - 50 // 50px 여유 공간
+        },
+        800 // 애니메이션 지속 시간(ms)
       );
       // $('#search' + rank).show();
       // $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% _");
@@ -1005,8 +1011,11 @@ function removeUpload() {
 
 
   // document.getElementById("search").height = 0;
-  $("html, body").scrollTop(
-    document.getElementsByClassName("title")[0].offsetTop
+  $("html, body").animate(
+    {
+      scrollTop: document.getElementsByClassName("title")[0].offsetTop - 50 // 50px 여유 공간
+    },
+    800 // 애니메이션 지속 시간(ms)
   );
 
   // 페이지 새로고침해서 광고 다시 로드하기 위한 용도
@@ -1210,8 +1219,11 @@ function showResults(resultParam, faceParam) {
       $('#extra-similars').hide();
       $('#result-creation').hide();
       
-      $("html, body").scrollTop(
-        document.getElementsByClassName("title")[0].offsetTop
+      $("html, body").animate(
+        {
+          scrollTop: document.getElementsByClassName("title")[0].offsetTop - 50 // 50px 여유 공간
+        },
+        800 // 애니메이션 지속 시간(ms)
       );
       
       const name = getBaseUrl()
