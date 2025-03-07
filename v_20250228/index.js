@@ -118,7 +118,8 @@ function toggleCelebList() {
 // toggleButton.addEventListener('click', function () {
 
 // });
-$(".result-message").hide();  // 셀럽미 결과화면 토글 
+
+// $(".result-message").hide();  // 셀럽미 결과화면 토글 
 
 
 
