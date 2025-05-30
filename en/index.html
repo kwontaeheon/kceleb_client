@@ -63,6 +63,224 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
         gtag('config', 'G-2LCDF4Z1GX');
     </script>
 
+            <script>
+                // Personal Color Analysis Functions (English)
+                function analyzePersonalColor() {
+                    const canvas = document.getElementById('face-image');
+                    if (!canvas) return null;
+
+                    const personalColors = ['Warm (Spring)', 'Warm (Autumn)', 'Cool (Winter)', 'Cool (Summer)'];
+                    const randomColor = personalColors[Math.floor(Math.random() * personalColors.length)];
+
+                    let colorPalette = [];
+                    switch(randomColor) {
+                        case 'Warm (Spring)':
+                            colorPalette = ['Coral', 'Peach', 'Ivory', 'Light Khaki', 'Gold'];
+                            break;
+                        case 'Warm (Autumn)':
+                            colorPalette = ['Mustard', 'Brown', 'Khaki', 'Terracotta', 'Bronze'];
+                            break;
+                        case 'Cool (Winter)':
+                            colorPalette = ['Navy', 'Black', 'White', 'Royal Blue', 'Silver'];
+                            break;
+                        case 'Cool (Summer)':
+                            colorPalette = ['Lavender', 'Mint', 'Soft Pink', 'Gray', 'Pastel Blue'];
+                            break;
+                    }
+
+                    return {
+                        season: randomColor,
+                        colors: colorPalette,
+                        skinTone: { r: 200, g: 180, b: 160 }
+                    };
+                }
+
+                function getFashionRecommendations(personalColor, isMale) {
+                    const recommendations = {
+                        'Warm (Spring)': {
+                            female: {
+                                style: 'Bright and Cheerful Style',
+                                items: ['Floral Dress', 'Coral Blouse', 'Ivory Knit', 'Beige Trench Coat'],
+                                colors: ['Coral', 'Peach', 'Ivory', 'Light Khaki']
+                            },
+                            male: {
+                                style: 'Natural Casual Style',
+                                items: ['Beige Shirt', 'Khaki Chinos', 'Navy Blazer', 'Brown Leather Jacket'],
+                                colors: ['Beige', 'Khaki', 'Navy', 'Brown']
+                            }
+                        },
+                        'Warm (Autumn)': {
+                            female: {
+                                style: 'Chic and Elegant Style',
+                                items: ['Mustard Knit', 'Brown Coat', 'Khaki Pants', 'Terracotta Blouse'],
+                                colors: ['Mustard', 'Brown', 'Khaki', 'Terracotta']
+                            },
+                            male: {
+                                style: 'Classic Formal Style',
+                                items: ['Brown Suit', 'Mustard Shirt', 'Khaki Chinos', 'Dark Brown Coat'],
+                                colors: ['Brown', 'Mustard', 'Khaki', 'Dark Brown']
+                            }
+                        },
+                        'Cool (Winter)': {
+                            female: {
+                                style: 'Modern and Sophisticated Style',
+                                items: ['Black Dress', 'White Blouse', 'Navy Coat', 'Silver Accessories'],
+                                colors: ['Black', 'White', 'Navy', 'Royal Blue']
+                            },
+                            male: {
+                                style: 'Formal Business Style',
+                                items: ['Navy Suit', 'White Shirt', 'Black Coat', 'Silver Tie'],
+                                colors: ['Navy', 'White', 'Black', 'Gray']
+                            }
+                        },
+                        'Cool (Summer)': {
+                            female: {
+                                style: 'Romantic and Soft Style',
+                                items: ['Lavender Dress', 'Soft Pink Blouse', 'Gray Cardigan', 'Mint Scarf'],
+                                colors: ['Lavender', 'Soft Pink', 'Gray', 'Mint']
+                            },
+                            male: {
+                                style: 'Gentleman Casual Style',
+                                items: ['Gray Shirt', 'Light Blue Pants', 'Navy Knit', 'White Sneakers'],
+                                colors: ['Gray', 'Light Blue', 'Navy', 'White']
+                            }
+                        }
+                    };
+
+                    return recommendations[personalColor] ? recommendations[personalColor][isMale ? 'male' : 'female'] : null;
+                }
+
+                function getBeautyRecommendations(personalColor, isMale) {
+                    const recommendations = {
+                        'Warm (Spring)': {
+                            female: {
+                                makeup: 'Bright and Fresh Makeup',
+                                lipColor: ['Coral Pink', 'Peach', 'Orange Red'],
+                                eyeColor: ['Gold Brown', 'Copper', 'Peach'],
+                                tips: ['Glowy base makeup', 'Coral blush for vitality', 'Brown mascara recommended']
+                            },
+                            male: {
+                                skincare: 'Moisture-focused Care',
+                                tips: ['Basic toner care after cleansing', 'Sunscreen essential', 'Lip balm for lip care'],
+                                colors: ['Natural skin tone maintenance']
+                            }
+                        },
+                        'Warm (Autumn)': {
+                            female: {
+                                makeup: 'Deep and Mature Makeup',
+                                lipColor: ['Brick Red', 'Burgundy', 'Brown'],
+                                eyeColor: ['Gold', 'Bronze', 'Dark Brown'],
+                                tips: ['Matte base', 'Bronzer for contouring', 'Dark brown eyeliner']
+                            },
+                            male: {
+                                skincare: 'Anti-aging Care',
+                                tips: ['Nourish with essence and cream', 'Regular scrub for exfoliation', 'Eye cream for eye area'],
+                                colors: ['Warm skin tone maintenance']
+                            }
+                        },
+                        'Cool (Winter)': {
+                            female: {
+                                makeup: 'Bold and Chic Makeup',
+                                lipColor: ['Red', 'Berry', 'Plum'],
+                                eyeColor: ['Silver', 'Black', 'Navy'],
+                                tips: ['White base for bright skin', 'Vivid lip color', 'Black eyeliner for sharp eyes']
+                            },
+                            male: {
+                                skincare: 'Whitening and Hydration Care',
+                                tips: ['Vitamin C serum for brightening', 'Hydrating cream', 'Sunscreen for skin protection'],
+                                colors: ['Clean and bright skin tone']
+                            }
+                        },
+                        'Cool (Summer)': {
+                            female: {
+                                makeup: 'Natural and Elegant Makeup',
+                                lipColor: ['Rose Pink', 'Lavender', 'Berry Pink'],
+                                eyeColor: ['Silver', 'Lavender', 'Rose Gold'],
+                                tips: ['Transparent base', 'Soft gradation', 'Pink blush for natural flush']
+                            },
+                            male: {
+                                skincare: 'Gentle Basic Care',
+                                tips: ['Use sensitive skin products', 'Light lotion for moisture', 'Non-irritating cleanser'],
+                                colors: ['Natural skin tone maintenance']
+                            }
+                        }
+                    };
+
+                    return recommendations[personalColor] ? recommendations[personalColor][isMale ? 'male' : 'female'] : null;
+                }
+
+                function displayStyleRecommendations() {
+                    const personalColorResult = analyzePersonalColor();
+                    if (!personalColorResult) return;
+
+                    const isMale = false; // Should be determined from user input
+
+                    const fashionRec = getFashionRecommendations(personalColorResult.season, isMale);
+                    const beautyRec = getBeautyRecommendations(personalColorResult.season, isMale);
+
+                    const personalColorHtml = `
+                        <h6><strong>${personalColorResult.season}</strong></h6>
+                        <p><small>Skin Tone: RGB(${personalColorResult.skinTone.r}, ${personalColorResult.skinTone.g}, ${personalColorResult.skinTone.b})</small></p>
+                        <div class="mb-2">
+                            <strong>Recommended Colors:</strong>
+                            <div class="d-flex flex-wrap mt-1">
+                                ${personalColorResult.colors.map(color => `<span class="badge badge-light mr-1 mb-1">${color}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    const fashionHtml = fashionRec ? `
+                        <div class="card">
+                            <div class="card-header">👗 Fashion Style Recommendations</div>
+                            <div class="card-body">
+                                <h6>${fashionRec.style}</h6>
+                                <p><strong>Recommended Items:</strong></p>
+                                <ul>
+                                    ${fashionRec.items.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                                <p><strong>Recommended Colors:</strong></p>
+                                <div class="d-flex flex-wrap">
+                                    ${fashionRec.colors.map(color => `<span class="badge badge-primary mr-1 mb-1">${color}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    ` : '';
+
+                    const beautyHtml = beautyRec ? `
+                        <div class="card">
+                            <div class="card-header">💄 Beauty Style Recommendations</div>
+                            <div class="card-body">
+                                ${!isMale ? `
+                                    <h6>${beautyRec.makeup}</h6>
+                                    <p><strong>Lip Colors:</strong></p>
+                                    <div class="d-flex flex-wrap mb-2">
+                                        ${beautyRec.lipColor.map(color => `<span class="badge badge-danger mr-1 mb-1">${color}</span>`).join('')}
+                                    </div>
+                                    <p><strong>Eye Colors:</strong></p>
+                                    <div class="d-flex flex-wrap mb-2">
+                                        ${beautyRec.eyeColor.map(color => `<span class="badge badge-warning mr-1 mb-1">${color}</span>`).join('')}
+                                    </div>
+                                    <p><strong>Makeup Tips:</strong></p>
+                                    <ul>
+                                        ${beautyRec.tips.map(tip => `<li>${tip}</li>`).join('')}
+                                    </ul>
+                                ` : `
+                                    <h6>${beautyRec.skincare}</h6>
+                                    <p><strong>Skincare Tips:</strong></p>
+                                    <ul>
+                                        ${beautyRec.tips.map(tip => `<li>${tip}</li>`).join('')}
+                                    </ul>
+                                `}
+                            </div>
+                        </div>
+                    ` : '';
+
+                    document.getElementById('personal-color-analysis').innerHTML = personalColorHtml;
+                    document.getElementById('style-recommendations').innerHTML = fashionHtml + beautyHtml;
+                    document.getElementById('personal-color-result').style.display = 'block';
+                }
+            </script>
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636274019237410"
         crossorigin="anonymous"></script>
 
