@@ -743,8 +743,10 @@ function displayStyleRecommendations() {
   
   // Display personal color result
   const personalColorHtml = `
-    <h6><strong>${personalColorResult.season}</strong></h6>
-    <p><small>피부톤: RGB(${personalColorResult.skinTone.r}, ${personalColorResult.skinTone.g}, ${personalColorResult.skinTone.b})</small></p>
+    <h4><strong>${personalColorResult.season}</strong></h4>
+    <p><small>피부톤: RGB(${personalColorResult.skinTone.r}, ${personalColorResult.skinTone.g}, ${personalColorResult.skinTone.b}) <span style="color:rgb(${personalColorResult.skinTone.r}, ${personalColorResult.skinTone.g}, ${personalColorResult.skinTone.b})">
+  ■
+</span></small></p>
     <div class="mb-2">
       <strong>추천 컬러:</strong>
       <div class="d-flex flex-wrap mt-1">
@@ -755,7 +757,7 @@ function displayStyleRecommendations() {
   
   // Display fashion recommendations
   const fashionHtml = fashionRec ? `
-    <h6><strong>${fashionRec.style}</strong></h6>
+    <h4><strong>${fashionRec.style}</strong></h4>
     <div class="mb-2">
       <strong>추천 아이템:</strong>
       <ul class="list-unstyled mt-1">
@@ -772,7 +774,7 @@ function displayStyleRecommendations() {
   
   // Display beauty recommendations
   const beautyHtml = beautyRec ? `
-    <h6><strong>${beautyRec.makeup || beautyRec.skincare}</strong></h6>
+    <h4><strong>${beautyRec.makeup || beautyRec.skincare}</strong></h4>
     ${beautyRec.lipColor ? `
       <div class="mb-2">
         <strong>추천 립 컬러:</strong>
