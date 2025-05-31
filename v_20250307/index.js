@@ -227,6 +227,11 @@ function drawChart(userData) {
       setTimeout(getSimilarCeleb, 3000, croppedImage);
 
     }, 'image/webp');
+
+    // Display style recommendations after displaying the first result
+    setTimeout(() => {
+      displayStyleRecommendations();
+    }, 1000);
   }
   const ageData = {
     labels: [getMeta("age")],
@@ -882,10 +887,7 @@ function displayIdolPredictionBriefly(data) {
           // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
         )
 
-        // Display style recommendations after displaying the first result
-        setTimeout(() => {
-          displayStyleRecommendations();
-        }, 1000);
+        
       }
     } catch (error) {
       console.log(error);

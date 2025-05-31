@@ -782,7 +782,7 @@ max-height: 0px !important;
     width: 400px;
     height: 400px;
     margin: 0 auto;
-    border-radius: 50%;
+    border-radius: 5%;
     padding: 20px;
     background: conic-gradient(
         #FF6B6B 0deg 90deg,     /* Spring colors */
@@ -790,7 +790,6 @@ max-height: 0px !important;
         #D4A574 180deg 270deg,  /* Autumn colors */
         #5A67D8 270deg 360deg   /* Winter colors */
     );
-    animation: rotateColors 10s linear infinite;
 }
 
 @keyframes rotateColors {
@@ -807,7 +806,7 @@ max-height: 0px !important;
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 5%;
     background: white;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -834,22 +833,18 @@ max-height: 0px !important;
 
 #spring-quadrant {
     background: linear-gradient(135deg, #FFE4E1, #FFB6C1);
-    border-top-left-radius: 50%;
 }
 
 #summer-quadrant {
     background: linear-gradient(135deg, #E6F3FF, #B8E6B8);
-    border-top-right-radius: 50%;
 }
 
 #autumn-quadrant {
     background: linear-gradient(135deg, #DEB887, #CD853F);
-    border-bottom-left-radius: 50%;
 }
 
 #winter-quadrant {
     background: linear-gradient(135deg, #F0F8FF, #E6E6FA);
-    border-bottom-right-radius: 50%;
 }
 
 /* Season Labels */
