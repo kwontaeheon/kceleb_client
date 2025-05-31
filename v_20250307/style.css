@@ -796,8 +796,24 @@ max-height: 0px !important;
     }
 }
 
-.cropped-face-spring {
-    border-radius: 10px;
+/* .cropped-face-container {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+} */
+
+
+
+.cropped-face-spring::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
     background: conic-gradient(
         #FF6B6B 0% 20% /* 코랄핑크 */,
         #FFCBA4 20% 40% /* 피치 */,
@@ -807,22 +823,38 @@ max-height: 0px !important;
       );
     padding: 10px;
     animation: spin 5s linear infinite;
+    border-radius: 50%;
+    z-index: -1;
 }
 
-.cropped-face-summer {
-    border-radius: 10px;
+
+.cropped-face-summer::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
     background: conic-gradient(
         #FFC0CB 0deg 72deg,     /* 로즈핑크 */
         #E6E6FA 72deg 144deg,   /* 라벤더 */
         #FFB6C1 144deg 216deg,  /* 베리핑크 */
         #C0C0C0 216deg 288deg,  /* 실버 */
         #B76E79 288deg 360deg   /* 로즈골드 */
-      );
+    );
     padding: 10px;
+    animation: spin 5s linear infinite;
+    border-radius: 50%;
+    z-index: -1;
 }
 
-.cropped-face-autumn {
-    border-radius: 10px;
+.cropped-face-autumn::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
     background: conic-gradient(
         #DC143C 0deg 72deg,     /* 브릭레드 */
         #800020 72deg 144deg,   /* 버건디 */
@@ -831,10 +863,18 @@ max-height: 0px !important;
         #CD7F32 288deg 360deg   /* 브론즈 */
       );
     padding: 10px;
+    animation: spin 5s linear infinite;
+    border-radius: 50%;
+    z-index: -1;
 }
 
-.cropped-face-winter {
-    border-radius: 10px;
+.cropped-face-winter::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
     background: conic-gradient(
         #FF0000 0deg 60deg,     /* 레드 */
         #8B008B 60deg 120deg,   /* 베리 */
@@ -842,8 +882,11 @@ max-height: 0px !important;
         #C0C0C0 180deg 240deg,  /* 실버 */
         #000000 240deg 300deg,  /* 블랙 */
         #000080 300deg 360deg   /* 네이비 */
-      );
+    );
     padding: 10px;
+    animation: spin 5s linear infinite;
+    border-radius: 50%;
+    z-index: -1;
 }
 
 .cropped-face-image {
@@ -853,7 +896,10 @@ max-height: 0px !important;
     border-radius: 50%;
     object-fit: cover;
     z-index: 1;
+    overflow: hidden;
+    padding: 10px;
 }
+
 
 @keyframes rotateColors {
     from {
