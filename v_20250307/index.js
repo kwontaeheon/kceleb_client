@@ -1,4 +1,3 @@
-
 // const compressor = require('./compression.js');
 // const apiUrl = "https://celebme.duckdns.org:8181";
 // const apiUrl = "https://knnlnzvrb56n7cvift2sajvyza.apigateway.ap-chuncheon-1.oci.customer-oci.com/v1"
@@ -77,7 +76,7 @@ var resultMeta = {};
       // for (var rank = 1; rank <= 2; rank++) {
       //   console.log("hide.."); 
       //   document.getElementById("search" + rank + "-head").style.display = "none";
-        
+
       // }
     })
     .catch(error => {
@@ -505,7 +504,7 @@ function getSimilarCeleb(inputImage) {
 
       // document.getElementById('cropped-image-2')
       // displayComparisonCelebMe(1); // 얼굴분석완료이후에 움짤이미지 생성
-      
+
 
       $("#loading-message").html(getMeta("celeb_finished"))
 
@@ -541,7 +540,7 @@ function analyzePersonalColor(imageData) {
   const ctx = canvas.getContext('2d');
   canvas.width = 300;
   canvas.height = 300;
-  
+
   // Convert tensor to image data for color analysis
   const img = document.getElementById("cropped-face-image-2");
   if (!img || !img.src) {
@@ -555,13 +554,13 @@ function analyzePersonalColor(imageData) {
   } else {
     ctx.drawImage(img, 0, 0, 300, 300);
   }
-  
+
   const pixelData = ctx.getImageData(0, 0, 300, 300).data;
-  
+
   // Analyze skin tone and undertones
   let totalR = 0, totalG = 0, totalB = 0;
   let pixelCount = 0;
-  
+
   // Sample pixels from center area (face region)
   for (let y = 100; y < 200; y++) {
     for (let x = 100; x < 200; x++) {
@@ -572,15 +571,15 @@ function analyzePersonalColor(imageData) {
       pixelCount++;
     }
   }
-  
+
   const avgR = totalR / pixelCount;
   const avgG = totalG / pixelCount;
   const avgB = totalB / pixelCount;
-  
+
   // Determine personal color season based on skin tone analysis
   let personalColor = '';
   let colorPalette = [];
-  
+
   if (avgR > avgG && avgR > avgB) {
     // Warm undertones
     if (avgR - avgG > 20) {
@@ -600,7 +599,7 @@ function analyzePersonalColor(imageData) {
       colorPalette = ['라벤더', '민트', '소프트핑크', '그레이', '파스텔블루'];
     }
   }
-  
+
   return {
     season: personalColor,
     colors: colorPalette,
@@ -659,7 +658,7 @@ function getFashionRecommendations(personalColor, isMale) {
       }
     }
   };
-  
+
   return recommendations[personalColor] ? recommendations[personalColor][isMale ? 'male' : 'female'] : null;
 }
 
@@ -718,35 +717,35 @@ function getBeautyRecommendations(personalColor, isMale) {
       }
     }
   };
-  
+
   return recommendations[personalColor] ? recommendations[personalColor][isMale ? 'male' : 'female'] : null;
 }
 
 function displayStyleRecommendations() {
   // Get personal color analysis
   const personalColorResult = analyzePersonalColor();
-  
+
   if (!personalColorResult) {
     console.log("Personal color analysis failed");
     return;
   }
-  
+
   // Determine gender based on face analysis data
   let isMale = false;
   if (faceData && faceData.dominant_gender) {
     isMale = faceData.dominant_gender === 'Man';
   }
-  
+
   // Get fashion and beauty recommendations
   const fashionRec = getFashionRecommendations(personalColorResult.season, isMale);
   const beautyRec = getBeautyRecommendations(personalColorResult.season, isMale);
-  
+
   // Display face images in all quadrants
   displayFaceInQuadrants();
-  
+
   // Show best matching season
   showBestMatchingSeason(personalColorResult.season);
-  
+
   // Display fashion recommendations
   const fashionHtml = fashionRec ? `
     <h4><strong>${fashionRec.style}</strong></h4>
@@ -763,7 +762,7 @@ function displayStyleRecommendations() {
       </div>
     </div>
   ` : '<p>스타일 분석 중...</p>';
-  
+
   // Display beauty recommendations
   const beautyHtml = beautyRec ? `
     <h4><strong>${beautyRec.makeup || beautyRec.skincare}</strong></h4>
@@ -790,14 +789,14 @@ function displayStyleRecommendations() {
       </ul>
     </div>
   ` : '<p>뷰티 분석 중...</p>';
-  
+
   // Update DOM
   const fashionStyleElement = document.getElementById('fashion-style-result');
   const beautyStyleElement = document.getElementById('beauty-style-result');
-  
+
   if (fashionStyleElement) fashionStyleElement.innerHTML = fashionHtml;
   if (beautyStyleElement) beautyStyleElement.innerHTML = beautyHtml;
-  
+
   // Show the recommendations section
   const styleRecommendationsElement = document.getElementById('style-recommendations');
   if (styleRecommendationsElement) {
@@ -809,9 +808,9 @@ function displayFaceInQuadrants() {
   // Get the cropped face image
   const faceCanvas = document.getElementById('cropped-face-image-2');
   if (!faceCanvas) return;
-  
+
   const faceImageSrc = faceCanvas.toDataURL();
-  
+
   // Display the same face image in all quadrants
   const seasons = ['spring', 'summer', 'autumn', 'winter'];
   seasons.forEach(season => {
@@ -826,7 +825,7 @@ function showBestMatchingSeason(bestSeason) {
   // Hide all best badges first
   const badges = document.querySelectorAll('.best-badge');
   badges.forEach(badge => badge.style.display = 'none');
-  
+
   // Map season names to quadrant IDs
   const seasonMapping = {
     '웜톤 (봄)': 'spring-quadrant',
@@ -834,7 +833,7 @@ function showBestMatchingSeason(bestSeason) {
     '쿨톤 (여름)': 'summer-quadrant',
     '쿨톤 (겨울)': 'winter-quadrant'
   };
-  
+
   // Show best badge for the matching season
   const matchingQuadrantId = seasonMapping[bestSeason];
   if (matchingQuadrantId) {
@@ -844,7 +843,7 @@ function showBestMatchingSeason(bestSeason) {
       if (badge) {
         badge.style.display = 'block';
       }
-      
+
       // Add special highlight effect
       matchingQuadrant.style.transform = 'scale(1.05)';
       matchingQuadrant.style.zIndex = '10';
@@ -872,7 +871,7 @@ function displayIdolPredictionBriefly(data) {
                crossorigin="anonymous">
         </div>
       `);
-      
+
      //  $('#search' + rank).hide();
       // $('#s' + rank).show();
       if (rank == 1) {
@@ -882,7 +881,7 @@ function displayIdolPredictionBriefly(data) {
           getMeta("face_in_picture") + r + getMeta("it_resembles")
           // + "셀럽 이름을 눌러서 이미지를 검색해보세요. <br/><br/>" 
         )
-        
+
         // Display style recommendations after displaying the first result
         setTimeout(() => {
           displayStyleRecommendations();
@@ -943,9 +942,9 @@ function displayIdolPrediction(rank) {
         result_face: true,
       });
     // }
-    
+
     displayComparisonCelebMe(rank); // 첫번째 결과로 이미지 표시하기
-    
+
   } catch (error) {
     console.log(error);
     gtag("event", "errorDisplayIdolPrediction", {
@@ -976,7 +975,7 @@ function selectImage(input, imageNumber) {
             previewImg.src = e.target.result;
             previewImg.style.display = 'block';
             selectedImages[imageNumber - 1] = input.files[0];
-            
+
             // 두 이미지가 모두 선택되었는지 확인
             // if (selectedImages[0] && selectedImages[1]) {
             //     document.getElementById('start-button').style.display = 'block';
@@ -1001,7 +1000,7 @@ function resizeAndCropImage(file, targetSize) {
       img.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      
+
       let width = img.width;
       let height = img.height;
       let offsetX = 0;
@@ -1023,10 +1022,10 @@ function resizeAndCropImage(file, targetSize) {
       // 캔버스 크기 설정
       canvas.width = targetSize;
       canvas.height = targetSize;
-      
+
       // 이미지를 리사이즈하고 크롭하여 그리기
       ctx.drawImage(img, -offsetX, -offsetY, width, height);
-      
+
       resolve(canvas.toDataURL('image/jpeg', 0.95));
 
       // // 캔버스를 Blob으로 변환
@@ -1070,17 +1069,17 @@ async function startMatch() {
   gtag("event", "matchStartOK", {
     event_category: "startMatch",
   });
-  
+
   $("#loading-message").html(getMeta("analyzing_face"))
   $("#loading").show();
   // 1초 대기
   await new Promise(resolve => setTimeout(resolve, 1000));
-  
+
 
   const formData = new FormData();
   await processAndAppendImage(selectedImages[0], formData, "img1");
   await processAndAppendImage(selectedImages[1], formData, "img2");
-  
+
   // formData.append("img1", selectedImages[0]); // Adjust file type as needed
   // formData.append("img2", selectedImages[1]); // Adjust file type as needed
   try {
@@ -1106,28 +1105,28 @@ async function startMatch() {
 function createComparisonImage(img1, img2, rank, celebme=false) {
     const canvas = document.getElementById('comparison-canvas');
     const ctx = canvas.getContext('2d');
-    
+
     // 캔버스 크기 설정
     canvas.width = 800;
     canvas.height = 200;
-    
+
     // 이미지 그리기 함수
     function drawImage(img, x, y, width, height) {
         ctx.drawImage(img, 0, 0, img.width, img.height, x, y, width, height);
     }
-    
+
     // 왼쪽 이미지
     drawImage(img1, 0, 0, 200, 200);
-    
+
     // 오른쪽 이미지
     drawImage(img2, 600, 0, 200, 200);
-    
+
     // 중앙 왼쪽 (66% img1, 33% img2)
     ctx.globalAlpha = 0.66;
     drawImage(img1, 200, 0, 200, 200);
     ctx.globalAlpha = 0.33;
     drawImage(img2, 200, 0, 200, 200);
-    
+
     // 중앙 오른쪽 (33% img1, 66% img2)
     ctx.globalAlpha = 0.33;
     drawImage(img1, 400, 0, 200, 200);
@@ -1139,7 +1138,7 @@ function createComparisonImage(img1, img2, rank, celebme=false) {
       document.getElementById('similar-celeb').textContent = `${similarIdolData[rank-1].name}`;
       const similarityScore = ((similarIdolData[rank-1].distance) * 100);
       document.getElementById('similarity-score').textContent = `${similarityScore.toFixed(2)}%`;
-      
+
       // 일치 여부 표시
       const threshold1 = 65; // 예시 임계값, 실제 사용 시 조정 필요
       const threshold2 = 55; // 예시 임계값, 실제 사용 시 조정 필요
@@ -1156,10 +1155,10 @@ function createComparisonImage(img1, img2, rank, celebme=false) {
       });
       $("#verification-result").html(getMeta(similarType));
     }
-    
+
     // 투명도 초기화
     ctx.globalAlpha = 1;
-    
+
     // 캡처 및 다운로드 버튼 표시
     const element = document.getElementById('result-message-section');
     element.style.display = 'block';
@@ -1200,7 +1199,7 @@ function loadImage(src) {
 async function displayResults(result) {
   // 결과 섹션 표시
   document.getElementById('match-result-message').style.display = 'block';
-  
+
   // 다운로드 버튼에 이벤트 리스너 추가
   const downloadButton = document.getElementById('download-comparison');
   downloadButton.style.display = 'block';
@@ -1209,7 +1208,7 @@ async function displayResults(result) {
   // 얼굴 인식 여부 확인
   const isFace1Detected = !(result.facial_areas.img1.w === 512 && result.facial_areas.img1.h === 512);
   const isFace2Detected = !(result.facial_areas.img2.w === 512 && result.facial_areas.img2.h === 512);
-  
+
   if (!isFace1Detected || !isFace2Detected) {
     // 하나 이상의 이미지에서 얼굴이 인식되지 않은 경우
     $("#img1-face-detected").html(!isFace1Detected ? getMeta('face_img1') : "");
@@ -1221,7 +1220,7 @@ async function displayResults(result) {
   // 유사도 점수 계산 (0에서 100 사이의 값으로 정규화)
   const similarityScore = Math.max(0, Math.min(100, (1 - result.distance) * 100));
   document.getElementById('similarity-score').textContent = `${similarityScore.toFixed(2)}%`;
-  
+
   // 일치 여부 표시
   const threshold1 = 65; // 예시 임계값, 실제 사용 시 조정 필요
   const threshold2 = 55; // 예시 임계값, 실제 사용 시 조정 필요
@@ -1236,10 +1235,10 @@ async function displayResults(result) {
   gtag("event", "matchType_" + similarType, {
     event_category: "startMatch",
   });
-  
+
   $("#verification-result").html(getMeta(similarType));
   document.getElementById('verification-result').style.color = similarType == "face_match" ? 'green' : 'blue';
-  
+
   // 이미지를 얼굴영역으로  자르기 및 표시
   cropAndDisplayImage(document.getElementById('processed-img1'), result.facial_areas.img1, 'cropped-image-1');
   cropAndDisplayImage(document.getElementById('processed-img2'), result.facial_areas.img2, 'cropped-image-2');
@@ -1247,7 +1246,7 @@ async function displayResults(result) {
   // 연결되는 이미지 생성
   const img1Src = document.getElementById('cropped-image-1').src;
   const img2Src = document.getElementById('cropped-image-2').src;
-  
+
   // 두 이미지를 동시에 로드
   const [img1, img2] = await Promise.all([
       loadImage(img1Src),
@@ -1256,19 +1255,19 @@ async function displayResults(result) {
 
   // 이미지가 모두 로드된 후 비교 이미지 생성
   createComparisonImage(img1, img2, 1);
-  
+
 }
 
 function cropAndDisplayImage(imgSource, area, elementId) {
-  
-  
+
+
   const canvas = document.createElement('canvas');
   canvas.width = area.w;
   canvas.height = area.h;
   const ctx = canvas.getContext('2d');
   ctx.drawImage(imgSource, area.x, area.y, area.w, area.h, 0, 0, area.w, area.h);
   document.getElementById(elementId).src = canvas.toDataURL();
-  
+
 }
 
 async function readURL(input) {
@@ -1307,8 +1306,8 @@ async function readURL(input) {
 
         analyzeFace(resizedImg).then(function (croppedImage) {
           // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
-          
-          
+
+
         });
 
 
@@ -1522,7 +1521,7 @@ function showResults(resultParam, faceParam) {
       $('#r1').html(similarIdolData[0].name + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "% 🔍");
       // displayIdolPredictionBriefly(similarIdolData);
       if (similarIdolData && similarIdolData[0] && similarIdolData[0].originalIdentity) {
-        
+
 
         $('#rank1').html(`
           <div style="width: 100%; height: 100%; max-width: 512px; max-height: 512px; margin: 0 auto;">
@@ -1542,14 +1541,14 @@ function showResults(resultParam, faceParam) {
 
       $('#extra-similars').hide();
       $('#result-creation').hide();
-      
+
       $("html, body").animate(
         {
           scrollTop: document.getElementsByClassName("title")[0].offsetTop - 50 // 50px 여유 공간
         },
         800 // 애니메이션 지속 시간(ms)
       );
-      
+
       const name = getBaseUrl()
       window.history.replaceState({}, document.title, name);
       clearInterval(int);
@@ -1615,7 +1614,7 @@ if (resultParam != null) {
   showResults(resultParam, faceParam);  // 구현필요
 
 } else {
-
+  displaySampleStyleRecommendations();
 }
 
 
@@ -1634,13 +1633,13 @@ async function displayComparisonCelebMe(searchIdx) {
   // var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
   // var target = search1.getElementsByClassName('gs-image-scalable').item(1);
   var target = document.getElementById('imgRank' + searchIdx);
-  
-  
+
+
   // 두 이미지를 동시에 로드
   const [img2] = await Promise.all([
       loadImage(target.src)
   ]);
-  
+
 
   // 이미지가 모두 로드된 후 비교 이미지 생성
   createComparisonImage(img1, img2, searchIdx, celebme=true);
@@ -1656,16 +1655,16 @@ function displayAnimation(searchIdx) {
   try {
     (adsbygoogle = window.adsbygoogle || []).push({});
   } catch (error) {
-  
+
   }
-  
+
   var image1 = document.getElementById('cropped-face-image-2'); // cropped-face-image-1
   // var image2 = document.getElementById('cropped-face-image-1');
-  
+
   // var search1 = document.getElementById('search' + searchIdx);  // 첫번째일 때
   // var target = search1.getElementsByClassName('gs-image-scalable').item(1);
   var target = document.getElementById('imgRank' + searchIdx);
-  
+
   const image2 = new Image();
   image2.src = target.src;
   image2.crossOrigin = 'anonymous';
@@ -1809,7 +1808,7 @@ function drawDefaultChart() {
       }
     }
   });
-  
+
   const genderData = {
     labels: [getMeta("man"), getMeta("woman"), ],
     datasets: [{
@@ -1919,7 +1918,7 @@ function drawDefaultChart() {
     asian
       : 
       97.17755913734436,
-      
+
       black
       : 
       0.00031450833830604097,
@@ -1985,4 +1984,96 @@ function drawDefaultChart() {
     }
   });
 
+}
+
+function displaySampleStyleRecommendations() {
+  // Sample personal color result
+  const samplePersonalColor = '웜톤 (봄)';
+
+  // Sample fashion recommendations
+  const sampleFashionHtml = `
+    <h4><strong>밝고 화사한 스타일</strong></h4>
+    <div class="mb-3">
+      <strong>추천 아이템:</strong>
+      <ul class="mt-2">
+        <li>플로럴 원피스</li>
+        <li>코랄 블라우스</li>
+        <li>아이보리 니트</li>
+        <li>베이지 트렌치코트</li>
+      </ul>
+    </div>
+    <div>
+      <strong>추천 컬러:</strong>
+      <div class="color-display mt-2">
+        <span class="badge">코랄</span>
+        <span class="badge">피치</span>
+        <span class="badge">아이보리</span>
+        <span class="badge">라이트카키</span>
+      </div>
+    </div>
+  `;
+
+  // Sample beauty recommendations
+  const sampleBeautyHtml = `
+    <h4><strong>밝고 생기있는 메이크업</strong></h4>
+    <div class="mb-3">
+      <strong>추천 립 컬러:</strong>
+      <div class="color-display mt-2">
+        <span class="badge">코랄핑크</span>
+        <span class="badge">피치</span>
+        <span class="badge">오렌지레드</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <strong>추천 아이 컬러:</strong>
+      <div class="color-display mt-2">
+        <span class="badge">골드브라운</span>
+        <span class="badge">코퍼</span>
+        <span class="badge">피치</span>
+      </div>
+    </div>
+    <div>
+      <strong>뷰티 팁:</strong>
+      <ul class="mt-2">
+        <li>글로우한 베이스 메이크업</li>
+        <li>코랄 블러셔로 생기 연출</li>
+        <li>브라운 마스카라 추천</li>
+      </ul>
+    </div>
+  `;
+
+  // Display sample face in all quadrants (placeholder image)
+  const sampleFaceImage = '/banner_org.png'; // Using existing banner as placeholder
+  const seasons = ['spring', 'summer', 'autumn', 'winter'];
+  seasons.forEach(season => {
+    const faceImg = document.getElementById(`${season}-face`);
+    if (faceImg) {
+      faceImg.src = sampleFaceImage;
+    }
+  });
+
+  // Show best matching season (spring as sample)
+  const springQuadrant = document.getElementById('spring-quadrant');
+  if (springQuadrant) {
+    const badge = springQuadrant.querySelector('.best-badge');
+    if (badge) {
+      badge.style.display = 'block';
+    }
+    springQuadrant.style.transform = 'scale(1.05)';
+    springQuadrant.style.zIndex = '10';
+    springQuadrant.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+  }
+
+  // Update DOM with sample content
+  const fashionStyleElement = document.getElementById('fashion-style-result');
+  const beautyStyleElement = document.getElementById('beauty-style-result');
+
+  if (fashionStyleElement) fashionStyleElement.innerHTML = sampleFashionHtml;
+  if (beautyStyleElement) beautyStyleElement.innerHTML = sampleBeautyHtml;
+
+  // Show the recommendations section
+  const styleRecommendationsElement = document.getElementById('style-recommendations');
+  if (styleRecommendationsElement) {
+    styleRecommendationsElement.style.display = 'block';
+  }
 }
