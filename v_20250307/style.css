@@ -1003,7 +1003,7 @@ max-height: 0px !important;
 
 .style-card .card-header h3 {
     color: #333;
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     font-weight: 600;
     text-align: center;
     margin: 0;
@@ -1012,11 +1012,12 @@ max-height: 0px !important;
 /* Card Content */
 .card-content {
     text-align: left;
+    font-size: 1.4rem;
 }
 
 .card-content h4 {
     color: #555;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 1rem;
     display: flex;
