@@ -612,7 +612,7 @@ function analyzePersonalColor(imageData) {
 ■
 </span></small></p>`;
 document.getElementById('personal-color-overview').innerHTML = resultDescription;
-console.log(resultDescription);
+// console.log(resultDescription);
   return {
     season: personalColor,
     colors: colorPalette,
