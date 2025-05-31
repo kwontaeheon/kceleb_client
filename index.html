@@ -249,6 +249,73 @@
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
                     얼굴에 대한 나이, 성별, 감정, 인종 분석 결과 샘플
                 </div>
+                <!-- Personal Color and Style Recommendations -->
+                <div id="style-recommendations" style="display: none;" class="mt-4">
+                    <!-- Personal Color Diagnosis with Four Quadrants -->
+                    <div class="personal-color-container">
+                        <h2 class="text-center mb-4">퍼스널 컬러 진단</h2>
+                        <div class="color-grid-container">
+                            <div class="color-grid">
+                                <div class="color-quadrant" id="spring-quadrant" data-season="웜톤 (봄)">
+                                    <div class="season-label">웜톤 (봄)</div>
+                                    <div class="face-display">
+                                        <img id="spring-face" src="" alt="Spring Face" />
+                                    </div>
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                </div>
+                                <div class="color-quadrant" id="summer-quadrant" data-season="쿨톤 (여름)">
+                                    <div class="season-label">쿨톤 (여름)</div>
+                                    <div class="face-display">
+                                        <img id="summer-face" src="" alt="Summer Face" />
+                                    </div>
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                </div>
+                                <div class="color-quadrant" id="autumn-quadrant" data-season="웜톤 (가을)">
+                                    <div class="season-label">웜톤 (가을)</div>
+                                    <div class="face-display">
+                                        <img id="autumn-face" src="" alt="Autumn Face" />
+                                    </div>
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                </div>
+                                <div class="color-quadrant" id="winter-quadrant" data-season="쿨톤 (겨울)">
+                                    <div class="season-label">쿨톤 (겨울)</div>
+                                    <div class="face-display">
+                                        <img id="winter-face" src="" alt="Winter Face" />
+                                    </div>
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Style Recommendations Cards -->
+                    <div class="style-cards-container mt-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="style-card fashion-card">
+                                    <div class="card-icon">👗</div>
+                                    <div class="card-header">
+                                        <h3>맞춤 패션 스타일</h3>
+                                    </div>
+                                    <div class="card-content" id="fashion-style-result">
+                                        <!-- Fashion style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="style-card beauty-card">
+                                    <div class="card-icon">💄</div>
+                                    <div class="card-header">
+                                        <h3>맞춤 뷰티 스타일</h3>
+                                    </div>
+                                    <div class="card-content" id="beauty-style-result">
+                                        <!-- Beauty style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="charts">
                     <div class="row">
                         <div style="position: relative; height: 20vh; width: 50%; padding: 20px 20px 20px 50px;">
@@ -470,73 +537,6 @@
                             다운받기</button>
 
                     </div>
-                <!-- Personal Color and Style Recommendations -->
-                <div id="style-recommendations" style="display: none;" class="mt-4">
-                    <!-- Personal Color Diagnosis with Four Quadrants -->
-                    <div class="personal-color-container">
-                        <h2 class="text-center mb-4">퍼스널 컬러 진단</h2>
-                        <div class="color-grid-container">
-                            <div class="color-grid">
-                                <div class="color-quadrant" id="spring-quadrant" data-season="웜톤 (봄)">
-                                    <div class="season-label">웜톤 (봄)</div>
-                                    <div class="face-display">
-                                        <img id="spring-face" src="" alt="Spring Face" />
-                                    </div>
-                                    <div class="best-badge" style="display: none;">BEST</div>
-                                </div>
-                                <div class="color-quadrant" id="summer-quadrant" data-season="쿨톤 (여름)">
-                                    <div class="season-label">쿨톤 (여름)</div>
-                                    <div class="face-display">
-                                        <img id="summer-face" src="" alt="Summer Face" />
-                                    </div>
-                                    <div class="best-badge" style="display: none;">BEST</div>
-                                </div>
-                                <div class="color-quadrant" id="autumn-quadrant" data-season="웜톤 (가을)">
-                                    <div class="season-label">웜톤 (가을)</div>
-                                    <div class="face-display">
-                                        <img id="autumn-face" src="" alt="Autumn Face" />
-                                    </div>
-                                    <div class="best-badge" style="display: none;">BEST</div>
-                                </div>
-                                <div class="color-quadrant" id="winter-quadrant" data-season="쿨톤 (겨울)">
-                                    <div class="season-label">쿨톤 (겨울)</div>
-                                    <div class="face-display">
-                                        <img id="winter-face" src="" alt="Winter Face" />
-                                    </div>
-                                    <div class="best-badge" style="display: none;">BEST</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Style Recommendations Cards -->
-                    <div class="style-cards-container mt-5">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="style-card fashion-card">
-                                    <div class="card-icon">👗</div>
-                                    <div class="card-header">
-                                        <h3>맞춤 패션 스타일</h3>
-                                    </div>
-                                    <div class="card-content" id="fashion-style-result">
-                                        <!-- Fashion style recommendations will be displayed here -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="style-card beauty-card">
-                                    <div class="card-icon">💄</div>
-                                    <div class="card-header">
-                                        <h3>맞춤 뷰티 스타일</h3>
-                                    </div>
-                                    <div class="card-content" id="beauty-style-result">
-                                        <!-- Beauty style recommendations will be displayed here -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <h4 class="subtitle">나랑 닮은 연예인 찾기 결과를 공유해보세요!</h4>
                 </center>
             </div>
