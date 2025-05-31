@@ -186,7 +186,7 @@ function drawChart(userData) {
     $("#face-analysis-result").html(
       confidenceStr + "<br/>"
     );
-
+    $("#style-recommendations").hide();
     // $("#charts").hide();
     cropSuccess = false;
   } else {
@@ -194,6 +194,7 @@ function drawChart(userData) {
       confidenceStr = getMeta("face_gt1");
 
     }
+    $("#style-recommendations").show();
     // 한 명 이상 인식되었을때에만 gif 생성버튼을 표시한다.
     try{ 
     document.getElementById("createGif").style.display = "block";
@@ -607,10 +608,8 @@ function analyzePersonalColor(imageData) {
     }
   }
 
-  let resultDescription = `<h4><strong>${personalColor}</strong></h4>
-  <p><small>피부톤: RGB(${Math.round(avgR)}, ${Math.round(avgG)}, ${Math.round(avgB)}) <span style="color:rgb(${Math.round(avgR)}, ${Math.round(avgG)}, ${Math.round(avgB)})">
-■
-</span></small></p>`;
+  let resultDescription = `<h4><strong>${personalColor} <span style="color:rgb(${Math.round(avgR)}, ${Math.round(avgG)}, ${Math.round(avgB)})">■</span> </strong></h4>`;
+  // <p><small>피부톤: RGB(${Math.round(avgR)}, ${Math.round(avgG)}, ${Math.round(avgB)}) </small></p>`;
 document.getElementById('personal-color-overview').innerHTML = resultDescription;
 // console.log(resultDescription);
   return {
