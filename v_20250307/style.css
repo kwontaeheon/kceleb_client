@@ -769,33 +769,325 @@ max-height: 0px !important;
     max-height: 300px;
 }
 
-/* Style recommendation cards */
-#style-recommendations .card {
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Personal Color Container */
+.personal-color-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-#style-recommendations .card-header {
-    background-color: #f8f9fa;
-    font-weight: bold;
+/* Color Grid Container */
+.color-grid-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 50%;
+    padding: 20px;
+    background: conic-gradient(
+        #FF6B6B 0deg 90deg,     /* Spring colors */
+        #4ECDC4 90deg 180deg,   /* Summer colors */
+        #D4A574 180deg 270deg,  /* Autumn colors */
+        #5A67D8 270deg 360deg   /* Winter colors */
+    );
+    animation: rotateColors 10s linear infinite;
 }
 
-#style-recommendations .card-body {
-    text-align: left;
+@keyframes rotateColors {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Color Grid */
+.color-grid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    overflow: hidden;
+}
+
+/* Color Quadrants */
+.color-quadrant {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-#style-recommendations .badge {
-    font-size: 1.0rem;
-    margin: 0.1rem;
-    text-align: center;
-    align-items: center;;
+.color-quadrant:hover {
+    transform: scale(1.05);
+    z-index: 10;
 }
 
-#style-recommendations ul {
+#spring-quadrant {
+    background: linear-gradient(135deg, #FFE4E1, #FFB6C1);
+    border-top-left-radius: 50%;
+}
+
+#summer-quadrant {
+    background: linear-gradient(135deg, #E6F3FF, #B8E6B8);
+    border-top-right-radius: 50%;
+}
+
+#autumn-quadrant {
+    background: linear-gradient(135deg, #DEB887, #CD853F);
+    border-bottom-left-radius: 50%;
+}
+
+#winter-quadrant {
+    background: linear-gradient(135deg, #F0F8FF, #E6E6FA);
+    border-bottom-right-radius: 50%;
+}
+
+/* Season Labels */
+.season-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
     margin-bottom: 0.5rem;
+    text-align: center;
 }
 
-#style-recommendations li {
-    margin-bottom: 0.2rem;
+/* Face Display */
+.face-display {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.face-display img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Best Badge */
+.best-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Style Cards Container */
+.style-cards-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Style Cards */
+.style-card {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.style-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.style-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+}
+
+.fashion-card::before {
+    background: linear-gradient(90deg, #FF6B6B, #FF8E8E, #FFA8A8);
+}
+
+.beauty-card::before {
+    background: linear-gradient(90deg, #E91E63, #F06292, #F8BBD9);
+}
+
+/* Card Icon */
+.card-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Card Header */
+.style-card .card-header {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.style-card .card-header h3 {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+}
+
+/* Card Content */
+.card-content {
+    text-align: left;
+}
+
+.card-content h4 {
+    color: #555;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-content h4::before {
+    content: '✨';
+    font-size: 1rem;
+}
+
+/* Style Badges */
+.style-card .badge {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin: 0.2rem;
+    display: inline-block;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.style-card .badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.fashion-card .badge {
+    background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+}
+
+.beauty-card .badge {
+    background: linear-gradient(45deg, #E91E63, #F06292);
+}
+
+/* Lists */
+.style-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+.style-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.style-card li::before {
+    content: '•';
+    color: #667eea;
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.fashion-card li::before {
+    color: #FF6B6B;
+}
+
+.beauty-card li::before {
+    color: #E91E63;
+}
+
+.style-card li:last-child {
+    border-bottom: none;
+}
+
+/* Color Display */
+.color-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.color-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .color-grid-container {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .face-display {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .season-label {
+        font-size: 0.8rem;
+    }
+    
+    .style-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-icon {
+        font-size: 2.5rem;
+    }
 }

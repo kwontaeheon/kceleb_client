@@ -741,33 +741,25 @@ function displayStyleRecommendations() {
   const fashionRec = getFashionRecommendations(personalColorResult.season, isMale);
   const beautyRec = getBeautyRecommendations(personalColorResult.season, isMale);
   
-  // Display personal color result
-  const personalColorHtml = `
-    <h4><strong>${personalColorResult.season}</strong></h4>
-    <p><small>피부톤: RGB(${personalColorResult.skinTone.r}, ${personalColorResult.skinTone.g}, ${personalColorResult.skinTone.b}) <span style="color:rgb(${personalColorResult.skinTone.r}, ${personalColorResult.skinTone.g}, ${personalColorResult.skinTone.b})">
-  ■
-</span></small></p>
-    <div class="mb-2">
-      <strong>추천 컬러:</strong>
-      <div class="d-flex flex-wrap mt-1">
-        ${personalColorResult.colors.map(color => `<span class="badge badge-light mr-1 mb-1">${color}</span>`).join('')}
-      </div>
-    </div>
-  `;
+  // Display face images in all quadrants
+  displayFaceInQuadrants();
+  
+  // Show best matching season
+  showBestMatchingSeason(personalColorResult.season);
   
   // Display fashion recommendations
   const fashionHtml = fashionRec ? `
     <h4><strong>${fashionRec.style}</strong></h4>
-    <div class="mb-2">
+    <div class="mb-3">
       <strong>추천 아이템:</strong>
-      <ul class="list-unstyled mt-1">
-        ${fashionRec.items.map(item => `<li><small>• ${item}</small></li>`).join('')}
+      <ul class="mt-2">
+        ${fashionRec.items.map(item => `<li>${item}</li>`).join('')}
       </ul>
     </div>
     <div>
       <strong>추천 컬러:</strong>
-      <div class="d-flex flex-wrap mt-1">
-        ${fashionRec.colors.map(color => `<span class="badge badge-secondary mr-1 mb-1">${color}</span>`).join('')}
+      <div class="color-display mt-2">
+        ${fashionRec.colors.map(color => `<span class="badge">${color}</span>`).join('')}
       </div>
     </div>
   ` : '<p>스타일 분석 중...</p>';
@@ -776,35 +768,33 @@ function displayStyleRecommendations() {
   const beautyHtml = beautyRec ? `
     <h4><strong>${beautyRec.makeup || beautyRec.skincare}</strong></h4>
     ${beautyRec.lipColor ? `
-      <div class="mb-2">
+      <div class="mb-3">
         <strong>추천 립 컬러:</strong>
-        <div class="d-flex flex-wrap mt-1">
-          ${beautyRec.lipColor.map(color => `<span class="badge badge-danger mr-1 mb-1">${color}</span>`).join('')}
+        <div class="color-display mt-2">
+          ${beautyRec.lipColor.map(color => `<span class="badge">${color}</span>`).join('')}
         </div>
       </div>
     ` : ''}
     ${beautyRec.eyeColor ? `
-      <div class="mb-2">
+      <div class="mb-3">
         <strong>추천 아이 컬러:</strong>
-        <div class="d-flex flex-wrap mt-1">
-          ${beautyRec.eyeColor.map(color => `<span class="badge badge-info mr-1 mb-1">${color}</span>`).join('')}
+        <div class="color-display mt-2">
+          ${beautyRec.eyeColor.map(color => `<span class="badge">${color}</span>`).join('')}
         </div>
       </div>
     ` : ''}
     <div>
       <strong>뷰티 팁:</strong>
-      <ul class="list-unstyled mt-1">
-        ${beautyRec.tips.map(tip => `<li><small>• ${tip}</small></li>`).join('')}
+      <ul class="mt-2">
+        ${beautyRec.tips.map(tip => `<li>${tip}</li>`).join('')}
       </ul>
     </div>
   ` : '<p>뷰티 분석 중...</p>';
   
   // Update DOM
-  const personalColorElement = document.getElementById('personal-color-result');
   const fashionStyleElement = document.getElementById('fashion-style-result');
   const beautyStyleElement = document.getElementById('beauty-style-result');
   
-  if (personalColorElement) personalColorElement.innerHTML = personalColorHtml;
   if (fashionStyleElement) fashionStyleElement.innerHTML = fashionHtml;
   if (beautyStyleElement) beautyStyleElement.innerHTML = beautyHtml;
   
@@ -812,6 +802,54 @@ function displayStyleRecommendations() {
   const styleRecommendationsElement = document.getElementById('style-recommendations');
   if (styleRecommendationsElement) {
     styleRecommendationsElement.style.display = 'block';
+  }
+}
+
+function displayFaceInQuadrants() {
+  // Get the cropped face image
+  const faceCanvas = document.getElementById('cropped-face-image-2');
+  if (!faceCanvas) return;
+  
+  const faceImageSrc = faceCanvas.toDataURL();
+  
+  // Display the same face image in all quadrants
+  const seasons = ['spring', 'summer', 'autumn', 'winter'];
+  seasons.forEach(season => {
+    const faceImg = document.getElementById(`${season}-face`);
+    if (faceImg) {
+      faceImg.src = faceImageSrc;
+    }
+  });
+}
+
+function showBestMatchingSeason(bestSeason) {
+  // Hide all best badges first
+  const badges = document.querySelectorAll('.best-badge');
+  badges.forEach(badge => badge.style.display = 'none');
+  
+  // Map season names to quadrant IDs
+  const seasonMapping = {
+    '웜톤 (봄)': 'spring-quadrant',
+    '웜톤 (가을)': 'autumn-quadrant',
+    '쿨톤 (여름)': 'summer-quadrant',
+    '쿨톤 (겨울)': 'winter-quadrant'
+  };
+  
+  // Show best badge for the matching season
+  const matchingQuadrantId = seasonMapping[bestSeason];
+  if (matchingQuadrantId) {
+    const matchingQuadrant = document.getElementById(matchingQuadrantId);
+    if (matchingQuadrant) {
+      const badge = matchingQuadrant.querySelector('.best-badge');
+      if (badge) {
+        badge.style.display = 'block';
+      }
+      
+      // Add special highlight effect
+      matchingQuadrant.style.transform = 'scale(1.05)';
+      matchingQuadrant.style.zIndex = '10';
+      matchingQuadrant.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+    }
   }
 }
 
