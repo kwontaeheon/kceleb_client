@@ -584,8 +584,10 @@ function analyzePersonalColor(imageData) {
   // Determine personal color season based on skin tone analysis
   let personalColor = '';
   let colorPalette = [];
-
-  if (avgR > avgG && avgR > avgB) {
+ 
+  // 아이린 229 207 202
+  // 229 -
+  if (avgR > avgG && avgR > avgB && avgG + avgB < 300) {
     // Warm undertones
     if (avgR - avgG > 20) {
       personalColor = '웜톤 (봄)';
@@ -605,6 +607,12 @@ function analyzePersonalColor(imageData) {
     }
   }
 
+  let resultDescription = `<h4><strong>${personalColor}</strong></h4>
+  <p><small>피부톤: RGB(${Math.round(avgR)}, ${Math.round(avgG)}, ${Math.round(avgB)}) <span style="color:rgb(${Math.round(avgR)}, ${Math.round(avgG)}, ${Math.round(avgB)})">
+■
+</span></small></p>`;
+document.getElementById('personal-color-overview').innerHTML = resultDescription;
+console.log(resultDescription);
   return {
     season: personalColor,
     colors: colorPalette,
