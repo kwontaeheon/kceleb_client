@@ -850,9 +850,9 @@ function showBestMatchingSeason(bestSeason) {
       }
 
       // Add special highlight effect
-      matchingQuadrant.style.transform = 'scale(1.05)';
-      matchingQuadrant.style.zIndex = '10';
-      matchingQuadrant.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+      // matchingQuadrant.style.transform = 'scale(1.05)';
+      // matchingQuadrant.style.zIndex = '10';
+      // matchingQuadrant.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
     }
   }
 }
@@ -2061,9 +2061,9 @@ function displaySampleStyleRecommendations() {
     if (badge) {
       badge.style.display = 'block';
     }
-    springQuadrant.style.transform = 'scale(1.05)';
-    springQuadrant.style.zIndex = '10';
-    springQuadrant.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+    // springQuadrant.style.transform = 'scale(1.05)';
+    // springQuadrant.style.zIndex = '10';
+    // springQuadrant.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
   }
 
   // Update DOM with sample content

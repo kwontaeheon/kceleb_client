@@ -928,23 +928,20 @@ max-height: 0px !important;
 
 /* Best Badge */
 .best-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     background: linear-gradient(45deg, #FFD700, #FFA500);
     color: white;
     padding: 4px 8px;
     border-radius: 12px;
-    font-size: 0.7rem;
+    font-size: 1rem;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% { transform: scale(0.7); }
+    50% { transform: scale(1.0); }
+    100% { transform: scale(0.7); }
 }
 
 /* Style Cards Container */
@@ -1119,7 +1116,7 @@ max-height: 0px !important;
 @media (max-width: 768px) {
     .color-grid-container {
         width: 100%;
-        height: 100%;
+        height: 50vh;
     }
     
     .face-display {
