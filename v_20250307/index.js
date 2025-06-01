@@ -2004,59 +2004,7 @@ function drawDefaultChart() {
 
 function displaySampleStyleRecommendations() {
   // Sample personal color result
-  const samplePersonalColor = '웜톤 (봄)';
-
-  // Sample fashion recommendations
-  const sampleFashionHtml = `
-    <h4><strong>밝고 화사한 스타일</strong></h4>
-    <div class="mb-3">
-      <strong>추천 아이템:</strong>
-      <ul class="mt-2">
-        <li>플로럴 원피스</li>
-        <li>코랄 블라우스</li>
-        <li>아이보리 니트</li>
-        <li>베이지 트렌치코트</li>
-      </ul>
-    </div>
-    <div>
-      <strong>추천 컬러:</strong>
-      <div class="color-display mt-2">
-        <span class="badge">코랄</span>
-        <span class="badge">피치</span>
-        <span class="badge">아이보리</span>
-        <span class="badge">라이트카키</span>
-      </div>
-    </div>
-  `;
-
-  // Sample beauty recommendations
-  const sampleBeautyHtml = `
-    <h4><strong>밝고 생기있는 메이크업</strong></h4>
-    <div class="mb-3">
-      <strong>추천 립 컬러:</strong>
-      <div class="color-display mt-2">
-        <span class="badge">코랄핑크</span>
-        <span class="badge">피치</span>
-        <span class="badge">오렌지레드</span>
-      </div>
-    </div>
-    <div class="mb-3">
-      <strong>추천 아이 컬러:</strong>
-      <div class="color-display mt-2">
-        <span class="badge">골드브라운</span>
-        <span class="badge">코퍼</span>
-        <span class="badge">피치</span>
-      </div>
-    </div>
-    <div>
-      <strong>뷰티 팁:</strong>
-      <ul class="mt-2">
-        <li>글로우한 베이스 메이크업</li>
-        <li>코랄 블러셔로 생기 연출</li>
-        <li>브라운 마스카라 추천</li>
-      </ul>
-    </div>
-  `;
+  
 
   // Display sample face in all quadrants (placeholder image)
   const sampleFaceImage = '/banner_org.png'; // Using existing banner as placeholder
@@ -2084,8 +2032,8 @@ function displaySampleStyleRecommendations() {
   const fashionStyleElement = document.getElementById('fashion-style-result');
   const beautyStyleElement = document.getElementById('beauty-style-result');
 
-  if (fashionStyleElement) fashionStyleElement.innerHTML = sampleFashionHtml;
-  if (beautyStyleElement) beautyStyleElement.innerHTML = sampleBeautyHtml;
+  // if (fashionStyleElement) fashionStyleElement.innerHTML = sampleFashionHtml;
+  // if (beautyStyleElement) beautyStyleElement.innerHTML = sampleBeautyHtml;
 
   // Show the recommendations section
   const styleRecommendationsElement = document.getElementById('style-recommendations');
