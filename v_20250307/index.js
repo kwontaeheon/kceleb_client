@@ -88,18 +88,39 @@ var resultMeta = {};
 })();
 
 function getMeta(name) {
-
   try {
-    return resultMeta[name.toLowerCase()];
-
+    // Handle dot notation for nested properties
+    if (name.includes('.')) {
+      const keys = name.split('.');
+      let value = resultMeta;
+      for (const key of keys) {
+        if (value && typeof value === 'object') {
+          value = value[key];
+        } else {
+          value = undefined;
+          break;
+        }
+      }
+      if (value === undefined) {
+        console.log(`Meta key not found: ${name}, available keys:`, Object.keys(resultMeta));
+        return name;
+      }
+      return value;
+    }
+    
+    // Handle simple property access
+    const result = resultMeta[name] || resultMeta[name.toLowerCase()] || name;
+    if (result === name) {
+      console.log(`Meta key not found: ${name}, available keys:`, Object.keys(resultMeta));
+    }
+    return result;
   } catch (error) {
     console.log(error);
     gtag("event", "errorGetMeta", {
-        event_category: "error",
-      });
+      event_category: "error",
+    });
     return name;
   }
-
 }
 
 
@@ -251,11 +272,7 @@ function drawChart(userData) {
     plugins: [ChartDataLabels],
     options: {
       maintainAspectRatio: false,
-      // indexAxis: 'y',
       plugins: {
-        // autocolors: {
-        //   mode: 'label'
-        // },
         legend: {
           display: false,
         }
@@ -268,9 +285,7 @@ function drawChart(userData) {
   // console.log(Object.keys(userData.gender).flatMap(value => { return getMeta(value); }));
   // Display gender in pie chart
   const genderData = {
-    labels: Object.keys(userData.gender).flatMap(value => {
-      return getMeta(value);
-    }),
+    labels: Object.keys(userData.gender).flatMap(value => { return getMeta(value); }),
     datasets: [{
       label: getMeta("gender"),
       maintainAspectRatio: false,
@@ -294,8 +309,7 @@ function drawChart(userData) {
         },
         datalabels: {
           formatter: function (value, context) {
-            // console.log(value);//context.chart.data.labels[context.dataIndex]
-            return value.toFixed(1);
+            return value.toFixed(2) + '%';
           }
         },
         legend: {
@@ -306,9 +320,7 @@ function drawChart(userData) {
   });
   // Display emotion in radar chart
   const emotionData = {
-    labels: Object.keys(userData.emotion).flatMap(value => {
-      return getMeta(value);
-    }),
+    labels: Object.keys(userData.emotion).flatMap(value => { return getMeta(value); }),
     datasets: [{
       label: getMeta("emotion"),
       data: Object.values(userData.emotion),
@@ -358,9 +370,7 @@ function drawChart(userData) {
 
   // Display race in radar chart
   const raceData = {
-    labels: Object.keys(userData.race).flatMap(value => {
-      return getMeta(value);
-    }),
+    labels: Object.keys(userData.race).flatMap(value => { return getMeta(value); }),
     datasets: [{
       label: getMeta("race"),
       data: Object.values(userData.race),
@@ -385,7 +395,6 @@ function drawChart(userData) {
     type: 'doughnut',
     data: raceData,
     options: {
-      // indexAxis: 'y',
       maintainAspectRatio: false,
       plugins: {
 
@@ -591,20 +600,20 @@ function analyzePersonalColor(imageData) {
   if (avgR > avgG && avgR > avgB && avgG + avgB < 300) {
     // Warm undertones
     if (avgR - avgG > 20) {
-      personalColor = '웜톤 (봄)';
-      colorPalette = ['코랄', '피치', '아이보리', '골드', '터쿼이즈'];
+      personalColor = getMeta("personalColorSeasons.warm_spring");
+      colorPalette = [getMeta("colors.coral"), getMeta("colors.peach"), getMeta("colors.ivory"), getMeta("colors.gold"), getMeta("colors.turquoise")];
     } else {
-      personalColor = '웜톤 (가을)';
-      colorPalette = ['베이지', '카키', '브라운', '머스타드', '테라코타'];
+      personalColor = getMeta("personalColorSeasons.warm_autumn");
+      colorPalette = [getMeta("colors.beige"), getMeta("colors.khaki"), getMeta("colors.brown"), getMeta("colors.mustard"), getMeta("colors.terracotta")];
     }
   } else {
     // Cool undertones
     if (avgB > avgG) {
-      personalColor = '쿨톤 (겨울)';
-      colorPalette = ['네이비', '블랙', '화이트', '로얄블루', '실버'];
+      personalColor = getMeta("personalColorSeasons.cool_winter");
+      colorPalette = [getMeta("colors.navy"), getMeta("colors.black"), getMeta("colors.white"), getMeta("colors.royal_blue"), getMeta("colors.silver")];
     } else {
-      personalColor = '쿨톤 (여름)';
-      colorPalette = ['라벤더', '민트', '소프트핑크', '그레이', '파스텔블루'];
+      personalColor = getMeta("personalColorSeasons.cool_summer");
+      colorPalette = [getMeta("colors.lavender"), getMeta("colors.mint"), getMeta("colors.soft_pink"), getMeta("colors.gray"), getMeta("colors.pastel_blue")];
     }
   }
 
@@ -621,52 +630,52 @@ document.getElementById('personal-color-overview').innerHTML = resultDescription
 
 function getFashionRecommendations(personalColor, isMale) {
   const recommendations = {
-    '웜톤 (봄)': {
+    [getMeta("personalColorSeasons.warm_spring")]: {
       female: {
-        style: '밝고 화사한 스타일',
-        items: ['플로럴 원피스', '코랄 블라우스', '아이보리 니트', '베이지 트렌치코트'],
-        colors: ['코랄', '피치', '아이보리', '라이트카키']
+        style: getMeta("fashionStyles.bright_cheerful"),
+        items: [getMeta("fashionItems.floral_dress"), getMeta("fashionItems.coral_blouse"), getMeta("fashionItems.ivory_knit"), getMeta("fashionItems.beige_trench_coat")],
+        colors: [getMeta("colors.coral"), getMeta("colors.peach"), getMeta("colors.ivory"), getMeta("fashionItems.light_khaki")]
       },
       male: {
-        style: '내추럴 캐주얼 스타일',
-        items: ['베이지 셔츠', '카키 치노팬츠', '네이비 블레이저', '브라운 가죽 재킷'],
-        colors: ['베이지', '카키', '네이비', '브라운']
+        style: getMeta("fashionStyles.natural_casual"),
+        items: [getMeta("fashionItems.beige_shirt"), getMeta("fashionItems.khaki_chino_pants"), getMeta("fashionItems.navy_blazer"), getMeta("fashionItems.brown_leather_jacket")],
+        colors: [getMeta("colors.beige"), getMeta("colors.khaki"), getMeta("colors.navy"), getMeta("colors.brown")]
       }
     },
-    '웜톤 (가을)': {
+    [getMeta("personalColorSeasons.warm_autumn")]: {
       female: {
-        style: '시크하고 우아한 스타일',
-        items: ['머스타드 니트', '브라운 코트', '카키 팬츠', '테라코타 블라우스'],
-        colors: ['머스타드', '브라운', '카키', '테라코타']
+        style: getMeta("fashionStyles.chic_elegant"),
+        items: [getMeta("fashionItems.mustard_knit"), getMeta("fashionItems.brown_coat"), getMeta("fashionItems.khaki_pants"), getMeta("fashionItems.terracotta_blouse")],
+        colors: [getMeta("colors.mustard"), getMeta("colors.brown"), getMeta("colors.khaki"), getMeta("colors.terracotta")]
       },
       male: {
-        style: '클래식 정장 스타일',
-        items: ['브라운 수트', '머스타드 셔츠', '카키 치노팬츠', '다크브라운 코트'],
-        colors: ['브라운', '머스타드', '카키', '다크브라운']
+        style: getMeta("fashionStyles.classic_formal"),
+        items: [getMeta("fashionItems.brown_suit"), getMeta("fashionItems.mustard_shirt"), getMeta("fashionItems.khaki_chino_pants"), getMeta("fashionItems.dark_brown_coat")],
+        colors: [getMeta("colors.brown"), getMeta("colors.mustard"), getMeta("colors.khaki"), getMeta("fashionItems.dark_brown")]
       }
     },
-    '쿨톤 (겨울)': {
+    [getMeta("personalColorSeasons.cool_winter")]: {
       female: {
-        style: '모던하고 세련된 스타일',
-        items: ['블랙 드레스', '화이트 블라우스', '네이비 코트', '실버 액세서리'],
-        colors: ['블랙', '화이트', '네이비', '로얄블루']
+        style: getMeta("fashionStyles.modern_sophisticated"),
+        items: [getMeta("fashionItems.black_dress"), getMeta("fashionItems.white_blouse"), getMeta("fashionItems.navy_coat"), getMeta("fashionItems.silver_accessories")],
+        colors: [getMeta("colors.black"), getMeta("colors.white"), getMeta("colors.navy"), getMeta("colors.royal_blue")]
       },
       male: {
-        style: '포멀 비즈니스 스타일',
-        items: ['네이비 수트', '화이트 셔츠', '블랙 코트', '실버 넥타이'],
-        colors: ['네이비', '화이트', '블랙', '그레이']
+        style: getMeta("fashionStyles.formal_business"),
+        items: [getMeta("fashionItems.navy_suit"), getMeta("fashionItems.white_shirt"), getMeta("fashionItems.black_coat"), getMeta("fashionItems.silver_tie")],
+        colors: [getMeta("colors.navy"), getMeta("colors.white"), getMeta("colors.black"), getMeta("colors.gray")]
       }
     },
-    '쿨톤 (여름)': {
+    [getMeta("personalColorSeasons.cool_summer")]: {
       female: {
-        style: '로맨틱하고 부드러운 스타일',
-        items: ['라벤더 원피스', '소프트핑크 블라우스', '그레이 가디건', '민트 스카프'],
-        colors: ['라벤더', '소프트핑크', '그레이', '민트']
+        style: getMeta("fashionStyles.romantic_soft"),
+        items: [getMeta("fashionItems.lavender_dress"), getMeta("fashionItems.soft_pink_blouse"), getMeta("fashionItems.gray_cardigan"), getMeta("fashionItems.mint_scarf")],
+        colors: [getMeta("colors.lavender"), getMeta("colors.soft_pink"), getMeta("colors.gray"), getMeta("colors.mint")]
       },
       male: {
-        style: '젠틀맨 캐주얼 스타일',
-        items: ['그레이 셔츠', '라이트블루 팬츠', '네이비 니트', '화이트 스니커즈'],
-        colors: ['그레이', '라이트블루', '네이비', '화이트']
+        style: getMeta("fashionStyles.gentleman_casual"),
+        items: [getMeta("fashionItems.gray_shirt"), getMeta("fashionItems.light_blue_pants"), getMeta("fashionItems.navy_knit"), getMeta("fashionItems.white_sneakers")],
+        colors: [getMeta("colors.gray"), getMeta("fashionItems.light_blue"), getMeta("colors.navy"), getMeta("colors.white")]
       }
     }
   };
@@ -676,61 +685,61 @@ function getFashionRecommendations(personalColor, isMale) {
 
 function getBeautyRecommendations(personalColor, isMale) {
   const recommendations = {
-    '웜톤 (봄)': {
+    [getMeta("personalColorSeasons.warm_spring")]: {
       female: {
-        makeup: '밝고 생기있는 메이크업',
-        lipColor: ['코랄핑크', '피치', '오렌지레드'],
-        eyeColor: ['골드브라운', '코퍼', '피치'],
-        tips: ['글로우한 베이스 메이크업', '코랄 블러셔로 생기 연출', '브라운 마스카라 추천']
+        makeup: getMeta("beautyStyles.bright_lively_makeup"),
+        lipColor: [getMeta("beautyColors.coral_pink"), getMeta("colors.peach"), getMeta("beautyColors.orange_red")],
+        eyeColor: [getMeta("beautyColors.gold_brown"), getMeta("beautyColors.copper"), getMeta("colors.peach")],
+        tips: [getMeta("beautyTips.glow_base_makeup"), getMeta("beautyTips.coral_blusher"), getMeta("beautyTips.brown_mascara")]
       },
       male: {
-        skincare: '수분 공급 중심 케어',
-        tips: ['세안 후 토너와 로션으로 기본 케어', '자외선 차단제 필수', '립밤으로 입술 관리'],
-        colors: ['내추럴한 피부 톤 유지']
+        skincare: getMeta("beautyStyles.moisture_centered_care"),
+        tips: [getMeta("beautyTips.basic_care_after_cleansing"), getMeta("beautyTips.sunscreen_essential"), getMeta("beautyTips.lip_balm_care")],
+        colors: [getMeta("beautyTips.natural_skin_tone")]
       }
     },
-    '웜톤 (가을)': {
+    [getMeta("personalColorSeasons.warm_autumn")]: {
       female: {
-        makeup: '깊이있고 우아한 메이크업',
-        lipColor: ['브릭레드', '버건디', '브라운'],
-        eyeColor: ['골드', '브론즈', '다크브라운'],
-        tips: ['매트한 베이스', '브론저로 윤곽 강조', '다크브라운 아이라이너']
+        makeup: getMeta("beautyStyles.deep_elegant_makeup"),
+        lipColor: [getMeta("beautyColors.brick_red"), getMeta("beautyColors.burgundy"), getMeta("colors.brown")],
+        eyeColor: [getMeta("colors.gold"), getMeta("beautyColors.bronze"), getMeta("beautyColors.dark_brown")],
+        tips: [getMeta("beautyTips.matte_base"), getMeta("beautyTips.bronzer_contouring"), getMeta("beautyTips.dark_brown_eyeliner")]
       },
       male: {
-        skincare: '안티에이징 케어',
-        tips: ['에센스와 크림으로 영양 공급', '주기적 스크럽으로 각질 제거', '아이크림으로 눈가 케어'],
-        colors: ['따뜻한 피부 톤 유지']
+        skincare: getMeta("beautyStyles.anti_aging_care"),
+        tips: [getMeta("beautyTips.essence_cream_nutrition"), getMeta("beautyTips.regular_scrub"), getMeta("beautyTips.eye_cream_care")],
+        colors: [getMeta("beautyTips.warm_skin_tone")]
       }
     },
-    '쿨톤 (겨울)': {
+    [getMeta("personalColorSeasons.cool_winter")]: {
       female: {
-        makeup: '강렬하고 시크한 메이크업',
-        lipColor: ['레드', '베리', '플럼'],
-        eyeColor: ['실버', '블랙', '네이비'],
-        tips: ['화이트 베이스로 밝은 피부 연출', '선명한 립컬러', '블랙 아이라이너로 또렷한 눈매']
+        makeup: getMeta("beautyStyles.intense_chic_makeup"),
+        lipColor: [getMeta("beautyColors.red"), getMeta("beautyColors.berry"), getMeta("beautyColors.plum")],
+        eyeColor: [getMeta("colors.silver"), getMeta("colors.black"), getMeta("colors.navy")],
+        tips: [getMeta("beautyTips.white_base_bright_skin"), getMeta("beautyTips.vivid_lip_color"), getMeta("beautyTips.black_eyeliner_sharp")]
       },
       male: {
-        skincare: '미백과 수분 케어',
-        tips: ['비타민C 세럼으로 브라이트닝', '하이드레이팅 크림', '썬크림으로 피부 보호'],
-        colors: ['깨끗하고 밝은 피부 톤']
+        skincare: getMeta("beautyStyles.whitening_moisture_care"),
+        tips: [getMeta("beautyTips.vitamin_c_brightening"), getMeta("beautyTips.hydrating_cream"), getMeta("beautyTips.sunscreen_protection")],
+        colors: [getMeta("beautyTips.clean_bright_skin")]
       }
     },
-    '쿨톤 (여름)': {
+    [getMeta("personalColorSeasons.cool_summer")]: {
       female: {
-        makeup: '자연스럽고 우아한 메이크업',
-        lipColor: ['로즈핑크', '라벤더', '베리핑크'],
-        eyeColor: ['실버', '라벤더', '로즈골드'],
-        tips: ['투명한 베이스', '소프트한 그라데이션', '핑크 블러셔로 자연스러운 홍조']
+        makeup: getMeta("beautyStyles.natural_elegant_makeup"),
+        lipColor: [getMeta("beautyColors.rose_pink"), getMeta("colors.lavender"), getMeta("beautyColors.berry_pink")],
+        eyeColor: [getMeta("colors.silver"), getMeta("colors.lavender"), getMeta("beautyColors.rose_gold")],
+        tips: [getMeta("beautyTips.transparent_base"), getMeta("beautyTips.soft_gradation"), getMeta("beautyTips.pink_blusher_natural")]
       },
       male: {
-        skincare: '순한 제품으로 기본 케어',
-        tips: ['민감성 피부용 제품 사용', '가벼운 로션으로 보습', '자극 없는 세안제'],
-        colors: ['자연스러운 피부 톤 유지']
+        skincare: getMeta("beautyStyles.gentle_basic_care"),
+        tips: [getMeta("beautyTips.sensitive_skin_products"), getMeta("beautyTips.light_lotion_moisturize"), getMeta("beautyTips.gentle_cleanser")],
+        colors: [getMeta("beautyTips.natural_skin_tone_maintain")]
       }
     }
   };
 
-  return recommendations[personalColor] ? recommendations[personalColor][isMale ? 'male' : 'female'] : null;
+  return recommendations[personalColor] ? recommendations[personalColor][isMale ? 'male' : 'female' ] : null;
 }
 
 function displayStyleRecommendations() {
@@ -762,25 +771,25 @@ function displayStyleRecommendations() {
   const fashionHtml = fashionRec ? `
     <h4><strong>${fashionRec.style}</strong></h4>
     <div class="mb-3">
-      <strong>추천 아이템:</strong>
+      <strong>${getMeta("recommendationLabels.recommended_items")}:</strong>
       <ul class="mt-2">
         ${fashionRec.items.map(item => `<li>${item}</li>`).join('')}
       </ul>
     </div>
     <div>
-      <strong>추천 컬러:</strong>
+      <strong>${getMeta("recommendationLabels.recommended_colors")}:</strong>
       <div class="color-display mt-2">
         ${fashionRec.colors.map(color => `<span class="badge">${color}</span>`).join('')}
       </div>
     </div>
-  ` : '<p>스타일 분석 중...</p>';
+  ` : `<p>${getMeta("statusMessages.style_analyzing")}</p>`;
 
   // Display beauty recommendations
   const beautyHtml = beautyRec ? `
     <h4><strong>${beautyRec.makeup || beautyRec.skincare}</strong></h4>
     ${beautyRec.lipColor ? `
       <div class="mb-3">
-        <strong>추천 립 컬러:</strong>
+        <strong>${getMeta("recommendationLabels.recommended_lip_colors")}:</strong>
         <div class="color-display mt-2">
           ${beautyRec.lipColor.map(color => `<span class="badge">${color}</span>`).join('')}
         </div>
@@ -788,19 +797,19 @@ function displayStyleRecommendations() {
     ` : ''}
     ${beautyRec.eyeColor ? `
       <div class="mb-3">
-        <strong>추천 아이 컬러:</strong>
+        <strong>${getMeta("recommendationLabels.recommended_eye_colors")}:</strong>
         <div class="color-display mt-2">
           ${beautyRec.eyeColor.map(color => `<span class="badge">${color}</span>`).join('')}
         </div>
       </div>
     ` : ''}
     <div>
-      <strong>뷰티 팁:</strong>
+      <strong>${getMeta("recommendationLabels.beauty_tips")}:</strong>
       <ul class="mt-2">
         ${beautyRec.tips.map(tip => `<li>${tip}</li>`).join('')}
       </ul>
     </div>
-  ` : '<p>뷰티 분석 중...</p>';
+  ` : `<p>${getMeta("statusMessages.beauty_analyzing")}</p>`;
 
   // Update DOM
   const fashionStyleElement = document.getElementById('fashion-style-result');
@@ -840,10 +849,10 @@ function showBestMatchingSeason(bestSeason) {
 
   // Map season names to quadrant IDs
   const seasonMapping = {
-    '웜톤 (봄)': 'spring-quadrant',
-    '웜톤 (가을)': 'autumn-quadrant',
-    '쿨톤 (여름)': 'summer-quadrant',
-    '쿨톤 (겨울)': 'winter-quadrant'
+    [getMeta("personalColorSeasons.warm_spring")]: 'spring-quadrant',
+    [getMeta("personalColorSeasons.warm_autumn")]: 'autumn-quadrant',
+    [getMeta("personalColorSeasons.cool_summer")]: 'summer-quadrant',
+    [getMeta("personalColorSeasons.cool_winter")]: 'winter-quadrant'
   };
 
   // Show best badge for the matching season
@@ -1225,7 +1234,6 @@ async function displayResults(result) {
     $("#face-not-detected").html(getMeta('face_not_detected'));
   } 
 
-  // console.log(result);
   // 유사도 점수 계산 (0에서 100 사이의 값으로 정규화)
   const similarityScore = Math.max(0, Math.min(100, (1 - result.distance) * 100));
   document.getElementById('similarity-score').textContent = `${similarityScore.toFixed(2)}%`;
@@ -1910,7 +1918,6 @@ function drawDefaultChart() {
         },
         datalabels: {
           formatter: function (value, context) {
-            // console.log(value); //context.chart.data.labels[context.dataIndex]
             return context.chart.data.labels[context.dataIndex] + ": " + value.toFixed(1);
           }
         },

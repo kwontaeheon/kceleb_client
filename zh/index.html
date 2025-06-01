@@ -235,8 +235,8 @@
                         <img src="/banner_org.png" class="mt-5 upload" alt='开始寻找与您脸型相似的名人'>
                         <!-- <img src="/img/upload.svg" class="mt-5 upload" alt="내 얼굴로 닮은 연예인 찾기 시작하기"/> -->
                         <div class="upload-text">
-                            发布一张你的脸部照片 <br />
-                            单击开始。
+                            上传您的面部照片或 <br />
+                            点击开始。
 
                         </div>
                     </div>
@@ -264,11 +264,81 @@
             </script>
             <div class="result-message" id="result-message">
                 <div class="h2" style="padding: 16px;">
-                    名人我：面部分析结果
+                    名人我: 面部分析・个人色彩诊断・风格推荐结果
                     <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
-                    人脸的年龄、性别、情绪和种族分析结果
+                    AI面部分析: 个人色彩诊断，定制风格推荐<br>
+                    年龄、性别、情绪、种族分析结果样本
+                </div>
+
+                <!-- Personal Color and Style Recommendations -->
+                <div id="style-recommendations" style="display: none;" class="mt-4">
+                    <!-- Personal Color Diagnosis with Four Quadrants -->
+                    <div class="personal-color-container">
+                        <h3 class="title">个人色彩诊断</h3>
+                        <h4 class="subtitle" id="personal-color-overview">诊断概要</h4>
+                        <div class="color-grid-container">
+                            <div class="color-grid">
+                                <div class="color-quadrant " id="spring-quadrant" data-season="暖色调（春）">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">暖色调（春）</div>
+                                    <div class="face-display cropped-face-spring cropped-face-image">
+                                        <img id="spring-face" src="/banner_org.png" alt="春季脸型" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant " id="summer-quadrant" data-season="冷色调（夏）">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">冷色调（夏）</div>
+                                    <div class="face-display cropped-face-summer cropped-face-image">
+                                        <img id="summer-face" src="/banner_org.png" alt="夏季脸型" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant " id="autumn-quadrant" data-season="暖色调（秋）">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">暖色调（秋）</div>
+                                    <div class="face-display cropped-face-autumn cropped-face-image">
+                                        <img id="autumn-face" src="/banner_org.png" alt="秋季脸型" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant" id="winter-quadrant" data-season="冷色调（冬）">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">冷色调（冬）</div>
+                                    <div class="face-display cropped-face-winter cropped-face-image">
+                                        <img id="winter-face" src="/banner_org.png" alt="冬季脸型" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Style Recommendations Cards -->
+                    <div class="style-cards-container mt-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="style-card fashion-card">
+                                    <div class="card-icon">👗</div>
+                                    <div class="card-header">
+                                        <h3 class="title">个性化时尚风格</h3>
+                                    </div>
+                                    <div class="card-content" id="fashion-style-result">
+                                        <!-- Fashion style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="style-card beauty-card">
+                                    <div class="card-icon">💄</div>
+                                    <div class="card-header">
+                                        <h3>个性化美容风格</h3>
+                                    </div>
+                                    <div class="card-content" id="beauty-style-result">
+                                        <!-- Beauty style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="charts">

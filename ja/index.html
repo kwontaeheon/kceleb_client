@@ -191,14 +191,12 @@
                 <div class="image-upload-wrap">
                     <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
                     <div class="drag-text">
-                        <img src="/banner_org.png" class="mt-5 upload" alt='私の顔に似た芸能人を探し始める'>
-                        <!-- <img src="/img/upload.svg" class="mt-5 upload" alt="내 얼굴로 닮은 연예인 찾기 시작하기"/> -->
-                        <div class="upload-text">
-                            顔写真をアップロードするか、 <br />
-                            タップして開始してください。
-
+                            <img src="/banner_org.png" class="mt-5 upload" alt='私の顔に似た芸能人を探し始める'>
+                            <div class="upload-text">
+                                顔写真をアップロードするか、 <br />
+                                タップして開始してください。
+                            </div>
                         </div>
-                    </div>
                 </div>
 
                 <div class="file-upload-content">
@@ -223,11 +221,81 @@
             </script>
             <div class="result-message" id="result-message">
                 <div class="h2" style="padding: 16px;">
-                    セレブミー：:顔分析結果
+                    セレブミー: 顔分析・パーソナルカラー診断・スタイル提案結果
                     <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
-                    顔に対する年齢、性別、感情、人種分析結果
+                    AI顔分析: パーソナルカラー診断、カスタマイズスタイル提案<br>
+                    年齢、性別、感情、人種分析結果サンプル
+                </div>
+
+                <!-- Personal Color and Style Recommendations -->
+                <div id="style-recommendations" style="display: none;" class="mt-4">
+                    <!-- Personal Color Diagnosis with Four Quadrants -->
+                    <div class="personal-color-container">
+                        <h3 class="title">パーソナルカラー診断</h3>
+                        <h4 class="subtitle" id="personal-color-overview">診断概要</h4>
+                        <div class="color-grid-container">
+                            <div class="color-grid">
+                                <div class="color-quadrant " id="spring-quadrant" data-season="ウォームトーン（春）">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">ウォームトーン（春）</div>
+                                    <div class="face-display cropped-face-spring cropped-face-image">
+                                        <img id="spring-face" src="/banner_org.png" alt="春の顔" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant " id="summer-quadrant" data-season="クールトーン（夏）">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">クールトーン（夏）</div>
+                                    <div class="face-display cropped-face-summer cropped-face-image">
+                                        <img id="summer-face" src="/banner_org.png" alt="夏の顔" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant " id="autumn-quadrant" data-season="ウォームトーン（秋）">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">ウォームトーン（秋）</div>
+                                    <div class="face-display cropped-face-autumn cropped-face-image">
+                                        <img id="autumn-face" src="/banner_org.png" alt="秋の顔" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant" id="winter-quadrant" data-season="クールトーン（冬）">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">クールトーン（冬）</div>
+                                    <div class="face-display cropped-face-winter cropped-face-image">
+                                        <img id="winter-face" src="/banner_org.png" alt="冬の顔" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Style Recommendations Cards -->
+                    <div class="style-cards-container mt-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="style-card fashion-card">
+                                    <div class="card-icon">👗</div>
+                                    <div class="card-header">
+                                        <h3 class="title">パーソナライズドファッションスタイル</h3>
+                                    </div>
+                                    <div class="card-content" id="fashion-style-result">
+                                        <!-- Fashion style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="style-card beauty-card">
+                                    <div class="card-icon">💄</div>
+                                    <div class="card-header">
+                                        <h3>パーソナライズドビューティースタイル</h3>
+                                    </div>
+                                    <div class="card-content" id="beauty-style-result">
+                                        <!-- Beauty style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="charts">

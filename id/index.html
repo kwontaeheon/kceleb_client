@@ -232,11 +232,81 @@
             </script>
             <div class="result-message" id="result-message">
                 <div class="h2" style="padding: 16px;">
-                    CelebMe: Hasil Analisis Wajah
+                    CelebMe: Hasil Analisis Wajah & Diagnosis Warna Pribadi & Rekomendasi Gaya
                     <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
-                    Hasil analisis usia, jenis kelamin, emosi, dan ras untuk wajah
+                    Analisis Wajah AI: Diagnosis warna pribadi, rekomendasi gaya yang disesuaikan<br>
+                    Contoh hasil analisis usia, jenis kelamin, emosi, dan ras
+                </div>
+
+                <!-- Personal Color and Style Recommendations -->
+                <div id="style-recommendations" style="display: none;" class="mt-4">
+                    <!-- Personal Color Diagnosis with Four Quadrants -->
+                    <div class="personal-color-container">
+                        <h3 class="title">Diagnosis Warna Pribadi</h3>
+                        <h4 class="subtitle" id="personal-color-overview">Ikhtisar diagnosis</h4>
+                        <div class="color-grid-container">
+                            <div class="color-grid">
+                                <div class="color-quadrant " id="spring-quadrant" data-season="Warna Hangat (Musim Semi)">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">Warna Hangat (Musim Semi)</div>
+                                    <div class="face-display cropped-face-spring cropped-face-image">
+                                        <img id="spring-face" src="/banner_org.png" alt="Wajah Musim Semi" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant " id="summer-quadrant" data-season="Warna Dingin (Musim Panas)">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">Warna Dingin (Musim Panas)</div>
+                                    <div class="face-display cropped-face-summer cropped-face-image">
+                                        <img id="summer-face" src="/banner_org.png" alt="Wajah Musim Panas" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant " id="autumn-quadrant" data-season="Warna Hangat (Musim Gugur)">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">Warna Hangat (Musim Gugur)</div>
+                                    <div class="face-display cropped-face-autumn cropped-face-image">
+                                        <img id="autumn-face" src="/banner_org.png" alt="Wajah Musim Gugur" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant" id="winter-quadrant" data-season="Warna Dingin (Musim Dingin)">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">Warna Dingin (Musim Dingin)</div>
+                                    <div class="face-display cropped-face-winter cropped-face-image">
+                                        <img id="winter-face" src="/banner_org.png" alt="Wajah Musim Dingin" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Style Recommendations Cards -->
+                    <div class="style-cards-container mt-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="style-card fashion-card">
+                                    <div class="card-icon">👗</div>
+                                    <div class="card-header">
+                                        <h3 class="title">Gaya Fashion yang Disesuaikan</h3>
+                                    </div>
+                                    <div class="card-content" id="fashion-style-result">
+                                        <!-- Fashion style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="style-card beauty-card">
+                                    <div class="card-icon">💄</div>
+                                    <div class="card-header">
+                                        <h3>Gaya Kecantikan yang Disesuaikan</h3>
+                                    </div>
+                                    <div class="card-content" id="beauty-style-result">
+                                        <!-- Beauty style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="charts">

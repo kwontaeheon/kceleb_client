@@ -13,19 +13,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
-    <title>Find celebrity look alike</title>
-    <meta name="title" content="Find Korean celebrity look alike" />
-    <meta name="subject"
-        content="Artificial intelligence K-POP idol test based on your face, find an idol who looks like you! Korean Celebrity Look-alike Generator" />
+    <title>CelebMe: Find Celebrity Look-alike | Personal Color Test | Fashion & Beauty Style Recommendations</title>
+    <meta name="title" content="CelebMe: Find Celebrity Look-alike | Personal Color Test | Fashion & Beauty Style Recommendations" />
+    <meta name="subject" content="AI face analysis to find celebrity look-alikes, personal color diagnosis, and customized fashion & beauty style recommendations all in one!" />
     <meta name="keywords"
-        content="Celebrity test, Celebrity Look-alike Generator, Korean Celebrity Lookalikes, Korean celebrity face test, celebrity look-alike test, celebrity who looks like me, find a celebrity who looks like me, celebrity who looks like me, celebrity who looks like me, celebrity test who looks like me, look-alike child, look-alike celebrity test, celebrity test, celebrity look-alike face test, celebrity face test, celebrity who looks like me, chicken celebrity, find a celebrity who looks like me, celebrity who looks like me test, find a celebrity who looks like me, celebrity who looks like me, my look-alike celebrity test, my AI face test, chicken celebrity find, celebrity face look-alike face find test, celebrity face test, celebrity photo test, find a celebrity look-alike face, celebrity look-alike test, AI celebrity test, celebrity look-alike test, celebrity look-alike celebrity test, look-alike celebrity test, my AI face test, find a celebrity who looks like me, look-alike test, celebrity face, celebrity look-alike, find a similar face, look-alike celebrity test, face test, celebrity look-alike test, celebrity face test, look-alike celebrity, AI face test, face test, face test Test, celebrities that look like me, celebrity that look like me test, celebrity, AI celebrity, find celebrity, celebrity by face, face celebrity, celebrity face, celebrity, AI celebrity image, face image, AI celebrity image, lookalike celebrity test, face lookalike test, celebrity lookalike test, face lookalike test, celebrity lookalike test, celebrity face lookalike test, celebrity face lookalike test, face celebrity test, face celebrity test, find celebrity, find lookalike celebrity, my face analysis, face age analysis, face emotion analysis, face gender analysis, face race analysis, lookalike test, celebrity lookalike, lookalike celebrity, lookalike celebrity test, find lookalike people" />
-    <meta name="author" content="Terry Kwon(kwontaeheon@gmail.com)" />
+        content="CelebMe, personal color test, personal color diagnosis, individual color test, warm tone cool tone, spring summer autumn winter type, fashion style recommendation, beauty style recommendation, customized style diagnosis, face analysis, celebrity test, celebrity face test, celebrity look-alike test, celebrity that looks like me, find celebrity look-alike, celebrity similar to me, celebrity resembling me, celebrity look-alike test, celebrity that looks like me, find similar celebrity, similar idol, celebrity look-alike test, celebrity test, celebrity face resemblance test, celebrity face test, celebrity similar to me test, similar celebrity, celebrity similar to me, celebrity look-alike finder, celebrity resembling me test, my AI face test, find celebrity look-alike, celebrity face similarity test, celebrity look-alike test, my celebrity look-alike test, my artificial intelligence face test, find celebrity look-alike, celebrity face resemblance finder test, celebrity appearance test, celebrity photo test, celebrity resemblance face finder, celebrity appearance test, AI celebrity test, celebrity appearance test, celebrity resemblance test, celebrity look-alike test, my AI face test, find celebrity look-alike, look-alike test, celebrity face, celebrity resemblance, similar face finder, celebrity look-alike test, face appearance test, celebrity appearance test, celebrity face appearance test, similar celebrity, celebrity face test, celebrity that looks like me, find similar celebrity, celebrity look-alike test, face analysis test, celebrity appearance test, face analysis, face age analysis, face emotion analysis, face gender analysis, face race analysis, resemblance test, celebrity look-alike, look-alike celebrity, celebrity look-alike test, find similar people, personal color test, style recommendation, fashion style, beauty style, find suitable colors, find colors that suit me, get customized fashion style recommendations" />
+    <meta name="author" content="권태헌(kwontaeheon@gmail.com)" />
     <meta name="description"
-        content="CelebMe: A test to find Korean celebrities who look like you based on their faces!
-An AI trained with representative celebrity data will find celebrities who look like you.
-The photos are not saved anywhere. Check them out right away without signing up!
-Analyze gender and emotions based on your face, and find celebrities who look like you.
-Find up to ten K-POP celebrities who look like you at once, and search for celebrity images that can be shared on SNS." />
+        content="AI face analysis to find celebrity look-alikes, personal color diagnosis (warm/cool tone, spring summer autumn winter), and customized fashion & beauty style recommendations! Find your unique style with face photo analysis including age, gender, and emotion detection. Photos are not saved anywhere for safety." />
     <link rel="stylesheet" href="/v_20250307/style.css" />
     <link rel="canonical" href="https://celebme.net/en/index.html" />
     <link rel="alternate" href="https://celebme.net/en/index.html" hreflang="en" />
@@ -38,13 +33,9 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
     <link rel="alternate" href="https://celebme.net/zh/index.html" hreflang="zh" />
     <meta property="og:url" content="https://celebme.net/en/index.html" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Find celebrities you look like" />
+    <meta property="og:title" content="CelebMe: Find Celebrity Look-alike | Personal Color Test | Fashion & Beauty Style Recommendations" />
     <meta property="og:description"
-        content="CelebMe: A test to find Korean celebrities who look like you based on their faces!
-        An AI trained with representative celebrity data will find celebrities who look like you.
-        The photos are not saved anywhere. Check them out right away without signing up!
-        Analyze gender and emotions based on your face, and find celebrities who look like you.
-        Find up to ten K-POP celebrities who look like you at once, and search for celebrity images that can be shared on SNS." />
+        content="AI face analysis to find celebrity look-alikes, personal color diagnosis (warm/cool tone, spring summer autumn winter), and customized fashion & beauty style recommendations! Find your unique style with face photo analysis including age, gender, and emotion detection." />
     <meta property="og:image" content="/banner_small.jpg" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -62,224 +53,6 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
 
         gtag('config', 'G-2LCDF4Z1GX');
     </script>
-
-            <script>
-                // Personal Color Analysis Functions (English)
-                function analyzePersonalColor() {
-                    const canvas = document.getElementById('face-image');
-                    if (!canvas) return null;
-
-                    const personalColors = ['Warm (Spring)', 'Warm (Autumn)', 'Cool (Winter)', 'Cool (Summer)'];
-                    const randomColor = personalColors[Math.floor(Math.random() * personalColors.length)];
-
-                    let colorPalette = [];
-                    switch(randomColor) {
-                        case 'Warm (Spring)':
-                            colorPalette = ['Coral', 'Peach', 'Ivory', 'Light Khaki', 'Gold'];
-                            break;
-                        case 'Warm (Autumn)':
-                            colorPalette = ['Mustard', 'Brown', 'Khaki', 'Terracotta', 'Bronze'];
-                            break;
-                        case 'Cool (Winter)':
-                            colorPalette = ['Navy', 'Black', 'White', 'Royal Blue', 'Silver'];
-                            break;
-                        case 'Cool (Summer)':
-                            colorPalette = ['Lavender', 'Mint', 'Soft Pink', 'Gray', 'Pastel Blue'];
-                            break;
-                    }
-
-                    return {
-                        season: randomColor,
-                        colors: colorPalette,
-                        skinTone: { r: 200, g: 180, b: 160 }
-                    };
-                }
-
-                function getFashionRecommendations(personalColor, isMale) {
-                    const recommendations = {
-                        'Warm (Spring)': {
-                            female: {
-                                style: 'Bright and Cheerful Style',
-                                items: ['Floral Dress', 'Coral Blouse', 'Ivory Knit', 'Beige Trench Coat'],
-                                colors: ['Coral', 'Peach', 'Ivory', 'Light Khaki']
-                            },
-                            male: {
-                                style: 'Natural Casual Style',
-                                items: ['Beige Shirt', 'Khaki Chinos', 'Navy Blazer', 'Brown Leather Jacket'],
-                                colors: ['Beige', 'Khaki', 'Navy', 'Brown']
-                            }
-                        },
-                        'Warm (Autumn)': {
-                            female: {
-                                style: 'Chic and Elegant Style',
-                                items: ['Mustard Knit', 'Brown Coat', 'Khaki Pants', 'Terracotta Blouse'],
-                                colors: ['Mustard', 'Brown', 'Khaki', 'Terracotta']
-                            },
-                            male: {
-                                style: 'Classic Formal Style',
-                                items: ['Brown Suit', 'Mustard Shirt', 'Khaki Chinos', 'Dark Brown Coat'],
-                                colors: ['Brown', 'Mustard', 'Khaki', 'Dark Brown']
-                            }
-                        },
-                        'Cool (Winter)': {
-                            female: {
-                                style: 'Modern and Sophisticated Style',
-                                items: ['Black Dress', 'White Blouse', 'Navy Coat', 'Silver Accessories'],
-                                colors: ['Black', 'White', 'Navy', 'Royal Blue']
-                            },
-                            male: {
-                                style: 'Formal Business Style',
-                                items: ['Navy Suit', 'White Shirt', 'Black Coat', 'Silver Tie'],
-                                colors: ['Navy', 'White', 'Black', 'Gray']
-                            }
-                        },
-                        'Cool (Summer)': {
-                            female: {
-                                style: 'Romantic and Soft Style',
-                                items: ['Lavender Dress', 'Soft Pink Blouse', 'Gray Cardigan', 'Mint Scarf'],
-                                colors: ['Lavender', 'Soft Pink', 'Gray', 'Mint']
-                            },
-                            male: {
-                                style: 'Gentleman Casual Style',
-                                items: ['Gray Shirt', 'Light Blue Pants', 'Navy Knit', 'White Sneakers'],
-                                colors: ['Gray', 'Light Blue', 'Navy', 'White']
-                            }
-                        }
-                    };
-
-                    return recommendations[personalColor] ? recommendations[personalColor][isMale ? 'male' : 'female'] : null;
-                }
-
-                function getBeautyRecommendations(personalColor, isMale) {
-                    const recommendations = {
-                        'Warm (Spring)': {
-                            female: {
-                                makeup: 'Bright and Fresh Makeup',
-                                lipColor: ['Coral Pink', 'Peach', 'Orange Red'],
-                                eyeColor: ['Gold Brown', 'Copper', 'Peach'],
-                                tips: ['Glowy base makeup', 'Coral blush for vitality', 'Brown mascara recommended']
-                            },
-                            male: {
-                                skincare: 'Moisture-focused Care',
-                                tips: ['Basic toner care after cleansing', 'Sunscreen essential', 'Lip balm for lip care'],
-                                colors: ['Natural skin tone maintenance']
-                            }
-                        },
-                        'Warm (Autumn)': {
-                            female: {
-                                makeup: 'Deep and Mature Makeup',
-                                lipColor: ['Brick Red', 'Burgundy', 'Brown'],
-                                eyeColor: ['Gold', 'Bronze', 'Dark Brown'],
-                                tips: ['Matte base', 'Bronzer for contouring', 'Dark brown eyeliner']
-                            },
-                            male: {
-                                skincare: 'Anti-aging Care',
-                                tips: ['Nourish with essence and cream', 'Regular scrub for exfoliation', 'Eye cream for eye area'],
-                                colors: ['Warm skin tone maintenance']
-                            }
-                        },
-                        'Cool (Winter)': {
-                            female: {
-                                makeup: 'Bold and Chic Makeup',
-                                lipColor: ['Red', 'Berry', 'Plum'],
-                                eyeColor: ['Silver', 'Black', 'Navy'],
-                                tips: ['White base for bright skin', 'Vivid lip color', 'Black eyeliner for sharp eyes']
-                            },
-                            male: {
-                                skincare: 'Whitening and Hydration Care',
-                                tips: ['Vitamin C serum for brightening', 'Hydrating cream', 'Sunscreen for skin protection'],
-                                colors: ['Clean and bright skin tone']
-                            }
-                        },
-                        'Cool (Summer)': {
-                            female: {
-                                makeup: 'Natural and Elegant Makeup',
-                                lipColor: ['Rose Pink', 'Lavender', 'Berry Pink'],
-                                eyeColor: ['Silver', 'Lavender', 'Rose Gold'],
-                                tips: ['Transparent base', 'Soft gradation', 'Pink blush for natural flush']
-                            },
-                            male: {
-                                skincare: 'Gentle Basic Care',
-                                tips: ['Use sensitive skin products', 'Light lotion for moisture', 'Non-irritating cleanser'],
-                                colors: ['Natural skin tone maintenance']
-                            }
-                        }
-                    };
-
-                    return recommendations[personalColor] ? recommendations[personalColor][isMale ? 'male' : 'female'] : null;
-                }
-
-                function displayStyleRecommendations() {
-                    const personalColorResult = analyzePersonalColor();
-                    if (!personalColorResult) return;
-
-                    const isMale = false; // Should be determined from user input
-
-                    const fashionRec = getFashionRecommendations(personalColorResult.season, isMale);
-                    const beautyRec = getBeautyRecommendations(personalColorResult.season, isMale);
-
-                    const personalColorHtml = `
-                        <h6><strong>${personalColorResult.season}</strong></h6>
-                        <p><small>Skin Tone: RGB(${personalColorResult.skinTone.r}, ${personalColorResult.skinTone.g}, ${personalColorResult.skinTone.b})</small></p>
-                        <div class="mb-2">
-                            <strong>Recommended Colors:</strong>
-                            <div class="d-flex flex-wrap mt-1">
-                                ${personalColorResult.colors.map(color => `<span class="badge badge-light mr-1 mb-1">${color}</span>`).join('')}
-                            </div>
-                        </div>
-                    `;
-
-                    const fashionHtml = fashionRec ? `
-                        <div class="card">
-                            <div class="card-header">👗 Fashion Style Recommendations</div>
-                            <div class="card-body">
-                                <h6>${fashionRec.style}</h6>
-                                <p><strong>Recommended Items:</strong></p>
-                                <ul>
-                                    ${fashionRec.items.map(item => `<li>${item}</li>`).join('')}
-                                </ul>
-                                <p><strong>Recommended Colors:</strong></p>
-                                <div class="d-flex flex-wrap">
-                                    ${fashionRec.colors.map(color => `<span class="badge badge-primary mr-1 mb-1">${color}</span>`).join('')}
-                                </div>
-                            </div>
-                        </div>
-                    ` : '';
-
-                    const beautyHtml = beautyRec ? `
-                        <div class="card">
-                            <div class="card-header">💄 Beauty Style Recommendations</div>
-                            <div class="card-body">
-                                ${!isMale ? `
-                                    <h6>${beautyRec.makeup}</h6>
-                                    <p><strong>Lip Colors:</strong></p>
-                                    <div class="d-flex flex-wrap mb-2">
-                                        ${beautyRec.lipColor.map(color => `<span class="badge badge-danger mr-1 mb-1">${color}</span>`).join('')}
-                                    </div>
-                                    <p><strong>Eye Colors:</strong></p>
-                                    <div class="d-flex flex-wrap mb-2">
-                                        ${beautyRec.eyeColor.map(color => `<span class="badge badge-warning mr-1 mb-1">${color}</span>`).join('')}
-                                    </div>
-                                    <p><strong>Makeup Tips:</strong></p>
-                                    <ul>
-                                        ${beautyRec.tips.map(tip => `<li>${tip}</li>`).join('')}
-                                    </ul>
-                                ` : `
-                                    <h6>${beautyRec.skincare}</h6>
-                                    <p><strong>Skincare Tips:</strong></p>
-                                    <ul>
-                                        ${beautyRec.tips.map(tip => `<li>${tip}</li>`).join('')}
-                                    </ul>
-                                `}
-                            </div>
-                        </div>
-                    ` : '';
-
-                    document.getElementById('personal-color-analysis').innerHTML = personalColorHtml;
-                    document.getElementById('style-recommendations').innerHTML = fashionHtml + beautyHtml;
-                    document.getElementById('personal-color-result').style.display = 'block';
-                }
-            </script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636274019237410"
         crossorigin="anonymous"></script>
@@ -401,26 +174,31 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script> -->
     <section class="section">
-        <h1 class="title">CelebMe: Find Korean celebrity look alike</h1>
-        <h4 class="subtitle">Artificial intelligence K-POP celebrity test with face</h4>
-        <h5 class="subtitle">Check the age, gender, and emotions predicted by artificial intelligence,</h5>
-        <h5 class="subtitle">Find celebrities who look like you!</h5>
-        <h4 class="sr-only">What celebrity do I resemble? Try Find My Celeb! </h4>
-        <h4 class="sr-only">
-            Artificial intelligence learned from photo data of representative celebrities will find celebrities that
-            resemble your face.
-        </h4>
-        <h4 class="sr-only">
-            This service was created using Google's artificial intelligence teachable machine 2.0, and then re-trained
-            and reorganized using Javascript-based Tensorflow.
-        </h4>
+        <h1 class="title">CelebMe: Find Celebrity Look-alike, Personal Color Test</h1>
+        <h4 class="subtitle">AI face analysis for customized style recommendations, find celebrity look-alikes</h4>
+        <p class="loading-message subtitle">Personal color diagnosis that suits you (warm tone/cool tone) <br>
+        Get customized fashion & beauty style recommendations and<br>
+        check face age, gender, emotion analysis results.<br>
+        </p>
+
+        <p class="loading-message subtitle">
+        Photo data is not saved anywhere and is safely protected. <br>
+        Discover your personal color, style, and celebrity look-alike! <br>
+        
+        </p>
+        <h6 class="sr-only">AI face analysis to find celebrity look-alikes, personal color diagnosis, and fashion & beauty style recommendations all in one! Check customized styles by warm tone cool tone, spring summer autumn winter types.</h6>
+        <h6 class="sr-only">
+            This service was created using Google's artificial intelligence teachable machine 2.0 and Javascript-based Tensorflow. Personal color analysis and style recommendation features have been added.
+        </h6>
+        <h6 class="sr-only">
+            Artificial intelligence trained with representative celebrity photo data will find celebrities that look like you, <br />
+            and diagnose your personal color through face analysis to recommend customized styles.
+        </h6>
+
         <p class="sr-only">
-            Artificial intelligence celebrity test based on your face, find a celebrity who looks like you!
-            Artificial intelligence learned from photo data of representative celebrities will find celebrities that
-            resemble your face.
-            Check it out right on the screen without even having to register!
-            Photo data is not transmitted anywhere. Take a test of my celebrity as seen by artificial intelligence!
-            Through the test, you can find celebrities who look like you.
+            AI face analysis to find celebrity look-alikes and personal color test all in one! Get warm tone cool tone diagnosis, spring summer autumn winter type personal color analysis to receive customized fashion & beauty style recommendations.
+            Artificial intelligence trained with representative celebrity photo data will find celebrities that look like your face, and simultaneously provide personal color diagnosis and style recommendations.
+            Available directly on screen without registration, and photo data is not saved anywhere and is safely protected. Discover your own personal color and style! What celebrity do I look like? What is my personal color? Start finding your own style! 
         </p>
     </section>
     <center>
@@ -430,14 +208,13 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
                 <div class="image-upload-wrap">
                     <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*" />
                     <div class="drag-text">
-                        <img src="/banner_org.png" class="mt-5 upload"
-                            alt='Start finding celebrities who look like you'>
-                        <div class="upload-text">
-                            Start by uploading or tapping<br />
-                            a photo of your face.
-
+                            <img src="/banner_org.png" class="mt-5 upload"
+                                alt='Start finding celebrities who look like you with your face'>
+                            <div class="upload-text">
+                                Upload your face photo or <br />
+                                click here to start.
+                            </div>
                         </div>
-                    </div>
                 </div>
 
                 <div class="file-upload-content">
@@ -465,11 +242,81 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
             </script>
             <div class="result-message" id="result-message">
                 <div class="h2" style="padding: 16px;">
-                    CelebMe: Face Analysis Results
+                    CelebMe: Face Analysis & Personal Color Diagnosis & Style Recommendations Results
                     <hr style="background-color:black;" />
                 </div>
                 <div class="h4" id="face-analysis-result" style="line-height: 1.8em ;">
-                    Age, gender, emotion, and race analysis results for faces
+                    AI Face Analysis: Personal Color Diagnosis, Customized Style Recommendations<br>
+                    Age, gender, emotion, race analysis results sample
+                </div>
+
+                <!-- Personal Color and Style Recommendations -->
+                <div id="style-recommendations" style="display: none;" class="mt-4">
+                    <!-- Personal Color Diagnosis with Four Quadrants -->
+                    <div class="personal-color-container">
+                        <h3 class="title">Personal Color Diagnosis</h3>
+                        <h4 class="subtitle" id="personal-color-overview">Diagnosis Overview</h4>
+                        <div class="color-grid-container">
+                            <div class="color-grid">
+                                <div class="color-quadrant " id="spring-quadrant" data-season="Warm Tone (Spring)">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">Warm Tone (Spring)</div>
+                                    <div class="face-display cropped-face-spring cropped-face-image">
+                                        <img id="spring-face" src="/banner_org.png" alt="Spring Face" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant " id="summer-quadrant" data-season="Cool Tone (Summer)">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">Cool Tone (Summer)</div>
+                                    <div class="face-display cropped-face-summer cropped-face-image">
+                                        <img id="summer-face" src="/banner_org.png" alt="Summer Face" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant " id="autumn-quadrant" data-season="Warm Tone (Autumn)">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">Warm Tone (Autumn)</div>
+                                    <div class="face-display cropped-face-autumn cropped-face-image">
+                                        <img id="autumn-face" src="/banner_org.png" alt="Autumn Face" />
+                                    </div>
+                                </div>
+                                <div class="color-quadrant" id="winter-quadrant" data-season="Cool Tone (Winter)">
+                                    <div class="best-badge" style="display: none;">BEST</div>
+                                    <div class="season-label">Cool Tone (Winter)</div>
+                                    <div class="face-display cropped-face-winter cropped-face-image">
+                                        <img id="winter-face" src="/banner_org.png" alt="Winter Face" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Style Recommendations Cards -->
+                    <div class="style-cards-container mt-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="style-card fashion-card">
+                                    <div class="card-icon">👗</div>
+                                    <div class="card-header">
+                                        <h3 class="title">Personalized Fashion Style</h3>
+                                    </div>
+                                    <div class="card-content" id="fashion-style-result">
+                                        <!-- Fashion style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="style-card beauty-card">
+                                    <div class="card-icon">💄</div>
+                                    <div class="card-header">
+                                        <h3>Personalized Beauty Style</h3>
+                                    </div>
+                                    <div class="card-content" id="beauty-style-result">
+                                        <!-- Beauty style recommendations will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="charts">
@@ -509,10 +356,8 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
             <div class="result-message" id="result-similar-idol">
 
                 <canvas id="cropped-face-image-1" style="display: none;"></canvas>
-
-                <div id="cropped-face-image-2" class="cropped-face-container styled-canvas" style="display: none;">
-                        <img id="cropped-face-display-2" src="" alt="Cropped Face" class="cropped-face-image">
-                    </div>
+                <canvas id="cropped-face-image-2" class="styled-canvas" width="100" height="100"
+                    style="max-width: 30%; max-height: 30%; border: 0px;"></canvas>
 
 
                 <div class="h2" style="padding: 10px;">
@@ -522,7 +367,7 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
 
                 <div class="normaltext" id="celeb-result-desc">
                     <div class="normaltext" id="celeb-result">
-                        Click on the celebrity name to search for images.
+                        <h3>Search result sample</h3>
                     </div>
                     Click on the celebrity name to search for images.<br /><br />
                 </div>
@@ -539,7 +384,7 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
                 <div id="rank1" style="width:45%;" onclick="displayIdolPrediction(1);"></div>
 
                 <div class="row" style="font-size: 1.1rem; margin: 10px;" id="extra-similars">
-                    <div style="width: 33%; max-height: 20%; overflow: hidden;">
+                    <div style="width: 33%; height: 100%; ">
                         <!-- https://wiki.creativecommons.org/wiki/CC_Search_integration -->
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(2);">
                             <div class='result-title' id="r2"> #2 </div>
@@ -554,20 +399,21 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(5);">
                             <div class='result-title' id="r5"> #5 </div>
                         </button>
+                        <div id="rank5" style="max-height:30%;" onclick="displayIdolPrediction(5);"></div>
                         <!-- <div id="search5" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q5"></div> -->
-                        <div id="rank5" style="max-height:30%;" onclick="displayIdolPrediction(5);"></div>
+
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(8);">
                             <div class='result-title' id="r8"> #8 </div>
                         </button>
+                        <div id="rank8" style="max-height:30%;" onclick="displayIdolPrediction(8);"></div>
                         <!-- <div id="search8" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q8"></div> -->
-                        <div id="rank8" style="max-height:30%;" onclick="displayIdolPrediction(8);"></div>
 
 
                     </div>
@@ -575,64 +421,65 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(3);">
                             <div class='result-title' id="r3"> #3 </div>
                         </button>
+                        <div id="rank3" style="max-height:30%;" onclick="displayIdolPrediction(3);"></div>
                         <!-- <div id="search3" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q3"></div> -->
-                        <div id="rank3" style="max-height:30%;" onclick="displayIdolPrediction(3);"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(6);">
                             <div class='result-title' id="r6"> #6 </div>
                             <!-- <span class="search-text" id="s6">🔍</span> -->
                         </button>
+                        <div id="rank6" style="max-height:30%;" onclick="displayIdolPrediction(6);"></div>
                         <!-- <div id="search6" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q6"></div> -->
-                        <div id="rank6" style="max-height:30%;" onclick="displayIdolPrediction(6);"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(9);">
                             <div class='result-title' id="r9"> #9 </div>
                         </button>
+                        <div id="rank9" style="max-height:30%;" onclick="displayIdolPrediction(9);"></div>
                         <!-- <div id="search9" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q9"></div> -->
-                        <div id="rank9" style="max-height:30%;" onclick="displayIdolPrediction(9);"></div>
+
 
                     </div>
                     <div style="width: 33%; max-height: 20%;  overflow: hidden;">
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(4);">
                             <div class='result-title' id="r4"> #4 </div>
                         </button>
+                        <div id="rank4" style="max-height:30%;" onclick="displayIdolPrediction(4);"></div>
                         <!-- <div id="search4" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q4"></div> -->
-                        <div id="rank4" style="max-height:30%;" onclick="displayIdolPrediction(4);"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(7);">
                             <div class='result-title' id="r7"> #7 </div>
                             <!-- <span class="search-text" id="s7">🔍</span> -->
                         </button>
+                        <div id="rank7" style="max-height:30%;" onclick="displayIdolPrediction(7);"></div>
                         <!-- <div id="search7" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q7"></div> -->
-                        <div id="rank7" style="max-height:30%;" onclick="displayIdolPrediction(7);"></div>
 
 
                         <button type="button p-2" class="search-btn" onclick="displayIdolPrediction(10);">
                             <div class='result-title' id="r10"> #10 </div>
                         </button>
+                        <div id="rank10" style="max-height:30%;" onclick="displayIdolPrediction(10);"></div>
                         <!-- <div id="search10" class="gcse-searchresults-only"
                             data-image_as_rights="(cc_publicdomain+cc_attribute+cc_sharealike)-(cc_noncommercial+cc_nonderived)"
                             data-mobileLayout="disabled" data-imageSearchResultSetSize="1" data-disableWebSearch="true"
                             data-image_type="face" data-gname="q10"></div> -->
-                        <div id="rank10" style="max-height:30%;" onclick="displayIdolPrediction(10);"></div>
 
 
                     </div>
@@ -698,7 +545,7 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
             <button type="button p-2" class="my-share-btn" id="shareKt1"
                 onclick="gtag('event', '카톡공유클릭', {'event_category': '공유클릭','event_label': '카톡공유클릭'}); shareKakao();"
                 style="margin:10px; height: 40px; background-color: #353709;">
-                <span class="try-again-text" style="font-size: 1.3rem;">Share Kakao
+                <span class="try-again-text" style="font-size: 1.4rem;">Share Kakao
                     <img src="/puppy/talk-share.png" style="width: 30px; height: 30px;" />
                 </span>
             </button>
@@ -706,7 +553,7 @@ Find up to ten K-POP celebrities who look like you at once, and search for celeb
             <button type="button p-2" class="my-share-btn"
                 onclick="gtag('event', 'URL공유클릭', {'event_category': '공유클릭','event_label': 'URL공유클릭'}); shareUrl();"
                 style="margin:10px; height: 40px; background-color: #353709;">
-                <span class="try-again-text" style="font-size: 1.3rem;">Copy link 🔗</span>
+                <span class="try-again-text" style="font-size: 1.4rem;">Copy link 🔗</span>
             </button>
 
             <button type="button p-2" class="try-again-btn" onclick="gaReload();" style="margin:10px;">
