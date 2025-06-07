@@ -220,6 +220,9 @@ function drawChart(userData) {
     try{ 
     document.getElementById("createGif").style.display = "block";
     document.getElementById("createComparisonPic").style.display = "block";
+    $("#result-message-section").show();
+    $("#download-comparison").show();
+    $("#make-comparison").show();
     } catch (e) {
 
     }
@@ -526,7 +529,7 @@ function getSimilarCeleb(inputImage) {
       // window.history.replaceState({}, document.title, "/");
       $("html, body").animate(
         {
-          scrollTop: document.getElementsByClassName("title")[0].offsetTop - 50 // 50px 여유 공간
+          scrollTop: document.getElementById("headtitle").offsetTop - 50 // 50px 여유 공간
         },
         800 // 애니메이션 지속 시간(ms)
       );
@@ -938,13 +941,13 @@ function displayIdolPrediction(rank) {
       var element = google.search.cse.element.getElement('q0');
       element.execute(q);
 
-      $("html, body").animate(
-        {
-          scrollTop: $("#result-creation").offset().top - 50 // 50px 여유 공간
-        },
-        800 // 애니메이션 지속 시간(ms)
-      );
-      // $('#search' + rank).show();
+      // $("html, body").animate(
+      //   {
+      //     scrollTop: $("#result-creation").offset().top - 50 // 50px 여유 공간
+      //   },
+      //   800 // 애니메이션 지속 시간(ms)
+      // );
+      $('#search' + rank).show();
       // $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% _");
 
       // window.history.replaceState({}, document.title, "/");
@@ -1178,12 +1181,12 @@ function createComparisonImage(img1, img2, rank, celebme=false) {
     ctx.globalAlpha = 1;
 
     // 캡처 및 다운로드 버튼 표시
-    const element = document.getElementById('result-message-section');
-    element.style.display = 'block';
+    // const element = document.getElementById('result-message-section');
+    // element.style.display = 'block';
     const captureButton = document.getElementById('download-comparison');
-    captureButton.style.display = 'block';
-    const captureCreateButton = document.getElementById('make-comparison');
-    captureCreateButton.style.display = 'block';
+    // captureButton.style.display = 'block';
+    // const captureCreateButton = document.getElementById('make-comparison');
+    // captureCreateButton.style.display = 'block';
     const createButton = document.getElementById('createComparisonPic');
     createButton.style.display = 'none';
     captureButton.addEventListener('click', captureAndDownload);
@@ -1220,7 +1223,7 @@ async function displayResults(result) {
 
   // 다운로드 버튼에 이벤트 리스너 추가
   const downloadButton = document.getElementById('download-comparison');
-  downloadButton.style.display = 'block';
+  // downloadButton.style.display = 'block';
   downloadButton.addEventListener('click', captureAndDownload);
 
   // 얼굴 인식 여부 확인
@@ -1353,7 +1356,7 @@ function removeUpload() {
   // document.getElementById("search").height = 0;
   $("html, body").animate(
     {
-      scrollTop: document.getElementsByClassName("title")[0].offsetTop - 50 // 50px 여유 공간
+      scrollTop: document.getElementById("headtitle").offsetTop - 50 // 50px 여유 공간
     },
     800 // 애니메이션 지속 시간(ms)
   );
@@ -1557,11 +1560,11 @@ function showResults(resultParam, faceParam) {
       )
 
       $('#extra-similars').hide();
-      $('#result-creation').hide();
+      // $('#result-creation').hide();
 
       $("html, body").animate(
         {
-          scrollTop: document.getElementsByClassName("title")[0].offsetTop - 50 // 50px 여유 공간
+          scrollTop: document.getElementById("headtitle").offsetTop - 50 // 50px 여유 공간
         },
         800 // 애니메이션 지속 시간(ms)
       );
@@ -1664,7 +1667,7 @@ async function displayComparisonCelebMe(searchIdx) {
   // 로딩 토글
   loadingGif.style.display = 'none';
   var downButton = document.getElementById('download-comparison');
-  downButton.style.display = 'block';
+  // downButton.style.display = 'block';
 }
 
 function displayAnimation(searchIdx) {
