@@ -748,8 +748,10 @@ function getBeautyRecommendations(personalColor, isMale) {
 function displayStyleRecommendations() {
   // Get personal color analysis
   const personalColorResult = analyzePersonalColor();
-
-  if (!personalColorResult) {
+    gtag("event", `personalColor_${personalColorResult.season}`, {
+      event_category: "personalColorAnalysis",
+    });
+    if (!personalColorResult) {
     console.log("Personal color analysis failed");
     return;
   }
@@ -954,10 +956,10 @@ function displayIdolPrediction(rank) {
       window.history.replaceState({}, document.title, getBaseUrl());
 
       gtag("event", "similar_idol_result", {
-        celeb: r.replaceAll(" ", ""),
+        celeb: koName.replaceAll(" ", ""),
         rank: rank
       });
-      gtag("event", r.replaceAll(" ", ""), {
+      gtag("event", koName.replaceAll(" ", ""), {
         event_category: "similar_idol_result",
         rank: rank,
         result_face: true,
