@@ -503,7 +503,3 @@ input:checked + label > .knob > i:before {
 div#disqus_thread iframe[sandbox] {
     max-height: 0px !important;
 }
-body {
-    font-family: "Maru Buri", sans-serif;
-    text-align: center;
-}
