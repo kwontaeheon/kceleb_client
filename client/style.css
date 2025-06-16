@@ -507,32 +507,3 @@ body {
     font-family: "Maru Buri", sans-serif;
     text-align: center;
 }
-
-/* Style recommendation cards */
-#style-recommendations .card {
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-#style-recommendations .card-header {
-    background-color: #f8f9fa;
-    font-weight: bold;
-}
-
-#style-recommendations .card-body {
-    text-align: left;
-    padding: 1rem;
-}
-
-#style-recommendations .badge {
-    font-size: 0.8rem;
-    margin: 0.1rem;
-}
-
-#style-recommendations ul {
-    margin-bottom: 0.5rem;
-}
-
-#style-recommendations li {
-    margin-bottom: 0.2rem;
-}
