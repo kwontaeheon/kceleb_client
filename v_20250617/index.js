@@ -485,6 +485,7 @@ function getSimilarCeleb(inputImage) {
       // Handle the response data here
       // console.log(data);
       try {
+        similarIdolData = data;
         for (var rank = 0; rank < 10; rank++) {
           delete data[rank].source_h;
           delete data[rank].source_w;
@@ -495,7 +496,15 @@ function getSimilarCeleb(inputImage) {
           delete data[rank].target_x;
           delete data[rank].target_y;
           delete data[rank].threshold;
+
+          similarIdolData[rank].name = faceNames[similarIdolData[rank].identity];
+          similarIdolData[rank].nameKo = faceNamesKo[similarIdolData[rank].identity];
+          similarIdolData[rank].originalIdentity = similarIdolData[rank].originalIdentity;
         }
+       
+        // for (var rank = 0; rank < 10; rank++) {
+          
+        // }
       } catch (error) {
         console.log(error);
         gtag("event", "errorGetSimilarCelebDelete", {
@@ -503,12 +512,7 @@ function getSimilarCeleb(inputImage) {
       });
       }
 
-      similarIdolData = data;
-      for (var rank = 0; rank < 10; rank++) {
-        similarIdolData[rank].name = faceNames[similarIdolData[rank].identity];
-        similarIdolData[rank].nameKo = faceNamesKo[similarIdolData[rank].identity];
-        similarIdolData[rank].originalIdentity = similarIdolData[rank].originalIdentity;
-      }
+      
       // console.log(faceNames, faceNamesKo,similarIdolData );
       displayIdolPredictionBriefly(similarIdolData);
       // displayIdolPrediction(1);
@@ -885,7 +889,7 @@ function displayIdolPredictionBriefly(data) {
       const r = data[rank - 1].name; // .split("/")[1]]
 
       // $('#fr' + rank).html(r+ ": " +  ((1 - data[rank - 1].distance) * 100).toFixed(1) + "%");
-      $('#r' + rank).html(r + ": " + ((data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
+      $('#r' + rank).html(r + ": " + ((1 - data[rank - 1].distance) * 100).toFixed(1) + "% 🔍");
       // console.log(data[rank-1].originalIdentity);
       //  object-fit: cover;
       $('#rank' + rank).html(`
