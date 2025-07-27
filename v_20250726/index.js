@@ -1165,7 +1165,7 @@ function createComparisonImage(img1, img2, rank, celebme=false) {
     // 닮은 정도 표시
     if (celebme == true) {
       document.getElementById('similar-celeb').textContent = `${similarIdolData[rank-1].name}`;
-      const similarityScore = ((similarIdolData[rank-1].distance) * 100);
+      const similarityScore = ((1 - similarIdolData[rank-1].distance) * 100);
       document.getElementById('similarity-score').textContent = `${similarityScore.toFixed(2)}%`;
 
       // 일치 여부 표시
@@ -1548,7 +1548,7 @@ function showResults(resultParam, faceParam) {
       // }
       // drawChart(faceData);
       $('#result-message').hide();
-      $('#r1').html(similarIdolData[0].name + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "% 🔍");
+      $('#r1').html(similarIdolData[0].name + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "% 🔍");
       // displayIdolPredictionBriefly(similarIdolData);
       if (similarIdolData && similarIdolData[0] && similarIdolData[0].originalIdentity) {
 
@@ -1617,7 +1617,7 @@ function shareKakao(customTemplateId) {
         templateId: templateId,
         templateArgs: {
           'result_url': link,    // encoded url
-          'result': similarIdolData[0].name + ": " + ((similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
+          'result': similarIdolData[0].name + ": " + ((1 - similarIdolData[0].distance) * 100).toFixed(1) + "%" // result text '에스파 닝닝: 56%'
         }
       }
     );
