@@ -33,21 +33,25 @@ const toggleButton = document.getElementById('toggleButton');
       // Use jsonData as needed
       faceNames = jsonData;
       const jsonKeys = Object.keys(faceNames);
+      const celebCount = jsonKeys.length;
+      const countEl = document.getElementById('celeb-count');
+      if (countEl) countEl.textContent = celebCount;
+      document.querySelectorAll('.celeb-count-display').forEach(function(el) {
+        el.textContent = celebCount;
+      });
+
       jsonKeys.forEach(key => {
-        const keyValueContainer = document.createElement('div');
-        const keyElement = document.createElement('span');
-        const valueElement = document.createElement('span');
-
-        keyElement.classList.add('json-key');
-        valueElement.classList.add('json-string');
-
-        keyElement.textContent = `"${key}": `;
-        valueElement.textContent = `"${faceNames[key]}"`;
-
-        keyValueContainer.appendChild(keyElement);
-        keyValueContainer.appendChild(valueElement);
-
-        jsonContainer.appendChild(keyValueContainer);
+        const badge = document.createElement('span');
+        badge.classList.add('celeb-badge');
+        badge.textContent = faceNames[key];
+        badge.title = faceNames[key] + ' 검색';
+        badge.style.cursor = 'pointer';
+        badge.addEventListener('click', function() {
+          searchCelebByName(faceNames[key]);
+          document.querySelectorAll('.celeb-badge.selected').forEach(function(b) { b.classList.remove('selected'); });
+          badge.classList.add('selected');
+        });
+        jsonContainer.appendChild(badge);
       });
       // console.log(jsonData);
     })
@@ -127,21 +131,57 @@ function getMeta(name) {
 
 
 
-function toggleCelebList() {
-  const x = jsonContainer;
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+function setAnalysisStep(step) {
+  for (var i = 1; i <= 5; i++) {
+    var el = document.getElementById('astep-' + i);
+    if (!el) continue;
+    el.classList.remove('active', 'done');
+    if (i < step) el.classList.add('done');
+    else if (i === step) el.classList.add('active');
   }
+  for (var j = 1; j <= 4; j++) {
+    var line = document.getElementById('aline-' + j);
+    if (line) line.classList.toggle('done', j < step);
+  }
+}
+
+function toggleCelebList() {
+  const panel = document.getElementById('celeb-list-panel');
+  const btn = document.getElementById('celebListToggleBtn');
+  if (panel.style.display === "none") {
+    panel.style.display = "block";
+    btn.innerHTML = '<span class="try-again-text" style="font-size:1.4rem;">&#9650; 연예인 목록 닫기</span>';
+    document.getElementById('celebSearchInput').focus();
+  } else {
+    panel.style.display = "none";
+    btn.innerHTML = '<span class="try-again-text" style="font-size:1.4rem;">&#127775; 등록 연예인 목록 보기</span>';
+  }
+}
+
+function filterCelebList(query) {
+  const badges = jsonContainer.querySelectorAll('.celeb-badge');
+  const q = query.trim().toLowerCase();
+  badges.forEach(function(badge) {
+    badge.style.display = badge.textContent.toLowerCase().includes(q) ? 'inline-block' : 'none';
+  });
+}
+
+function searchCelebByName(name) {
+  document.getElementById('celeb-cse-result').style.display = 'block';
+  var interval = setInterval(function() {
+    if (typeof google !== 'undefined' && google.search && google.search.cse) {
+      clearInterval(interval);
+      var el = google.search.cse.element.getElement('celeblist');
+      if (el) {
+        el.execute(name + ' 연예인');
+        document.getElementById('celeb-cse-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, 200);
 }
 // toggleButton.addEventListener('click', function () {
 
 // });
-
-// $(".result-message").hide();  // 셀럽미 결과화면 토글 
-
-
 
 
 // 쿠키 확인 
@@ -514,15 +554,22 @@ function getSimilarCeleb(inputImage) {
 
       
       // console.log(faceNames, faceNamesKo,similarIdolData );
+      setAnalysisStep(5);
       displayIdolPredictionBriefly(similarIdolData);
-      // displayIdolPrediction(1);
       $('#extra-similars').show();
       $('#result-creation').show();
-      // updateKakaoLink();
       $(".try-again-btn").show();
-      $(".result-message").show();
-      // $("#loading").hide();
+      $(".share-action-btn").show();
+      $(".result-message").addClass('result-fade-in').show();
       $("#celeb-spinner").hide();
+
+      // SEO: 결과 표시 시 title·meta description 업데이트
+      try {
+        var top1Ko = similarIdolData[0].nameKo || similarIdolData[0].name;
+        document.title = top1Ko + ' 닮은꼴 | 셀럽미 닮은 연예인 찾기';
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', '내 얼굴 분석 결과, ' + top1Ko + '와 가장 닮았어요! 셀럽미에서 나의 닮은 K-pop 아이돌·배우를 무료로 찾아보세요.');
+      } catch(e) {}
 
       // document.getElementById('cropped-image-2')
       // displayComparisonCelebMe(1); // 얼굴분석완료이후에 움짤이미지 생성
@@ -894,9 +941,9 @@ function displayIdolPredictionBriefly(data) {
       //  object-fit: cover;
       $('#rank' + rank).html(`
         <div style="width: 100%; height: 100%; max-width: 512px; max-height: 512px; margin: 0 auto;">
-          <img src="/${data[rank-1].originalIdentity}" 
+          <img src="/${data[rank-1].originalIdentity}"
                style="padding: 4%; border-radius: 20%; width: 100%; height: 100%;"
-               alt="Original celebrity image"
+               alt="${r} 닮은 연예인 - 셀럽미 닮은꼴 테스트"
                id="imgRank${rank}"
                crossorigin="anonymous">
         </div>
@@ -1300,17 +1347,6 @@ function cropAndDisplayImage(imgSource, area, elementId) {
 
 async function readURL(input) {
   if (input.files && input.files[0]) {
-    // $(".try-again-btn").hide();
-
-    // 동의모드는 추후구현
-    // gtag('consent', 'default', {
-    //   'ad_storage': 'denied',
-    //   'ad_user_data': 'denied',
-    //   'ad_personalization': 'denied',
-    //   'analytics_storage': 'denied',
-    //   'wait_for_update': 500
-    // });
-
     gtag("event", "AI호출시작", {
       event_category: "AI호출시작",
     });
@@ -1323,30 +1359,25 @@ async function readURL(input) {
     };
     await reader.readAsDataURL(input.files[0]);
     $(".file-upload-content").show();
-    $("#loading-message").html(getMeta("analyzing_face"))
     $("#loading").show();
     $("#celeb-spinner").show();
     $(".result-message").hide();
+    $(".share-action-btn").hide();
+    $(".try-again-btn").hide();
     $("#result-similar-idol").hide();
+    setAnalysisStep(1);
+    $("#loading-message").html("사진을 준비하고 있어요...");
+    setTimeout(function() { setAnalysisStep(2); $("#loading-message").html("얼굴을 인식하고 있어요..."); }, 1000);
+    setTimeout(function() { setAnalysisStep(3); $("#loading-message").html("얼굴 특징을 분석하고 있어요..."); }, 2800);
+    setTimeout(function() { setAnalysisStep(4); $("#loading-message").html("연예인 데이터와 비교하고 있어요..."); }, 5500);
 
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");
       cropImage(imgData, function (resizedImg) {
-       setTimeout(function () {
-        analyzeFace(resizedImg).then(function (croppedImage) {
-          // getSimilarCeleb 을 analyzeFace 내부에서 blob 이후 호출
-
-
-        });
-      }, 5000);
-
-
-      })
-
-      // predict().then(function (prom) {
-
-      //     });
-
+        setTimeout(function () {
+          analyzeFace(resizedImg);
+        }, 5000);
+      });
     };
   } else {
     removeUpload();
@@ -1589,6 +1620,7 @@ function showResults(resultParam, faceParam) {
 
 
   $(".try-again-btn").show();
+  $(".share-action-btn").show();
   $(".result-message").show();
   // window.location.href = window.location.pathname + "?q1=" + faceNames[similarIdolData[0].identity];
   // displayIdolPrediction(1);
@@ -1734,7 +1766,7 @@ function displayAnimation(searchIdx) {
     ctx.lineJoin = 'miter';
     ctx.miterLimit = 2;
     ctx.strokeStyle = '#000000';
-    var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + ((similarIdolData[searchIdx - 1].distance) * 100).toFixed(1) + "%";
+    var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + ((1 - similarIdolData[searchIdx - 1].distance) * 100).toFixed(1) + "%";
     ctx.fillText(contentText, fontWidth, fontHeight);
     ctx.strokeText(contentText, fontWidth, fontHeight);
     gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition
