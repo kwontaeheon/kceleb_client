@@ -66,7 +66,7 @@ const toggleButton = document.getElementById('toggleButton');
 
 var resultMeta = {};
 (function () {
-  fetch(version + "/meta_" + lang + ".json")
+  fetch(version + "/meta-" + lang + ".json")
     .then(response => response.json())
     .then(jsonData => {
       // Use jsonData as needed
@@ -150,11 +150,11 @@ function toggleCelebList() {
   const btn = document.getElementById('celebListToggleBtn');
   if (panel.style.display === "none") {
     panel.style.display = "block";
-    btn.innerHTML = '<span class="try-again-text" style="font-size:1.4rem;">&#9650; 연예인 목록 닫기</span>';
+    btn.innerHTML = '<span class="try-again-text" style="font-size:1.4rem;">&#9650; ' + getMeta("celebListCloseText") + '</span>';
     document.getElementById('celebSearchInput').focus();
   } else {
     panel.style.display = "none";
-    btn.innerHTML = '<span class="try-again-text" style="font-size:1.4rem;">&#127775; 등록 연예인 목록 보기</span>';
+    btn.innerHTML = '<span class="try-again-text" style="font-size:1.4rem;">&#127775; ' + getMeta("celebListText") + '(<span id="celeb-count">569</span>)</span>';
   }
 }
 
@@ -1766,7 +1766,7 @@ function displayAnimation(searchIdx) {
     ctx.lineJoin = 'miter';
     ctx.miterLimit = 2;
     ctx.strokeStyle = '#000000';
-    var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + ((1 - similarIdolData[searchIdx - 1].distance) * 100).toFixed(1) + "%";
+    var contentText = "celebme.net " + similarIdolData[searchIdx - 1].name + ": " + (similarIdolData[searchIdx - 1].distance * 100).toFixed(1) + "%";
     ctx.fillText(contentText, fontWidth, fontHeight);
     ctx.strokeText(contentText, fontWidth, fontHeight);
     gif.addFrame(ctx, { copy: true, delay: 500 }); // Delay before transition

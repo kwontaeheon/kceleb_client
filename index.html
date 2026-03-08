@@ -369,7 +369,7 @@
                         <div class="analysis-steps-bar" role="progressbar" aria-label="분석 진행 상태">
                             <div class="astep active" id="astep-1">
                                 <div class="astep-dot">📸</div>
-                                <span class="astep-label">이미지 처리</span>
+                                <span class="astep-label">사진 전처리</span>
                             </div>
                             <div class="astep-line" id="aline-1"></div>
                             <div class="astep" id="astep-2">
@@ -708,22 +708,10 @@
                     <h4 class="subtitle share-action-btn" style="display:none;">나랑 닮은 연예인 찾기 결과를 공유해보세요!</h4>
                 </center>
             </div>
-
-
-
             <br />
-
-
-
-
-
-
-
-
-
             <button type="button" id="celebListToggleBtn" class="my-share-btn" onclick="toggleCelebList();"
                 style="margin:10px; background-color: #35885d;">
-                <span class="try-again-text" style="font-size: 1.4rem;">&#127775; 등록 연예인 목록 보기 (<span id="celeb-count">569</span>명)</span>
+                <span class="try-again-text" style="font-size: 1.4rem;">&#127775; 연예인 목록 보기 (<span id="celeb-count">569</span>명)</span>
             </button>
             <div id="celeb-list-panel" style="display:none; margin:10px;">
                 <input type="text" id="celebSearchInput" placeholder="연예인 이름 검색..." oninput="filterCelebList(this.value)"
