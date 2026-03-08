@@ -986,7 +986,7 @@ function displayIdolPrediction(rank, initial = false) {
     // else {
 
       // console.log(r);
-      q = 'allintitle: "' + koName + '"';
+      q =  koName;
       // q = '"' + koName + '"' + " portrait -youtube";
       // q = koName + " portrait -youtube -남편 -아내 -여러명 -논란";
 
