@@ -247,38 +247,35 @@
         crossorigin="anonymous"></script>
 
     <nav class="p-3 container navbar navbar-expand-lg navbar-light" style="border-bottom: 1px solid #f0f2f5;">
-
-        <a class="navbar-brand" href="/" style="font-weight:700; font-size:1.8rem;">셀럽미</a>
+        <a class="navbar-brand" href="/" style="font-weight:700; font-size:1.8rem;">셀럽미: 닮은 연예인 찾기</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active"
-                    onclick="gtag('event', '닮은 연예인 찾기 이동', {'event_category': '닮은 연예인 찾기 이동','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/" style="font-weight:600;">&#127914; 닮은 연예인 찾기</a>
+                <li class="nav-item active" onclick="gtag('event','Nav Home','event_category','navigation');">
+                    <a class="nav-link" href="/" style="font-weight:600;">&#127914; 셀럽미: 닮은 연예인 찾기</a>
                 </li>
-                <li class="nav-item"
-                    onclick="gtag('event', '매칭테스트 이동', {'event_category': '매칭테스트 이동','event_label': '상단 메뉴'});">
+                <li class="nav-item" onclick="gtag('event','Nav Face Match','event_category','navigation');">
                     <a class="nav-link" href="/match/index.html">&#128145; 얼굴 매칭 테스트</a>
                 </li>
-                <li class="nav-item"
-                    onclick="gtag('event', '퍼피테스트 클릭', {'event_category': '퍼피테스트 클릭','event_label': '상단 메뉴'});">
+                <li class="nav-item" onclick="gtag('event','Nav Interval Timer','event_category','navigation');">
+                    <a class="nav-link" href="/timer/index.html">&#128337; 인터벌 타이머</a>
+                </li>
+                <li class="nav-item" onclick="gtag('event','Nav Slot','event_category','navigation');">
+                    <a class="nav-link" href="/slot/index.html">&#127922; 슬롯머신 시뮬레이터</a>
+                </li>
+                <li class="nav-item" onclick="gtag('event','Nav On-device','event_category','navigation');">
+                    <a class="nav-link" href="/client/index.html">&#128241; (On-device) 셀럽미: 닮은 아이돌 찾기</a>
+                </li>
+                <li class="nav-item" onclick="gtag('event','Nav Puppy','event_category','navigation');">
                     <a class="nav-link" href="/puppy/index.html">&#128054; 닮은 강아지 MBTI</a>
                 </li>
-                <li class="nav-item"
-                    onclick="gtag('event', '과제생활 동물찾기 클릭', {'event_category': '과제생활 동물찾기 클릭','event_label': '상단 메뉴'});">
+                <li class="nav-item" onclick="gtag('event','Nav Animal','event_category','navigation');">
                     <a class="nav-link" href="/animaltest/index.html">&#129409; 닮은 동물 MBTI</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#how-to-use">&#128214; 사용 방법</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#faq">&#10067; FAQ</a>
-                </li>
-                <li class="nav-item"
-                    onclick="gtag('event', '러블리햄의 블로그 클릭', {'event_category': '러블리햄의 블로그 클릭','event_label': '상단 메뉴'});">
+                <li class="nav-item" onclick="gtag('event','Nav Blog','event_category','navigation');">
                     <a class="nav-link" href="/blog">&#9998; 블로그</a>
                 </li>
             </ul>
@@ -343,6 +340,35 @@
             <span class="hero-badge">&#10003; 사진 저장 없음</span>
             <span class="hero-badge">&#10003; 닮은 연예인 TOP 10</span>
             <span class="hero-badge">&#10003; 퍼스널컬러 진단</span>
+        </div>
+        <!-- 추가 링크 -->
+        <div class="hero-badges" style="flex-direction: column; align-items: center; gap: 10px;">
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <a href="#how-to-use" class="hero-badge" style="text-decoration: none; cursor: pointer; background: linear-gradient(135deg, #4caf50, #66bb6a);">
+                    <span style="font-size: 1.2em;">📖</span> 사용 방법
+                </a>
+                <a href="#faq" class="hero-badge" style="text-decoration: none; cursor: pointer; background: linear-gradient(135deg, #4caf50, #66bb6a);">
+                    <span style="font-size: 1.2em;">❓</span> FAQ
+                </a>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button type="button" id="celebListToggleBtn" class="hero-badge" onclick="toggleCelebList();" style="background: linear-gradient(135deg, #4caf50, #66bb6a); cursor: pointer; border: none;">
+                    <span style="font-size: 1.2em;">&#127775;</span> 연예인 목록 보기 (<span id="celeb-count">569</span>명)
+                </button>
+            </div>
+        </div>
+        <div id="celeb-list-panel" style="display:none; margin:10px;">
+            <input type="text" id="celebSearchInput" placeholder="연예인 이름 검색..." oninput="filterCelebList(this.value)"
+                style="width:100%; max-width:400px; padding:10px 16px; border:1.5px solid #d0d7e2; border-radius:24px; font-size:1.4rem; margin-bottom:14px; outline:none; box-sizing:border-box;" />
+            <div id="json-container" class="json-container"></div>
+            <div id="celeb-cse-result" style="margin-top:16px; text-align:left;">
+                <div id="search-celeblist" class="gcse-searchresults-only"
+                    data-webSearchResultSetSize="5"
+                    data-imageSearchResultSetSize="6"
+                    data-image_type="face"
+                    data-filter="1"
+                    data-gname="celeblist"></div>
+            </div>
         </div>
     </section>
     <center>
@@ -709,23 +735,8 @@
                 </center>
             </div>
             <br />
-            <button type="button" id="celebListToggleBtn" class="my-share-btn" onclick="toggleCelebList();"
-                style="margin:10px; background-color: #35885d;">
-                <span class="try-again-text" style="font-size: 1.4rem;">&#127775; 연예인 목록 보기 (<span id="celeb-count">569</span>명)</span>
-            </button>
-            <div id="celeb-list-panel" style="display:none; margin:10px;">
-                <input type="text" id="celebSearchInput" placeholder="연예인 이름 검색..." oninput="filterCelebList(this.value)"
-                    style="width:100%; max-width:400px; padding:10px 16px; border:1.5px solid #d0d7e2; border-radius:24px; font-size:1.4rem; margin-bottom:14px; outline:none; box-sizing:border-box;" />
-                <div id="json-container" class="json-container"></div>
-                <div id="celeb-cse-result" style="margin-top:16px; text-align:left;">
-                    <div id="search-celeblist" class="gcse-searchresults-only"
-                        data-webSearchResultSetSize="5"
-                        data-imageSearchResultSetSize="6"
-                        data-image_type="face"
-                        data-filter="1"
-                        data-gname="celeblist"></div>
-                </div>
-            </div>
+
+
             <br />
 
 

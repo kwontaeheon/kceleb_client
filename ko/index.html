@@ -126,45 +126,36 @@
         crossorigin="anonymous"></script>
 
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
-
-        <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">셀럽미: 닮은 연예인 찾기</a>
+        <a class="navbar-brand" href="/" onClick="top.location='javascript:location.reload()'" style="font-weight:700; font-size:1.8rem;">셀럽미: 닮은 연예인 찾기</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active"
-                    onclick="gtag('event', '매칭테스트 이동', {'event_category': '매칭테스트 이동','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/match/index.html"> 셀럽미: 얼굴 매칭 테스트
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item active" onclick="gtag('event','Nav Home','event_category','navigation');">
+                    <a class="nav-link" href="/" style="font-weight:600;">&#127914; 셀럽미: 닮은 연예인 찾기</a>
                 </li>
-
-                <li class="nav-item active"
-                    onclick="gtag('event', '닮은 아이돌 찾기 클릭', {'event_category': '닮은 아이돌 찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/client/index.html">(On-device) 셀럽미: 닮은 아이돌 찾기
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item" onclick="gtag('event','Nav Face Match','event_category','navigation');">
+                    <a class="nav-link" href="/match/index.html">&#128145; 셀럽미: 얼굴 매칭 테스트</a>
                 </li>
-                <li class="nav-item active"
-                    onclick="gtag('event', '퍼피테스트 클릭', {'event_category': '퍼피테스트 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/puppy/index.html"
-                        onClick="top.location='javascript:location.reload()'">닮은 강아지 테스트 MBTI
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item" onclick="gtag('event','Nav Interval Timer','event_category','navigation');">
+                    <a class="nav-link" href="/timer/index.html">&#128337; 인터벌 타이머</a>
                 </li>
-                <li class="nav-item active"
-                    onclick="gtag('event', '과제생활 동물찾기 클릭', {'event_category': '과제생활 동물찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/animaltest/index.html">닮은 동물 테스트 MBTI
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item" onclick="gtag('event','Nav Slot','event_category','navigation');">
+                    <a class="nav-link" href="/slot/index.html">&#127922; 슬롯머신 시뮬레이터</a>
                 </li>
-
-                <li class="nav-item active"
-                    onclick="gtag('event', '러블리햄의 블로그 클릭', {'event_category': '러블리햄의 블로그 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/blog">
-                        셀럽미: 블로그</a>
+                <li class="nav-item" onclick="gtag('event','Nav On-device','event_category','navigation');">
+                    <a class="nav-link" href="/client/index.html">&#128241; (On-device) 셀럽미: 닮은 아이돌 찾기</a>
+                </li>
+                <li class="nav-item" onclick="gtag('event','Nav Puppy','event_category','navigation');">
+                    <a class="nav-link" href="/puppy/index.html">&#128054; 닮은 강아지 테스트 MBTI</a>
+                </li>
+                <li class="nav-item" onclick="gtag('event','Nav Animal','event_category','navigation');">
+                    <a class="nav-link" href="/animaltest/index.html">&#129409; 닮은 동물 테스트 MBTI</a>
+                </li>
+                <li class="nav-item" onclick="gtag('event','Nav Blog','event_category','navigation');">
+                    <a class="nav-link" href="/blog">&#9998; 블로그</a>
                 </li>
             </ul>
         </div>
@@ -510,7 +501,7 @@
 
                 <button type="button" id="celebListToggleBtn" class="my-share-btn" onclick="toggleCelebList();"
                     style="margin:10px; background-color: #35885d;">
-                    <span class="try-again-text" style="font-size: 1.4rem;">&#127775; 등록 연예인 목록 보기 (<span id="celeb-count">569</span>명)</span>
+                    <span class="try-again-text" style="font-size: 1.4rem;">&#127775; 등록 연예인 목록 보기 (<span id="celeb-count">563</span>명)</span>
                 </button>
                 <div id="celeb-list-panel" style="display:none; margin:10px;">
                     <input type="text" id="celebSearchInput" placeholder="연예인 이름 검색..." oninput="filterCelebList(this.value)"
@@ -652,7 +643,7 @@
                 <img src="/img/celebme-find-similar-celebrity.png" alt="닮은 연예인 TOP 10 결과 화면" class="feature-img" loading="lazy" />
                 <span class="feature-icon">&#127917;</span>
                 <h3 class="feature-title">닮은 연예인 TOP 10</h3>
-                <p class="feature-desc">BTS·블랙핑크·아이브·뉴진스·에스파 등 K-pop 아이돌부터 배우·예능인까지, 총 <span class="celeb-count-display">569</span>명의 연예인 중에서 내 얼굴과 가장 닮은 TOP 10을 발견하세요!</p>
+                <p class="feature-desc">BTS·블랙핑크·아이브·뉴진스·에스파 등 K-pop 아이돌부터 배우·예능인까지, 총 <span class="celeb-count-display">563</span>명의 연예인 중에서 내 얼굴과 가장 닮은 TOP 10을 발견하세요!</p>
             </div>
             <div class="feature-card">
                 <img src="/img/celebme-personal-color-test.png" alt="퍼스널컬러 진단 결과 화면" class="feature-img" loading="lazy" />
@@ -764,7 +755,7 @@
                     <span class="faq-arrow">&#9660;</span>
                 </button>
                 <div class="faq-answer">
-                    <p>AI가 사진에서 눈·코·입·얼굴형 등 얼굴 속 특징을 분석한 후, <span class="celeb-count-display">569</span>명의 대한민국 연예인 얼굴 특징 데이터와 비교합니다. 특징이 가장 비슷한 연예인을 닮은 비율 순으로 TOP 10을 선별해 보여드려요.</p>
+                    <p>AI가 사진에서 눈·코·입·얼굴형 등 얼굴 속 특징을 분석한 후, <span class="celeb-count-display">563</span>명의 대한민국 연예인 얼굴 특징 데이터와 비교합니다. 특징이 가장 비슷한 연예인을 닮은 비율 순으로 TOP 10을 선별해 보여드려요.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -791,7 +782,7 @@
                     <span class="faq-arrow">&#9660;</span>
                 </button>
                 <div class="faq-answer">
-                    <p>총 <span class="celeb-count-display">569</span>명의 대한민국 연예인이 등록되어 있어요. K-pop 아이돌 그룹(BTS 뷔·정국·지민, 블랙핑크 제니·지수·리사·로제, 아이브 장원영·안유진, 뉴진스, 에스파, 세븐틴 등), 드라마·영화 배우(아이유, 차은우, 송중기, 김태리, 수지, 현빈, 손예진 등), 예능인·가수까지 폭넓게 포함되어 있습니다. '연예인 목록 보기' 버튼을 눌러 전체 목록을 검색할 수 있어요.</p>
+                    <p>총 <span class="celeb-count-display">563</span>명의 대한민국 연예인이 등록되어 있어요. K-pop 아이돌 그룹(BTS 뷔·정국·지민, 블랙핑크 제니·지수·리사·로제, 아이브 장원영·안유진, 뉴진스, 에스파, 세븐틴 등), 드라마·영화 배우(아이유, 차은우, 송중기, 김태리, 수지, 현빈, 손예진 등), 예능인·가수까지 폭넓게 포함되어 있습니다. '연예인 목록 보기' 버튼을 눌러 전체 목록을 검색할 수 있어요.</p>
                 </div>
             </div>
         </div>

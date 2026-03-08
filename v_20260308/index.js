@@ -1366,10 +1366,10 @@ async function readURL(input) {
     $(".try-again-btn").hide();
     $("#result-similar-idol").hide();
     setAnalysisStep(1);
-    $("#loading-message").html("사진을 준비하고 있어요...");
-    setTimeout(function() { setAnalysisStep(2); $("#loading-message").html("얼굴을 인식하고 있어요..."); }, 1000);
-    setTimeout(function() { setAnalysisStep(3); $("#loading-message").html("얼굴 특징을 분석하고 있어요..."); }, 2800);
-    setTimeout(function() { setAnalysisStep(4); $("#loading-message").html("연예인 데이터와 비교하고 있어요..."); }, 5500);
+    $("#loading-message").html(getMeta("analyzing_face"));
+    setTimeout(function() { setAnalysisStep(2); $("#loading-message").html(getMeta("recognizing_face")); }, 1000);
+    setTimeout(function() { setAnalysisStep(3); $("#loading-message").html(getMeta("analyzing_features")); }, 2800);
+    setTimeout(function() { setAnalysisStep(4); $("#loading-message").html(getMeta("comparing_data")); }, 5500);
 
     document.getElementById("face-image").onload = function (e) {
       var imgData = document.getElementById("face-image");

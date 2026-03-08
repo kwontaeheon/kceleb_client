@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="robots" content="index,follow" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -128,51 +129,39 @@
         crossorigin="anonymous"></script>
 
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
-
-        <a class="navbar-brand" href="#" onClick="top.location='javascript:location.reload()'">CelebMe: Encuentra
-            celebridades a las que te pareces</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active"
-                    onclick="gtag('event', '매칭테스트 이동', {'event_category': '매칭테스트 이동','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/match/en/index.html"> CelebMe: Prueba de coincidencia de rostros
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-
-                <li class="nav-item active"
-                    onclick="gtag('event', '닮은 아이돌 찾기 클릭', {'event_category': '닮은 아이돌 찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/client/index.html">(On-device) CelebMe: Encuentra celebridades a las que
-                        te pareces
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item active"
-                    onclick="gtag('event', '퍼피테스트 클릭', {'event_category': '퍼피테스트 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/puppy/index.html"
-                        onClick="top.location='javascript:location.reload()'">Prueba de personalidad MBTI: Cachorro
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item active"
-                    onclick="gtag('event', '과제생활 동물찾기 클릭', {'event_category': '과제생활 동물찾기 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/animaltest/index.html">Test de personalidad MBTI: animales
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-
-                <li class="nav-item active"
-                    onclick="gtag('event', '러블리햄의 블로그 클릭', {'event_category': '러블리햄의 블로그 클릭','event_label': '상단 메뉴'});">
-                    <a class="nav-link" href="/en/blog">
-                        Celebrame: Blog</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <a class="navbar-brand" href="/es/index.html" onClick="top.location='javascript:location.reload()'" style="font-weight:700; font-size:1.8rem;">CelebMe: Encuentra celebridades a las que te pareces</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active" onclick="gtag('event','Nav Inicio','event_category','navigation');">
+                <a class="nav-link" href="/es/index.html" style="font-weight:600;">&#127914; CelebMe: Encuentra celebridades a las que te pareces
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item" onclick="gtag('event','Nav Prueba Rostros','event_category','navigation');">
+                <a class="nav-link" href="/es/match/index.html">&#128145; CelebMe: Prueba de coincidencia de rostros</a>
+            </li>
+            <li class="nav-item" onclick="gtag('event','Nav Temporizador','event_category','navigation');">
+                <a class="nav-link" href="/es/timer/index.html">&#128337; CelebMe: Temporizador de intervalos</a>
+            </li>
+            <li class="nav-item" onclick="gtag('event','Nav On-device','event_category','navigation');">
+                <a class="nav-link" href="/client/index.html">&#128241; (On-device) CelebMe: Encuentra celebridades a las que te pareces</a>
+            </li>
+            <li class="nav-item" onclick="gtag('event','Nav Prueba Cachorro','event_category','navigation');">
+                <a class="nav-link" href="/puppy/index.html" onClick="top.location='javascript:location.reload()'">&#128054; Prueba de personalidad MBTI: Cachorro</a>
+            </li>
+            <li class="nav-item" onclick="gtag('event','Nav Prueba Animales','event_category','navigation');">
+                <a class="nav-link" href="/animaltest/index.html">&#129409; Prueba de personalidad MBTI: Animales</a>
+            </li>
+            <li class="nav-item active" onclick="gtag('event','Nav Blog','event_category','navigation');">
+                <a class="nav-link" href="/es/blog">&#9998; Blog</a>
+            </li>
+        </ul>
+    </div>
+</nav>
     <section class="container d-flex flex-column justify-content-center align-items-center">
         <div class="row">
             <div class="language">Language:</div>
@@ -231,6 +220,35 @@
             <span class="hero-badge">&#10003; Fotos No Guardadas</span>
             <span class="hero-badge">&#10003; TOP 10 Famosos</span>
             <span class="hero-badge">&#10003; Color Personal</span>
+        </div>
+        <!-- Enlaces adicionales -->
+        <div class="hero-badges" style="flex-direction: column; align-items: center; gap: 10px;">
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <a href="#how-to-use" class="hero-badge" style="text-decoration: none; cursor: pointer; background: linear-gradient(135deg, #4caf50, #66bb6a);">
+                    <span style="font-size: 1.2em;">📖</span> Cómo usar
+                </a>
+                <a href="#faq" class="hero-badge" style="text-decoration: none; cursor: pointer; background: linear-gradient(135deg, #4caf50, #66bb6a);">
+                    <span style="font-size: 1.2em;">❓</span> Preguntas frecuentes
+                </a>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button type="button" id="celebListToggleBtn" class="hero-badge" onclick="toggleCelebList();" style="background: linear-gradient(135deg, #4caf50, #66bb6a); cursor: pointer; border: none;">
+                    <span style="font-size: 1.2em;">&#127775;</span> Ver lista de celebridades (<span id="celeb-count">563</span>)
+                </button>
+            </div>
+        </div>
+        <div id="celeb-list-panel" style="display:none; margin:10px;">
+            <input type="text" id="celebSearchInput" placeholder="Buscar nombres de celebridades..." oninput="filterCelebList(this.value)"
+                style="width:100%; max-width:400px; padding:10px 16px; border:1.5px solid #d0d7e2; border-radius:24px; font-size:1.4rem; margin-bottom:14px; outline:none; box-sizing:border-box;" />
+            <div id="json-container" class="json-container"></div>
+            <div id="celeb-cse-result" style="margin-top:16px; text-align:left;">
+                <div id="search-celeblist" class="gcse-searchresults-only"
+                    data-webSearchResultSetSize="5"
+                    data-imageSearchResultSetSize="6"
+                    data-image_type="face"
+                    data-filter="1"
+                    data-gname="celeblist"></div>
+            </div>
         </div>
     </section>
     <center>
@@ -588,23 +606,7 @@
                 </center>
             </div>
             <br />
-            <button type="button" id="celebListToggleBtn" class="my-share-btn" onclick="toggleCelebList();"
-                style="margin:10px; background-color: #35885d;">
-                <span class="try-again-text" style="font-size: 1.4rem;">&#127775; Ver lista de famosos (<span id="celeb-count">569</span>)</span>
-            </button>
-            <div id="celeb-list-panel" style="display:none; margin:10px;">
-                <input type="text" id="celebSearchInput" placeholder="Buscar famoso..." oninput="filterCelebList(this.value)"
-                    style="width:100%; max-width:400px; padding:10px 16px; border:1.5px solid #d0d7e2; border-radius:24px; font-size:1.4rem; margin-bottom:14px; outline:none; box-sizing:border-box;" />
-                <div id="json-container" class="json-container"></div>
-                <div id="celeb-cse-result" style="margin-top:16px; text-align:left;">
-                    <div id="search-celeblist" class="gcse-searchresults-only"
-                        data-webSearchResultSetSize="5"
-                        data-imageSearchResultSetSize="6"
-                        data-image_type="face"
-                        data-filter="1"
-                        data-gname="celeblist"></div>
-                </div>
-            </div>
+
 
 
             <br />
@@ -709,15 +711,244 @@
         </div>
         </div>
     </center>
+
+    <!-- ===== Cómo Usar ===== -->
+    <section class="how-to-section" id="how-to-use">
+        <h2 class="section-heading">Cómo Usar CelebMe</h2>
+        <p class="section-subheading">Encuentra tu doble celebridad en 3 pasos simples</p>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon">&#128247;</div>
+                <h3 class="step-title">Selecciona una Foto</h3>
+                <p class="step-desc">Elige o arrastra una foto de frente donde tu cara sea claramente visible. Cuanto más clara la iluminación y la imagen (sin filtros), más precisos serán los resultados.</p>
+            </div>
+            <div class="step-arrow">&#10132;</div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon">&#129302;</div>
+                <h3 class="step-title">Análisis de Rostro con IA</h3>
+                <p class="step-desc">Nuestra IA analiza tu edad, género, emoción y tono de piel en tiempo real. ¡Los resultados vienen en solo segundos!</p>
+            </div>
+            <div class="step-arrow">&#10132;</div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon">&#11088;</div>
+                <h3 class="step-title">Ver y Compartir Resultados</h3>
+                <p class="step-desc">Mira tus 10 celebridades principales similares, diagnóstico de color personal y recomendaciones de estilo personalizadas. ¡Comparte con amigos en Kakao Talk!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Características Principales ===== -->
+    <section class="features-section" id="features">
+        <h2 class="section-heading">Características Principales de CelebMe</h2>
+        <p class="section-subheading">Ve resultados diversos de una vez con análisis de rostro con IA</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="/img/celebme-find-similar-celebrity.png" alt="Resultados de los 10 Dobles Celebridades Principales" class="feature-img" loading="lazy" />
+                <span class="feature-icon">&#127917;</span>
+                <h3 class="feature-title">Top 10 Dobles Celebridades</h3>
+                <p class="feature-desc">¡Encuentra tu coincidencia celebridad entre <span class="celeb-count-display">563</span> celebridades coreanas incluyendo ídolos K-pop (BTS, BLACKPINK, IVE) y actores!</p>
+            </div>
+            <div class="feature-card">
+                <img src="/img/celebme-personal-color-test.png" alt="Resultados del Diagnóstico de Color Personal" class="feature-img" loading="lazy" />
+                <span class="feature-icon">&#127912;</span>
+                <h3 class="feature-title">Diagnóstico de Color Personal</h3>
+                <p class="feature-desc">Descubre si eres de tono cálido o frío, y tu estación (Primavera, Verano, Otoño o Invierno) con análisis de tono de piel con IA.</p>
+            </div>
+            <div class="feature-card">
+                <img src="/img/celebme-fashion-recommendation.png" alt="Recomendaciones Personalizadas de Moda y Belleza" class="feature-img" loading="lazy" />
+                <span class="feature-icon">&#128507;</span>
+                <h3 class="feature-title">Recomendaciones Personalizadas de Moda y Belleza</h3>
+                <p class="feature-desc">Obtén sugerencias detalladas de estilo de moda y belleza basadas en los resultados de tu análisis de color personal.</p>
+            </div>
+            <div class="feature-card">
+                <img src="/img/celebme-make-similar-celebrity-gif.png" alt="Crear Foto de Doble Celebridad y GIF" class="feature-img" loading="lazy" />
+                <span class="feature-icon">&#128247;</span>
+                <h3 class="feature-title">Crear Foto de Doble Celebridad y GIF</h3>
+                <p class="feature-desc">Crea fotos de comparación con tu doble celebridad o crea GIFs animados para compartir en redes sociales.</p>
+            </div>
+            <div class="feature-card">
+                <img src="/img/celebme-security.png" alt="Seguridad y Protección de Privacidad de CelebMe" class="feature-img" loading="lazy" />
+                <span class="feature-icon">&#128274;</span>
+                <h3 class="feature-title">Completamente Gratis y Seguro</h3>
+                <p class="feature-desc">No se requiere registro. Tus fotos se eliminan inmediatamente después del análisis y nunca se almacenan en ningún lugar.</p>
+            </div>
+            <div class="feature-card">
+                <img src="/img/celebme-support-multi-language.png" alt="Soporte Multilingüe de CelebMe" class="feature-img" loading="lazy" />
+                <span class="feature-icon">&#127760;</span>
+                <h3 class="feature-title">Soporte en 7 Idiomas</h3>
+                <p class="feature-desc">Disponible en coreano, inglés, japonés, chino, español, vietnamita e indonesio para usuarios de todo el mundo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Imagen SEO -->
+    <div style="text-align:center; margin: 0 auto 20px; max-width:900px; padding: 0 20px;">
+        <figure style="margin:0;">
+            <img src="/banner_small.jpg"
+                 alt="CelebMe: Encuentra tu Doble Celebridad - Resultados de Prueba de Doble Ídol K-pop Analizados con IA"
+                 style="max-width:100%; height:auto; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.12);"
+                 loading="lazy" />
+            <figcaption style="font-size:1.3rem; color:#888; margin-top:10px;">
+                CelebMe: Encuentra Dobles Celebridades — Descubre instantáneamente ídolos K-pop y actores que se parecen a ti con análisis de rostro con IA
+            </figcaption>
+        </figure>
+    </div>
+
+    <!-- ===== Otros Servicios ===== -->
+    <section class="related-section" id="related-services">
+        <h2 class="section-heading">Más Servicios de CelebMe</h2>
+        <p class="section-subheading">Disfruta de más pruebas de IA divertidas y diversas</p>
+        <div class="related-grid">
+            <a href="/es/match/index.html" class="related-card"
+                onclick="gtag('event', 'Face Match Test Click', {'event_category': 'Related Services', 'event_label': 'Footer Section'});">
+                <span class="related-icon">&#128145;</span>
+                <h3>Prueba de Coincidencia de Rostro</h3>
+                <p>¿Qué tan similares son tus rostros? ¡Compara con parejas, celebridades o miembros de la familia!</p>
+            </a>
+            <a href="/puppy/index.html" class="related-card"
+                onclick="gtag('event', 'Puppy Test Click', {'event_category': 'Related Services', 'event_label': 'Footer Section'});">
+                <span class="related-icon">&#128054;</span>
+                <h3>MBTI de Perrito Similar</h3>
+                <p>¿A qué raza de perro te pareces? ¡Verifica tu tipo de personalidad MBTI también!</p>
+            </a>
+            <a href="/animaltest/index.html" class="related-card"
+                onclick="gtag('event', 'Animal Test Click', {'event_category': 'Related Services', 'event_label': 'Footer Section'});">
+                <span class="related-icon">&#129409;</span>
+                <h3>MBTI de Animal Similar</h3>
+                <p>¿Qué animal eres? ¡Realiza nuestra prueba MBTI de animal con IA y descúbrelo!</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== Preguntas Frecuentes (FAQ) ===== -->
+    <section class="faq-section" id="faq">
+        <h2 class="section-heading">Preguntas Frecuentes</h2>
+        <p class="section-subheading">Encuentra respuestas a preguntas comunes sobre CelebMe</p>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                    ¿Es CelebMe completamente gratis?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <p>¡Sí, es completamente gratis! No se requiere registro y puedes usarlo tantas veces como quieras. No se necesita instalación de aplicación, simplemente úsalo directamente en tu navegador web.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                    ¿Se almacenan mis fotos en tu servidor?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <p>No, no se almacenan en absoluto. Las fotos solo se usan para análisis de IA y se eliminan inmediatamente después de que se complete el análisis. Nunca se comparten con terceros y tu privacidad está completamente protegida.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                    ¿Qué tipo de foto da los resultados más precisos?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Una foto clara de frente con buena iluminación produce los resultados más precisos. Evita fotos con máscaras, gafas de sol, filtros pesados o iluminación oscura. Usa una foto reciente donde tu cara completa sea claramente visible.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                    ¿Cómo encuentra CelebMe dobles celebridades?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Nuestra IA analiza características faciales como ojos, nariz, boca y forma de rostro desde tu foto. Luego compara estas características contra <span class="celeb-count-display">563</span> celebridades coreanas registradas y clasifica los 10 mejores resultados por porcentaje de similitud.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                    ¿Cómo funciona el diagnóstico de color personal?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Nuestra IA analiza tu tono de piel para determinar si eres de tono cálido o frío, y te clasifica en una estación (Primavera, Verano, Otoño o Invierno). Basándonos en tus resultados, recomendamos colores, estilos de moda y looks de belleza que te van mejor.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                    ¿Puedo compartir mis resultados?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <p>¡Sí! Puedes compartir tus resultados a través de Kakao Talk o copiar el enlace para compartir con amigos. ¡También puedes crear fotos de comparación con tu doble celebridad o guardarlas como GIFs animados!</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                    ¿Qué celebridades están registradas?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Tenemos <span class="celeb-count-display">563</span> celebridades coreanas registradas incluyendo ídolos K-pop (BTS, BLACKPINK, IVE, NewJeans, aespa, SEVENTEEN, etc.), actores de drama y cine (Hyun Bin, Son Ye-jin, etc.), y artistas. Puedes explorar la lista completa haciendo clic en el botón "Ver Lista de Celebridades".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="container pt-3">
         <div id="disqus_thread"></div>
     </div>
 
-    <footer class="footer pt-5 container d-flex justify-content-center">
-        <div>
-            <p>&copy; 테리 Terry 2022. All Rights Reserved.</p>
+    <footer class="footer container" style="border-top: 1px solid #e8ecf0; padding: 40px 20px; margin-top: 20px;">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 20px; font-size: 1.3rem;">
+                <a href="/es/index.html" style="color: #35465d; text-decoration: none; font-weight: 600;">&#127914; Encuentra Dobles Celebridades</a>
+                <a href="/es/match/index.html" style="color: #35465d; text-decoration: none;">&#128145; Prueba de Coincidencia de Rostro</a>
+                <a href="/puppy/index.html" style="color: #35465d; text-decoration: none;">&#128054; MBTI de Perrito Similar</a>
+                <a href="/animaltest/index.html" style="color: #35465d; text-decoration: none;">&#129409; MBTI de Animal Similar</a>
+                <a href="/slot/index.html" style="color: #35465d; text-decoration: none;">&#127920; Máquina Tragaperras</a>
+                <a href="/es/timer/index.html" style="color: #35465d; text-decoration: none;">&#9200; Temporizador de Intervalo</a>
+                <a href="/privacy.html" style="color: #888; text-decoration: none;">Política de Privacidad</a>
+                <a href="/es/blog" style="color: #888; text-decoration: none;">Blog</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 16px; font-size: 1.2rem;">
+                <a href="/index.html" style="color: #aaa; text-decoration: none;">한국어</a>
+                <a href="/en/index.html" style="color: #aaa; text-decoration: none;">English</a>
+                <a href="/ja/index.html" style="color: #aaa; text-decoration: none;">日本語</a>
+                <a href="/zh/index.html" style="color: #aaa; text-decoration: none;">中文</a>
+                <a href="/vi/index.html" style="color: #aaa; text-decoration: none;">Tiếng Việt</a>
+                <a href="/id/index.html" style="color: #aaa; text-decoration: none;">Bahasa Indonesia</a>
+            </div>
+            <p style="color: #aaa; font-size: 1.2rem; margin: 0;">&copy; Terry 테리 2022-2026. All Rights Reserved.</p>
         </div>
     </footer>
+    <script>
+        function gaReload() {
+            gtag('event', '다른 사진으로 재시도', {
+                event_category: '다른 사진으로 재시도',
+            });
+            removeUpload();
+        }
+        function donate() {
+            gtag('event', '개발자에게 커피한잔! 후원하기', {
+                event_category: '개발자에게 커피한잔! 후원하기',
+            });
+        }
+        function toggleFaq(btn) {
+            var item = btn.closest('.faq-item');
+            var answer = item.querySelector('.faq-answer');
+            var isOpen = answer.classList.contains('open');
+            document.querySelectorAll('.faq-answer.open').forEach(function(a) { a.classList.remove('open'); });
+            document.querySelectorAll('.faq-question.active').forEach(function(q) {
+                q.classList.remove('active');
+                q.setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) {
+                answer.classList.add('open');
+                btn.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        }
+    </script>
     <script>
         function gaReload() {
             gtag('event', '다른 사진으로 재시도', {
